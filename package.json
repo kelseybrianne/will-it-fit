@@ -2,12 +2,14 @@
   "name": "will-it-fit",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
-  "directories": {
-    "doc": "docs"
-  },
+  "main": "server/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/server.js --ignore client",
+    "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
+    "install": "cd server && npm i && cd ../client && npm i",
+    "seed": "cd server && npm run seed",
+    "build": "cd client && npm run build"
   },
   "repository": {
     "type": "git",
@@ -19,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/kelseybrianne/will-it-fit/issues"
   },
-  "homepage": "https://github.com/kelseybrianne/will-it-fit#readme"
+  "homepage": "https://github.com/kelseybrianne/will-it-fit#readme",
+  "devDependencies": {
+    "concurrently": "^7.1.0"
+  }
 }
