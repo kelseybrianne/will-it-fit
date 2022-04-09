@@ -5,43 +5,67 @@ const itemSchema = require("./Item");
 
 const userSchema = new Schema(
   {
-    username: {
+      username: {
       type: String,
       required: true,
       unique: true,
     },
+
     email: {
       type: String,
       required: true,
       unique: true,
       match: [/.+@.+\..+/, "Must use a valid email address"],
     },
+
     password: {
       type: String,
       required: true,
     },
+
     height: {
-      type: INT,
+      type: Number,
     },
-    //   in or cm
-    heightUnits: {},
+
+    heightUnits: {
+      type: String
+      //   in or cm <-- could use some front end magic 
+
+    },
 
     weight: {
-      type: INT,
+      type: Number
     },
 
-    // lbs or kgs
-    weightUnits: {},
+    weightUnits: {
+      type: String
 
-    //   would this be an array?
-    closet: {},
+      // lbs or kgs <-- could use some front end magic 
 
-    img: {},
+    },
+    
+    closet: {
+      //   would this be an array?
+    },
 
-    following: [],
+    primaryPhoto: {
+      type: String
+    },
 
-    followers: [],
-// do we need this ?
+    following: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+      },
+    ],
+
+    followers: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+      },
+    ],
+    // do we need this ?
     savedItems: [itemSchema],
   },
   {
@@ -61,9 +85,8 @@ userSchema.pre("save", async function (next) {
 });
 
 userSchema.methods.isCorrectPassword = async function (password) {
-    return bcrypt.compare(password, this.password)
-}
-
+  return bcrypt.compare(password, this.password);
+};
 
 const User = model("User", userSchema);
 
