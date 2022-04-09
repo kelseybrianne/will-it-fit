@@ -1,11 +1,11 @@
-const { Schema, model } = require("mongoose");
-const bcrypt = require("bcrypt");
+const { Schema, model } = require('mongoose');
+const bcrypt = require('bcrypt');
 
-const itemSchema = require("./Item");
+const itemSchema = require('./Item');
 
 const userSchema = new Schema(
   {
-      username: {
+    username: {
       type: String,
       required: true,
       unique: true,
@@ -15,7 +15,7 @@ const userSchema = new Schema(
       type: String,
       required: true,
       unique: true,
-      match: [/.+@.+\..+/, "Must use a valid email address"],
+      match: [/.+@.+\..+/, 'Must use a valid email address'],
     },
 
     password: {
@@ -29,7 +29,7 @@ const userSchema = new Schema(
 
     heightUnits: {
       type: String
-      //   in or cm <-- could use some front end magic 
+      //   in or cm <-- could use some front end magic
 
     },
 
@@ -40,10 +40,10 @@ const userSchema = new Schema(
     weightUnits: {
       type: String
 
-      // lbs or kgs <-- could use some front end magic 
+      // lbs or kgs <-- could use some front end magic
 
     },
-    
+
     closet: {
       //   would this be an array?
     },
@@ -55,14 +55,14 @@ const userSchema = new Schema(
     following: [
       {
         type: Schema.Types.ObjectId,
-        ref: "User",
+        ref: 'User',
       },
     ],
 
     followers: [
       {
         type: Schema.Types.ObjectId,
-        ref: "User",
+        ref: 'User',
       },
     ],
     // do we need this ?
@@ -75,8 +75,8 @@ const userSchema = new Schema(
   }
 );
 
-userSchema.pre("save", async function (next) {
-  if (this.isNew || this.isModified("password")) {
+userSchema.pre('save', async function (next) {
+  if (this.isNew || this.isModified('password')) {
     const saltRounds = 10;
     this.password = await bcrypt.hash(this.password, saltRounds);
   }
@@ -88,6 +88,6 @@ userSchema.methods.isCorrectPassword = async function (password) {
   return bcrypt.compare(password, this.password);
 };
 
-const User = model("User", userSchema);
+const User = model('User', userSchema);
 
 module.exports = User;
