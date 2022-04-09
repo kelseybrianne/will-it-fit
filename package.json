@@ -10,7 +10,8 @@
     "install": "cd server && npm i && cd ../client && npm i",
     "seed": "cd server && npm run seed",
     "build": "cd client && npm run build",
-    "lint": "npx eslint --ext .js ./"
+    "lint": "npx eslint --ext .js ./",
+    "lint:fix": "eslint --fix --ext .js,.jsx ."
   },
   "repository": {
     "type": "git",

@@ -1,5 +1,5 @@
 // import Header from "./components/Header";
-import DiscoverFeed from "./pages/DiscoverFeed";
+import DiscoverFeed from './pages/DiscoverFeed';
 
 function App() {
   return (
