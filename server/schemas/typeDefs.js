@@ -3,7 +3,7 @@ const { gql } = require('apollo-server-express');
 const typeDefs = gql`
 
     type User {
-        _id: _id!
+        _id: ID!
         username: String!
         email: String!
         password: String!
@@ -34,7 +34,7 @@ const typeDefs = gql`
     }
 
     type Item {
-        _id: _id!
+        _id: ID!
         category: String!
         style: String
         brand: String
@@ -48,6 +48,7 @@ const typeDefs = gql`
     }
 
     type Comment {
+        _id: ID
         commentText: String!
         commentAuthor: User!
         createdAt: String!
@@ -58,13 +59,84 @@ const typeDefs = gql`
         user: User
     }
 
-
     type Query: {
         users: [User]
+        user(
+            username: String!)
+            ; User
+        item:(
+            name: String!
+            ); Item
+        items: [Item]
+        photo:(
+            name: String!
+            ); Photo
+        photos: [photos]
 
+        comments(
+            username: String
+            ): [Comment]
+        comment(commentId: ID!):
+
+        following(
+            username: String!
+        )
+        followers(
+            username: String!
+        ); User
     }
 
-    type Mutation: {}
+    type Mutation: {
+        addUser(
+            username: String! 
+            email: String! 
+            password: String!
+            height: Int
+            heightUnits:[Unit]
+            weight: Int
+            weightUnits:String
+            closet:[Closet]
+            primaryPhoto:String
+            ): Auth
+        login(
+            email: String!, 
+            password: String!
+            ): Auth
+
+        addItem(
+            category:String!, 
+            style: String,
+             brand: String, 
+             name: String!, 
+             gender: String, 
+             size: String!, 
+             link: String, 
+             photo: String, 
+             color: String
+             ): Item
+        removeItem: Item
+
+        addComment(
+            commentText: String!
+            commentAuthor: User! 
+            ): Comment
+        removeComment: Comment
+
+        addPhoto(
+            path: String! 
+            name: String!
+            ): Photo
+        removePhoto: Photo
+
+        addFollower(
+            username: String!
+        ): User
+        removeFollower(
+            username: String!
+        ): User
+
+
+    }
 `;
 
 module.exports = typeDefs;
