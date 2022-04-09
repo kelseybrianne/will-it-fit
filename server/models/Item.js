@@ -6,7 +6,7 @@ const itemSchema = new Schema({
   },
   category: {
     type: String,
-
+    required: true
     // [footwear, head wear, top, bottom, dress, etc...]
   },
   style: {
@@ -19,6 +19,7 @@ const itemSchema = new Schema({
   },
   name: {
     type: String,
+    required: true
     // air jordans
   },
   gender: {
@@ -27,6 +28,7 @@ const itemSchema = new Schema({
   },
   size: {
     type: String,
+    required: true
     // [medium tall, 4, xxl, ps, 8L]
   },
   link: {
