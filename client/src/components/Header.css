@@ -1,0 +1,11 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  padding: 30px;
+  z-index: 1;
+}
+
+h1 {
+  font-family: var(--serif);
+  font-size: 30px;
+}
