@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/will-it-fit/static/css/main.ce879645.css",
+    "main.js": "/will-it-fit/static/js/main.01cfe490.js",
+    "static/media/ivana-cajina-dnL6ZIpht2s-unsplash.jpg": "/will-it-fit/static/media/ivana-cajina-dnL6ZIpht2s-unsplash.846bfb717a7616f99ccd.jpg",
+    "static/media/daniel-monteiro-VMeHP3mNJL4-unsplash.jpg": "/will-it-fit/static/media/daniel-monteiro-VMeHP3mNJL4-unsplash.3acfa8a8fc6dac01c6fa.jpg",
+    "static/media/rayul-_M6gy9oHgII-unsplash.jpg": "/will-it-fit/static/media/rayul-_M6gy9oHgII-unsplash.916df3fbce8ab4681dc3.jpg",
+    "static/media/huston-wilson-WyDr1KFS23Y-unsplash.jpg": "/will-it-fit/static/media/huston-wilson-WyDr1KFS23Y-unsplash.581d233fdfb5f429f59d.jpg",
+    "static/media/brooke-cagle-Ss3wTFJPAVY-unsplash.jpg": "/will-it-fit/static/media/brooke-cagle-Ss3wTFJPAVY-unsplash.04363fa5d66816c68bf5.jpg",
+    "static/media/dom-hill-nimElTcTNyY-unsplash.jpg": "/will-it-fit/static/media/dom-hill-nimElTcTNyY-unsplash.fbe13a44c1f6f86cc75e.jpg",
+    "index.html": "/will-it-fit/index.html",
+    "main.ce879645.css.map": "/will-it-fit/static/css/main.ce879645.css.map",
+    "main.01cfe490.js.map": "/will-it-fit/static/js/main.01cfe490.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ce879645.css",
+    "static/js/main.01cfe490.js"
+  ]
+}

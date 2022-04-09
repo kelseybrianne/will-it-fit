@@ -2,3 +2,7 @@
   --serif: 'Chonburi', cursive;
   --sans: 'Inter', sans-serif;
 }
+
+body {
+  overflow: hidden;
+}

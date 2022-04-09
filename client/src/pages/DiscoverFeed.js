@@ -33,15 +33,19 @@ const DiscoverFeed = () => {
     <div>
       <Header />
       <div className="discover-container">
-        {images.map(({ id, img }) => (
+        <div className="second-wrapper">
+          {images.map(({ id, img }) => (
           <div
             className={
               id % 2 === 0 ? "img-div-even img-div" : "img-div-odd img-div"
             }
           >
             <img alt="cool-pic" src={img} className="img" />
+            <p className="view-closet">View Closet</p>
           </div>
         ))}
+          </div>
+        
       </div>
     </div>
   );
