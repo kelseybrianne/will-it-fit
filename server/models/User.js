@@ -1,5 +1,6 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
+// eslint-disable-next-line no-unused-vars
 const itemSchema = require('./Item');
 
 const userSchema = new Schema(

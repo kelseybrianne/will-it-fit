@@ -14,6 +14,7 @@ const typeDefs = gql`
     primaryPhoto: String
     following: [User]
     followers: [User]
+    savedItems: [Item]
   }
 
   type me {
@@ -68,16 +69,10 @@ const typeDefs = gql`
     users: [User]
     me: User
 
-    item(name: String!): Item
+    item(_id: ID!): Item
     items: [Item]
-
-    closet(closetId: ID!): User
-
-    photo(name: String!): User
-    photos: [Photo]
-
-    # comments(username: String): [Comment]
-    # comment(commentId: ID!): Comment
+    
+    closet: [Item]
 
     following(username: String!): [User]
     followers(username: String!): [User]
@@ -107,11 +102,9 @@ const typeDefs = gql`
       link: String
       photo: String
       color: String
+      review: String
     ): User
     removeItem(itemId: ID!): User
-
-    # addComment(username: String!): User
-    # removeComment(commentId: ID!): User
 
     addPhoto(path: String!, name: String!): User
     removePhoto: User

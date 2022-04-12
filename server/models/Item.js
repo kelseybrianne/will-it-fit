@@ -2,10 +2,9 @@
 const { Schema, model } = require('mongoose');
 
 const itemSchema = new Schema({
-
   category: {
     type: String,
-    required: true
+    required: true,
     // [footwear, head wear, top, bottom, dress, etc...]
   },
   style: {
@@ -18,7 +17,7 @@ const itemSchema = new Schema({
   },
   name: {
     type: String,
-    required: true
+    required: true,
     // air jordans
   },
   gender: {
@@ -27,7 +26,7 @@ const itemSchema = new Schema({
   },
   size: {
     type: String,
-    required: true
+    required: true,
     // [medium tall, 4, xxl, ps, 8L]
   },
   link: {
@@ -36,7 +35,7 @@ const itemSchema = new Schema({
   },
   photo: {
     type: String,
-    required: true
+    required: true,
     // pic of clothing
   },
   color: {
@@ -46,28 +45,9 @@ const itemSchema = new Schema({
 
   review: {
     type: String,
-  }
-  // comments: [
-  //   {
-  //     commentText: {
-  //       type: String,
-  //       required: true,
-  //       minlength: 1,
-  //       maxlenght: 280,
-  //     },
-  //     commentAuthor: {
-  //       type: String,
-  //       required: true,
-  //     },
-  //     createdAt: {
-  //       type: Date,
-  //       default: Date.now,
-  //       get: (timestamp) => dateFormat(timestamp),
-  //     },
-  //   },
-  // ],
+  },
 });
 
-model('Item', itemSchema);
+const Item = model('Item', itemSchema);
 
-module.exports= itemSchema;
+module.exports = Item;

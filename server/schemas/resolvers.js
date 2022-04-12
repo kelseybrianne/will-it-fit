@@ -1,32 +1,54 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User } = require('../models');
+const { User, Item } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
   Query: {
-    user: async (parent, {username}, context) => {
+    // working
+    // TEST SAVED ITEMS
+    user: async (parent, { username }, context) => {
       if (context.user) {
-        return await User.findOne({username}).populate(
-          // 'following',
-          // 'followers',
+        return await User.findOne({ username }).populate(
+          'following',
+          'followers',
           'savedItems',
-          // 'closet'
+          'closet'
         );
       }
       throw new AuthenticationError('You need to be logged in!');
     },
-    me: async () => {
-      // TODO: Steal this from last homework
+
+    me: async (parent, { username }, context) => {
+      if (context.user) {
+        return await User.findOne({ username }).populate(
+          'following',
+          'followers',
+          'savedItems',
+          'closet'
+        );
+      }
+      throw new AuthenticationError('You need to be logged in!');
     },
-    closet: async (parent, args) => {
-      return await Closet.findById(args.id).populate('item', 'photo');
-    },
+
+    // item is working! Display one item, by item id.
     item: async (parent, args) => {
-      // Populate the comment subdocument
-      return await Item.find(args.id).populate('comments');
+      return await Item.findOne(args.id);
+    },
+
+    // items is working! find all items (perhaps for random image generation/home page)
+    // eslint-disable-next-line no-unused-vars
+    items: async (parent, args) => {
+      return await Item.find();
+    },
+
+    // Retrieve user closet (ITEMS), pull from user Id
+    closet: async (parent, { _id }, context) => {
+      if (context.user) {
+        return await User.findById({ _id }).populate('closet');
+      }
+      throw new AuthenticationError('You need to be logged in!');
     },
   },
-
   // starting mutations file
   Mutation: {
     addUser: async (parent, args) => {
