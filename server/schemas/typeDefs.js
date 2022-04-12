@@ -6,12 +6,12 @@ const typeDefs = gql`
     username: String!
     email: String!
     password: String!
-    height: Int
+    height: Float!
     heightUnits: [Unit]
-    weight: Int
+    weight: Float!
     weightUnits: String
     closet: [Closet]
-    primaryPhoto: String
+    primaryPhoto: String!
     following: [User]
     followers: [User]
     savedItems: [Item]
@@ -28,7 +28,6 @@ const typeDefs = gql`
   }
 
   type Closet {
-    #   Do we need these '_id's' called out specifically? Can delete if not.
     _id: ID!
     item: [Item]
     photo: [Photo]
@@ -43,17 +42,17 @@ const typeDefs = gql`
     gender: String
     size: String!
     link: String
-    photo: String
+    photo: String!
     color: String
-    comments: [Comment]
+    review: String
   }
 
-  type Comment {
-    _id: ID
-    commentText: String!
-    commentAuthor: User!
-    createdAt: String!
-  }
+  #   type Comment {
+  #     _id: ID!
+  #     commentText: String!
+  #     commentAuthor: User!
+  #     createdAt: String!
+  #   }
 
   type Auth {
     token: ID!
@@ -72,8 +71,8 @@ const typeDefs = gql`
     photo(name: String!): User
     photos: [Photo]
 
-    comments(username: String): [Comment]
-    comment(commentId: ID!): Comment
+    # comments(username: String): [Comment]
+    # comment(commentId: ID!): Comment
 
     following(username: String!): [User]
     followers(username: String!): [User]
@@ -106,11 +105,11 @@ const typeDefs = gql`
     ): User
     removeItem(itemId: ID!): User
 
-    addComment(username: String!): User
-    removeComment(commentId: ID!): User
+    # addComment(username: String!): User
+    # removeComment(commentId: ID!): User
 
-    addPhoto(path: String!, name: String!): Photo
-    removePhoto: Photo
+    addPhoto(path: String!, name: String!): User
+    removePhoto: User
 
     addFollower(username: String!): User
     removeFollower(username: String!): User

@@ -36,31 +36,36 @@ const itemSchema = new Schema({
   },
   photo: {
     type: String,
+    required: true
     // pic of clothing
   },
   color: {
     type: String,
     // [black, white, grey, red, orange, yellow, green, blue, purple, pink]
   },
-  comments: [
-    {
-      commentText: {
-        type: String,
-        required: true,
-        minlength: 1,
-        maxlenght: 280,
-      },
-      commentAuthor: {
-        type: String,
-        required: true,
-      },
-      createdAt: {
-        type: Date,
-        default: Date.now,
-        get: (timestamp) => dateFormat(timestamp),
-      },
-    },
-  ],
+
+  review: {
+    type: String,
+  }
+  // comments: [
+  //   {
+  //     commentText: {
+  //       type: String,
+  //       required: true,
+  //       minlength: 1,
+  //       maxlenght: 280,
+  //     },
+  //     commentAuthor: {
+  //       type: String,
+  //       required: true,
+  //     },
+  //     createdAt: {
+  //       type: Date,
+  //       default: Date.now,
+  //       get: (timestamp) => dateFormat(timestamp),
+  //     },
+  //   },
+  // ],
 });
 
 // const Item = model('Item', itemSchema);

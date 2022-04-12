@@ -28,11 +28,13 @@ const userSchema = new Schema(
 
     heightUnits: {
       type: String,
+      required: true,
       //   in or cm <-- could use some front end magic
     },
 
     weight: {
       type: Number,
+      required: true,
     },
 
     weightUnits: {
