@@ -14,6 +14,7 @@ const typeDefs = gql`
     primaryPhoto: String
     following: [User]
     followers: [User]
+    savedItems: [Item]
   }
 
   type me {

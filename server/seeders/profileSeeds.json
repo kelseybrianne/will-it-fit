@@ -10,6 +10,7 @@
  
     "savedItems": [
       {
+      
         "category": "Shoes",
         "style": "spring",
         "brand": "NIKE",
@@ -32,7 +33,7 @@
     "primaryPhoto": "https://marvel.fandom.com/wiki/File:Stephen_Strange_(Earth-199999)_from_Spider-Man_No_Way_Home_Promo_001.jpg",
     
     "savedItems": [
-      {
+      { 
         "category": "Shoes",
         "style": "spring",
         "brand": "NIKE",
@@ -45,6 +46,7 @@
         "review": "I loved it!"
       }
     ]
+    
   },
   {
     "username": "Friend",
@@ -56,6 +58,7 @@
 
     "savedItems": [
       {
+        
         "category": "Shoes",
         "style": "spring",
         "brand": "NIKE",
