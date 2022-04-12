@@ -33,13 +33,8 @@
         "size": "8",
         "link": "nike",
         "photo": "https://unsplash.com/photos/164_6wVEHfI",
-        "Red": "String",
-        "comments": [
-          {
-            "commentText": "Henlo fren",
-            "commentAuthor": "Amiko"
-          }
-        ]
+        "color": "red",
+        "review": "I loved it!"
       }
     ]
   },
@@ -77,13 +72,8 @@
         "size": "8",
         "link": "nike",
         "photo": "https://unsplash.com/photos/164_6wVEHfI",
-        "Red": "String",
-        "comments": [
-          {
-            "commentText": "Henlo fren",
-            "commentAuthor": "Brian"
-          }
-        ]
+        "color": "red",
+        "review": "I loved it!"
       }
     ]
   },
@@ -121,13 +111,8 @@
         "size": "8",
         "link": "nike",
         "photo": "https://unsplash.com/photos/164_6wVEHfI",
-        "Red": "String",
-        "comments": [
-          {
-            "commentText": "Henlo fren",
-            "commentAuthor": "Amiko"
-          }
-        ]
+        "color": "red",
+        "review": "I loved it!"
       }
     ]
   }
