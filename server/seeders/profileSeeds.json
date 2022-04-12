@@ -4,9 +4,7 @@
     "email": "bkernighan@techfriends.dev",
     "password": "password01",
     "height": 5,
-    "heightUnits": "feet",
     "weight": "130",
-    "weightUnits": "pounds",
     "closet": "",
     "primaryPhoto": "https://marvel.fandom.com/wiki/File:Stephen_Strange_(Earth-199999)_from_Spider-Man_No_Way_Home_Promo_001.jpg",
     "following": [
@@ -43,9 +41,7 @@
     "email": "amiko@techfriends.dev",
     "password": "password",
     "height": 5,
-    "heightUnits": "feet",
     "weight": "130",
-    "weightUnits": "pounds",
     "closet": "",
     "primaryPhoto": "https://marvel.fandom.com/wiki/File:Stephen_Strange_(Earth-199999)_from_Spider-Man_No_Way_Home_Promo_001.jpg",
     "following": [
@@ -82,9 +78,7 @@
     "email": "friend@gmail.com",
     "password": "password",
     "height": 5,
-    "heightUnits": "feet",
     "weight": "130",
-    "weightUnits": "pounds",
     "closet": "",
     "primaryPhoto": "https://marvel.fandom.com/wiki/File:Stephen_Strange_(Earth-199999)_from_Spider-Man_No_Way_Home_Promo_001.jpg",
     "following": [
