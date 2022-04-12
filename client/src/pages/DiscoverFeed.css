@@ -36,7 +36,7 @@
 .img-div {
   transform-origin: right top;
   margin: -165px;
-  z-index: 5;
+  z-index: 0;
 }
 
 .img {
@@ -44,7 +44,7 @@
   width: 100%;
   height: 100%;
   border-radius: 2px;
-  z-index: 5;
+  z-index: 0;
 }
 
 .img-div-odd {
@@ -52,6 +52,7 @@
   width: 300px;
   height: 54.5vh;
   height: 480px;
+  z-index: 0;
 }
 
 .img-div-even {
@@ -59,9 +60,14 @@
   height: 43.6vh;
   height: 400px;
   transform: rotate(90deg) translateX(431px) translateY(-590px);
+  z-index: 0;
 }
 
 @media screen and (min-width: 767px) {
+  .discover-feed-container {
+    position: relative;
+  }
+
   .second-wrapper {
     right: 40vh;
   }
@@ -71,26 +77,31 @@
     position: relative;
   }
 
-  .img-div:hover .view-closet,
+  /* .img-div:hover .view-closet,
   .img-div:focus .view-closet {
     opacity: 1;
     visibility: visible;
     transform: scale(1);
-  }
+  } */
+
+  /* .img-div:hover::before {
+    content: "View Closet";
+    font-size: 100px;
+    white-space: nowrap;
+    z-index: 10000;
+  } */
 
   .view-closet {
-      font-size: 100px;
-      white-space: nowrap;
-      position: absolute;
-     right: 0px;
-     top: 20%;
-      z-index: 100;
-      color: white;
-      overflow-x: visible;
-      opacity: 0;
-      transform: scale(1.1) ;
-      transition: opacity .2s, transform .2s;
-    }
+    font-size: 100px;
+    white-space: nowrap;
+    position: absolute;
+    z-index: 100;
+    color: rgb(31, 31, 31);
+    overflow-x: visible;
+    /* display: none; */
+    transform: scale(1.1);
+    transition: opacity 0.2s, transform 0.2s;
+  }
 
   .img-div-odd {
     transform: rotate(90deg) translateX(650px) translateY(-440px);

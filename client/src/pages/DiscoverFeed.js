@@ -1,5 +1,8 @@
 import Header from '../components/Header';
+import React, { useState } from 'react';
 import './DiscoverFeed.css';
+let viewClosetEl = document.querySelector('.view-closet');
+let imgDivEl = document.querySelector('.img-div');
 
 const DiscoverFeed = () => {
   const images = [
@@ -29,9 +32,33 @@ const DiscoverFeed = () => {
     },
   ];
 
+  const [hover, setHover] = useState('false');
+
+  if (imgDivEl) {
+    imgDivEl.addEventListener('mouseover', function (e) {
+      // setHover('true');
+      viewClosetEl.style.top = e.pageY + 'px';
+      viewClosetEl.style.left = e.pageX + 'px';
+      // viewClosetEl.style.display = 'block';
+    });
+  }
+
+  // window.addEventListener('mousemove', cursor);
+
+  // function cursor(e) {
+  //   if (hover) {
+  //     viewClosetEl.style.top = e.pageY + 'px';
+  //     viewClosetEl.style.left = e.pageX + 'px';
+  //     viewClosetEl.style.display = 'block';
+  //   } else {
+  //     viewClosetEl.style.display = 'none';
+  //   }
+  // }
+
   return (
-    <div>
+    <div className="discover-feed-container">
       <Header />
+      {/* <p className="view-closet">View Closet</p> */}
       <div className="discover-container">
         <div className="second-wrapper">
           {images.map(({ id, img }) => (
@@ -41,7 +68,6 @@ const DiscoverFeed = () => {
               }
             >
               <img key={id} alt="cool-pic" src={img} className="img" />
-              <p className="view-closet">View Closet</p>
             </div>
           ))}
         </div>
