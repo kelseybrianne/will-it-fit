@@ -67,7 +67,9 @@ const typeDefs = gql`
     item(name: String!): Item
     items: [Item]
 
-    photo(name: String!): Photo
+    closet(closetId: ID!): User
+
+    photo(name: String!): User
     photos: [Photo]
 
     comments(username: String): [Comment]
@@ -102,29 +104,16 @@ const typeDefs = gql`
       photo: String
       color: String
     ): User
-    removeItem (
-        itemId: ID!
-        ): User
+    removeItem(itemId: ID!): User
 
-    addComment(
-        username: String!
-        ): User
-    removeComment(
-        commentId: ID!
-        ): User
+    addComment(username: String!): User
+    removeComment(commentId: ID!): User
 
-    addPhoto(
-        path: String! 
-        name: String!
-        ): Photo
+    addPhoto(path: String!, name: String!): Photo
     removePhoto: Photo
 
-    addFollower(
-        username: String!
-        ): User
-    removeFollower(
-        username: String!
-        ): User
+    addFollower(username: String!): User
+    removeFollower(username: String!): User
   }
 `;
 
