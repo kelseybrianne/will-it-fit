@@ -44,9 +44,7 @@ const userSchema = new Schema(
 
     },
 
-    closet: {
-      //   would this be an array?
-    },
+    closet: [itemSchema],
 
     primaryPhoto: {
       type: String
