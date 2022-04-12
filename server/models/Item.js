@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 const { Schema, model } = require('mongoose');
 
 const itemSchema = new Schema({
@@ -64,4 +65,4 @@ const itemSchema = new Schema({
 
 // const Item = model('Item', itemSchema);
 
-module.exports= itemSchema
+module.exports= itemSchema;
