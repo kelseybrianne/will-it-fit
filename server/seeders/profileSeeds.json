@@ -1,0 +1,72 @@
+[
+  {
+    "username": "Brian",
+    "email": "bkernighan@techfriends.dev",
+    "password": "password01",
+    "height": 5,
+    "weight": "130",
+    
+    "primaryPhoto": "https://marvel.fandom.com/wiki/File:Stephen_Strange_(Earth-199999)_from_Spider-Man_No_Way_Home_Promo_001.jpg",
+ 
+    "savedItems": [
+      {
+        "category": "Shoes",
+        "style": "spring",
+        "brand": "NIKE",
+        "name": "Running shoes",
+        "gender": "women",
+        "size": "8",
+        "link": "nike",
+        "photo": "https://unsplash.com/photos/164_6wVEHfI",
+        "color": "red",
+        "review": "I loved it!"
+      }
+    ]
+  },
+  {
+    "username": "Amiko",
+    "email": "amiko@techfriends.dev",
+    "password": "password",
+    "height": 5,
+    "weight": "130",
+    "primaryPhoto": "https://marvel.fandom.com/wiki/File:Stephen_Strange_(Earth-199999)_from_Spider-Man_No_Way_Home_Promo_001.jpg",
+    
+    "savedItems": [
+      {
+        "category": "Shoes",
+        "style": "spring",
+        "brand": "NIKE",
+        "name": "Running shoes",
+        "gender": "women",
+        "size": "8",
+        "link": "nike",
+        "photo": "https://unsplash.com/photos/164_6wVEHfI",
+        "color": "red",
+        "review": "I loved it!"
+      }
+    ]
+  },
+  {
+    "username": "Friend",
+    "email": "friend@gmail.com",
+    "password": "password",
+    "height": 5,
+    "weight": "130",
+    "primaryPhoto": "https://marvel.fandom.com/wiki/File:Stephen_Strange_(Earth-199999)_from_Spider-Man_No_Way_Home_Promo_001.jpg",
+
+    "savedItems": [
+      {
+        "category": "Shoes",
+        "style": "spring",
+        "brand": "NIKE",
+        "name": "Running shoes",
+        "gender": "women",
+        "size": "8",
+        "link": "nike",
+        "photo": "https://unsplash.com/photos/164_6wVEHfI",
+        "color": "red",
+        "review": "I loved it!"
+      }
+    ]
+  }
+]

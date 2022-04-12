@@ -68,6 +68,6 @@ const itemSchema = new Schema({
   // ],
 });
 
-// const Item = model('Item', itemSchema);
+model('Item', itemSchema);
 
 module.exports= itemSchema;

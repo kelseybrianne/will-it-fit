@@ -24,7 +24,7 @@ const userSchema = new Schema(
 
     height: {
       type: Number,
-      required: true
+      required: true,
     },
 
     // heightUnits: {
@@ -44,7 +44,12 @@ const userSchema = new Schema(
     //   // lbs or kgs <-- could use some front end magic
     // },
 
-    closet: [itemSchema],
+    closet: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Item',
+      },
+    ],
 
     primaryPhoto: {
       type: String,
@@ -64,7 +69,12 @@ const userSchema = new Schema(
       },
     ],
     // do we need this ?
-    savedItems: [itemSchema],
+    savedItems: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Item',
+      },
+    ],
   },
   {
     toJSON: {
