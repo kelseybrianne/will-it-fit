@@ -8,12 +8,13 @@ const resolvers = {
     // TEST SAVED ITEMS
     user: async (parent, { username }, context) => {
       if (context.user) {
-        return await User.findOne({ username }).populate(
-          'following',
-          'followers',
-          'savedItems',
-          'closet'
-        );
+        return await User.findOne({username});
+        // .populate(
+        //   // 'following',
+        //   // 'followers',
+        //   'savedItems'
+        //   // 'closet'
+        // );
       }
       throw new AuthenticationError('You need to be logged in!');
     },
