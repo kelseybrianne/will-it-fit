@@ -15,6 +15,9 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
+    me: async () => {
+      // TODO: Steal this from last homework
+    },
     closet: async (parent, args) => {
       return await Closet.findById(args.id).populate('item', 'photo');
     },
@@ -26,8 +29,8 @@ const resolvers = {
 
   // starting mutations file
   Mutation: {
-    addUser: async (parent, { username, email, password }) => {
-      const user = await User.create({ username, email, password });
+    addUser: async (parent, args) => {
+      const user = await User.create(args);
       const token = signToken(user);
       return { token, user };
     },

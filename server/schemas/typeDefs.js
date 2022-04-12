@@ -5,32 +5,36 @@ const typeDefs = gql`
     _id: ID!
     username: String!
     email: String!
-    password: String!
+    # password: String!
     height: Float!
-    heightUnits: [Unit]
+    # heightUnits: [Unit]
     weight: Float!
-    weightUnits: String
-    closet: [Closet]
-    primaryPhoto: String!
+    # weightUnits: String
+    closet: [Item]
+    primaryPhoto: String
+    following: [User]
+    followers: [User]
+  }
+
+  type me {
+    _id: ID!
+    username: String!
+    email: String!
+    # password: String!
+    height: Float!
+    # heightUnits: [Unit]
+    weight: Float!
+    # weightUnits: String
+    closet: [Item]
+    primaryPhoto: String
     following: [User]
     followers: [User]
     savedItems: [Item]
   }
 
-  type Unit {
-    inches: Int
-    feet: Int
-  }
-
   type Photo {
     path: String!
     name: String!
-  }
-
-  type Closet {
-    _id: ID!
-    item: [Item]
-    photo: [Photo]
   }
 
   type Item {
@@ -62,6 +66,7 @@ const typeDefs = gql`
   type Query {
     user(username: String!): User
     users: [User]
+    me: User
 
     item(name: String!): Item
     items: [Item]
@@ -83,10 +88,10 @@ const typeDefs = gql`
       username: String!
       email: String!
       password: String!
-      height: Int
-      heightUnits: String
-      weight: Int
-      weightUnits: String
+      height: Float!
+      # heightUnits: String
+      weight: Float!
+      # weightUnits: String
       primaryPhoto: String
     ): Auth
 

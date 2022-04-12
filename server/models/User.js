@@ -24,28 +24,27 @@ const userSchema = new Schema(
 
     height: {
       type: Number,
+      required: true
     },
 
-    heightUnits: {
-      type: String,
-      required: true,
-      //   in or cm <-- could use some front end magic
-    },
+    // heightUnits: {
+    //   type: String,
+    //   required: true,
+    //   //   in or cm <-- could use some front end magic
+    // },
 
     weight: {
       type: Number,
       required: true,
     },
 
-    weightUnits: {
-      type: String,
+    // weightUnits: {
+    //   type: String,
 
-      // lbs or kgs <-- could use some front end magic
-    },
+    //   // lbs or kgs <-- could use some front end magic
+    // },
 
-    closet: {
-      //   would this be an array?
-    },
+    closet: [itemSchema],
 
     primaryPhoto: {
       type: String,
