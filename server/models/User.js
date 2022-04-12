@@ -1,6 +1,5 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
-
 const itemSchema = require('./Item');
 
 const userSchema = new Schema(
@@ -28,20 +27,18 @@ const userSchema = new Schema(
     },
 
     heightUnits: {
-      type: String
+      type: String,
       //   in or cm <-- could use some front end magic
-
     },
 
     weight: {
-      type: Number
+      type: Number,
     },
 
     weightUnits: {
-      type: String
+      type: String,
 
       // lbs or kgs <-- could use some front end magic
-
     },
 
     closet: {
@@ -49,7 +46,7 @@ const userSchema = new Schema(
     },
 
     primaryPhoto: {
-      type: String
+      type: String,
     },
 
     following: [

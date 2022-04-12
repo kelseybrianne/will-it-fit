@@ -1,9 +1,7 @@
 const { Schema, model } = require('mongoose');
 
 const itemSchema = new Schema({
-  itemId: {
-    type: ID,
-  },
+
   category: {
     type: String,
     required: true
@@ -64,6 +62,6 @@ const itemSchema = new Schema({
   ],
 });
 
-const Item = model('Item', itemSchema);
+// const Item = model('Item', itemSchema);
 
-module.exports= Item;
+module.exports= itemSchema
