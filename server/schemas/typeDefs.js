@@ -71,7 +71,7 @@ const typeDefs = gql`
 
     item(_id: ID!): Item
     items: [Item]
-    
+
     closet: [Item]
 
     following(username: String!): [User]

@@ -8,7 +8,7 @@ const resolvers = {
     // TEST SAVED ITEMS
     user: async (parent, { username }, context) => {
       if (context.user) {
-        return await User.findOne({username});
+        return await User.findOne({ username });
         // .populate(
         //   // 'following',
         //   // 'followers',
@@ -18,15 +18,16 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
-
-    me: async (parent, { username }, context) => {
+    // working
+    me: async (parent, { _id }, context) => {
       if (context.user) {
-        return await User.findOne({ username }).populate(
-          'following',
-          'followers',
-          'savedItems',
-          'closet'
-        );
+        return await User.findOne({ _id })
+          .populate
+          // 'following',
+          // 'followers',
+          // 'savedItems',
+          // 'closet'
+          ();
       }
       throw new AuthenticationError('You need to be logged in!');
     },
@@ -70,6 +71,20 @@ const resolvers = {
 
       const token = signToken(user);
       return { token, user };
+    },
+
+    addItem: async (parent, args, context) => {
+      if (context.user) {
+        const item = await new Item(args);
+        await User.findByIdAndUpdate(context.user._id, {
+          // not sure what this statement should be
+          $push: { items: item },
+        });
+
+        return item;
+      }
+
+      throw new AuthenticationError('You need to be logged in!');
     },
   },
 };
