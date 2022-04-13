@@ -1,4 +1,46 @@
 .closet {
-    width: 75vw;
-    margin: 0px auto;
+    /* width: 85vw; */
+    margin: 0px 10px;
+}
+
+.item-img {
+    border-radius: 2px;
+}
+
+.item-text {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 14ch;
+}
+
+@media screen and (min-width: 375px) {
+    .item-text {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        width: 19ch;
+    }
+}
+
+@media screen and (min-width: 440px) {
+    .item-text {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        width: 23ch;
+    }
+}
+
+@media screen and (min-width: 767px) {
+    .closet {
+        width: 85vw;
+        margin: 0px auto;
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    .closet {
+        width: 65vw;
+    }
 }

@@ -3,7 +3,8 @@ import Box from '@mui/material/Box';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
-import './Items.css'
+import IconButton from '@mui/material/IconButton';
+import './Items.css';
 
 const Items = () => {
   const images = [
@@ -33,11 +34,16 @@ const Items = () => {
     },
   ];
 
+  // use useState and useEffect to track window width so line 44 updates without refreshing
   console.log(window.innerWidth);
 
   return (
     <div className="closet">
-      <ImageList variant="masonry" cols={ window.innerWidth > 766 ? 3 : 2} gap={8}>
+      <ImageList
+        variant="masonry"
+        cols={window.innerWidth > 766 ? 3 : 2}
+        gap={8}
+      >
         {images.map(({ id, img }) => (
           <ImageListItem key={id}>
             <img
@@ -45,8 +51,27 @@ const Items = () => {
               srcSet={`${img}?w=248&fit=crop&auto=format&dpr=2 2x`}
               alt="alt goes here"
               loading="lazy"
+              className="item-img"
             />
-            <ImageListItemBar position="below" title="title goes here" />
+            {/* <ImageListItemBar
+              title="Brand Category - Size"
+              subtitle="Review preview..."
+              position="below"
+              className="item-text"
+              actionIcon={
+                <IconButton
+                  sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
+                  aria-label={`info about`}
+                ></IconButton>
+              }
+            /> */}
+            <ImageListItemBar
+              className="item-text"
+              title="Name Brand Category - SizeBrand Category - SizeBrand Category - Size"
+            //   subtitle={<span>title of the productfffffffffff yes yes yayyya who hoooo</span>}
+              subtitle="Brand Category Brand Category - SizeBrand Category - SizeBrand Category - Size"
+              position="below"
+            />
           </ImageListItem>
         ))}
       </ImageList>
