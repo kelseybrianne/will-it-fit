@@ -1,5 +1,6 @@
 import React from 'react';
 import './Closet.css';
+import Items from '../components/Items';
 
 const Closet = () => {
   return (
@@ -18,6 +19,7 @@ const Closet = () => {
           className="unfollow">Following</button>
         </div>
       </div>
+      <Items />
     </div>
   );
 };
