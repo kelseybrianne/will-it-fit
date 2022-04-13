@@ -9,15 +9,7 @@
     background-color: white;
 }
 
-.profile-head {
-    /* position: absolute;
-    right: 0;
-    left: 0;
-    top: 5%;
-    margin: 0px auto; */
-}
-
-.img-div {
+.profile-img-div {
     width: 250px;
     height: 350px;
     margin: 0px auto;
@@ -26,7 +18,7 @@
     transform: translateY(-120px);
 }
 
-.img-div h2 {
+.profile-img-div h2 {
     font-size: 40px;
     text-align: center;
     /* transform: translateY(-28px); */
@@ -75,15 +67,15 @@
         height: 30vh;
     }
 
-    .img-div {
+    .profile-img-div {
         width: 490px;
         height: 650px;
         transform: translateY(-175px);
     }
 
-    .img-div h2 {
-        font-size: 80px;
-        top: -55px;
+    .profile-img-div h2 {
+        font-size: 70px;
+        top: -50px;
     }
 
     .folls-div {

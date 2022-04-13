@@ -11,8 +11,8 @@ const header = () => {
       <Link to="/">
         {/* <h1>Will It Fit</h1> */}
       </Link>
-      <Link to="/feed">
-        <p>username</p>
+      <Link to="/closet">
+        <p>closet</p>
       </Link>
     </header>
   );

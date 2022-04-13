@@ -1,12 +1,12 @@
 import React from 'react';
-import './MainFeed.css';
+import './Closet.css';
 
-const MainFeed = () => {
+const Closet = () => {
   return (
     <div className="profile-page">
       <div className="white-div"></div>
       <div className="profile-head">
-        <div className="img-div">
+        <div className="profile-img-div">
           <h2>rsherman</h2>
           <div className="folls-div">
             <p>Following</p>
@@ -22,4 +22,4 @@ const MainFeed = () => {
   );
 };
 
-export default MainFeed;
+export default Closet;

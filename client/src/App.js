@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { setContext } from '@apollo/client/link/context';
 import Header from './components/Header';
 import DiscoverFeed from './pages/DiscoverFeed';
-import MainFeed from './pages/MainFeed';
+import Closet from './pages/Closet';
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -36,7 +36,7 @@ function App() {
           <Header />
           <Routes>
             <Route path="/" element={<DiscoverFeed />} />
-            <Route path="/feed" element={<MainFeed />} />
+            <Route path="/closet" element={<Closet />} />
           </Routes>
         </>
       </Router>
