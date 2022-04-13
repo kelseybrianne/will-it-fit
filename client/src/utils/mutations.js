@@ -103,5 +103,3 @@ mutation Mutation($username: String!) {
     }
   }
   `
-
-
