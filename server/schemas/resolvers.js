@@ -30,24 +30,24 @@ const resolvers = {
       return await Item.find();
     },
 
-    // GET user closet (ITEMS), based on id entered in args
+    // GET user closet (ITEMS), based on user id entered in args
     closet: async (parent, { _id }, context) => {
       if (context.user) {
-        return await User.find({ _id }).populate('closet');
+        return await User.findById({ _id }).populate('closet');
       }
       throw new AuthenticationError('You need to be logged in!');
     },
     // GET users savedItems (FAVORITES), pull from user id entered in args
     savedItems: async (parent, { _id }, context) => {
       if (context.user) {
-        return await User.find({ _id }).populate('savedItems');
+        return await User.findById({ _id }).populate('savedItems');
       }
       throw new AuthenticationError('You need to be logged in!');
     },
     // GET all users the user _id is following
     following: async (parent, { _id }, context) => {
       if (context.user) {
-        return await User.find({ _id }).populate('following');
+        return await User.findById({ _id }).populate('following');
       }
       throw new AuthenticationError('You need to be logged in!');
     },
@@ -55,7 +55,7 @@ const resolvers = {
     // GET all followers of the user _id entered in args.
     followers: async (parent, { _id }, context) => {
       if (context.user) {
-        return await User.find({ _id }).populate('followers');
+        return await User.findById({ _id }).populate('followers');
       }
       throw new AuthenticationError('You need to be logged in!');
     },
@@ -109,7 +109,7 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
 
-    // POST add this username to users 'follower' array (i.e. I follow Kelsey. Kelseys username passes through args then it finds Kelsey's User account and adds me as a follower.)
+    // POST add this username to users 'follower' array (i.e. I follow Kelsey. Kelseys user id passes through args then it finds Kelsey's User account and adds me as a follower.)
 
     addFollower: async (parent, { _id }, context) => {
       if (context.user) {
@@ -122,7 +122,7 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
 
-    // POST add this username to logged in users' 'following' array. (i.e. I follow Kelsey. My username passes through args. It finds my user account and adds Kelsey to who I'm following.)
+    // POST add this username to logged in users' 'following' array. (i.e. I follow Kelsey. Kelsey's user id passes through args. It finds my user account and adds Kelsey to who I'm following.)
     addFollowing: async (parent, { _id }, context) => {
       if (context.user) {
         return await User.findByIdAndUpdate(
@@ -162,7 +162,6 @@ const resolvers = {
     // DELETE photo the user has previously added to an item.
     removePhoto: async (parent, args, context) => {
       if (context.user) {
-
         return await Item.findByIdAndUpdate(
           { _id: _id },
           { $pull: args.photo },

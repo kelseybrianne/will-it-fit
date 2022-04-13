@@ -67,11 +67,11 @@ const typeDefs = gql`
     item(_id: ID!): Item
     items: [Item]
 
-    closet(_id: ID!): [Item]
-    savedItems(_id: ID!): [Item]
+    closet(_id: ID!): User
+    savedItems(_id: ID!): User
 
-    following(_id: ID!): [User]
-    followers(_id: ID!): [User]
+    following(_id: ID!): User
+    followers(_id: ID!): User
   }
 
   type Mutation {
@@ -101,7 +101,7 @@ const typeDefs = gql`
       review: String
     ): Item
 
-    addFavorite(_id: ID!): Item
+    addFavorite(_id: ID!): User
     removeFavorite(_id: ID!): User
 
     removeItem(_id: ID!): User

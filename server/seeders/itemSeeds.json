@@ -20,8 +20,6 @@
     "size": "30w",
     "link": "nike.com",
     "photo": "../../client/src/assets/images/ivana-cajina-dnL6ZIpht2s-unsplash.jpg",
-
- 
     "color": "red",
     "review": "Good call!"
   },
@@ -58,7 +56,6 @@
     "size": "8",
     "link": "nike",
     "photo":"../../client/src/assets/images/huston-wilson-WyDr1KFS23Y-unsplash.jpg",
-
     "color": "red",
     "review": "It was ok"
   }

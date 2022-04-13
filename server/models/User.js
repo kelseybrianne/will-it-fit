@@ -28,22 +28,10 @@ const userSchema = new Schema(
       required: true,
     },
 
-    // heightUnits: {
-    //   type: String,
-    //   required: true,
-    //   //   in or cm <-- could use some front end magic
-    // },
-
     weight: {
       type: Number,
       required: true,
     },
-
-    // weightUnits: {
-    //   type: String,
-
-    //   // lbs or kgs <-- could use some front end magic
-    // },
 
     closet: [
       {
