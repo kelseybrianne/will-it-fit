@@ -8,9 +8,8 @@
     "primaryPhoto": "https://marvel.fandom.com/wiki/File:Stephen_Strange_(Earth-199999)_from_Spider-Man_No_Way_Home_Promo_001.jpg",
     "savedItems": [],
     "closet": [],
-    "following":[
-      
-    ]
+    "following": [],
+    "followers": []
   },
   {
     "username": "Amiko",
@@ -20,7 +19,9 @@
     "weight": "130",
     "primaryPhoto": "https://marvel.fandom.com/wiki/File:Stephen_Strange_(Earth-199999)_from_Spider-Man_No_Way_Home_Promo_001.jpg",
     "savedItems": [],
-    "closet": []
+    "closet": [],
+    "following": [],
+    "followers": []
   },
   {
     "username": "friend",
@@ -30,6 +31,8 @@
     "weight": "130",
     "primaryPhoto": "https://marvel.fandom.com/wiki/File:Stephen_Strange_(Earth-199999)_from_Spider-Man_No_Way_Home_Promo_001.jpg",
     "savedItems": [],
-    "closet": []
+    "closet": [],
+    "following": [],
+    "followers": []
   }
 ]

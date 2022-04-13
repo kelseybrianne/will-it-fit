@@ -33,11 +33,6 @@ const typeDefs = gql`
     savedItems: [Item]
   }
 
-  type Photo {
-    path: String!
-    name: String!
-  }
-
   type Item {
     _id: ID!
     category: String!
@@ -67,15 +62,16 @@ const typeDefs = gql`
   type Query {
     user(username: String!): User
     users: [User]
-    me: User
+    me(_id: ID!): User
 
     item(_id: ID!): Item
     items: [Item]
 
-    closet: [Item]
+    closet(_id: ID!): [Item]
+    savedItems(_id: ID!): [Item]
 
-    following(username: String!): [User]
-    followers(username: String!): [User]
+    following(_id: ID!): [User]
+    followers(_id: ID!): [User]
   }
 
   type Mutation {
@@ -100,17 +96,23 @@ const typeDefs = gql`
       gender: String
       size: String!
       link: String
-      photo: String
+      photo: String!
       color: String
       review: String
-    ): User
-    removeItem(itemId: ID!): User
+    ): Item
 
-    addPhoto(path: String!, name: String!): User
-    removePhoto: User
+    addFavorite(_id: ID!): Item
+    removeFavorite(_id: ID!): User
 
-    addFollower(username: String!): User
-    removeFollower(username: String!): User
+    removeItem(_id: ID!): User
+
+    removePhoto(_id: ID!): Item
+
+    addFollowing(_id: ID!): User
+    removeFollowing(_id: ID!): User
+
+    addFollower(_id: ID!): User
+    removeFollower(_id: ID!): User
   }
 `;
 

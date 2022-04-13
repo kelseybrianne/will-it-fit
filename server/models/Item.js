@@ -36,8 +36,9 @@ const itemSchema = new Schema({
   photo: {
     type: String,
     required: true,
-    // pic of clothing
   },
+
+  // pic of clothing
   color: {
     type: String,
     // [black, white, grey, red, orange, yellow, green, blue, purple, pink]

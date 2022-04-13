@@ -69,7 +69,6 @@ const userSchema = new Schema(
         ref: 'User',
       },
     ],
-    // do we need this ?
     savedItems: [
       {
         type: Schema.Types.ObjectId,
