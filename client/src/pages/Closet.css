@@ -56,6 +56,11 @@
     margin: 0px auto;
     border: none;
     background-color: white;
+    color: black;
+}
+
+.profile-head button:hover {
+    background-color: rgb(249, 249, 249);
 }
 
 .unfollow {
