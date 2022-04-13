@@ -97,6 +97,28 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
+    // POST photo to an item. Also UPDATES any existing photo in the database for this item.
+    addPhoto: async (parent, args, context) => {
+      if (context.user) {
+        return await Item.findByIdAndUpdate(
+          { _id: args._id },
+          { $set: { photo: args.photo } },
+          { new: true }
+        );
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
+    // POST photo to a USER. Also UPDATES any existing photo in the database for this user.
+    addProfilePhoto: async (parent, args, context) => {
+      if (context.user) {
+        return await User.findByIdAndUpdate(
+          { _id: context.user._id },
+          { $set: { primaryPhoto: args.primaryPhoto } },
+          { new: true }
+        );
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
     // POST - favorite items from other users closet into savedItems
     addFavorite: async (parent, { _id }, context) => {
       if (context.user) {
@@ -159,12 +181,12 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
 
-    // DELETE photo the user has previously added to an item.
-    removePhoto: async (parent, args, context) => {
+    // DELETE photo the user has added to its profile
+    removeProfilePhoto: async (parent, { _id }, context) => {
       if (context.user) {
-        return await Item.findByIdAndUpdate(
+        return await User.findByIdAndUpdate(
           { _id: _id },
-          { $pull: args.photo },
+          { $set: { primaryPhoto: '' } },
           { new: true }
         );
       }

@@ -100,13 +100,15 @@ const typeDefs = gql`
       color: String
       review: String
     ): Item
+    removeItem(_id: ID!): User
 
     addFavorite(_id: ID!): User
     removeFavorite(_id: ID!): User
 
-    removeItem(_id: ID!): User
-
-    removePhoto(_id: ID!): Item
+    addPhoto(_id: ID!, photo: String!): Item
+    
+    addProfilePhoto(_id: ID!, primaryPhoto: String!): User
+    removeProfilePhoto(_id: ID!): User
 
     addFollowing(_id: ID!): User
     removeFollowing(_id: ID!): User
