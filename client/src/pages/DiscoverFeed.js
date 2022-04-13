@@ -31,7 +31,6 @@ const DiscoverFeed = () => {
 
   return (
     <div>
-      <Header />
       <div className="discover-container">
         {images.map(({ id, img }) => (
           <div

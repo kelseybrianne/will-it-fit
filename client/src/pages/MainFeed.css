@@ -1,0 +1,99 @@
+.profile-page {
+    position: relative;
+    background-color: #e6e6e6;
+    min-height: 100vh;
+}
+
+.white-div {
+    min-height: 20vh;
+    background-color: white;
+}
+
+.profile-head {
+    /* position: absolute;
+    right: 0;
+    left: 0;
+    top: 5%;
+    margin: 0px auto; */
+}
+
+.img-div {
+    width: 250px;
+    height: 350px;
+    margin: 0px auto;
+    position: relative;
+    background-color: gray;
+    transform: translateY(-120px);
+}
+
+.img-div h2 {
+    font-size: 40px;
+    text-align: center;
+    /* transform: translateY(-28px); */
+    font-weight: 1;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0px auto;
+    top: -25px;
+}
+
+.folls-div {
+    display: flex;
+    text-align: flex-start;
+    padding: 10px;
+    transform: rotate(-90deg);
+    position: absolute;
+    left: -34%;
+    bottom: 13%;
+    font-size: 10px;
+}
+
+.folls-div p {
+    margin-right: 10px;
+}
+
+.profile-head button {
+    padding: 10px;
+    width: 150px;
+    height: 50px;
+    position: absolute;
+    bottom: -100px;
+    left: 0;
+    right: 0;
+    margin: 0px auto;
+    border: none;
+    background-color: white;
+}
+
+.unfollow {
+    color: rgb(79, 79, 79);
+}
+
+@media screen and (min-width: 767px) {
+    .white-div {
+        height: 30vh;
+    }
+
+    .img-div {
+        width: 490px;
+        height: 650px;
+        transform: translateY(-175px);
+    }
+
+    .img-div h2 {
+        font-size: 80px;
+        top: -55px;
+    }
+
+    .folls-div {
+        left: -21%;
+        bottom: 10%;
+        font-size: 12px;
+    }
+
+    .folls-div p {
+        margin-right: 15px;
+        font-weight: 1;
+    }
+}
