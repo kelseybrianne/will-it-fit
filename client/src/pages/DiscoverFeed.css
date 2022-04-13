@@ -40,9 +40,6 @@
   z-index: 0;
   background: rgb(152, 152, 152);
   overflow: hidden;
-  position: absolute;
-  top: 10%;
-  left: 10%;
 }
 
 .img {
