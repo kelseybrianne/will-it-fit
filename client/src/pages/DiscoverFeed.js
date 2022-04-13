@@ -68,7 +68,9 @@ const DiscoverFeed = () => {
               }
             >
               <img key={id} alt="cool-pic" src={img} className="img" />
+              <p className="view-closet">View Closet</p>
             </div>
+            
           ))}
         </div>
       </div>
