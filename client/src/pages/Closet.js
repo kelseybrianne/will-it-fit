@@ -12,9 +12,9 @@ const Closet = () => {
         <div className="profile-img-div">
           <h2>rsherman</h2>
           <div className="folls-div">
-            <p>Following</p>
+            <a href=""><p>Following</p></a>
             <p>|</p>
-            <p>Followers</p>
+            <a href=""><p>Followers</p></a>
           </div>
           {/* toggle 'Following' and 'Follow' on click'*/}
           {/* <button className="unfollow">Following</button> */}
