@@ -37,6 +37,7 @@ const DiscoverFeed = () => {
             className={
               id % 2 === 0 ? "img-div-even img-div" : "img-div-odd img-div"
             }
+            key={id}
           >
             <img alt="cool-pic" src={img} className="img" />
           </div>

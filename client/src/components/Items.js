@@ -67,9 +67,9 @@ const Items = () => {
             /> */}
             <ImageListItemBar
               className="item-text"
-              title="Name Brand Category - SizeBrand Category - SizeBrand Category - Size"
+              title="Name"
             //   subtitle={<span>title of the productfffffffffff yes yes yayyya who hoooo</span>}
-              subtitle="Brand Category Brand Category - SizeBrand Category - SizeBrand Category - Size"
+              subtitle="Brand Category"
               position="below"
             />
           </ImageListItem>

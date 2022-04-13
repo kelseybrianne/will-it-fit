@@ -29,13 +29,15 @@ const client = new ApolloClient({
 });
 
 function App() {
+  console.log(document.location);
+
   return (
     <ApolloProvider client={client}>
       <Router>
         <>
           <Header />
           <Routes>
-            <Route path="/" element={<DiscoverFeed />} />
+            <Route path="/" element={<DiscoverFeed />} component={DiscoverFeed} />
             <Route path="/closet" element={<Closet />} />
           </Routes>
         </>
