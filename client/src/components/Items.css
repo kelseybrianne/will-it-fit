@@ -1,6 +1,6 @@
 .closet {
     /* width: 85vw; */
-    margin: 0px 10px;
+    margin: 0px 8px;
 }
 
 .item-img {
@@ -11,24 +11,22 @@
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
-    width: 14ch;
+    width: 13ch;
 }
 
 @media screen and (min-width: 375px) {
     .item-text {
-        text-overflow: ellipsis;
-        overflow: hidden;
-        white-space: nowrap;
         width: 19ch;
     }
 }
 
 @media screen and (min-width: 440px) {
+    .closet {
+        margin: 0px 16px;
+    }
+
     .item-text {
-        text-overflow: ellipsis;
-        overflow: hidden;
-        white-space: nowrap;
-        width: 23ch;
+        width: 22ch;
     }
 }
 
@@ -36,6 +34,10 @@
     .closet {
         width: 85vw;
         margin: 0px auto;
+    }
+
+    .item-text {
+        width: 23ch;
     }
 }
 

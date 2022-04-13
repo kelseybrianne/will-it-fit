@@ -42,7 +42,7 @@ const Items = () => {
       <ImageList
         variant="masonry"
         cols={window.innerWidth > 766 ? 3 : 2}
-        gap={8}
+        gap={window.innerWidth > 339 ? 16 : 8}
       >
         {images.map(({ id, img }) => (
           <ImageListItem key={id}>

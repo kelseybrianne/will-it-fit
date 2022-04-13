@@ -10,8 +10,8 @@
 }
 
 .profile-img-div {
-    width: 250px;
-    height: 350px;
+    width: 220px;
+    height: 300px;
     margin: 0px auto;
     position: relative;
     background-color: gray;
@@ -36,8 +36,8 @@
     padding: 10px;
     transform: rotate(-90deg);
     position: absolute;
-    left: -34%;
-    bottom: 13%;
+    left: -37%;
+    bottom: 16%;
     font-size: 10px;
 }
 
@@ -47,10 +47,10 @@
 
 .profile-head button {
     padding: 10px;
-    width: 150px;
-    height: 50px;
+    width: 130px;
+    height: 45px;
     position: absolute;
-    bottom: -100px;
+    bottom: -80px;
     left: 0;
     right: 0;
     margin: 0px auto;
@@ -67,15 +67,27 @@
     color: rgb(79, 79, 79);
 }
 
+@media screen and (min-width: 500px) {
+    .profile-img-div {
+        width: 320px;
+        height: 375px;
+    } 
+
+    .folls-div {
+        left: -27%;
+        bottom: 13%;
+    }
+}
+
 @media screen and (min-width: 767px) {
     .white-div {
-        height: 30vh;
+        height: 28vh;
     }
 
     .profile-img-div {
         width: 490px;
-        height: 650px;
-        transform: translateY(-175px);
+        height: 600px;
+        transform: translateY(-155px);
     }
 
     .profile-img-div h2 {
@@ -85,12 +97,16 @@
 
     .folls-div {
         left: -21%;
-        bottom: 10%;
+        bottom: 10.5%;
         font-size: 12px;
     }
 
     .folls-div p {
         margin-right: 15px;
         font-weight: 1;
+    }
+
+    .profile-head button {
+        bottom: -90px;
     }
 }

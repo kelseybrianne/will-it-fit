@@ -18,7 +18,7 @@ const Closet = () => {
           </div>
           {/* toggle 'Following' and 'Follow' on click'*/}
           {/* <button className="unfollow">Following</button> */}
-          <Button variant="contained">Following</Button>
+          <Button variant="contained">Follow</Button>
         </div>
       </div>
       <Items />
