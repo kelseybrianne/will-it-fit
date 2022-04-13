@@ -44,12 +44,13 @@ const resolvers = {
     },
 
     // Retrieve user closet (ITEMS), pull from user Id
-    closet: async (parent, { _id }, context) => {
+    //WORK IN PROGRESS
+    /*closet: async (parent, { _id }, context) => {
       if (context.user) {
         return await User.findById({ _id }).populate('closet');
       }
       throw new AuthenticationError('You need to be logged in!');
-    },
+    },*/
   },
   // starting mutations file
   Mutation: {
@@ -73,18 +74,34 @@ const resolvers = {
       return { token, user };
     },
 
+    // still working on this -
     addItem: async (parent, args, context) => {
-      if (context.user) {
-        const item = await new Item(args);
-        await User.findByIdAndUpdate(context.user._id, {
-          // not sure what this statement should be
-          $push: { items: item },
-        });
+      console.log('parent', parent);
+      console.log('args', args);
+      if (args) {
+        const item = await Item.create(args);
+        console.log('item', item);
+        const userToUpdate = await User.findByIdAndUpdate(
+          { _id: args._id },
+          // { $addToSet: { savedBooks: args.input } },
+          { new: true }
+        );
+        console.log('userToUpdate', userToUpdate);
+      }
+      // console.group('context', context);
+      /*if (context.user) {
+        const item = await Item.create(args);
+
+        // await User.findByIdAndUpdate(context.user._id, {
+        //   // not sure what this statement should be
+        //   $push: { items: item },
+        // });
 
         return item;
       }
 
       throw new AuthenticationError('You need to be logged in!');
+      */
     },
   },
 };
