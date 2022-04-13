@@ -44,7 +44,7 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
-    // GET all users the user _id is following
+    // GET all users this user id is following
     following: async (parent, { _id }, context) => {
       if (context.user) {
         return await User.findById({ _id }).populate('following');
