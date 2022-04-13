@@ -50,26 +50,42 @@ mutation Mutation($itemId: ID!) {
   }
 `
 
-// addPhoto:
+// addItemPhoto:
 export const ADD_PHOTO = gql`
-mutation Mutation($path: String!, $name: String!) {
-    addPhoto(path: $path, name: $name) {
+mutation Mutation( $id: ID!) {
+    addPhoto(_id: $id) {
       _id
-      closet {
-        _id
-      }
+     
     }
   }
   `
 
-// removePhoto:
+// removeItemPhoto:
   export const REMOVE_PHOTO = gql`
-mutation Mutation {
-    removePhoto {
+mutation Mutation ($id: ID! ){
+    removePhoto (_id: $id) {
       _id
     }
   }
 `
+// removeProfilePicture 
+export const ADD_PROFILE_PHOTO = gql`
+mutation Mutation ($id: ID! ){
+  addProfilePhoto (_id: $id) {
+      _id
+    }
+  }
+`
+
+// removeProfilePicture 
+export const REMOVE_PROFILE_PHOTO = gql`
+mutation Mutation ($id: ID! ){
+    removeProfilePhoto (_id: $id) {
+      _id
+    }
+  }
+`
+
 // addFollower
 export const ADD_FOLLOWER = gql`
 mutation Mutation($username: String!) {
