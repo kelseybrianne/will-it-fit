@@ -1,14 +1,28 @@
-import React from "react";
-import './Header.css'
+import { Link, useLocation } from 'react-router-dom';
+import React from 'react';
+import './Header.css';
 
-const header = () => {
+const Header = () => {
+
+  const location = useLocation(); 
+  const pathname = location.pathname;
+
   return (
     <header>
-      <p>nav</p>
-      <h1>Will It Fit</h1>
-      <p>username</p>
+      <Link to="/">
+        <p>nav</p>
+      </Link>
+      
+      {pathname === '/closet' ? (
+        ''
+      ) : (
+        <Link to="/"><h1>Will It Fit</h1></Link>
+      )}
+      <Link to="/closet">
+        <p>closet</p>
+      </Link>
     </header>
   );
 };
 
-export default header;
+export default Header;
