@@ -22,20 +22,46 @@
     width: 13ch;
 }
 
+.icon {
+    position: absolute;
+    border-radius: 50px;
+    visibility: hidden;
+    z-index: 5;
+
+}
+
 .heart-icon {
     color: rgb(0, 0, 0);
-    position: absolute;
     left: 5px;
     top: 5px;
     background-color: white;
-    border-radius: 50px;
     padding: 5px;
-    visibility: hidden;
-    z-index: 5;
+} 
+
+.more-icon {
+    color: rgb(61, 61, 61);
+    left: 3px;
+    top: 10px;
 }
 
-.item-list-wrapper:hover .heart-icon {
+.item-list-wrapper:hover .heart-icon,
+.item-list-wrapper:hover .more-icon {
     visibility: visible;
+}
+
+#basic-menu {
+    
+    border-radius: 2px;
+}
+
+.dropdown-menu {
+    border-radius: 2px;
+}
+
+@media (hover: none) {
+    .icon {
+        visibility: visible;
+    }
 }
 
 @media screen and (min-width: 375px) {
