@@ -57,6 +57,7 @@
     border: none;
     background-color: white;
     color: black;
+    display: inline;
 }
 
 .profile-head button:hover {

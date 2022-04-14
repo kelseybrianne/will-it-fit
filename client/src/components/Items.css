@@ -32,10 +32,30 @@
     padding: 5px;
     visibility: hidden;
     z-index: 5;
+} 
+
+.more-icon {
+    color: rgb(61, 61, 61);
+    position: absolute;
+    left: 3px;
+    top: 10px;
+    border-radius: 50px;
+    visibility: hidden;
+    z-index: 5;
 }
 
-.item-list-wrapper:hover .heart-icon {
+.item-list-wrapper:hover .heart-icon,
+.item-list-wrapper:hover .more-icon {
     visibility: visible;
+}
+
+#basic-menu {
+    
+    border-radius: 2px;
+}
+
+.dropdown-menu {
+    border-radius: 2px;
 }
 
 @media screen and (min-width: 375px) {
