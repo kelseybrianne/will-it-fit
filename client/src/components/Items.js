@@ -43,7 +43,7 @@ const Items = ({ windowSize }) => {
                 aria-haspopup="true"
                 aria-expanded={open ? 'true' : undefined}
                 onClick={handleClick}
-                className="more-icon"
+                className="more-icon icon"
               />
 
               <Menu
@@ -62,7 +62,7 @@ const Items = ({ windowSize }) => {
               </Menu>
             </div>
             {/* <a href="">
-              <FavoriteBorderIcon className="heart-icon" />
+              <FavoriteBorderIcon className="heart-icon icon" />
             </a> */}
             <a href="">
               <ImageListItem key={id}>
