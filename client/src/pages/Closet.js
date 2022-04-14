@@ -4,7 +4,7 @@ import './Closet.css';
 import Items from '../components/Items';
 import Stack from '@mui/material/Stack';
 
-const Closet = () => {
+const Closet = ({ windowSize }) => {
   return (
     <div className="profile-page">
       <div className="white-div"></div>
@@ -21,7 +21,7 @@ const Closet = () => {
           <Button variant="contained">Follow</Button>
         </div>
       </div>
-      <Items />
+      <Items windowSize={windowSize} />
     </div>
   );
 };
