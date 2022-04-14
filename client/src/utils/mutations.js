@@ -1,22 +1,31 @@
-import { gql } from '@apollo/client'
+import { gql } from '@apollo/client';
 
 // addUser:
 export const ADD_USER = gql`
- mutation Mutation($username: String!, $email: String!, 
- $password: String!, $height: Float!, $weight: Float!, 
- $primaryPhoto: String) {
-   addUser(username: $username, email: $email, password: $password, height: $height, weight: $weight, primaryPhoto: $primaryPhoto) {
-    token
-    user {
+  mutation Mutation(
+    $username: String!
+    $email: String!
+    $password: String!
+    $height: Float!
+    $weight: Float!
+  ) {
+    addUser(
+      username: $username
+      email: $email
+      password: $password
+      height: $height
+      weight: $weight
+    ) {
+      token
+      user {
         _id
       }
-     }
-   }
-`
-
+    }
+  }
+`;
 // login:
 export const LOGIN_USER = gql`
-mutation Mutation($email: String!, $password: String!) {
+  mutation Mutation($email: String!, $password: String!) {
     login(email: $email, password: $password) {
       token
       user {
@@ -24,82 +33,119 @@ mutation Mutation($email: String!, $password: String!) {
       }
     }
   }
-`
-
+`;
 // addItem:
 export const ADD_ITEM = gql`
-mutation Mutation($category: String!, $name: String!, $size: String!, $style: String, $brand: String, $gender: String, $link: String, $photo: String, $color: String, $review: String) {
-    addItem(category: $category, name: $name, size: $size, style: $style, brand: $brand, gender: $gender, link: $link, photo: $photo, color: $color, review: $review) {
+  mutation Mutation(
+    $category: String!
+    $size: String!
+    $photo: String!
+    $style: String
+    $brand: String
+    $name: String!
+    $gender: String
+    $link: String
+    $color: String
+    $review: String
+  ) {
+    addItem(
+      category: $category
+      size: $size
+      photo: $photo
+      style: $style
+      brand: $brand
+      name: $name
+      gender: $gender
+      link: $link
+      color: $color
+      review: $review
+    ) {
       _id
-      closet {
-        _id
- 
-      }
     }
   }
-`
-// removeItem: 
-export const REMOVE_ITEM = gql `
-mutation Mutation($itemId: ID!) {
-    removeItem(itemId: $itemId) {
-      _id
-      closet {
-        _id
-      }
-    }
-  }
-`
-
+`;
 // addItemPhoto:
 export const ADD_PHOTO = gql`
-mutation Mutation( $id: ID!) {
-    addPhoto(_id: $id) {
-      _id
-     
-    }
-  }
-  `
-
-// removeItemPhoto:
-  export const REMOVE_PHOTO = gql`
-mutation Mutation ($id: ID! ){
-    removePhoto (_id: $id) {
+  mutation Mutation($id: ID!, $photo: String!) {
+    addPhoto(_id: $id, photo: $photo) {
       _id
     }
   }
-`
-// removeProfilePicture 
+`;
+// addProfilePhoto:
 export const ADD_PROFILE_PHOTO = gql`
-mutation Mutation ($id: ID! ){
-  addProfilePhoto (_id: $id) {
+  mutation Mutation($id: ID!, $primaryPhoto: String!) {
+    addProfilePhoto(_id: $id, primaryPhoto: $primaryPhoto) {
       _id
     }
   }
-`
-
-// removeProfilePicture 
-export const REMOVE_PROFILE_PHOTO = gql`
-mutation Mutation ($id: ID! ){
-    removeProfilePhoto (_id: $id) {
+`;
+//  addFavorite:
+export const ADD_FAVORITE = gql`
+  mutation Mutation($id: ID!) {
+    addFavorite(_id: $id) {
       _id
     }
   }
-`
+`;
 
-// addFollower
+// addFollower:
 export const ADD_FOLLOWER = gql`
-mutation Mutation($username: String!) {
-    addFollower(username: $username) {
+  mutation Mutation($id: ID!) {
+    addFollower(_id: $id) {
       _id
     }
   }
-`
+`;
 
-// removeFollower: 
-export const REMOVE_FOLLOWER =gql`
-mutation Mutation($username: String!) {
-    removeFollower(username: $username) {
+// addFollowing:
+export const ADD_FOLLOWING = gql`
+  mutation Mutation($id: ID!) {
+    addFollowing(_id: $id) {
       _id
     }
   }
-  `
+`;
+
+// removeItem:
+export const REMOVE_ITEM = gql`
+  mutation Mutation($id: ID!) {
+    removeItem(_id: $id) {
+      _id
+    }
+  }
+`;
+
+// removeFavorite:
+export const REMOVE_FAVORITE = gql`
+  mutation Mutation($id: ID!) {
+    removeFavorite(_id: $id) {
+      _id
+    }
+  }
+`;
+
+// removeProfilePhoto:
+export const REMOVE_PROFILE_PHOTO = gql`
+  mutation Mutation($id: ID!) {
+    removeProfilePhoto(_id: $id) {
+      _id
+    }
+  }
+`;
+// removeFollower:
+export const REMOVE_FOLLOWER = gql`
+  mutation Mutation($id: ID!) {
+    removeFollower(_id: $id) {
+      _id
+    }
+  }
+`;
+// removeFollowing:
+export const REMOVE_FOLLOWING = gql`
+  mutation Mutation($id: ID!) {
+    removeFollowing(_id: $id) {
+      _id
+    }
+  }
+`;
