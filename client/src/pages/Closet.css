@@ -1,0 +1,112 @@
+.profile-page {
+    position: relative;
+    background-color: #e6e6e6;
+    min-height: 100vh;
+}
+
+.white-div {
+    min-height: 20vh;
+    background-color: white;
+}
+
+.profile-img-div {
+    width: 220px;
+    height: 300px;
+    margin: 0px auto;
+    position: relative;
+    background-color: gray;
+    transform: translateY(-120px);
+}
+
+.profile-img-div h2 {
+    font-size: 40px;
+    text-align: center;
+    /* transform: translateY(-28px); */
+    font-weight: 1;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0px auto;
+    top: -25px;
+}
+
+.folls-div {
+    display: flex;
+    text-align: flex-start;
+    padding: 10px;
+    transform: rotate(-90deg);
+    position: absolute;
+    left: -37%;
+    bottom: 16%;
+    font-size: 10px;
+}
+
+.folls-div p {
+    margin-right: 10px;
+}
+
+.profile-head button {
+    padding: 10px;
+    width: 130px;
+    height: 45px;
+    position: absolute;
+    bottom: -80px;
+    left: 0;
+    right: 0;
+    margin: 0px auto;
+    border: none;
+    background-color: white;
+    color: black;
+}
+
+.profile-head button:hover {
+    background-color: rgb(249, 249, 249);
+}
+
+.unfollow {
+    color: rgb(79, 79, 79);
+}
+
+@media screen and (min-width: 500px) {
+    .profile-img-div {
+        width: 320px;
+        height: 375px;
+    } 
+
+    .folls-div {
+        left: -27%;
+        bottom: 13%;
+    }
+}
+
+@media screen and (min-width: 767px) {
+    .white-div {
+        height: 28vh;
+    }
+
+    .profile-img-div {
+        width: 490px;
+        height: 600px;
+        transform: translateY(-155px);
+    }
+
+    .profile-img-div h2 {
+        font-size: 70px;
+        top: -50px;
+    }
+
+    .folls-div {
+        left: -21%;
+        bottom: 10.5%;
+        font-size: 12px;
+    }
+
+    .folls-div p {
+        margin-right: 15px;
+        font-weight: 1;
+    }
+
+    .profile-head button {
+        bottom: -90px;
+    }
+}
