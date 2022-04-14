@@ -1,0 +1,62 @@
+[
+  {
+    "category": "Shoes",
+    "style": "spring",
+    "brand": "NIKE",
+    "name": "Running shoes",
+    "gender": "women",
+    "size": "8",
+    "link": "nike",
+    "photo": "../../client/src/assets/images/dom-hill-nimElTcTNyY-unsplash.jpg",
+    "color": "red",
+    "review": "I loved it!"
+  },
+  {
+    "category": "Pants",
+    "style": "summer",
+    "brand": "NIKE",
+    "name": "Running shoes",
+    "gender": "women",
+    "size": "30w",
+    "link": "nike.com",
+    "photo": "../../client/src/assets/images/ivana-cajina-dnL6ZIpht2s-unsplash.jpg",
+    "color": "red",
+    "review": "Good call!"
+  },
+  {
+    "category": "Shirts",
+    "style": "spring",
+    "brand": "NIKE",
+    "name": "Running shoes",
+    "gender": "women",
+    "size": "30x37",
+    "link": "nike",
+    "photo":"../../client/src/assets/images/daniel-monteiro-VMeHP3mNJL4-unsplash.jpg",
+    "color": "red",
+    "review": "You gotta try this!"
+  },
+  {
+    "category": "Hats",
+    "style": "Winter",
+    "brand": "NIKE",
+    "name": "Running shoes",
+    "gender": "women",
+    "size": "8",
+    "link": "nike",
+    "photo":"../../client/src/assets/images/dom-hill-nimElTcTNyY-unsplash.jpg",
+    "color": "red",
+    "review": "It was ok"
+  },
+  {
+    "category": "Jacket",
+    "style": "Fall",
+    "brand": "NIKE",
+    "name": "Running shoes",
+    "gender": "women",
+    "size": "8",
+    "link": "nike",
+    "photo":"../../client/src/assets/images/huston-wilson-WyDr1KFS23Y-unsplash.jpg",
+    "color": "red",
+    "review": "It was ok"
+  }
+]
