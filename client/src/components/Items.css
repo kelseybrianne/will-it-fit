@@ -3,8 +3,16 @@
     margin: 0px 8px;
 }
 
+.item-list-wrapper {
+    position: relative;
+}
+
 .item-img {
     border-radius: 2px;
+}
+
+.item-img:hover {
+    opacity: .9;
 }
 
 .item-text {
@@ -12,6 +20,22 @@
     overflow: hidden;
     white-space: nowrap;
     width: 13ch;
+}
+
+.heart-icon {
+    color: rgb(0, 0, 0);
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    background-color: white;
+    border-radius: 50px;
+    padding: 5px;
+    visibility: hidden;
+    z-index: 5;
+}
+
+.item-list-wrapper:hover .heart-icon {
+    visibility: visible;
 }
 
 @media screen and (min-width: 375px) {

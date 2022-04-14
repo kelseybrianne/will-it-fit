@@ -4,6 +4,7 @@ import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
 import IconButton from '@mui/material/IconButton';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import './Items.css';
 
 const Items = () => {
@@ -45,36 +46,28 @@ const Items = () => {
         gap={window.innerWidth > 339 ? 16 : 8}
       >
         {images.map(({ id, img }) => (
-            <a href="" key={id}>
-          <ImageListItem >
-            <img
-              src={`${img}?w=248&fit=crop&auto=format`}
-              srcSet={`${img}?w=248&fit=crop&auto=format&dpr=2 2x`}
-              alt="alt goes here"
-              loading="lazy"
-              className="item-img"
-            />
-            {/* <ImageListItemBar
-              title="Brand Category - Size"
-              subtitle="Review preview..."
-              position="below"
-              className="item-text"
-              actionIcon={
-                <IconButton
-                  sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
-                  aria-label={`info about`}
-                ></IconButton>
-              }
-            /> */}
-            <ImageListItemBar
-              className="item-text"
-              title="Name"
-            //   subtitle={<span>title of the productfffffffffff yes yes yayyya who hoooo</span>}
-              subtitle="Brand Category"
-              position="below"
-            />
-          </ImageListItem>
-          </a>
+          <div key={id} className="item-list-wrapper">
+            <a href="">
+              <FavoriteBorderIcon className="heart-icon" />
+            </a>
+            <a href="">
+              <ImageListItem key={id}>
+                <img
+                  src={`${img}?w=248&fit=crop&auto=format`}
+                  srcSet={`${img}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                  alt="alt goes here"
+                  loading="lazy"
+                  className="item-img"
+                />
+                <ImageListItemBar
+                  className="item-text"
+                  title="Name"
+                  subtitle="Brand Category"
+                  position="below"
+                />
+              </ImageListItem>
+            </a>
+          </div>
         ))}
       </ImageList>
     </div>
