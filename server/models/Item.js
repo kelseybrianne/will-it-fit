@@ -1,9 +1,10 @@
+// eslint-disable-next-line no-unused-vars
 const { Schema, model } = require('mongoose');
 
 const itemSchema = new Schema({
   category: {
     type: String,
-
+    required: true,
     // [footwear, head wear, top, bottom, dress, etc...]
   },
   style: {
@@ -16,6 +17,7 @@ const itemSchema = new Schema({
   },
   name: {
     type: String,
+    required: true,
     // air jordans
   },
   gender: {
@@ -24,6 +26,7 @@ const itemSchema = new Schema({
   },
   size: {
     type: String,
+    required: true,
     // [medium tall, 4, xxl, ps, 8L]
   },
   link: {
@@ -32,36 +35,20 @@ const itemSchema = new Schema({
   },
   photo: {
     type: String,
-    // pic of clothing
+    required: true,
   },
+
+  // pic of clothing
   color: {
     type: String,
     // [black, white, grey, red, orange, yellow, green, blue, purple, pink]
   },
   review: {
-    type: String
-  }
-  // comments: [
-  //   {
-  //     commentText: {
-  //       type: String,
-  //       required: true,
-  //       minlength: 1,
-  //       maxlenght: 280,
-  //     },
-  //     commentAuthor: {
-  //       type: String,
-  //       required: true,
-  //     },
-  //     createdAt: {
-  //       type: Date,
-  //       default: Date.now,
-  //       get: (timestamp) => dateFormat(timestamp),
-  //     },
-  //   },
-  // ],
+    type: String,
+  },
+
 });
 
 const Item = model('Item', itemSchema);
 
-module.exports= Item;
+module.exports = Item;

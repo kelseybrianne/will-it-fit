@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
-
+// eslint-disable-next-line no-unused-vars
 const itemSchema = require('./Item');
 
 const userSchema = new Schema(
@@ -25,31 +25,23 @@ const userSchema = new Schema(
 
     height: {
       type: Number,
-    },
-
-    heightUnits: {
-      type: String
-      //   in or cm <-- could use some front end magic
-
+      required: true,
     },
 
     weight: {
-      type: Number
+      type: Number,
+      required: true,
     },
 
-    weightUnits: {
-      type: String
-
-      // lbs or kgs <-- could use some front end magic
-
-    },
-
-    closet: {
-      //   would this be an array?
-    },
+    closet: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Item',
+      },
+    ],
 
     primaryPhoto: {
-      type: String
+      type: String,
     },
 
     following: [
@@ -65,8 +57,12 @@ const userSchema = new Schema(
         ref: 'User',
       },
     ],
-    // do we need this ?
-    savedItems: [itemSchema],
+    savedItems: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Item',
+      },
+    ],
   },
   {
     toJSON: {

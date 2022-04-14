@@ -56,6 +56,7 @@ const DiscoverFeed = () => {
   // }
 
   return (
+
     <div className="discover-feed-container">
       <Header />
       {/* <p className="view-closet">View Closet</p> */}
