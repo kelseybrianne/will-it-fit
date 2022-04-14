@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/kelseybrianne/will-it-fit#readme",
   "devDependencies": {
+    "@faker-js/faker": "^6.1.2",
     "concurrently": "^7.1.0",
     "eslint": "8.10.0",
     "eslint-config-prettier": "8.4.0",

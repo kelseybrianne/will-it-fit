@@ -64,6 +64,8 @@ const typeDefs = gql`
     users: [User]
     me(_id: ID!): User
 
+    userSearch(height: Float!, weight: Float!): User
+
     item(_id: ID!): Item
     items: [Item]
 
@@ -106,7 +108,7 @@ const typeDefs = gql`
     removeFavorite(_id: ID!): User
 
     addPhoto(_id: ID!, photo: String!): Item
-    
+
     addProfilePhoto(_id: ID!, primaryPhoto: String!): User
     removeProfilePhoto(_id: ID!): User
 

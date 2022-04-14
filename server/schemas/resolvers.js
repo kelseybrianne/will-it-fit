@@ -11,6 +11,40 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
+
+    // GET users in range of height and weight
+    userSearch: async (parent, { height, weight }, context) => {
+      if (context.user) {
+        return await User.find({
+          $project: {
+            height: {
+              $filter: {
+                input: height,
+                cond: {
+                  $and: [
+                    { $gte: [(height*.05)-height]},
+                    { $lt: [(height*.05)-height]}
+                  ],
+                }
+              }
+            },
+            weight: {
+              $filter: {
+                input: weight,
+                cond: {
+                  $and: [
+                    { $gte: [(weight*.05)-weight]},
+                    { $lt: [(weight*.05)-height]}
+                  ]
+                }
+              }
+            }
+          }
+        });
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
+
     // GET logged in user
     me: async (parent, { _id }, context) => {
       if (context.user) {
