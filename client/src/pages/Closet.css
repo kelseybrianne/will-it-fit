@@ -5,24 +5,29 @@
 }
 
 .white-div {
-  min-height: 20vh;
+  height: 20vh;
+  min-height: 150px;
   background-color: white;
 }
 
 .profile-img-div {
   width: 220px;
-  height: 300px;
+  /* height: 300px; */
   margin: 0px auto;
   position: relative;
-  background-color: gray;
   transform: translateY(-120px);
+}
+
+.profile-img-div img {
+    height: 100%;
+    width: 100%;
 }
 
 .profile-img-div h2 {
   font-size: 40px;
   text-align: center;
   /* transform: translateY(-28px); */
-  font-weight: 1;
+  font-weight: 300;
   position: absolute;
   left: 0;
   right: 0;
@@ -36,8 +41,8 @@
   padding: 10px;
   transform: rotate(-90deg);
   position: absolute;
-  left: -37%;
-  bottom: 16%;
+  left: -85px;
+  bottom: 50px;
   font-size: 10px;
 }
 
@@ -71,34 +76,36 @@
 @media screen and (min-width: 500px) {
   .profile-img-div {
     width: 320px;
-    height: 375px;
   }
 
   .folls-div {
-    left: -27%;
-    bottom: 13%;
+    left: -85px;
+    bottom: 50px;
   }
 }
 
 @media screen and (min-width: 767px) {
   .white-div {
-    height: 28vh;
+    height: 175px;
   }
 
   .profile-img-div {
-    width: 490px;
-    height: 600px;
+    width: 35%;
+    height: auto;
+    max-width: 800px;
+    /* max-height: 600px; */
     transform: translateY(-120px);
+    object-fit: cover;
   }
 
   .profile-img-div h2 {
-    font-size: 50px;
+    font-size: 60px;
     top: -35px;
   }
 
   .folls-div {
-    left: -21%;
-    bottom: 10.5%;
+    left: -100px;
+    bottom: 65px;
     font-size: 12px;
   }
 

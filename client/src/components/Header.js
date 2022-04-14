@@ -12,7 +12,7 @@ const Header = () => {
       </Link>
 
       <Link to="/">
-        <h1>Will It Fit</h1>
+        <h1>Will It Fit?</h1>
       </Link>
 
       {Auth.loggedIn() ? (
