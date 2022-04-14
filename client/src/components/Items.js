@@ -20,6 +20,7 @@ const Items = ({ windowSize }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
+    event.preventDefault();
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
@@ -36,36 +37,34 @@ const Items = ({ windowSize }) => {
       >
         {images.map(({ id, img }) => (
           <div key={id} className="item-list-wrapper">
-            <div>
-              <MoreVertIcon
-                id="basic-button"
-                aria-controls={open ? 'basic-menu' : undefined}
-                aria-haspopup="true"
-                aria-expanded={open ? 'true' : undefined}
-                onClick={handleClick}
-                className="more-icon"
-              />
-
-              <Menu
-                id="basic-menu"
-                elevation={0}
-                className="dropdown-menu"
-                anchorEl={anchorEl}
-                open={open}
-                onClose={handleClose}
-                MenuListProps={{
-                  'aria-labelledby': 'basic-button',
-                }}
-              >
-                <MenuItem  onClick={handleClose}>Edit</MenuItem>
-                <MenuItem onClick={handleClose}>Delete</MenuItem>
-              </Menu>
-            </div>
             {/* <a href="">
               <FavoriteBorderIcon className="heart-icon" />
             </a> */}
             <a href="">
               <ImageListItem key={id}>
+                <MoreVertIcon
+                  id="basic-button"
+                  aria-controls={open ? 'basic-menu' : undefined}
+                  aria-haspopup="true"
+                  aria-expanded={open ? 'true' : undefined}
+                  onClick={handleClick}
+                  className="more-icon"
+                />
+
+                <Menu
+                  id="basic-menu"
+                  elevation={0}
+                  className="dropdown-menu"
+                  anchorEl={anchorEl}
+                  open={open}
+                  onClose={handleClose}
+                  MenuListProps={{
+                    'aria-labelledby': 'basic-button',
+                  }}
+                >
+                  <MenuItem onClick={handleClose}>Edit</MenuItem>
+                  <MenuItem onClick={handleClose}>Delete</MenuItem>
+                </Menu>
                 <img
                   src={`${img}?w=248&fit=crop&auto=format`}
                   srcSet={`${img}?w=248&fit=crop&auto=format&dpr=2 2x`}
