@@ -22,7 +22,7 @@ const Closet = ({ windowSize }) => {
           </div>
           {/* toggle 'Following' and 'Follow' on click'*/}
           {/* <button className="unfollow">Following</button> */}
-          <Button variant="contained">Follow</Button>
+          <Button variant="contained">Add Item</Button>
         </div>
       </div>
       <Items windowSize={windowSize} />
