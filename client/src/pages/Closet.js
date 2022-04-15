@@ -3,6 +3,7 @@ import Button from '@mui/material/Button';
 import './Closet.css';
 import Items from '../components/Items.js';
 import Stack from '@mui/material/Stack';
+import UploadButtons from '../components/ImageUpload';
 
 const Closet = ({ windowSize }) => {
   return (
@@ -12,13 +13,18 @@ const Closet = ({ windowSize }) => {
         <div className="profile-img-div">
           <h2>rsherman</h2>
           <div className="folls-div">
-            <a href=""><p>Following</p></a>
+            <a href="">
+              <p>Following</p>
+            </a>
             <p>|</p>
-            <a href=""><p>Followers</p></a>
+            <a href="">
+              <p>Followers</p>
+            </a>
           </div>
           {/* toggle 'Following' and 'Follow' on click'*/}
           {/* <button className="unfollow">Following</button> */}
           <Button variant="contained">Add Item</Button>
+          <UploadButtons/>
         </div>
       </div>
       <Items windowSize={windowSize} />
