@@ -1,11 +1,69 @@
+// react:
 import * as React from 'react';
+import { useState } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
+import TextareaAutosize from '@mui/base/TextareaAutosize';
 import { Button } from '@mui/material';
 import { useFormControl } from '@mui/material/FormControl';
 
-export default function Closet() {
+
+// graphQL:
+import {useMutation} from '@apollo/client';
+import {ADD_ITEM} from '../utils/mutations';
+import Auth from '../utils/auth'
+
+const AddItem = () => {
+
+  const [userFormData, setUserFromData] = useState({
+    category: '',
+    size: '',
+    photo: '',
+    style: '',
+    brand: '',
+    name: '',
+    gender: '',
+    link: '',
+    color: '',
+    review: ''
+  })
+const [validated] = useState(false);
+
+const [addItem] =useMutation(ADD_ITEM)
+
+const handleInputChange = (event) => {
+  const { name, value } = event.target;
+  setUserFromData({...setUserFromData, [name]: value})
+  
+}
+
+const handFormSubmit = async (event) => {
+  event.preventDefault();
+  try{
+    const {data} = await addItem({
+      variables: {... userFormData},
+    });
+    Auth.addItem(data.addItem.token)
+  } catch(e) {
+    console.error(e)
+  }
+setUserFromData({
+  category: '',
+  size: '',
+  photo: '',
+  style: '',
+  brand: '',
+  name: '',
+  gender: '',
+  link: '',
+  color: '',
+  review: ''
+})
+
+}
+
   return (
+    <div>
     <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
       <TextField
         required
@@ -40,10 +98,19 @@ export default function Closet() {
         variant="filled"
       />
       <TextField id="filled-basic" label="Color" variant="filled" />
-      <TextField id="filled-basic" label="Review" variant="filled" />
+      <TextareaAutosize
+      variant="filled"
+        aria-label="minimum height"
+        minRows={3}
+        placeholder="review"
+        style={{ width: 300 }}
+      />
 
-      <Button variant="contained">Submit Item</Button>
     </Box>
+      <Button variant="contained">Submit Item</Button>
+      </div>
   );
 }
 
+
+export default AddItem
