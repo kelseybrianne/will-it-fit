@@ -1,5 +1,9 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
+import PropTypes from 'prop-types';
+import clsx from 'clsx';
+import { styled, Box } from '@mui/system';
+import ModalUnstyled from '@mui/base/ModalUnstyled';
+import BoxComp from '@mui/material/Box';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
@@ -10,20 +14,27 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+// import ItemModal from './ItemModal.js';
 import './Items.css';
 
 const Items = ({ windowSize }) => {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   // use useState and useEffect to track window width so line 44 updates without refreshing
   console.log(window.innerWidth);
   console.log(windowSize);
 
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
+  const openMenu = Boolean(anchorEl);
   const handleClick = (event) => {
     event.preventDefault();
+    event.stopPropagation();
     setAnchorEl(event.currentTarget);
   };
-  const handleClose = () => {
+  const handleCloseMenu = (e) => {
+    e.stopPropagation();
     setAnchorEl(null);
   };
 
@@ -40,13 +51,13 @@ const Items = ({ windowSize }) => {
             {/* <button>
               <FavoriteBorderIcon className="heart-icon icon" />
             </button> */}
-            <a href="">
+            <a type="button" onClick={handleOpen}>
               <ImageListItem key={id}>
                 <MoreVertIcon
                   id="basic-button"
-                  aria-controls={open ? 'basic-menu' : undefined}
+                  aria-controls={openMenu ? 'basic-menu' : undefined}
                   aria-haspopup="true"
-                  aria-expanded={open ? 'true' : undefined}
+                  aria-expanded={openMenu ? 'true' : undefined}
                   onClick={handleClick}
                   className="more-icon icon"
                 />
@@ -55,14 +66,14 @@ const Items = ({ windowSize }) => {
                   elevation={0}
                   className="dropdown-menu"
                   anchorEl={anchorEl}
-                  open={open}
-                  onClose={handleClose}
+                  open={openMenu}
+                  onClose={handleCloseMenu}
                   MenuListProps={{
                     'aria-labelledby': 'basic-button',
                   }}
                 >
-                  <MenuItem onClick={handleClose}>Edit</MenuItem>
-                  <MenuItem onClick={handleClose}>Delete</MenuItem>
+                  <MenuItem onClick={handleCloseMenu}>Edit</MenuItem>
+                  <MenuItem onClick={handleCloseMenu}>Delete</MenuItem>
                 </Menu>
                 <img
                   src={`${img}?w=248&fit=crop&auto=format`}
@@ -79,12 +90,74 @@ const Items = ({ windowSize }) => {
                 />
               </ImageListItem>
             </a>
+            {/* <ItemModal /> */}
+            <Modal
+              aria-labelledby="unstyled-modal-title"
+              aria-describedby="unstyled-modal-description"
+              open={open}
+              onClose={handleClose}
+              BackdropComponent={Backdrop}
+            >
+              <Box sx={style}>
+                <h2 id="unstyled-modal-title">Text in a modal</h2>
+                <p id="unstyled-modal-description">
+                  Aliquid amet deserunt earum!
+                </p>
+              </Box>
+            </Modal>
           </div>
         ))}
       </ImageList>
     </div>
   );
 };
+
+const BackdropUnstyled = React.forwardRef((props, ref) => {
+  const { open, className, ...other } = props;
+  return (
+    <div
+      className={clsx({ 'MuiBackdrop-open': open }, className)}
+      ref={ref}
+      {...other}
+    />
+  );
+});
+
+BackdropUnstyled.propTypes = {
+  className: PropTypes.string.isRequired,
+  open: PropTypes.bool,
+};
+
+const Modal = styled(ModalUnstyled)`
+  position: fixed;
+  z-index: 1300;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const Backdrop = styled(BackdropUnstyled)`
+  z-index: -1;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  -webkit-tap-highlight-color: transparent;
+  opacity: 0.3;
+`;
+
+const style = (theme) => ({
+  width: 400,
+  bgcolor: theme.palette.mode === 'dark' ? '#0A1929' : 'white',
+  border: '2px solid currentColor',
+  padding: '16px 32px 24px 32px',
+});
 
 const images = [
   {
