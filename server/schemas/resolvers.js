@@ -4,6 +4,35 @@ const { signToken } = require('../utils/auth');
 
 const resolvers = {
   Query: {
+    //Query users similar to user height and weight, by user id
+    userSearch: async (parent, { height, weight }, context) => {
+      return await User.find({
+        $project: {
+          height: {
+            $filter: {
+              input: height,
+              cond: {
+                $and: [
+                  { $gte: [(height*.05)-height]},
+                  { $lt: [(height*.05)-height]}
+                ],
+              }
+            }
+          },
+          weight: {
+            $filter: {
+              input: weight,
+              cond: {
+                $and: [
+                  { $gte: [(weight*.05)-weight]},
+                  { $lt: [(weight*.05)-height]}
+                ]
+              }
+            }
+          }
+        }
+      });
+    },
     // GET any user
     user: async (parent, { username }, context) => {
       if (context.user) {
