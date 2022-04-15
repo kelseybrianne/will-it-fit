@@ -47,13 +47,6 @@ const typeDefs = gql`
     review: String
   }
 
-  #   type Comment {
-  #     _id: ID!
-  #     commentText: String!
-  #     commentAuthor: User!
-  #     createdAt: String!
-  #   }
-
   type Auth {
     token: ID!
     user: User
@@ -64,7 +57,7 @@ const typeDefs = gql`
     users: [User]
     me(_id: ID!): User
 
-    userSearch(height: Float!, weight: Float!): User
+    userMatches(height: Float!, weight: Float!): [User]
 
     item(_id: ID!): Item
     items: [Item]

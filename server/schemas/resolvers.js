@@ -5,34 +5,52 @@ const { signToken } = require('../utils/auth');
 const resolvers = {
   Query: {
     //Query users similar to user height and weight, by user id
-    userSearch: async (parent, { height, weight }, context) => {
-      return await User.find({
-        $project: {
-          height: {
-            $filter: {
-              input: height,
-              cond: {
-                $and: [
-                  { $gte: [(height*.05)-height]},
-                  { $lt: [(height*.05)-height]}
-                ],
-              }
-            }
+    userMatches: async (parent, args, {}) => {
+      // adjust these numbers higher to broaden the scope of the serach
+      let heightVar = 0.03;
+      let weightVar = 0.05;
+      const userMatches = await User.find({
+        $and: [
+          {
+            height: {
+              $gte: args.height - args.height * heightVar,
+              $lt: args.height + args.height * heightVar,
+            },
           },
-          weight: {
-            $filter: {
-              input: weight,
-              cond: {
-                $and: [
-                  { $gte: [(weight*.05)-weight]},
-                  { $lt: [(weight*.05)-height]}
-                ]
-              }
-            }
-          }
-        }
-      });
+          {
+            weight: {
+              $gte: args.weight - args.weight * weightVar,
+              $lt: args.weight + args.weight * weightVar,
+            },
+          },
+        ],
+      })
+        .populate('closet')
+        .populate({
+          path: 'closet',
+          populate: [
+            '_id',
+            'category',
+            'style',
+            'brand',
+            'name',
+            'gender',
+            'size',
+            'link',
+            'photo',
+            'color',
+            'review',
+          ],
+        });
+      // if no matches, return the closets of 15 random users.
+      if (userMatches === []) {
+        return userMatches;
+      } else {
+        const randomUsers = User.find({}).limit(15).populate('closet');
+        return randomUsers;
+      }
     },
+
     // GET any user
     user: async (parent, { username }, context) => {
       if (context.user) {
