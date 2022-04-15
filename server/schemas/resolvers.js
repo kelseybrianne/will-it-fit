@@ -7,40 +7,166 @@ const resolvers = {
     // GET any user
     user: async (parent, { username }, context) => {
       if (context.user) {
-        return await User.findOne({ username });
+        return await User.findOne({ username })
+          .populate('closet')
+          .populate({
+            path: 'closet',
+            populate: [
+              '_id',
+              'category',
+              'style',
+              'brand',
+              'name',
+              'gender',
+              'size',
+              'link',
+              'photo',
+              'color',
+              'review',
+            ],
+          })
+          .populate('savedItems')
+          .populate({
+            path: 'savedItems',
+            populate: [
+              '_id',
+              'category',
+              'style',
+              'brand',
+              'name',
+              'gender',
+              'size',
+              'link',
+              'photo',
+              'color',
+              'review',
+            ],
+          });
       }
       throw new AuthenticationError('You need to be logged in!');
     },
     // GET logged in user
     me: async (parent, { _id }, context) => {
       if (context.user) {
-        return await User.findOne({ _id });
+        return await User.findOne({ _id })
+          .populate('closet')
+          .populate({
+            path: 'closet',
+            populate: [
+              '_id',
+              'category',
+              'style',
+              'brand',
+              'name',
+              'gender',
+              'size',
+              'link',
+              'photo',
+              'color',
+              'review',
+            ],
+          })
+          .populate('savedItems')
+          .populate({
+            path: 'savedItems',
+            populate: [
+              '_id',
+              'category',
+              'style',
+              'brand',
+              'name',
+              'gender',
+              'size',
+              'link',
+              'photo',
+              'color',
+              'review',
+            ],
+          });
       }
       throw new AuthenticationError('You need to be logged in!');
     },
 
     // GET one item, by item id.
     item: async (parent, args) => {
-      return await Item.findOne(args.id);
+      return await Item.findOne(args.id).populate([
+        '_id',
+        'category',
+        'style',
+        'brand',
+        'name',
+        'gender',
+        'size',
+        'link',
+        'photo',
+        'color',
+        'review',
+      ]);
     },
 
     // GET all items
     // eslint-disable-next-line no-unused-vars
     items: async (parent, args) => {
-      return await Item.find();
+      return await Item.find({}).populate([
+        '_id',
+        'category',
+        'style',
+        'brand',
+        'name',
+        'gender',
+        'size',
+        'link',
+        'photo',
+        'color',
+        'review',
+      ]);
     },
 
     // GET user closet (ITEMS), based on user id entered in args
     closet: async (parent, { _id }, context) => {
       if (context.user) {
-        return await User.findById({ _id }).populate('closet');
+        return await User.findById({ _id })
+          .populate('closet')
+          .populate({
+            path: 'closet',
+            populate: [
+              '_id',
+              'category',
+              'style',
+              'brand',
+              'name',
+              'gender',
+              'size',
+              'link',
+              'photo',
+              'color',
+              'review',
+            ],
+          });
       }
       throw new AuthenticationError('You need to be logged in!');
     },
     // GET users savedItems (FAVORITES), pull from user id entered in args
     savedItems: async (parent, { _id }, context) => {
       if (context.user) {
-        return await User.findById({ _id }).populate('savedItems');
+        return await User.findById({ _id })
+          .populate('savedItems')
+          .populate({
+            path: 'savedItems',
+            populate: [
+              '_id',
+              'category',
+              'style',
+              'brand',
+              'name',
+              'gender',
+              'size',
+              'link',
+              'photo',
+              'color',
+              'review',
+            ],
+          });
       }
       throw new AuthenticationError('You need to be logged in!');
     },
