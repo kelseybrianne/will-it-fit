@@ -2,6 +2,7 @@ import React from 'react';
 import Button from '@mui/material/Button';
 import './Closet.css';
 import Items from '../components/Items.js';
+// eslint-disable-next-line no-unused-vars
 import Stack from '@mui/material/Stack';
 
 const Closet = ({ windowSize }) => {

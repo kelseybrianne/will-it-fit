@@ -38,7 +38,7 @@ db.once('open', async () => {
     await User.deleteMany({});
     await Item.deleteMany({});
     let itemData = [];
-    for (let i = 0; i < 1000; i++) {
+    for (let i = 0; i < 10; i++) {
       let items = {
         category: randomCategory(),
         style: faker.commerce.productAdjective(),
@@ -56,9 +56,22 @@ db.once('open', async () => {
     await Item.insertMany(itemData);
     console.log('Items seeded! :)');
 
+    // get list of newly created itemId's to pass through to user data.
+    let itemID = [];
+    const itemSearch = await Item.find({}).distinct('_id', {});
+    itemID.push(itemSearch);
+    console.log(itemID);
+
+    // call this function to return random item ID.
+    function itemIndex() {
+      const index = Math.floor(Math.random() * 10);
+      return itemID[index];
+    }
+    console.log(itemIndex());
+
     // make a bunch of user data
     let userData = [];
-    for (let i = 0; i < 500; i++) {
+    for (let i = 0; i < 5; i++) {
       const firstName = faker.name.firstName();
       const lastName = faker.name.lastName();
 
@@ -69,15 +82,17 @@ db.once('open', async () => {
         weight: randomIntFromInterval(100, 400),
         height: randomIntFromInterval(55, 85),
         primaryPhoto: faker.image.avatar(),
+        closet: itemIndex(),
+        savedItems: itemIndex(),
       };
-      // for (let j = 0; j < randomIntFromInterval(1, 6); j++) {
-      //   let weight = {
-      //     weight: randomIntFromInterval(100, 400),
-      //   };
-      //   newDay.push(weight);
       userData.push(newDay);
     }
+
+    // // For each of the users that exist, add 2 items.
+    // tags.forEach(() => makePost(getRandomPost(50)));
+
     await User.insertMany(userData);
+
     console.log('Database seeded! :)');
 
     console.log('all done!');
