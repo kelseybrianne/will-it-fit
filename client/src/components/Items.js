@@ -16,6 +16,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 // import ItemModal from './ItemModal.js';
 import './Items.css';
+import './ItemModal.css';
 
 const Items = ({ windowSize }) => {
   const [open, setOpen] = React.useState(false);
@@ -99,6 +100,10 @@ const Items = ({ windowSize }) => {
               BackdropComponent={Backdrop}
             >
               <Box sx={style}>
+                <div className="item-modal-pic">
+                  <img src={images[5].img} alt="img" />
+                </div>
+                <div className="item-modal-text"></div>
                 <h2 id="unstyled-modal-title">Text in a modal</h2>
                 <p id="unstyled-modal-description">
                   Aliquid amet deserunt earum!
@@ -153,10 +158,11 @@ const Backdrop = styled(BackdropUnstyled)`
 `;
 
 const style = (theme) => ({
-  width: 400,
+  width: 900,
+  maxHeight: '90vh',
   bgcolor: theme.palette.mode === 'dark' ? '#0A1929' : 'white',
-  border: '2px solid currentColor',
-  padding: '16px 32px 24px 32px',
+  border: 'none',
+  // padding: '0px 2px3',
 });
 
 const images = [
@@ -174,7 +180,7 @@ const images = [
   },
   {
     id: 4,
-    img: require('../assets/images/daniel-monteiro-VMeHP3mNJL4-unsplash.jpg'),
+    img: require('../assets/images/atikh-bana-_KaMTEmJnxY-unsplash.jpg'),
   },
   {
     id: 5,
@@ -182,6 +188,18 @@ const images = [
   },
   {
     id: 6,
+    img: require('../assets/images/warion-taipei-vSqmb2IX3DM-unsplash.jpg'),
+  },
+  {
+    id: 7,
+    img: require('../assets/images/jasmin-chew-txy8AZU04iw-unsplash.jpg'),
+  },
+  {
+    id: 8,
+    img: require('../assets/images/noah-buscher-8A7fD6Y5VF8-unsplash.jpg'),
+  },
+  {
+    id: 9,
     img: require('../assets/images/huston-wilson-WyDr1KFS23Y-unsplash.jpg'),
   },
 ];
