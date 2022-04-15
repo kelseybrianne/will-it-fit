@@ -42,8 +42,9 @@ const resolvers = {
             'review',
           ],
         });
+      console.log(userMatches.length);
       // if no matches, return the closets of 15 random users.
-      if (userMatches === []) {
+      if (userMatches.length !== 0) {
         return userMatches;
       } else {
         const randomUsers = User.find({}).limit(15).populate('closet');
