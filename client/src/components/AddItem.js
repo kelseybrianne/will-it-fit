@@ -5,8 +5,6 @@ import TextField from '@mui/material/TextField';
 import TextareaAutosize from '@mui/base/TextareaAutosize';
 import { Button } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
-import { useFormControl } from '@mui/material/FormControl';
-
 
 import FormControl from '@mui/material/FormControl';
 
@@ -17,7 +15,6 @@ import { useMutation } from '@apollo/client';
 import { ADD_ITEM } from '../utils/mutations';
 
 import './AddItem.css';
-import Auth from '../utils/auth';
 
 // array to make the gender a drop down
 const genderDB = [
@@ -45,17 +42,23 @@ const AddItem = () => {
 
   const [addItem] = useMutation(ADD_ITEM);
 
-  const handleInputChange = (event) => {
-    setUserFromData(event.target.value);
-  }; 
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    console.log('🤘', event.target);
+    setUserFromData({
+      ...userFormData,
+      [name]: value,
+    });
+  };
 
-  const handleFormSubmit = async (event) => {
+  const formSubmit = async (event) => {
     event.preventDefault();
+
     try {
       await addItem({
         variables: { ...userFormData },
       });
-      // Auth.addItem(data.addItem.token);
+   
     } catch (e) {
       console.error(e);
     }
@@ -78,106 +81,127 @@ const AddItem = () => {
     <div id="form">
       <Box
         // validate={validated}
-        onSubmit={handleFormSubmit}
+        onSubmit={formSubmit}
         component="form"
         sx={{
           '& .MuiTextField-root': { m: 1, width: '25ch' },
         }}
       >
+        {/* category */}
         <FormControl>
           <TextField
+            name="category"
             label="* Category"
             variant="filled"
-            onChange={handleInputChange}
+            onChange={handleChange}
             value={userFormData.category}
           />
         </FormControl>
 
+        {/* size */}
         <FormControl>
           <TextField
+            name="size"
             label="* Size"
             variant="filled"
-            onChange={handleInputChange}
+            onChange={handleChange}
             value={userFormData.size}
           />
         </FormControl>
 
+        {/* photo */}
         <FormControl>
           <TextField
+            name="photo"
             label="* Photo"
             variant="filled"
-            onChange={handleInputChange}
+            onChange={handleChange}
             value={userFormData.photo}
           />
         </FormControl>
 
+        {/* style */}
         <FormControl>
           <TextField
+            name="style"
             label="Style"
             variant="filled"
-            onChange={handleInputChange}
+            onChange={handleChange}
             value={userFormData.style}
           />
         </FormControl>
 
+        {/* brand */}
         <FormControl>
           <TextField
+            name="brand"
             label="Brand"
             variant="filled"
-            onChange={handleInputChange}
+            onChange={handleChange}
             value={userFormData.brand}
           />
         </FormControl>
 
+        {/* name */}
         <FormControl>
           <TextField
+            name="name"
             label="* Name"
             variant="filled"
-            onChange={handleInputChange}
+            onChange={handleChange}
             value={userFormData.name}
           />
         </FormControl>
 
+        {/* gender - drop down menu */}
         <FormControl>
-          <TextField select label="Gender" variant="filled">
+          <TextField
+            name="gender"
+            select
+            value={userFormData.gender}
+            label="Gender"
+            variant="filled"
+            onChange={handleChange}
+          >
             {genderDB.map((option) => (
-              <MenuItem
-                onChange={handleInputChange}
-                size="large"
-                key={option.value}
-                value={option.value}
-              >
+              <MenuItem size="large" key={option.value} value={option.value}>
                 {option.label}
               </MenuItem>
             ))}
           </TextField>
         </FormControl>
 
+        {/* link */}
         <FormControl>
           <TextField
+            name="link"
             label="Link"
             variant="filled"
-            onChange={handleInputChange}
+            onChange={handleChange}
             value={userFormData.link}
           />
         </FormControl>
 
+        {/* color */}
         <FormControl>
           <TextField
+            name="color"
             label="Color"
             variant="filled"
-            onChange={handleInputChange}
+            onChange={handleChange}
             value={userFormData.color}
           />
         </FormControl>
 
+        {/* review */}
         <TextareaAutosize
+          name="review"
           variant="filled"
           aria-label="minimum height"
           minRows={5}
           placeholder="Add your review here"
           style={{ width: 435 }}
-          onChange={handleInputChange}
+          onChange={handleChange}
           value={userFormData.review}
         />
       </Box>
