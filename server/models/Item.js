@@ -43,10 +43,10 @@ const itemSchema = new Schema({
     type: String,
     // [black, white, grey, red, orange, yellow, green, blue, purple, pink]
   },
-
   review: {
     type: String,
   },
+
 });
 
 const Item = model('Item', itemSchema);
