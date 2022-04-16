@@ -11,6 +11,7 @@
     "seed": "cd server && npm run seed",
     "build": "cd client && npm run build",
     "lint": "npx eslint --ext .js ./"
+ 
   },
   "repository": {
     "type": "git",
