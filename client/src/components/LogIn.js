@@ -21,12 +21,10 @@ function LogInForm({ setDialogState }) {
   // submit form
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log({ ...formState }); // looks good here
     try {
       const { data } = await login({
         variables: { ...formState },
       });
-      console.log('👟 Made it past mutation for login', data);
       auth.login(data.login.token);
     } catch (e) {
       console.error(e);
