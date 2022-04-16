@@ -1,6 +1,5 @@
 // react:
 import * as React from 'react';
-import { useState } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import TextareaAutosize from '@mui/base/TextareaAutosize';
@@ -41,7 +40,7 @@ const AddItem = () => {
     color: '',
     review: '',
   });
-  const [validated] = useState(false);
+  // const [validated] = useState(false);
 
   const [addItem] = useMutation(ADD_ITEM);
 
@@ -52,7 +51,7 @@ const AddItem = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     try {
-      const { data } = await addItem({
+      await addItem({
         variables: { ...userFormData },
       });
       // Auth.addItem(data.addItem.token);
@@ -77,17 +76,15 @@ const AddItem = () => {
   return (
     <div id="form">
       <Box
-        validate={validated}
+        // validate={validated}
         onSubmit={handleFormSubmit}
         component="form"
         sx={{
           '& .MuiTextField-root': { m: 1, width: '25ch' },
         }}
       >
-        <FormControl variant="filled">
+        <FormControl>
           <TextField
-            // required
-            id="filled-basic"
             label="* Category"
             variant="filled"
             onChange={handleInputChange}
@@ -95,73 +92,84 @@ const AddItem = () => {
           />
         </FormControl>
 
-        <TextField
-          id="filled-basic"
-          label="Style"
-          variant="filled"
-          onChange={handleInputChange}
-          value={userFormData.style}
-        />
-        <TextField
-          id="filled-basic"
-          label="Brand"
-          variant="filled"
-          onChange={handleInputChange}
-          value={userFormData.brand}
-        />
-        <TextField
-          id="filled-basic"
-          label="* Name"
-          // defaultValue="Name"
-          variant="filled"
-          onChange={handleInputChange}
-          value={userFormData.name}
-        />
+        <FormControl>
+          <TextField
+            label="* Size"
+            variant="filled"
+            onChange={handleInputChange}
+            value={userFormData.size}
+          />
+        </FormControl>
 
-        {/* <TextField select label="Gender" variant="filled" 
-       
-        >
-          {genderDB.map((option) => (
-            <MenuItem
-              size="large"
-              key={option.value}
-              value={option.value}
-              onChange={handleInputChange}
-            >
-              {option.label}
-            </MenuItem>
-          ))}
-        </TextField> */}
+        <FormControl>
+          <TextField
+            label="* Photo"
+            variant="filled"
+            onChange={handleInputChange}
+            value={userFormData.photo}
+          />
+        </FormControl>
 
-        <TextField
-          label="* Size"
-          // defaultValue="Size"
-          variant="filled"
-          onChange={handleInputChange}
-          value={userFormData.size}
-        />
-        <TextField
-          label="Link"
-          variant="filled"
-          onChange={handleInputChange}
-          value={userFormData.link}
-        />
+        <FormControl>
+          <TextField
+            label="Style"
+            variant="filled"
+            onChange={handleInputChange}
+            value={userFormData.style}
+          />
+        </FormControl>
 
-        <TextField
-          label="* Photo"
-          // defaultValue="Photo"
-          variant="filled"
-          onChange={handleInputChange}
-          value={userFormData.photo}
-        />
+        <FormControl>
+          <TextField
+            label="Brand"
+            variant="filled"
+            onChange={handleInputChange}
+            value={userFormData.brand}
+          />
+        </FormControl>
 
-        <TextField
-          id="filled-basic"
-          label="Color"
-          variant="filled"
-          onChange={handleInputChange}
-          value={userFormData.color}
-        />
+        <FormControl>
+          <TextField
+            label="* Name"
+            variant="filled"
+            onChange={handleInputChange}
+            value={userFormData.name}
+          />
+        </FormControl>
+
+        <FormControl>
+          <TextField select label="Gender" variant="filled">
+            {genderDB.map((option) => (
+              <MenuItem
+                onChange={handleInputChange}
+                size="large"
+                key={option.value}
+                value={option.value}
+              >
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
+        </FormControl>
+
+        <FormControl>
+          <TextField
+            label="Link"
+            variant="filled"
+            onChange={handleInputChange}
+            value={userFormData.link}
+          />
+        </FormControl>
+
+        <FormControl>
+          <TextField
+            label="Color"
+            variant="filled"
+            onChange={handleInputChange}
+            value={userFormData.color}
+          />
+        </FormControl>
+
         <TextareaAutosize
           variant="filled"
           aria-label="minimum height"
@@ -172,16 +180,15 @@ const AddItem = () => {
           value={userFormData.review}
         />
       </Box>
+
       <Button
-        id="add-btn"
         // disabled={
         //   !(
         //     userFormData.category &&
         //     userFormData.name &&
         //     userFormData.size &&
         //     userFormData.photo
-        //   )
-        // }
+        //   )}
         type="submit"
         variant="contained"
       >
