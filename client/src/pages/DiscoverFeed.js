@@ -1,8 +1,10 @@
+
 import Header from '../components/Header';
 import React, { useState } from 'react';
 import './DiscoverFeed.css';
 let viewClosetEl = document.querySelector('.view-closet');
 let imgDivEl = document.querySelector('.img-div');
+
 
 const DiscoverFeed = () => {
   const images = [
