@@ -203,7 +203,7 @@ const AddItem = () => {
           onChange={handleChange}
           value={userFormData.review}
         />
-      </Box>
+      
 
       <Button
         // disabled={
@@ -218,6 +218,7 @@ const AddItem = () => {
       >
         Submit Item
       </Button>
+      </Box>
     </div>
   );
 };
