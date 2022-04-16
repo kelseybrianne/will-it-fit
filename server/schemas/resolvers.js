@@ -1,8 +1,13 @@
+const { GraphQLUpload } = require('graphql-upload');
+const { finished } = require('stream/promises');
+
 const { AuthenticationError } = require('apollo-server-express');
 const { User, Item } = require('../models');
 const { signToken } = require('../utils/auth');
 
+
 const resolvers = {
+  Upload: GraphQLUpload,
   Query: {
     //Query users similar to user height and weight, by user id
     userMatches: async (parent, args, {}) => {
@@ -233,6 +238,10 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
+
+    // # This is only here to satisfy the requirement that at least one
+    // # field be present within the 'Query' type.  This example does not
+    // # demonstrate how to fetch uploads back.
   },
   // starting mutations file
   Mutation: {
@@ -366,7 +375,21 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
+    singleUpload: async (parent, { file }) => {
+      const { createReadStream, filename, mimetype, encoding } = await file;
 
+      // Invoking the `createReadStream` will return a Readable Stream.
+      // See https://nodejs.org/api/stream.html#stream_readable_streams
+      const stream = createReadStream();
+
+      // This is purely for demonstration purposes and will overwrite the
+      // local-file-output.txt in the current working directory on EACH upload.
+      const out = require('fs').createWriteStream('local-file-output.txt');
+      stream.pipe(out);
+      await finished(out);
+
+      return { filename, mimetype, encoding };
+    },
     // DELETE this 'username' from logged in users 'followers' array. (i.e. I stop following Kelsey. My username is passed through args. It finds Kelsey's user account by her username and removes MY name from her list of followers.
     removeFollower: async (parent, { _id }, context) => {
       if (context.user) {

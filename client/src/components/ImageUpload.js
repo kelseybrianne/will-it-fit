@@ -14,12 +14,12 @@ export default function UploadButtons() {
   return (
     <Stack direction="row" alignItems="center" spacing={2}>
       {/* Below is an 'Upload Button' if you prefer it to an icon. */}
-      {/* <label htmlFor="contained-button-file">
+      <label htmlFor="contained-button-file">
         <Input accept="image/*" id="contained-button-file" multiple type="file" />
         <Button variant="contained" component="span">
           Upload
         </Button>
-      </label> */}
+      </label>
       {/* Below is the 'camera icon' to click for uploads */}
       <label htmlFor="icon-button-file">
         <Input accept="image/*" id="icon-button-file" type="file" />

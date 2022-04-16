@@ -47,17 +47,30 @@ const typeDefs = gql`
     review: String
   }
 
+  #   type Comment {
+  #     _id: ID!
+  #     commentText: String!
+  #     commentAuthor: User!
+  #     createdAt: String!
+  #   }
+
   type Auth {
     token: ID!
     user: User
+  }
+  scalar Upload
+
+  type File {
+    filename: String!
+    mimetype: String!
+    encoding: String!
   }
 
   type Query {
     user(username: String!): User
     users: [User]
     me(_id: ID!): User
-
-    userMatches(height: Float!, weight: Float!): [User]
+    otherFields: Boolean!
 
     item(_id: ID!): Item
     items: [Item]
@@ -101,6 +114,7 @@ const typeDefs = gql`
     removeFavorite(_id: ID!): User
 
     addPhoto(_id: ID!, photo: String!): Item
+    singleUpload(file: Upload!): File!
 
     addProfilePhoto(_id: ID!, primaryPhoto: String!): User
     removeProfilePhoto(_id: ID!): User
