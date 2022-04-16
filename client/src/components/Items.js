@@ -104,21 +104,53 @@ const Items = ({ windowSize }) => {
                   <img src={images[5].img} alt="img" />
                 </div>
                 <div className="item-modal-text">
-                  <h1>Name</h1>
+                  <div className="item-name-more-div">
+                    <h1>Name</h1>
+                    <MoreVertIcon
+                      id="basic-button"
+                      aria-controls={openMenu ? 'basic-menu' : undefined}
+                      aria-haspopup="true"
+                      aria-expanded={openMenu ? 'true' : undefined}
+                      onClick={handleClick}
+                      className=""
+                    />
+                    <Menu
+                      id="basic-menu"
+                      elevation={0}
+                      className="dropdown-menu"
+                      anchorEl={anchorEl}
+                      open={openMenu}
+                      onClose={handleCloseMenu}
+                      MenuListProps={{
+                        'aria-labelledby': 'basic-button',
+                      }}
+                    >
+                      <MenuItem onClick={handleCloseMenu}>Edit</MenuItem>
+                      <MenuItem onClick={handleCloseMenu}>Delete</MenuItem>
+                    </Menu>
+                  </div>
                   <p>Brand Category</p>
                   <p>Size: size</p>
-                  <Button className="shop-btn" variant="contained">Shop</Button>
+                  <Button className="shop-btn" variant="contained">
+                    Shop
+                  </Button>
                   <div className="review-div">
                     <div className="review-header">
                       <div className="avatar-pic-div">
                         <img src={images[3].img} />
                       </div>
                       <div className="username-div">
-                        <p className="username">rsherman</p>
-                        <p className="user-measurements-displayed">5"5' | 140lbs</p>
+                        <a href="">
+                          <p className="username">rsherman</p>
+                        </a>
+                        <p className="user-measurements-displayed">
+                          5'5" | 140lbs
+                        </p>
                       </div>
                     </div>
-                    <p className="review-content">I wish it was a little longer, but the look is a 10/10</p>
+                    <p className="review-content">
+                      I wish it was a little longer, but the look is a 10/10
+                    </p>
                   </div>
                 </div>
               </Box>
@@ -174,7 +206,7 @@ const style = (theme) => ({
   width: 900,
   bgcolor: theme.palette.mode === 'dark' ? '#0A1929' : '#f1f1f1',
   border: 'none',
-  overflow: 'auto'
+  overflow: 'auto',
 });
 
 const images = [

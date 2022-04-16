@@ -30,13 +30,22 @@
     padding: 10px;
 }
 
+.item-name-more-div {
+    display: flex;
+    justify-content: space-between;
+}
+
 .item-modal-text h1 {
-    padding-bottom: 5px;
+    padding-bottom: 8px;
 }
 
 .item-modal-text p {
-    line-height: 1.3;
+    padding-bottom: 8px;
 }
+
+/* p {
+    line-height: 1.3;
+} */
 
 .shop-btn {
     padding: 5px !important;
@@ -45,7 +54,7 @@
     border: none;
     background-color: white !important;
     color: black !important;
-    margin: 10px 0px !important;
+    margin: 4px 0px 12px 0px !important;
     border-radius: 2px !important;
 }
 
@@ -108,6 +117,6 @@
     } */
 
     .shop-btn {
-        margin: 20px 0px !important;
+        /* margin: 20px 0px !important; */
     }
 }
