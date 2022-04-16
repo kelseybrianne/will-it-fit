@@ -7,8 +7,7 @@ import { Button } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
 import { useFormControl } from '@mui/material/FormControl';
 
-import InputLabel from '@mui/material/InputLabel';
-import FilledInput from '@mui/material/FilledInput';
+
 import FormControl from '@mui/material/FormControl';
 
 // import Menu from '@mui/material/Menu';
@@ -40,13 +39,15 @@ const AddItem = () => {
     color: '',
     review: '',
   });
+
+  // const { category, size, photo, style, brand, name, gender, link, color, review } = userFormData
   // const [validated] = useState(false);
 
   const [addItem] = useMutation(ADD_ITEM);
 
   const handleInputChange = (event) => {
     setUserFromData(event.target.value);
-  };
+  }; 
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
