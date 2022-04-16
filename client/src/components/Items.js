@@ -99,15 +99,28 @@ const Items = ({ windowSize }) => {
               onClose={handleClose}
               BackdropComponent={Backdrop}
             >
-              <Box sx={style}>
+              <Box sx={style} className="modal-box">
                 <div className="item-modal-pic">
                   <img src={images[5].img} alt="img" />
                 </div>
-                <div className="item-modal-text"></div>
-                <h2 id="unstyled-modal-title">Text in a modal</h2>
-                <p id="unstyled-modal-description">
-                  Aliquid amet deserunt earum!
-                </p>
+                <div className="item-modal-text">
+                  <h1>Name</h1>
+                  <p>Brand Category</p>
+                  <p>Size: size</p>
+                  <Button className="shop-btn" variant="contained">Shop</Button>
+                  <div className="review-div">
+                    <div className="review-header">
+                      <div className="avatar-pic-div">
+                        <img src={images[3].img} />
+                      </div>
+                      <div className="username-div">
+                        <p className="username">rsherman</p>
+                        <p className="user-measurements-displayed">5"5' | 140lbs</p>
+                      </div>
+                    </div>
+                    <p className="review-content">I wish it was a little longer, but the look is a 10/10</p>
+                  </div>
+                </div>
               </Box>
             </Modal>
           </div>
@@ -159,10 +172,9 @@ const Backdrop = styled(BackdropUnstyled)`
 
 const style = (theme) => ({
   width: 900,
-  maxHeight: '90vh',
-  bgcolor: theme.palette.mode === 'dark' ? '#0A1929' : 'white',
+  bgcolor: theme.palette.mode === 'dark' ? '#0A1929' : '#f1f1f1',
   border: 'none',
-  // padding: '0px 2px3',
+  overflow: 'auto'
 });
 
 const images = [
