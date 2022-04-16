@@ -58,7 +58,6 @@ const AddItem = () => {
       await addItem({
         variables: { ...userFormData },
       });
-   
     } catch (e) {
       console.error(e);
     }
