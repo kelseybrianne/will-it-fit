@@ -5,6 +5,8 @@ import Items from '../components/Items.js';
 // eslint-disable-next-line no-unused-vars
 import Stack from '@mui/material/Stack';
 import UploadButtons from '../components/ImageUpload';
+// import profilePic from '../assets/images/ivana-cajina-dnL6ZIpht2s-unsplash.jpg'
+import profilePic from '../assets/images/atikh-bana-_KaMTEmJnxY-unsplash.jpg'
 
 const Closet = ({ windowSize }) => {
   return (
@@ -12,6 +14,7 @@ const Closet = ({ windowSize }) => {
       <div className="white-div"></div>
       <div className="profile-head">
         <div className="profile-img-div">
+          <img src={profilePic} />
           <h2>rsherman</h2>
           <div className="folls-div">
             <a href="">

@@ -6,6 +6,8 @@ export const GET_USER = gql`
     user(username: $username) {
       _id
       username
+      height
+      weight
       closet {
         _id
         category
@@ -80,6 +82,8 @@ export const GET_USERMATCHES = gql`
     userMatches(height: $height, weight: $weight) {
       _id
       username
+      height
+      weight
       primaryPhoto
       closet {
         _id
