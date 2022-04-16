@@ -54,31 +54,33 @@ function LogInForm({ setDialogState }) {
         flexDirection: 'column',
       }}
     >
-      <TextField
-        autoFocus
-        id="email"
-        label="email"
-        type="email"
-        onChange={handleChange}
-        value={formState.email}
-        variant="standard"
-      />
-      <TextField
-        margin="dense"
-        id="password"
-        label="password"
-        type="password"
-        onChange={handleChange}
-        value={formState.password}
-        variant="standard"
-      />
-      <Button onClick={handleFormSubmit}>Log In</Button>
-      <span
-        style={{ textDecoration: 'underline', cursor: 'pointer' }}
-        onClick={() => setDialogState('signup')}
-      >
-        sign up
-      </span>
+      <Box component="form" onSubmit={handleFormSubmit}>
+        <TextField
+          autoFocus
+          id="email"
+          label="email"
+          type="email"
+          onChange={handleChange}
+          value={formState.email}
+          variant="standard"
+        />
+        <TextField
+          margin="dense"
+          id="password"
+          label="password"
+          type="password"
+          onChange={handleChange}
+          value={formState.password}
+          variant="standard"
+        />
+        <Button type="submit">Log In</Button>
+        <span
+          style={{ textDecoration: 'underline', cursor: 'pointer' }}
+          onClick={() => setDialogState('signup')}
+        >
+          sign up
+        </span>
+      </Box>
     </Container>
   );
 }
