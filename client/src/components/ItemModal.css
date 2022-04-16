@@ -6,7 +6,7 @@
 .modal-box {
     display: flex;
     flex-direction: column;
-    max-height: 80vh;
+    max-height: 90vh;
     max-width: 90vw;
 }
 
@@ -106,10 +106,11 @@
 
     .item-modal-text {
         padding: 20px;
+        width: 45%;
     }
 
     .item-modal-pic {
-        width: 60%;
+        width: 55%;
     }
 
     /* .review-div {

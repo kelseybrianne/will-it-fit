@@ -149,7 +149,7 @@ const Items = ({ windowSize }) => {
                       </div>
                     </div>
                     <p className="review-content">
-                      I wish it was a little longer, but the look is a 10/10
+                      I wish it was a little longer, but the look is a 10/10. Review: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
                     </p>
                   </div>
                 </div>
