@@ -3,7 +3,12 @@
   --sans: 'Inter', sans-serif;
 }
 
+body {
+  overflow: hidden;
+}
+
 a {
   text-decoration: none;
   color: inherit;
 }
+

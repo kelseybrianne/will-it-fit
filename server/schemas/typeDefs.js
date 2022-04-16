@@ -47,13 +47,6 @@ const typeDefs = gql`
     review: String
   }
 
-  #   type Comment {
-  #     _id: ID!
-  #     commentText: String!
-  #     commentAuthor: User!
-  #     createdAt: String!
-  #   }
-
   type Auth {
     token: ID!
     user: User
@@ -63,6 +56,8 @@ const typeDefs = gql`
     user(username: String!): User
     users: [User]
     me(_id: ID!): User
+
+    userMatches(height: Float!, weight: Float!): [User]
 
     item(_id: ID!): Item
     items: [Item]
@@ -106,7 +101,7 @@ const typeDefs = gql`
     removeFavorite(_id: ID!): User
 
     addPhoto(_id: ID!, photo: String!): Item
-    
+
     addProfilePhoto(_id: ID!, primaryPhoto: String!): User
     removeProfilePhoto(_id: ID!): User
 
