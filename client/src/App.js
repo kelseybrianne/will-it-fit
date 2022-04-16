@@ -7,6 +7,7 @@ import { setContext } from '@apollo/client/link/context';
 import Header from './components/Header';
 import DiscoverFeed from './pages/DiscoverFeed';
 import Closet from './pages/Closet';
+import AddItem from "./components/AddItem";
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -43,6 +44,7 @@ function App() {
           <Routes>
             <Route path="/" element={<DiscoverFeed />} />
             <Route path="/closet" element={<Closet windowSize={windowSize} />} />
+            <Route path="/additem" element={<AddItem windowSize={windowSize} />} />
           </Routes>
         </>
       </Router>

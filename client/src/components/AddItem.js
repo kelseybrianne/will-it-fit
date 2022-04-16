@@ -7,7 +7,7 @@ import { Button } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
 
 import FormControl from '@mui/material/FormControl';
-
+import { Dialog } from '@mui/material';
 // import Menu from '@mui/material/Menu';
 
 // graphQL:
@@ -22,8 +22,8 @@ const genderDB = [
   { label: 'Mens', value: 'Mens' },
   { label: 'Unisex', value: 'Unisex' },
 ];
-
 const AddItem = () => {
+  const [open, setOpen] = React.useState(false)
   const [userFormData, setUserFromData] = React.useState({
     category: '',
     size: '',
@@ -77,7 +77,13 @@ const AddItem = () => {
   };
 
   return (
-    <div id="form">
+    <div>
+    <Button onClick={(e)=> {
+      setOpen(true)
+      e.preventDefault()
+      }} variant="contained">Add Item</Button> 
+    
+    <Dialog open={open} onClose={() => setOpen(false)} id="form">
       <Box
         // validate={validated}
         onSubmit={formSubmit}
@@ -219,6 +225,7 @@ const AddItem = () => {
         Submit Item
       </Button>
       </Box>
+    </Dialog>
     </div>
   );
 };
