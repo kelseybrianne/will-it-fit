@@ -60,7 +60,6 @@ const DiscoverFeed = () => {
   return (
 
     <div className="discover-feed-container">
-      <Header />
       {/* <p className="view-closet">View Closet</p> */}
       <div className="discover-container">
         <div className="second-wrapper">
