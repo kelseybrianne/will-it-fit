@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from '@mui/material/Button';
 import './Closet.css';
-import Items from '../components/Items';
+import Items from '../components/Items.js';
 import Stack from '@mui/material/Stack';
 
 const Closet = ({ windowSize }) => {
@@ -18,7 +18,7 @@ const Closet = ({ windowSize }) => {
           </div>
           {/* toggle 'Following' and 'Follow' on click'*/}
           {/* <button className="unfollow">Following</button> */}
-          <Button variant="contained">Follow</Button>
+          <Button variant="contained">Add Item</Button>
         </div>
       </div>
       <Items windowSize={windowSize} />
