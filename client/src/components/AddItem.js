@@ -11,6 +11,8 @@ import { Container } from '@mui/material';
 import FormControl from '@mui/material/FormControl';
 import { Dialog } from '@mui/material';
 
+import background from '../assets/images/ihssan-rami-azouagh-1YCKCCrLEbU-unsplash.jpg';
+
 // graphQL:
 import { useMutation } from '@apollo/client';
 import { ADD_ITEM } from '../utils/mutations';
@@ -35,6 +37,7 @@ const colorDB = [
   { label: 'White', value: 'White' },
   { label: 'Grey', value: 'Grey' },
   { label: 'Black', value: 'Black' },
+  { label: 'Brown', value: 'Brown' },
 ];
 const AddItem = () => {
   const [open, setOpen] = React.useState(false);
@@ -102,216 +105,218 @@ const AddItem = () => {
         Add Item
       </Button>
 
-      <Dialog open={open} onClose={() => setOpen(false)} id="form">
-        <Container
-          sx={{
-            maxWidth: 320,
-          }}
-        >
-          <Box
-            onSubmit={formSubmit}
-            component="form"
-            // sx={{
-            //   '& .MuiTextField-root': { m: 1, width: '28ch' },
-            // }}
+      <div style={{  }}>
+        <Dialog open={open} onClose={() => setOpen(false)} id="form">
+          <Container
             sx={{
-              display: 'flex',
-              fontFamily: 'var(--serif)',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              alignContent: 'center',
-              textAlign: 'center',
+              backgroundImage: `url(${background})`,
+              maxWidth: 320,
             }}
           >
-            <Typography
-              variant="h1"
+            <Box
+              onSubmit={formSubmit}
+              component="form"
+              // sx={{
+              //   '& .MuiTextField-root': { m: 1, width: '28ch' },
+              // }}
               sx={{
+                
+                display: 'flex',
                 fontFamily: 'var(--serif)',
-                fontSize: 20,
-                py: 2,
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignContent: 'center',
+                textAlign: 'center',
               }}
             >
-              Add Item
-            </Typography>
-
-            {/* category */}
-            <FormControl>
-              <TextField
-                inputStyle={{ textAlign: 'center' }}
-                name="category"
-                label="* Category"
-                variant="filled"
-                margin="dense"
-                onChange={handleChange}
-                value={userFormData.category}
-              />
-            </FormControl>
-
-            {/* size */}
-            <FormControl>
-              <TextField
-                name="size"
-                label="* Size"
-                variant="filled"
-                margin="dense"
-                onChange={handleChange}
-                value={userFormData.size}
-              />
-            </FormControl>
-
-            {/* photo */}
-            <FormControl>
-              <TextField
-                name="photo"
-                label="* Photo"
-                variant="filled"
-                margin="dense"
-                onChange={handleChange}
-                value={userFormData.photo}
-              />
-            </FormControl>
-
-            {/* style */}
-            <FormControl>
-              <TextField
-                name="style"
-                label="Style"
-                variant="filled"
-                margin="dense"
-                onChange={handleChange}
-                value={userFormData.style}
-              />
-            </FormControl>
-
-            {/* brand */}
-            <FormControl>
-              <TextField
-                name="brand"
-                label="Brand"
-                variant="filled"
-                margin="dense"
-                onChange={handleChange}
-                value={userFormData.brand}
-              />
-            </FormControl>
-
-            {/* name */}
-            <FormControl>
-              <TextField
-                name="name"
-                label="* Name"
-                variant="filled"
-                margin="dense"
-                onChange={handleChange}
-                value={userFormData.name}
-              />
-            </FormControl>
-
-            {/* gender - drop down menu */}
-            <FormControl>
-              <TextField
-                name="gender"
-                select
-                value={userFormData.gender}
-                label="Gender"
-                margin="dense"
-                variant="filled"
-                onChange={handleChange}
+              <Typography
+                variant="h1"
+                sx={{
+                  fontFamily: 'var(--serif)',
+                  fontSize: 20,
+                  py: 2,
+                }}
               >
-                {genderDB.map((option) => (
-                  <MenuItem
-                    size="large"
-                    key={option.value}
-                    value={option.value}
-                  >
-                    {option.label}
-                  </MenuItem>
-                ))}
-              </TextField>
-            </FormControl>
+                Add An Item:
+              </Typography>
 
-            {/* link */}
-            <FormControl>
-              <TextField
-                name="link"
-                label="Link"
-                margin="dense"
+              {/* category */}
+              <FormControl>
+                <TextField
+                  inputStyle={{ textAlign: 'center' }}
+                  name="category"
+                  label="* Category"
+                  variant="filled"
+                  margin="dense"
+                  onChange={handleChange}
+                  value={userFormData.category}
+                />
+              </FormControl>
+
+              {/* size */}
+              <FormControl>
+                <TextField
+                  name="size"
+                  label="* Size"
+                  variant="filled"
+                  margin="dense"
+                  onChange={handleChange}
+                  value={userFormData.size}
+                />
+              </FormControl>
+
+              {/* photo */}
+              <FormControl>
+                <TextField
+                  name="photo"
+                  label="* Photo"
+                  variant="filled"
+                  margin="dense"
+                  onChange={handleChange}
+                  value={userFormData.photo}
+                />
+              </FormControl>
+
+              {/* style */}
+              <FormControl>
+                <TextField
+                  name="style"
+                  label="Style"
+                  variant="filled"
+                  margin="dense"
+                  onChange={handleChange}
+                  value={userFormData.style}
+                />
+              </FormControl>
+
+              {/* brand */}
+              <FormControl>
+                <TextField
+                  name="brand"
+                  label="Brand"
+                  variant="filled"
+                  margin="dense"
+                  onChange={handleChange}
+                  value={userFormData.brand}
+                />
+              </FormControl>
+
+              {/* name */}
+              <FormControl>
+                <TextField
+                  name="name"
+                  label="* Name"
+                  variant="filled"
+                  margin="dense"
+                  onChange={handleChange}
+                  value={userFormData.name}
+                />
+              </FormControl>
+
+              {/* gender - drop down menu */}
+              <FormControl>
+                <TextField
+                  name="gender"
+                  select
+                  value={userFormData.gender}
+                  label="Gender"
+                  margin="dense"
+                  variant="filled"
+                  onChange={handleChange}
+                >
+                  {genderDB.map((option) => (
+                    <MenuItem
+                      size="large"
+                      key={option.value}
+                      value={option.value}
+                    >
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </TextField>
+              </FormControl>
+
+              {/* link */}
+              <FormControl>
+                <TextField
+                  name="link"
+                  label="Link"
+                  margin="dense"
+                  variant="filled"
+                  onChange={handleChange}
+                  value={userFormData.link}
+                />
+              </FormControl>
+
+              {/* color */}
+              <FormControl>
+                <TextField
+                  name="color"
+                  select
+                  value={userFormData.color}
+                  label="Color"
+                  margin="dense"
+                  variant="filled"
+                  onChange={handleChange}
+                >
+                  {colorDB.map((option) => (
+                    <MenuItem
+                      size="large"
+                      key={option.value}
+                      value={option.value}
+                    >
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </TextField>
+              </FormControl>
+
+              {/* review */}
+              <TextareaAutosize
+                //  fullWidth ={true}
+                name="review"
                 variant="filled"
+                margin="dense"
+                aria-label="minimum height"
+                minRows={5}
+                placeholder="Add your review here:"
+                style={{ m: 1, width: 450 }}
                 onChange={handleChange}
-                value={userFormData.link}
+                value={userFormData.review}
               />
-            </FormControl>
 
-            {/* color */}
-            <FormControl>
-              <TextField
-                name="color"
-                select
-                value={userFormData.color}
-                label="Color"
-                margin="dense"
-                variant="filled"
-                onChange={handleChange}
+              <Button
+                sx={{
+                  py: 1.5,
+                  my: 2,
+                  fontFamily: 'var(--serif)',
+                  textTransform: 'none',
+                  backgroundColor: '#B95252',
+                  ':hover': {
+                    backgroundColor: '#B95252AA',
+                  },
+                }}
+                // margin="dense"
+                // fullWidth={true}
+                disabled={
+                  !(
+                    userFormData.category &&
+                    userFormData.name &&
+                    userFormData.size &&
+                    userFormData.photo
+                  )
+                }
+                type="submit"
+                variant="contained"
               >
-                {colorDB.map((option) => (
-                  <MenuItem
-                    size="large"
-                    key={option.value}
-                    value={option.value}
-                  >
-                    {option.label}
-                  </MenuItem>
-                ))}
-              </TextField>
-            </FormControl>
-
-            {/* review */}
-            <TextareaAutosize
-              //  fullWidth ={true}
-              name="review"
-              variant="filled"
-              margin="dense"
-              aria-label="minimum height"
-              minRows={5}
-              placeholder="Add your review here:"
-              style={{ m: 1, width: 435 }}
-              onChange={handleChange}
-              value={userFormData.review}
-            />
-
-            <Button
-               sx={{
-                py: 1.5,
-                my: 2,
-                fontFamily: 'var(--serif)',
-                textTransform: 'none',
-                backgroundColor: '#B95252',
-                ':hover': {
-                  backgroundColor: '#B95252AA',
-                },
-              }}
-              margin="dense"
-              fullWidth={true}
-              disabled={
-                !(
-                  userFormData.category &&
-                  userFormData.name &&
-                  userFormData.size &&
-                  userFormData.photo
-                )
-              }
-              type="submit"
-              variant="contained"
-            >
-              Submit Item
-            </Button>
-          </Box>
-        </Container>
-      </Dialog>
+                Submit Item
+              </Button>
+            </Box>
+          </Container>
+        </Dialog>
+      </div>
     </div>
   );
 };
 
 export default AddItem;
-
-
