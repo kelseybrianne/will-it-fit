@@ -6,9 +6,13 @@ import {
   InMemoryCache,
   createHttpLink,
 } from '@apollo/client';
-// import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Header from './components/Header';
+import DiscoverFeed from './pages/DiscoverFeed';
+import Closet from './pages/Closet';
 import { setContext } from '@apollo/client/link/context';
-import Router from './components/Router';
+// import Router from './components/Router';
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -39,7 +43,18 @@ function App() {
 
   return (
     <ApolloProvider client={client}>
-      <Router windowSize={windowSize} />
+      <Router>
+        <>
+          <Header />
+          <Routes>
+            <Route path="/" element={<DiscoverFeed />} />
+            <Route
+              path="/closet"
+              element={<Closet windowSize={windowSize} />}
+            />
+          </Routes>
+        </>
+      </Router>
     </ApolloProvider>
   );
 }

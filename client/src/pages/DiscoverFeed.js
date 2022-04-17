@@ -1,22 +1,27 @@
-import Header from '../components/Header';
-import React, { useState } from 'react';
+import React from 'react';
 import './DiscoverFeed.css';
 
-import { useMutation, useQuery } from '@apollo/client';
-import { GET_USERMATCHES } from '../utils/queries';
+import { useQuery } from '@apollo/client';
+import { GET_USERMATCHES, GET_ME } from '../utils/queries';
 
-let viewClosetEl = document.querySelector('.view-closet');
-let imgDivEl = document.querySelector('.img-div');
+// let viewClosetEl = document.querySelector('.view-closet');
+// let imgDivEl = document.querySelector('.img-div');
 
 const DiscoverFeed = () => {
-  
+  // Get logged in user data so you can use the weight and height to get matching users data.
+  const { data: data_me } = useQuery(GET_ME);
+  console.log(data_me?.me.height);
 
-  const { loading, data } = useQuery(GET_USERMATCHES, {
-    variables: { height: 70, weight: 140 },
+  const { data: data_users } = useQuery(GET_USERMATCHES, {
+    skip: !data_me,
+    variables: {
+      height: data_me && data_me.me.height,
+      weight: data_me && data_me.me.weight,
+    },
   });
-  console.log(data);
-  const userMatches = data?.userMatches || [];
-  console.log(userMatches);
+
+  console.log(data_users)
+  console.log(data_users?.userMatches)
 
   // const [hover, setHover] = useState('false');
 
@@ -46,13 +51,14 @@ const DiscoverFeed = () => {
       {/* <p className="view-closet">View Closet</p> */}
       <div className="discover-container">
         <div className="second-wrapper">
-          {images.map(({ id, img }) => (
+          {data_users?.userMatches?.map(({ primaryPhoto, _id }) => (
             <div
+              key={_id}
               className={
-                id % 2 === 0 ? 'img-div-even img-div' : 'img-div-odd img-div'
+                _id % 2 === 0 ? 'img-div-even img-div' : 'img-div-odd img-div'
               }
             >
-              <img key={id} alt="cool-pic" src={img} className="img" />
+              <img alt="cool-pic" src={primaryPhoto} className="img" />
               <p className="view-closet">View Closet</p>
             </div>
           ))}

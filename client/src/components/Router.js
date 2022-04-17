@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Header from './components/Header';
-import DiscoverFeed from './pages/DiscoverFeed';
-import Closet from './pages/Closet';
+import Header from './Header';
+import DiscoverFeed from '../pages/DiscoverFeed';
+import Closet from '../pages/Closet';
 
 const BrowserRouter = ({ windowSize }) => {
   return (
