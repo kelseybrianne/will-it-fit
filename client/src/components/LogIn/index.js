@@ -23,12 +23,36 @@ export default function LogIn() {
     setOpen(false);
   };
 
+  const backdropImage = require('../../assets/images/ihssan-rami-azouagh-1YCKCCrLEbU-unsplash.jpg');
+  console.log(backdropImage);
   return (
     <Box>
       <Link to={(location) => location} onClick={handleClickOpen}>
         log in
       </Link>
-      <Dialog fullScreen open={open} onClose={handleClose}>
+      <Dialog
+        fullScreen
+        open={open}
+        onClose={handleClose}
+        sx={{
+          width: '75%',
+          minWidth: 380,
+          margin: 'auto',
+          height: 'fit-content',
+          maxHeight: '100%',
+          overflowY: 'scroll',
+        }}
+        BackdropProps={{
+          style: {
+            width: '100%',
+            height: '100%',
+            backgroundImage: `url(${backdropImage})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center bottom',
+          },
+        }}
+        PaperProps={{ sx: { backgroundColor: 'rgba(255, 255,255, 0.65)' } }}
+      >
         <IconButton
           edge="start"
           color="inherit"

@@ -43,7 +43,8 @@ function LogInForm({ setDialogState }) {
   return (
     <Container
       sx={{
-        maxWidth: 320,
+        width: 320,
+        py: 20,
       }}
     >
       <Box
@@ -51,11 +52,11 @@ function LogInForm({ setDialogState }) {
         onSubmit={handleFormSubmit}
         sx={{
           display: 'flex',
-          fontFamily: 'var(--serif)',
           flexDirection: 'column',
-          justifyContent: 'center',
-          alignContent: 'center',
+          //   justifyContent: 'center',
+          //   alignContent: 'center',
           textAlign: 'center',
+          gap: 1,
         }}
       >
         <Typography
@@ -71,19 +72,19 @@ function LogInForm({ setDialogState }) {
         <TextField
           autoFocus
           id="email"
-          label="email"
+          placeholder="email"
           type="email"
           onChange={handleChange}
           value={formState.email}
-          variant="standard"
+          sx={{ backgroundColor: 'white' }}
         />
         <TextField
           id="password"
-          label="password"
+          placeholder="password"
           type="password"
           onChange={handleChange}
           value={formState.password}
-          variant="standard"
+          sx={{ backgroundColor: 'white' }}
         />
         <Button
           type="submit"

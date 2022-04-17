@@ -54,7 +54,8 @@ function SignUpForm({ setDialogState }) {
   return (
     <Container
       sx={{
-        maxWidth: 320,
+        width: 320,
+        py: 4,
       }}
     >
       <Box
@@ -62,11 +63,11 @@ function SignUpForm({ setDialogState }) {
         onSubmit={handleFormSubmit}
         sx={{
           display: 'flex',
-          fontFamily: 'var(--serif)',
           flexDirection: 'column',
           justifyContent: 'center',
           alignContent: 'center',
           textAlign: 'center',
+          gap: 1,
         }}
       >
         <Typography
@@ -83,56 +84,56 @@ function SignUpForm({ setDialogState }) {
           autoFocus
           margin="dense"
           id="username"
-          label="username"
+          placeholder="username"
           type="text"
-          variant="standard"
           onChange={handleChange}
           value={formState.username}
+          sx={{ backgroundColor: 'white' }}
         />
         <TextField
           margin="dense"
           id="email"
-          label="email"
+          placeholder="email"
           type="email"
-          variant="standard"
           onChange={handleChange}
           value={formState.email}
+          sx={{ backgroundColor: 'white' }}
         />
         <TextField
           margin="dense"
           id="password"
-          label="password"
+          placeholder="password"
           type="password"
-          variant="standard"
           onChange={handleChange}
           value={formState.password}
+          sx={{ backgroundColor: 'white' }}
         />
         <TextField
           margin="dense"
           id="height"
-          label="height"
+          placeholder="height"
           type="number"
-          variant="standard"
           onChange={handleChange}
           value={formState.height}
+          sx={{ backgroundColor: 'white' }}
         />
         <TextField
           margin="dense"
           id="weight"
-          label="weight"
+          placeholder="weight"
           type="number"
-          variant="standard"
           onChange={handleChange}
           value={formState.weight}
+          sx={{ backgroundColor: 'white' }}
         />
         <TextField
           margin="dense"
           id="shoeSize"
-          label="shoe size"
+          placeholder="shoe size"
           type="text"
-          variant="standard"
           onChange={handleChange}
           value={formState.shoeSize}
+          sx={{ backgroundColor: 'white' }}
         />
         <Button
           type="submit"
