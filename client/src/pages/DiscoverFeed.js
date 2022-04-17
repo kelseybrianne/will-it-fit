@@ -9,10 +9,12 @@ let viewClosetEl = document.querySelector('.view-closet');
 let imgDivEl = document.querySelector('.img-div');
 
 const DiscoverFeed = () => {
+  
+
   const { loading, data } = useQuery(GET_USERMATCHES, {
-    variables: { height: 70, weight: 140 }
+    variables: { height: 70, weight: 140 },
   });
-console.log(data);
+  console.log(data);
   const userMatches = data?.userMatches || [];
   console.log(userMatches);
 
@@ -44,13 +46,13 @@ console.log(data);
       {/* <p className="view-closet">View Closet</p> */}
       <div className="discover-container">
         <div className="second-wrapper">
-          {userMatches.map(({ _id, primaryPhoto }) => (
+          {images.map(({ id, img }) => (
             <div
               className={
-                _id % 2 === 0 ? 'img-div-even img-div' : 'img-div-odd img-div'
+                id % 2 === 0 ? 'img-div-even img-div' : 'img-div-odd img-div'
               }
             >
-              <img key={_id} alt="cool-pic" src={primaryPhoto} className="img" />
+              <img key={id} alt="cool-pic" src={img} className="img" />
               <p className="view-closet">View Closet</p>
             </div>
           ))}

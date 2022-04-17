@@ -1,12 +1,14 @@
-
 // import Header from "./components/Header";
-import { useState, useEffect } from "react";
-import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink, } from '@apollo/client';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import {
+  ApolloClient,
+  ApolloProvider,
+  InMemoryCache,
+  createHttpLink,
+} from '@apollo/client';
+// import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { setContext } from '@apollo/client/link/context';
-import Header from './components/Header';
-import DiscoverFeed from './pages/DiscoverFeed';
-import Closet from './pages/Closet';
+import Router from './components/Router';
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -37,22 +39,13 @@ function App() {
 
   return (
     <ApolloProvider client={client}>
-      <Router>
-        <>
-          <Header />
-          <Routes>
-            <Route path="/" element={<DiscoverFeed />} />
-            <Route path="/closet" element={<Closet windowSize={windowSize} />} />
-          </Routes>
-        </>
-      </Router>
+      <Router windowSize={windowSize} />
     </ApolloProvider>
   );
 }
 
 // Hook
 function useWindowSize() {
-
   // Initialize state with undefined width/height so server and client renders match
   // Learn more here: https://joshwcomeau.com/react/the-perils-of-rehydration/
   const [windowSize, setWindowSize] = useState({
@@ -67,12 +60,12 @@ function useWindowSize() {
         height: window.innerHeight,
       });
     }
-    
-    window.addEventListener("resize", handleResize);
+
+    window.addEventListener('resize', handleResize);
     // Call handler immediately so state gets updated with initial window size
     handleResize();
 
-    // Remove event listener on cleanup 
+    // Remove event listener on cleanup
     // return () => window.removeEventListener("resize", handleResize);
   }, []); // Empty array ensures that effect is only run on mount
   return windowSize;
