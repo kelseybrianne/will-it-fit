@@ -32,7 +32,6 @@ const colorDB = [
   { label: 'White', value: 'White' },
   { label: 'Grey', value: 'Grey' },
   { label: 'Black', value: 'Black' },
-  
 ];
 const AddItem = () => {
   const [open, setOpen] = React.useState(false);
@@ -102,16 +101,17 @@ const AddItem = () => {
 
       <Dialog open={open} onClose={() => setOpen(false)} id="form">
         <Box
-          // validate={validated}
           onSubmit={formSubmit}
           component="form"
           sx={{
-            '& .MuiTextField-root': { m: 1, width: '25ch' },
+            '& .MuiTextField-root': { m: 1, width: '28ch' },
           }}
         >
           {/* category */}
           <FormControl>
             <TextField
+            margin= 'dense'
+             inputStyle={{ textAlign: 'center' }}
               name="category"
               label="* Category"
               variant="filled"
@@ -224,24 +224,29 @@ const AddItem = () => {
 
           {/* review */}
           <TextareaAutosize
+          //  fullWidth ={true}
             name="review"
             variant="filled"
             aria-label="minimum height"
             minRows={5}
-            placeholder="Add your review here"
-            style={{ width: 435 }}
+            
+            placeholder="Add your review here:"
+            style={{ m: 1, width: 435 }}
             onChange={handleChange}
             value={userFormData.review}
           />
 
           <Button
-            // disabled={
-            //   !(
-            //     userFormData.category &&
-            //     userFormData.name &&
-            //     userFormData.size &&
-            //     userFormData.photo
-            //   )}
+          // style={{ width: '28ch'}}
+          fullWidth ={true}
+            disabled={
+              !(
+                userFormData.category &&
+                userFormData.name &&
+                userFormData.size &&
+                userFormData.photo
+              )
+            }
             type="submit"
             variant="contained"
           >
