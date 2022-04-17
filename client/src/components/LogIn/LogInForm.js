@@ -1,0 +1,118 @@
+import { useMutation } from '@apollo/client';
+import { Button, Container, TextField, Typography } from '@mui/material';
+import { Box } from '@mui/system';
+import { useState } from 'react';
+import auth from '../../utils/auth';
+import { LOGIN_USER } from '../../utils/mutations';
+
+/** This is the dialog form for logging in a user */
+function LogInForm({ setDialogState }) {
+  const [login, { error, data }] = useMutation(LOGIN_USER);
+  const [formState, setFormState] = useState({
+    email: '',
+    password: '',
+  });
+
+  // submit form
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const { data } = await login({
+        variables: { ...formState },
+      });
+      auth.login(data.login.token);
+    } catch (e) {
+      console.error(e);
+    }
+
+    // clear form values
+    setFormState({
+      email: '',
+      password: '',
+    });
+  };
+  // update state based on form input changes
+  const handleChange = (event) => {
+    const { id, value } = event.target;
+
+    setFormState({
+      ...formState,
+      [id]: value,
+    });
+  };
+  return (
+    <Container
+      sx={{
+        maxWidth: 320,
+      }}
+    >
+      <Box
+        component="form"
+        onSubmit={handleFormSubmit}
+        sx={{
+          display: 'flex',
+          fontFamily: 'var(--serif)',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignContent: 'center',
+          textAlign: 'center',
+        }}
+      >
+        <Typography
+          variant="h1"
+          sx={{
+            fontFamily: 'var(--serif)',
+            fontSize: 40,
+            py: 2,
+          }}
+        >
+          Will It Fit?
+        </Typography>
+        <TextField
+          autoFocus
+          id="email"
+          label="email"
+          type="email"
+          onChange={handleChange}
+          value={formState.email}
+          variant="standard"
+        />
+        <TextField
+          id="password"
+          label="password"
+          type="password"
+          onChange={handleChange}
+          value={formState.password}
+          variant="standard"
+        />
+        <Button
+          type="submit"
+          variant="contained"
+          sx={{
+            py: 1.5,
+            my: 2,
+            fontFamily: 'var(--serif)',
+            textTransform: 'none',
+            backgroundColor: '#B95252',
+            ':hover': {
+              backgroundColor: '#B95252AA',
+            },
+          }}
+        >
+          Log in
+        </Button>
+        <Typography variant="subtitle1" sx={{ py: 2 }}>
+          <span>Don't have an account? </span>
+          <span
+            style={{ textDecoration: 'underline', cursor: 'pointer' }}
+            onClick={() => setDialogState('signup')}
+          >
+            Sign up
+          </span>
+        </Typography>
+      </Box>
+    </Container>
+  );
+}
+
+export default LogInForm;
