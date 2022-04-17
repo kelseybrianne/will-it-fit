@@ -8,7 +8,15 @@ import Stack from '@mui/material/Stack';
 import profilePic from '../assets/images/atikh-bana-_KaMTEmJnxY-unsplash.jpg'
 import AddItem from '../components/AddItem';
 
+import { useMutation, useQuery } from '@apollo/client';
+import { GET_ME } from '../utils/queries';
+
 const Closet = ({ windowSize }) => {
+  const { loading, data } = useQuery(GET_ME);
+
+  const userData = data?.me || {};
+  console.log(userData);
+
   return (
     <div className="profile-page">
       <div className="white-div"></div>
