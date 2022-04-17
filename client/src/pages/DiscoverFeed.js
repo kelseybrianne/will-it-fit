@@ -51,9 +51,10 @@ const DiscoverFeed = () => {
       {/* <p className="view-closet">View Closet</p> */}
       <div className="discover-container">
         <div className="second-wrapper">
-          {data_users?.userMatches?.map(({ primaryPhoto, _id }) => (
+          {data_users?.userMatches?.map(({ primaryPhoto, _id, username }) => (
             <div
               key={_id}
+              data-username={username}
               className={
                 _id % 2 === 0 ? 'img-div-even img-div' : 'img-div-odd img-div'
               }
