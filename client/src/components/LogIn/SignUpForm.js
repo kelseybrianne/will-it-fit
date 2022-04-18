@@ -1,5 +1,11 @@
 import { useMutation } from '@apollo/client';
-import { Button, Container, TextField, Typography } from '@mui/material';
+import {
+  Button,
+  Container,
+  InputAdornment,
+  TextField,
+  Typography,
+} from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import { Box } from '@mui/system';
 import { useState } from 'react';
@@ -145,6 +151,9 @@ function SignUpForm({ setDialogState }) {
           type="number"
           required={true}
           onChange={handleChange}
+          InputProps={{
+            endAdornment: <InputAdornment position="end">in</InputAdornment>,
+          }}
           value={formState.height}
           sx={{ backgroundColor: 'white' }}
         />
@@ -155,6 +164,9 @@ function SignUpForm({ setDialogState }) {
           type="number"
           required={true}
           onChange={handleChange}
+          InputProps={{
+            endAdornment: <InputAdornment position="end">lbs</InputAdornment>,
+          }}
           value={formState.weight}
           sx={{ backgroundColor: 'white' }}
         />
