@@ -12,13 +12,30 @@ import background from '../assets/images/ihssan-rami-azouagh-1YCKCCrLEbU-unsplas
 import { useMutation } from '@apollo/client';
 import { ADD_ITEM } from '../utils/mutations';
 
-// array to make the gender a drop down
+// *arrays for drop downs*:
+// style
+const styleDB = [
+  { label: 'Street Wear', value: 'Street' },
+  { label: 'Formal Wear', value: 'Formal' },
+  { label: 'Vintage', value: 'Vintage' },
+  { label: 'Sport', value: 'Sport' },
+  { label: 'Artsy', value: 'Artsy' },
+  { label: 'Casual', value: 'Casual' },
+  { label: 'Business Casual', value: 'Business' },
+  { label: 'Exotic', value: 'Exotic' },
+  { label: 'Swimwear', value: 'Swimwear' },
+  { label: 'Outerwear', value: 'Outerwear' },
+  { label: 'Maternity', value: 'Maternity' },
+  { label: 'Sleep', value: 'Sleep' },
+];
+
+// gender
 const genderDB = [
   { label: 'Womens', value: 'Womens' },
   { label: 'Mens', value: 'Mens' },
   { label: 'Unisex', value: 'Unisex' },
 ];
-// array of colors for the drop down
+//  colors
 const colorDB = [
   { label: 'Red', value: 'Red' },
   { label: 'Orange', value: 'Orange' },
@@ -163,12 +180,23 @@ const AddItem = () => {
 
               <TextField
                 name="style"
+                select
                 label="Style"
                 variant="filled"
                 margin="dense"
                 onChange={handleChange}
                 value={userFormData.style}
-              />
+                >
+                {styleDB.map((option) => (
+                  <MenuItem
+                    size="large"
+                    key={option.value}
+                    value={option.value}
+                  >
+                    {option.label}
+                  </MenuItem>
+                ))}
+              </TextField>
 
               {/* brand */}
 
@@ -226,7 +254,6 @@ const AddItem = () => {
               />
 
               {/* color */}
-
               <TextField
                 name="color"
                 select
