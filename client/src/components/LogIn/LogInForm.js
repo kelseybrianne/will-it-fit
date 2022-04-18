@@ -44,7 +44,8 @@ function LogInForm({ setDialogState }) {
     <Container
       sx={{
         width: 320,
-        py: 20,
+        height: '100%',
+        py: 4,
       }}
     >
       <Box
@@ -53,9 +54,9 @@ function LogInForm({ setDialogState }) {
         sx={{
           display: 'flex',
           flexDirection: 'column',
-          //   justifyContent: 'center',
-          //   alignContent: 'center',
+          justifyContent: 'center',
           textAlign: 'center',
+          height: '100%',
           gap: 1,
         }}
       >

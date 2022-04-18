@@ -38,8 +38,10 @@ export default function LogIn() {
           width: '75%',
           minWidth: 380,
           margin: 'auto',
-          height: 'fit-content',
-          maxHeight: '100%',
+          height: 'max-content',
+          '@supports (-webkit-touch-callout: none)': {
+            height: '100%',
+          },
           overflowY: 'scroll',
         }}
         BackdropProps={{

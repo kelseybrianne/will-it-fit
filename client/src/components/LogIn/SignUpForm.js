@@ -55,6 +55,7 @@ function SignUpForm({ setDialogState }) {
     <Container
       sx={{
         width: 320,
+        height: '100%',
         py: 4,
       }}
     >
@@ -65,7 +66,7 @@ function SignUpForm({ setDialogState }) {
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
-          alignContent: 'center',
+          height: '100%',
           textAlign: 'center',
           gap: 1,
         }}
