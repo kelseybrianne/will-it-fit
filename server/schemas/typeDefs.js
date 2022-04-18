@@ -1,4 +1,9 @@
-const { gql } = require('apollo-server-express');
+const { ApolloServer, gql } = require('apollo-server-express');
+const {
+  GraphQLUpload,
+  graphqlUploadExpress, // A Koa implementation is also exported.
+} = require('graphql-upload');
+const express = require('express');
 
 const typeDefs = gql`
   type User {
@@ -51,6 +56,13 @@ const typeDefs = gql`
     token: ID!
     user: User
   }
+  scalar Upload
+
+  type File {
+    filename: String!
+    mimetype: String!
+    encoding: String!
+  }
 
   type Query {
     user(username: String!): User
@@ -70,6 +82,8 @@ const typeDefs = gql`
   }
 
   type Mutation {
+    singleUpload(file: Upload!): File!
+
     addUser(
       username: String!
       email: String!

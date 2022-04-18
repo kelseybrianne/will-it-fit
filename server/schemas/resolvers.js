@@ -1,8 +1,15 @@
-const { AuthenticationError } = require('apollo-server-express');
+const { AuthenticationError, ApolloServer, gql } = require('apollo-server-express');
 const { User, Item } = require('../models');
 const { signToken } = require('../utils/auth');
+const {
+  GraphQLUpload,
+  graphqlUploadExpress, // A Koa implementation is also exported.
+} = require('graphql-upload');
+const { finished } = require('stream/promises');
 
 const resolvers = {
+  Upload: GraphQLUpload,
+
   Query: {
     //Query users similar to user height and weight, by user id
     userMatches: async (parent, args, {}) => {
@@ -281,6 +288,22 @@ const resolvers = {
   },
   // starting mutations file
   Mutation: {
+    singleUpload: async (parent, { file }) => {
+      const { createReadStream, filename, mimetype, encoding } = await file;
+
+      // Invoking the `createReadStream` will return a Readable Stream.
+      // See https://nodejs.org/api/stream.html#stream_readable_streams
+      const stream = createReadStream();
+
+      // This is purely for demonstration purposes and will overwrite the
+      // local-file-output.txt in the current working directory on EACH upload.
+      const out = require('fs').createWriteStream('local-file-output.txt');
+      stream.pipe(out);
+      await finished(out);
+
+      return { filename, mimetype, encoding };
+    },
+
     // POST-CREATE new user
     addUser: async (parent, args) => {
       const user = await User.create(args);

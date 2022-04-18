@@ -10,10 +10,7 @@
     "install": "cd server && npm i && cd ../client && npm i",
     "seed": "cd server && npm run seed",
     "build": "cd client && npm run build",
-
     "lint": "npx eslint --ext .js ./"
- 
-
   },
   "repository": {
     "type": "git",
@@ -31,5 +28,8 @@
     "eslint": "8.10.0",
     "eslint-config-prettier": "8.4.0",
     "prettier": "2.5.1"
+  },
+  "dependencies": {
+    "graphql-upload": "^13.0.0"
   }
 }
