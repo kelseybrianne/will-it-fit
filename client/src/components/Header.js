@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import React from 'react';
 import './Header.css';
-import LogIn from './LogIn';
+import LogInDialog from './LogIn';
 import LogOut from './LogOut';
 
 import Auth from '../utils/auth';
@@ -19,7 +19,7 @@ const Header = () => {
         <h1>Will It Fit?</h1>
       </Link>
 
-      {Auth.loggedIn() ? <LogOut /> : <LogIn />}
+      {Auth.loggedIn() ? <LogOut /> : <LogInDialog />}
     </header>
   );
 };

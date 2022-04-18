@@ -38,7 +38,6 @@ const client = new ApolloClient({
 });
 
 function App() {
-  console.log(document.location);
   const windowSize = useWindowSize();
 
   return (
