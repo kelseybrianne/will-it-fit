@@ -61,6 +61,7 @@ const typeDefs = gql`
   scalar Upload
 
   type File {
+    url: String!
     filename: String!
     mimetype: String!
     encoding: String!
@@ -68,9 +69,11 @@ const typeDefs = gql`
 
   type Query {
     user(username: String!): User
+    userMatches(height: Float!, weight: Float!): [User]
     users: [User]
     me(_id: ID!): User
     otherFields: Boolean!
+    hello: String!
 
     item(_id: ID!): Item
     items: [Item]
@@ -114,7 +117,7 @@ const typeDefs = gql`
     removeFavorite(_id: ID!): User
 
     addPhoto(_id: ID!, photo: String!): Item
-    singleUpload(file: Upload!): File!
+    uploadFile(file: Upload!): File!
 
     addProfilePhoto(_id: ID!, primaryPhoto: String!): User
     removeProfilePhoto(_id: ID!): User

@@ -1,8 +1,16 @@
 import { gql } from '@apollo/client';
+// add a photo to graphQL
+export const UPLOAD_FILE = gql`
+  mutation ($file: Upload!) {
+    uploadFile(file: $file) {
+      url
+    }
+  }
+`;
 
 // addUser:
 export const ADD_USER = gql`
-  mutation Mutation(
+  mutation addUser(
     $username: String!
     $email: String!
     $password: String!
@@ -25,7 +33,7 @@ export const ADD_USER = gql`
 `;
 // login:
 export const LOGIN_USER = gql`
-  mutation Mutation($email: String!, $password: String!) {
+  mutation login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
       token
       user {
@@ -36,7 +44,7 @@ export const LOGIN_USER = gql`
 `;
 // addItem:
 export const ADD_ITEM = gql`
-  mutation Mutation(
+  mutation addItem(
     $category: String!
     $size: String!
     $photo: String!

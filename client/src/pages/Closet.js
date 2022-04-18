@@ -4,7 +4,7 @@ import './Closet.css';
 import Items from '../components/Items.js';
 // eslint-disable-next-line no-unused-vars
 import Stack from '@mui/material/Stack';
-import UploadButtons from '../components/ImageUpload';
+import UploadForm from '../components/UploadForm';
 // import profilePic from '../assets/images/ivana-cajina-dnL6ZIpht2s-unsplash.jpg'
 import profilePic from '../assets/images/atikh-bana-_KaMTEmJnxY-unsplash.jpg'
 
@@ -28,7 +28,7 @@ const Closet = ({ windowSize }) => {
           {/* toggle 'Following' and 'Follow' on click'*/}
           {/* <button className="unfollow">Following</button> */}
           <Button variant="contained">Add Item</Button>
-          <UploadButtons/>
+          <UploadForm/>
         </div>
       </div>
       <Items windowSize={windowSize} />

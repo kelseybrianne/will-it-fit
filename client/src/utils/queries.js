@@ -1,4 +1,5 @@
 import { gql } from '@apollo/client';
+// get one photo to display to the user
 
 // get one user by username
 export const GET_USER = gql`
