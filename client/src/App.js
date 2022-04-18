@@ -1,6 +1,7 @@
 // import Header from "./components/Header";
 import { useState, useEffect } from 'react';
 import {
+  from,
   ApolloClient,
   ApolloProvider,
   InMemoryCache,
@@ -10,16 +11,12 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import DiscoverFeed from './pages/DiscoverFeed';
-import UploadForm from './components/UploadForm';
 import Closet from './pages/Closet';
 import { createUploadLink } from 'apollo-upload-client';
 import { setContext } from '@apollo/client/link/context';
 // import Router from './components/Router';
 
-// Construct our main GraphQL API endpoint
-const httpLink = createUploadLink({
-  uri: '/graphql',
-});
+// Construct our main GraphQL API endpoint. Had to add createUploadLink to get image upload working. Also need the terminating link, httpLink, included in order to process all other query and mutation (non-uploads) requests.
 
 // Construct request middleware that will attach the JWT token to every request as an `authorization` header
 const authLink = setContext((_, { headers }) => {
@@ -34,13 +31,18 @@ const authLink = setContext((_, { headers }) => {
   };
 });
 
+const additiveLink = from([
+  authLink,
+  new createUploadLink({ uri: '/graphql' }),
+  new createHttpLink({ uri: '/graphql' }),
+]);
+// if this is erroring, try authLink.concat(additiveLink);
 const client = new ApolloClient({
-  link: authLink.concat(httpLink),
+  link: additiveLink,
   cache: new InMemoryCache(),
 });
 
 function App() {
-  console.log(document.location);
   const windowSize = useWindowSize();
 
   return (

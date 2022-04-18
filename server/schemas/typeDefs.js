@@ -71,11 +71,8 @@ const typeDefs = gql`
     user(username: String!): User
     userMatches(height: Float!, weight: Float!): [User]
     users: [User]
-    me(_id: ID!): User
     otherFields: Boolean!
-    hello: String!
     me: User
-    userMatches(height: Float, weight: Float): [User]
 
     item(_id: ID!): Item
     items: [Item]

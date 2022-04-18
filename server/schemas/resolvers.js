@@ -295,8 +295,6 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
-
-    hello: () => 'Hello World',
   },
   // starting mutations file
   Mutation: {
@@ -315,7 +313,7 @@ const resolvers = {
       }
       const correctPw = await user.isCorrectPassword(password);
       if (!correctPw) {
-        throw new AuthenticationError('Incorrect enmail or password entered');
+        throw new AuthenticationError('Incorrect email or password entered');
       }
 
       const token = signToken(user);
@@ -341,7 +339,7 @@ const resolvers = {
       if (context.user) {
         const { createReadStream, filename, mimetype, encoding } = await file;
         // generate random string for user privacy
-        const { ext, name } = path.parse(filename);
+        const { ext } = path.parse(filename);
         const randomName = generateRandomString(8) + ext;
 
         const stream = await createReadStream();
@@ -357,6 +355,9 @@ const resolvers = {
         });
         // include user id to serve image back quickly.
         return {
+          mimetype,
+          encoding,
+          filename,
           url: `http://localhost:3000/uploads/${context.user._id}/${randomName}`,
         };
       }
