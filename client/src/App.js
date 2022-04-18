@@ -12,12 +12,17 @@ import Header from './components/Header';
 import DiscoverFeed from './pages/DiscoverFeed';
 import Closet from './pages/Closet';
 import { setContext } from '@apollo/client/link/context';
+import { createUploadLink } from 'apollo-upload-client'
 // import Router from './components/Router';
 
 // Construct our main GraphQL API endpoint
-const httpLink = createHttpLink({
+// const httpLink = createHttpLink({
+//   uri: '/graphql',
+// });
+
+const uploadLink = createUploadLink({
   uri: '/graphql',
-});
+})
 
 // Construct request middleware that will attach the JWT token to every request as an `authorization` header
 const authLink = setContext((_, { headers }) => {
@@ -33,7 +38,7 @@ const authLink = setContext((_, { headers }) => {
 });
 
 const client = new ApolloClient({
-  link: authLink.concat(httpLink),
+  link: authLink.concat(uploadLink),
   cache: new InMemoryCache(),
 });
 

@@ -297,34 +297,28 @@ const resolvers = {
   },
   // starting mutations file
   Mutation: {
+    // upload the file with the user id in the database.
     singleUpload: async (parent, { file }, context) => {
-      if (context.user) {
-        const { createReadStream, filename, mimetype, encoding } = await file;
-        // generate random string for user privacy
-        const { ext } = path.parse(filename);
-        const randomName = generateRandomString(8) + ext;
+      // if (context.user) {
+      const { createReadStream, filename, mimetype, encoding } = await file;
 
-        const stream = await createReadStream();
-        // currently in root of project, intend to migrate to cloud storage KV workers Cloudflare.
-        const pathName = path.join(
-          __dirname,
-          `../../public/images/${context.user._id}/${randomName}`
-        );
+      const { ext, name } = path.parse(filename);
+      const randomName = generateRandomString(8) + ext;
 
-        await new Promise((resolve, reject) => {
-          const writeStream = fs.createWriteStream(pathName);
-          stream.pipe(writeStream).on('finish', resolve).on('error', reject);
-        });
-        // include user id to serve image back quickly.
-        return {
-          mimetype,
-          encoding,
-          filename,
-          url: `http://localhost:3000/images/${context.user._id}/${randomName}`,
-        };
-      }
-      throw new AuthenticationError('You need to be logged in!');
+      const stream = await createReadStream();
+      const pathName = path.join(__dirname, `../../uploads/${randomName}`);
+
+      await new Promise((resolve, reject) => {
+        const writeStream = fs.createWriteStream(pathName);
+        stream.pipe(writeStream).on('finish', resolve).on('error', reject);
+      });
+
+      return {
+        url: `http://localhost:3000/uploads/${randomName}`,
+      };
     },
+    //   throw new AuthenticationError('You need to be logged in!');
+    // },
     // POST-CREATE new user
     addUser: async (parent, args) => {
       const user = await User.create(args);

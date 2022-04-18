@@ -8,24 +8,24 @@ import { ADD_USER, SINGLE_UPLOAD } from '../../utils/mutations';
 /** This is a dialog form for signing up for an account */
 function SignUpForm({ setDialogState }) {
   const [signup, { error, data }] = useMutation(ADD_USER);
-  const [selectedImage, setSelectedImage] = useState(null);
-  const [imageUrl, setImageUrl] = useState(null);
+  // const [selectedImage, setSelectedImage] = useState(null);
+  // const [imageUrl, setImageUrl] = useState(null);
 
-  useEffect(() => {
-    if (selectedImage) {
-      setImageUrl(URL.createObjectURL(selectedImage));
-    }
-  }, [selectedImage]);
+  // useEffect(() => {
+  //   if (selectedImage) {
+  //     setImageUrl(URL.createObjectURL(selectedImage));
+  //   }
+  // }, [selectedImage]);
+
   const [uploadFile] = useMutation(SINGLE_UPLOAD, {
     onCompleted: (data) => console.log(data),
   });
-
-  const handleFileUpload = () => {
-    alert('handleFileUpload reached');
-    const file = selectedImage;
-    // working
+  const handleFileUpload = (e) => {
+    const file = e.target.files[0];
+    if (!file) {
+      return;
+    }
     console.log(file);
-    // not working, needs createUploadLink, only httpLink or createUploadLink work, not both.
     uploadFile({ variables: { file } });
   };
 
@@ -45,8 +45,11 @@ function SignUpForm({ setDialogState }) {
     try {
       const { data } = await signup({
         variables: { ...formState },
-      }).then(handleFileUpload());
+      });
 
+      // if (selectedImage) {
+      //   handleFileUpload();
+      // }
       auth.login(data.addUser.token);
     } catch (e) {
       console.error(e);
@@ -61,7 +64,6 @@ function SignUpForm({ setDialogState }) {
       weight: 0,
       shoeSize: '',
     });
-    handleFileUpload();
   };
   // update state based on form input changes
   const handleChange = (event) => {
@@ -110,19 +112,15 @@ function SignUpForm({ setDialogState }) {
           type="file"
           id="select-image"
           style={{ display: 'none' }}
-          onChange={(e) => setSelectedImage(e.target.files[0])}
+          // onChange={(e) => setSelectedImage(e.target.files[0])}
+          onChange={handleFileUpload}
         />
         <label htmlFor="select-image">
           <Button variant="contained" color="primary" component="span">
             Upload Image
           </Button>
         </label>
-        {imageUrl && selectedImage && (
-          <Box mt={2} textAlign="center">
-            {/* <div>Image Preview:</div> */}
-            <img src={imageUrl} alt={selectedImage.name} height="100px" />
-          </Box>
-        )}
+  
 
         {/* Begin standard form questions */}
         <TextField
