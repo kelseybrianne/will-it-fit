@@ -6,13 +6,16 @@ import {
   InMemoryCache,
   createHttpLink,
 } from '@apollo/client';
+import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { setContext } from '@apollo/client/link/context';
 import Header from './components/Header';
 import DiscoverFeed from './pages/DiscoverFeed';
 import UploadForm from './components/UploadForm';
 import Closet from './pages/Closet';
 import { createUploadLink } from 'apollo-upload-client';
+import { setContext } from '@apollo/client/link/context';
+// import Router from './components/Router';
+
 // Construct our main GraphQL API endpoint
 const httpLink = createUploadLink({
   uri: '/graphql',

@@ -41,8 +41,9 @@ export const GET_USER = gql`
 `;
 // get logged in user data by user id
 export const GET_ME = gql`
-  query me($id: ID!) {
-    me(_id: $id) {
+  query me {
+    me {
+      _id
       username
       email
       height

@@ -23,6 +23,7 @@ const resolvers = {
   Query: {
     //Query users similar to user height and weight, by user id
     userMatches: async (parent, args, {}) => {
+      console.log('inside user matches');
       // adjust these numbers higher to broaden the scope of the serach
       let heightVar = 0.03;
       let weightVar = 0.05;
@@ -63,9 +64,11 @@ const resolvers = {
       // if no matches, return the closets of 15 random users.
       if (userMatches.length !== 0) {
         return userMatches;
-      } else {
+      } else if (!args || userMatches.length === 0) {
         const randomUsers = User.find({}).limit(15).populate('closet');
         return randomUsers;
+      } else {
+        console.log('Did not work');
       }
     },
 
@@ -111,45 +114,87 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
     // GET logged in user
-    me: async (parent, { _id }, context) => {
-      if (context.user) {
-        return await User.findOne({ _id })
-          .populate('closet')
-          .populate({
-            path: 'closet',
-            populate: [
-              '_id',
-              'category',
-              'style',
-              'brand',
-              'name',
-              'gender',
-              'size',
-              'link',
-              'photo',
-              'color',
-              'review',
-            ],
-          })
-          .populate('savedItems')
-          .populate({
-            path: 'savedItems',
-            populate: [
-              '_id',
-              'category',
-              'style',
-              'brand',
-              'name',
-              'gender',
-              'size',
-              'link',
-              'photo',
-              'color',
-              'review',
-            ],
-          });
-      }
-      throw new AuthenticationError('You need to be logged in!');
+    // me: async (parent, { _id } ) => {
+    //   if (context.user) {
+    //     return await User.findOne({ _id })
+    //       .populate('closet')
+    //       .populate({
+    //         path: 'closet',
+    //         populate: [
+    //           '_id',
+    //           'category',
+    //           'style',
+    //           'brand',
+    //           'name',
+    //           'gender',
+    //           'size',
+    //           'link',
+    //           'photo',
+    //           'color',
+    //           'review',
+    //         ],
+    //       })
+    //       .populate('savedItems')
+    //       .populate({
+    //         path: 'savedItems',
+    //         populate: [
+    //           '_id',
+    //           'category',
+    //           'style',
+    //           'brand',
+    //           'name',
+    //           'gender',
+    //           'size',
+    //           'link',
+    //           'photo',
+    //           'color',
+    //           'review',
+    //         ],
+    //       });
+    //   }
+    //   throw new AuthenticationError('You need to be logged in!');
+    // },
+
+    me: async (parent, args, context) => {
+      // if (context.user) {
+      const userData = await User.findOne({ _id: context.user._id })
+        .populate('closet')
+        .populate({
+          path: 'closet',
+          populate: [
+            '_id',
+            'category',
+            'style',
+            'brand',
+            'name',
+            'gender',
+            'size',
+            'link',
+            'photo',
+            'color',
+            'review',
+          ],
+        })
+        .populate('savedItems')
+        .populate({
+          path: 'savedItems',
+          populate: [
+            '_id',
+            'category',
+            'style',
+            'brand',
+            'name',
+            'gender',
+            'size',
+            'link',
+            'photo',
+            'color',
+            'review',
+          ],
+        });
+      return userData;
+      // }
+      // throw new AuthenticationError('You need to be logged in!');
     },
 
     // GET one item, by item id.

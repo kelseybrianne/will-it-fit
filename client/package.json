@@ -4,6 +4,7 @@
   "private": true,
   "proxy": "http://localhost:3001",
   "homepage": "https://kelseybrianne.github.io/will-it-fit",
+  "proxy": "http://localhost:3001",
   "dependencies": {
     "@apollo/client": "^3.5.10",
     "@emotion/react": "^11.9.0",

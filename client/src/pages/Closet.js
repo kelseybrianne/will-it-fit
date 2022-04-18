@@ -8,7 +8,15 @@ import UploadForm from '../components/UploadForm';
 // import profilePic from '../assets/images/ivana-cajina-dnL6ZIpht2s-unsplash.jpg'
 import profilePic from '../assets/images/atikh-bana-_KaMTEmJnxY-unsplash.jpg'
 
+import { useMutation, useQuery } from '@apollo/client';
+import { GET_ME } from '../utils/queries';
+
 const Closet = ({ windowSize }) => {
+  const { loading, data } = useQuery(GET_ME);
+
+  const userData = data?.me || {};
+  console.log(userData);
+
   return (
     <div className="profile-page">
       <div className="white-div"></div>
