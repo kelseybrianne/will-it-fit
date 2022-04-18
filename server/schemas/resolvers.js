@@ -293,26 +293,30 @@ const resolvers = {
 
     // upload the file with the user id in the database.
     uploadFile: async (parent, { file }, context) => {
-      // if (context.user) {
-      const { createReadStream, filename, mimetype, encoding } = await file;
+      if (context.user) {
+        const { createReadStream, filename, mimetype, encoding } = await file;
+        // generate random string for user privacy
+        const { ext, name } = path.parse(filename);
+        const randomName = generateRandomString(8) + ext;
 
-      const { ext, name } = path.parse(filename);
-      const randomName = generateRandomString(8) + ext;
+        const stream = await createReadStream();
+        // currently in root of project, intend to migrate to cloud storage KV workers Cloudflare.
+        const pathName = path.join(
+          __dirname,
+          `../../uploads/${context.user._id}/${randomName}`
+        );
 
-      const stream = await createReadStream();
-      const pathName = path.join(__dirname, `../../uploads/${randomName}`);
-
-      await new Promise((resolve, reject) => {
-        const writeStream = fs.createWriteStream(pathName);
-        stream.pipe(writeStream).on('finish', resolve).on('error', reject);
-      });
-
-      return {
-        url: `http://localhost:3000/uploads/${randomName}`,
-      };
+        await new Promise((resolve, reject) => {
+          const writeStream = fs.createWriteStream(pathName);
+          stream.pipe(writeStream).on('finish', resolve).on('error', reject);
+        });
+        // include user id to serve image back quickly.
+        return {
+          url: `http://localhost:3000/uploads/${context.user._id}/${randomName}`,
+        };
+      }
+      throw new AuthenticationError('You need to be logged in!');
     },
-    //   throw new AuthenticationError('You need to be logged in!');
-    // },
     // POST photo to an item. Also UPDATES any existing photo in the database for this item.
     addPhoto: async (parent, args, context) => {
       if (context.user) {
