@@ -1,4 +1,6 @@
+
 import { Link } from 'react-router-dom';
+
 import React from 'react';
 import './Header.css';
 import LogInDialog from './LogIn';
@@ -14,7 +16,7 @@ const Header = () => {
       </Link>
 
       <Link to="/">
-        <h1>Will It Fit</h1>
+        <h1>Will It Fit?</h1>
       </Link>
 
       {Auth.loggedIn() ? <LogOut /> : <LogInDialog />}
