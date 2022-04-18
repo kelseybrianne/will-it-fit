@@ -13,12 +13,31 @@ import { useMutation } from '@apollo/client';
 import { ADD_ITEM } from '../utils/mutations';
 
 // *arrays for drop downs*:
+
+// category
+const categoryDB = [
+  { label: 'Shoes', value: 'Shoes' },
+  { label: 'Socks', value: 'Socks' },
+  { label: 'Pants', value: 'Pants' },
+  { label: 'Jeans', value: 'Jeans' },
+  { label: 'Leggings', value: 'Leggings' },
+  { label: 'Skirt', value: 'Skirt' },
+  { label: 'Dress', value: 'Dress' },
+  { label: 'T-shirt', value: 'Tshirt' },
+  { label: 'Button-up Shirt', value: 'Button-up' },
+  { label: 'Tank-top', value: 'Tank' },
+  { label: 'Jacket', value: 'Jacket' },
+  { label: 'Outdoor Wear', value: 'Outdoor' },
+  { label: 'Hat', value: 'Hat' },
+
+]
+
 // style
 const styleDB = [
   { label: 'Street Wear', value: 'Street' },
   { label: 'Formal Wear', value: 'Formal' },
   { label: 'Vintage', value: 'Vintage' },
-  { label: 'Sport', value: 'Sport' },
+  { label: 'Sporty', value: 'Sport' },
   { label: 'Artsy', value: 'Artsy' },
   { label: 'Casual', value: 'Casual' },
   { label: 'Business Casual', value: 'Business' },
@@ -27,6 +46,7 @@ const styleDB = [
   { label: 'Outerwear', value: 'Outerwear' },
   { label: 'Maternity', value: 'Maternity' },
   { label: 'Sleep', value: 'Sleep' },
+  { label: 'Other', value: 'Other' },
 ];
 
 // gender
@@ -152,7 +172,18 @@ const AddItem = () => {
                 margin="dense"
                 onChange={handleChange}
                 value={userFormData.category}
-              />
+                select
+                >
+                  {categoryDB.map((option) => (
+                    <MenuItem
+                      size="large"
+                      key={option.value}
+                      value={option.value}
+                    >
+                      {option.label}
+                    </MenuItem>
+                  ))}
+              </TextField>
 
               {/* size */}
 
@@ -180,13 +211,13 @@ const AddItem = () => {
 
               <TextField
                 name="style"
-                select
                 label="Style"
                 variant="filled"
                 margin="dense"
                 onChange={handleChange}
                 value={userFormData.style}
-                >
+                select
+              >
                 {styleDB.map((option) => (
                   <MenuItem
                     size="large"
