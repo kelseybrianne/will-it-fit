@@ -10,6 +10,7 @@ function SignUpForm({ setDialogState }) {
   const [signup, { error, data }] = useMutation(ADD_USER);
   const [selectedImage, setSelectedImage] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
+
   useEffect(() => {
     if (selectedImage) {
       setImageUrl(URL.createObjectURL(selectedImage));
@@ -19,12 +20,12 @@ function SignUpForm({ setDialogState }) {
     onCompleted: (data) => console.log(data),
   });
 
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (!file) {
-      return;
-    }
+  const handleFileUpload = () => {
+    alert('handleFileUpload reached');
+    const file = selectedImage;
+    // working
     console.log(file);
+    // not working, needs createUploadLink, only httpLink or createUploadLink work, not both.
     uploadFile({ variables: { file } });
   };
 
@@ -39,11 +40,13 @@ function SignUpForm({ setDialogState }) {
 
   // submit form
   const handleFormSubmit = async (event) => {
+    alert('handleformsubmit');
     event.preventDefault();
     try {
       const { data } = await signup({
         variables: { ...formState },
-      });
+      }).then(handleFileUpload());
+
       auth.login(data.addUser.token);
     } catch (e) {
       console.error(e);
@@ -58,6 +61,7 @@ function SignUpForm({ setDialogState }) {
       weight: 0,
       shoeSize: '',
     });
+    handleFileUpload();
   };
   // update state based on form input changes
   const handleChange = (event) => {
@@ -102,24 +106,25 @@ function SignUpForm({ setDialogState }) {
         </Typography>
         {/* image upload */}
         <input
-        accept="image/*"
-        type="file"
-        id="select-image"
-        style={{ display: 'none' }}
-        onChange={(e) => setSelectedImage(e.target.files[0])}
-      />
-      <label htmlFor="select-image">
-        <Button variant="contained" color="primary" component="span">
-          Upload Image
-        </Button>
-      </label>
+          accept="image/*"
+          type="file"
+          id="select-image"
+          style={{ display: 'none' }}
+          onChange={(e) => setSelectedImage(e.target.files[0])}
+        />
+        <label htmlFor="select-image">
+          <Button variant="contained" color="primary" component="span">
+            Upload Image
+          </Button>
+        </label>
         {imageUrl && selectedImage && (
-        <Box mt={2} textAlign="center">
-          <div>Image Preview:</div>
-          <img src={imageUrl} alt={selectedImage.name} height="100px" />
-        </Box>
-         )}
-          { /* Begin standard form questions */}
+          <Box mt={2} textAlign="center">
+            {/* <div>Image Preview:</div> */}
+            <img src={imageUrl} alt={selectedImage.name} height="100px" />
+          </Box>
+        )}
+
+        {/* Begin standard form questions */}
         <TextField
           autoFocus
           margin="dense"
@@ -175,7 +180,7 @@ function SignUpForm({ setDialogState }) {
           value={formState.shoeSize}
           sx={{ backgroundColor: 'white' }}
         />
-        
+
         <Button
           type="submit"
           variant="contained"
