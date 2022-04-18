@@ -1,5 +1,6 @@
 import { useMutation } from '@apollo/client';
-import { Button, Container, TextField, Typography } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
+import { Container, TextField, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { useState } from 'react';
 import auth from '../../utils/auth';
@@ -7,7 +8,7 @@ import { LOGIN_USER } from '../../utils/mutations';
 
 /** This is the dialog form for logging in a user */
 function LogInForm({ setDialogState }) {
-  const [login, { error, data }] = useMutation(LOGIN_USER);
+  const [login, { loading, error }] = useMutation(LOGIN_USER);
   const [formState, setFormState] = useState({
     email: '',
     password: '',
@@ -21,15 +22,14 @@ function LogInForm({ setDialogState }) {
         variables: { ...formState },
       });
       auth.login(data.login.token);
+      // clear form values
+      setFormState({
+        email: '',
+        password: '',
+      });
     } catch (e) {
       console.error(e);
     }
-
-    // clear form values
-    setFormState({
-      email: '',
-      password: '',
-    });
   };
   // update state based on form input changes
   const handleChange = (event) => {
@@ -40,6 +40,14 @@ function LogInForm({ setDialogState }) {
       [id]: value,
     });
   };
+
+  const handleError = (error) => {
+    if (!error) {
+      return false;
+    }
+    return error.message || 'There was an error';
+  };
+
   return (
     <Container
       sx={{
@@ -75,6 +83,8 @@ function LogInForm({ setDialogState }) {
           id="email"
           placeholder="email"
           type="email"
+          required={true}
+          error={error}
           onChange={handleChange}
           value={formState.email}
           sx={{ backgroundColor: 'white' }}
@@ -83,13 +93,24 @@ function LogInForm({ setDialogState }) {
           id="password"
           placeholder="password"
           type="password"
+          required={true}
+          error={error}
           onChange={handleChange}
           value={formState.password}
           sx={{ backgroundColor: 'white' }}
         />
-        <Button
+        {error ? (
+          <Typography variant="subtitle2" color="error">
+            {handleError(error)}
+          </Typography>
+        ) : (
+          ''
+        )}
+        <LoadingButton
           type="submit"
           variant="contained"
+          loading={loading}
+          loadingPosition="end"
           sx={{
             py: 1.5,
             my: 2,
@@ -102,7 +123,7 @@ function LogInForm({ setDialogState }) {
           }}
         >
           Log in
-        </Button>
+        </LoadingButton>
         <Typography variant="subtitle1" sx={{ py: 2 }}>
           <span>Don't have an account? </span>
           <span

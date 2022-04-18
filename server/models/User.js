@@ -7,30 +7,30 @@ const userSchema = new Schema(
   {
     username: {
       type: String,
-      required: true,
+      required: [true, 'username is required'],
       unique: true,
     },
 
     email: {
       type: String,
-      required: true,
+      required: [true, 'email is required'],
       unique: true,
       match: [/.+@.+\..+/, 'Must use a valid email address'],
     },
 
     password: {
       type: String,
-      required: true,
+      required: [true, 'password is required'],
     },
 
     height: {
       type: Number,
-      required: true,
+      required: [true, 'height is required'],
     },
 
     weight: {
       type: Number,
-      required: true,
+      required: [true, 'weight is required'],
     },
 
     closet: [
