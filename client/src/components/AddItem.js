@@ -3,21 +3,14 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import TextareaAutosize from '@mui/base/TextareaAutosize';
-import { Button } from '@mui/material';
+import { Button, Typography, Container, Dialog } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
-
-import { Typography } from '@mui/material';
-import { Container } from '@mui/material';
-import FormControl from '@mui/material/FormControl';
-import { Dialog } from '@mui/material';
 
 import background from '../assets/images/ihssan-rami-azouagh-1YCKCCrLEbU-unsplash.jpg';
 
 // graphQL:
 import { useMutation } from '@apollo/client';
 import { ADD_ITEM } from '../utils/mutations';
-
-import './AddItem.css';
 
 // array to make the gender a drop down
 const genderDB = [
@@ -53,9 +46,6 @@ const AddItem = () => {
     color: '',
     review: '',
   });
-
-  // const { category, size, photo, style, brand, name, gender, link, color, review } = userFormData
-  // const [validated] = useState(false);
 
   const [addItem] = useMutation(ADD_ITEM);
 
@@ -105,22 +95,17 @@ const AddItem = () => {
         Add Item
       </Button>
 
-      <div style={{  }}>
+      <div style={{ backgroundImage: `url(${background})` }}>
         <Dialog open={open} onClose={() => setOpen(false)} id="form">
           <Container
             sx={{
-              backgroundImage: `url(${background})`,
               maxWidth: 320,
             }}
           >
             <Box
               onSubmit={formSubmit}
               component="form"
-              // sx={{
-              //   '& .MuiTextField-root': { m: 1, width: '28ch' },
-              // }}
               sx={{
-                
                 display: 'flex',
                 fontFamily: 'var(--serif)',
                 flexDirection: 'column',
@@ -141,135 +126,126 @@ const AddItem = () => {
               </Typography>
 
               {/* category */}
-              <FormControl>
-                <TextField
-                  inputStyle={{ textAlign: 'center' }}
-                  name="category"
-                  label="* Category"
-                  variant="filled"
-                  margin="dense"
-                  onChange={handleChange}
-                  value={userFormData.category}
-                />
-              </FormControl>
+
+              <TextField
+                inputStyle={{ textAlign: 'center' }}
+                name="category"
+                label="* Category"
+                variant="filled"
+                margin="dense"
+                onChange={handleChange}
+                value={userFormData.category}
+              />
 
               {/* size */}
-              <FormControl>
-                <TextField
-                  name="size"
-                  label="* Size"
-                  variant="filled"
-                  margin="dense"
-                  onChange={handleChange}
-                  value={userFormData.size}
-                />
-              </FormControl>
+
+              <TextField
+                name="size"
+                label="* Size"
+                variant="filled"
+                margin="dense"
+                onChange={handleChange}
+                value={userFormData.size}
+              />
 
               {/* photo */}
-              <FormControl>
-                <TextField
-                  name="photo"
-                  label="* Photo"
-                  variant="filled"
-                  margin="dense"
-                  onChange={handleChange}
-                  value={userFormData.photo}
-                />
-              </FormControl>
+
+              <TextField
+                name="photo"
+                label="* Photo"
+                variant="filled"
+                margin="dense"
+                onChange={handleChange}
+                value={userFormData.photo}
+              />
 
               {/* style */}
-              <FormControl>
-                <TextField
-                  name="style"
-                  label="Style"
-                  variant="filled"
-                  margin="dense"
-                  onChange={handleChange}
-                  value={userFormData.style}
-                />
-              </FormControl>
+
+              <TextField
+                name="style"
+                label="Style"
+                variant="filled"
+                margin="dense"
+                onChange={handleChange}
+                value={userFormData.style}
+              />
 
               {/* brand */}
-              <FormControl>
-                <TextField
-                  name="brand"
-                  label="Brand"
-                  variant="filled"
-                  margin="dense"
-                  onChange={handleChange}
-                  value={userFormData.brand}
-                />
-              </FormControl>
+
+              <TextField
+                name="brand"
+                label="Brand"
+                variant="filled"
+                margin="dense"
+                onChange={handleChange}
+                value={userFormData.brand}
+              />
 
               {/* name */}
-              <FormControl>
-                <TextField
-                  name="name"
-                  label="* Name"
-                  variant="filled"
-                  margin="dense"
-                  onChange={handleChange}
-                  value={userFormData.name}
-                />
-              </FormControl>
+
+              <TextField
+                name="name"
+                label="* Name"
+                variant="filled"
+                margin="dense"
+                onChange={handleChange}
+                value={userFormData.name}
+              />
 
               {/* gender - drop down menu */}
-              <FormControl>
-                <TextField
-                  name="gender"
-                  select
-                  value={userFormData.gender}
-                  label="Gender"
-                  margin="dense"
-                  variant="filled"
-                  onChange={handleChange}
-                >
-                  {genderDB.map((option) => (
-                    <MenuItem
-                      size="large"
-                      key={option.value}
-                      value={option.value}
-                    >
-                      {option.label}
-                    </MenuItem>
-                  ))}
-                </TextField>
-              </FormControl>
+
+              <TextField
+                name="gender"
+                select
+                value={userFormData.gender}
+                label="Gender"
+                margin="dense"
+                variant="filled"
+                onChange={handleChange}
+              >
+                {genderDB.map((option) => (
+                  <MenuItem
+                    size="large"
+                    key={option.value}
+                    value={option.value}
+                  >
+                    {option.label}
+                  </MenuItem>
+                ))}
+              </TextField>
 
               {/* link */}
-              <FormControl>
-                <TextField
-                  name="link"
-                  label="Link"
-                  margin="dense"
-                  variant="filled"
-                  onChange={handleChange}
-                  value={userFormData.link}
-                />
-              </FormControl>
+
+              <TextField
+                name="link"
+                label="Link"
+                margin="dense"
+                variant="filled"
+                onChange={handleChange}
+                value={userFormData.link}
+              />
 
               {/* color */}
-              <FormControl>
-                <TextField
-                  name="color"
-                  select
-                  value={userFormData.color}
-                  label="Color"
-                  margin="dense"
-                  variant="filled"
-                  onChange={handleChange}
-                >
-                  {colorDB.map((option) => (
-                    <MenuItem
-                      size="large"
-                      key={option.value}
-                      value={option.value}
-                    >
-                      {option.label}
-                    </MenuItem>
-                  ))}
-                </TextField>
-              </FormControl>
+
+              <TextField
+                name="color"
+                select
+                value={userFormData.color}
+                label="Color"
+                margin="dense"
+                variant="filled"
+                onChange={handleChange}
+              >
+                {colorDB.map((option) => (
+                  <MenuItem
+                    size="large"
+                    key={option.value}
+                    value={option.value}
+                  >
+                    {option.label}
+                  </MenuItem>
+                ))}
+              </TextField>
 
               {/* review */}
               <TextareaAutosize
