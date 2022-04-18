@@ -6,6 +6,7 @@ import Items from '../components/Items.js';
 import Stack from '@mui/material/Stack';
 // import profilePic from '../assets/images/ivana-cajina-dnL6ZIpht2s-unsplash.jpg'
 import profilePic from '../assets/images/atikh-bana-_KaMTEmJnxY-unsplash.jpg'
+import AddItem from '../components/AddItem';
 
 import { useMutation, useQuery } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
@@ -34,7 +35,7 @@ const Closet = ({ windowSize }) => {
           </div>
           {/* toggle 'Following' and 'Follow' on click'*/}
           {/* <button className="unfollow">Following</button> */}
-          <Button variant="contained">Add Item</Button>
+          <AddItem />
         </div>
       </div>
       <Items windowSize={windowSize} />
