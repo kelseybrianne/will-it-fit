@@ -87,7 +87,6 @@ function LogInForm({ setDialogState }) {
           error={error}
           onChange={handleChange}
           value={formState.email}
-          sx={{ backgroundColor: 'white' }}
         />
         <TextField
           id="password"
@@ -97,7 +96,6 @@ function LogInForm({ setDialogState }) {
           error={error}
           onChange={handleChange}
           value={formState.password}
-          sx={{ backgroundColor: 'white' }}
         />
         {error ? (
           <Typography variant="subtitle2" color="error">
@@ -110,10 +108,8 @@ function LogInForm({ setDialogState }) {
           type="submit"
           variant="contained"
           loading={loading}
-          loadingPosition="end"
           sx={{
-            py: 1.5,
-            my: 2,
+            py: '16px',
             fontFamily: 'var(--serif)',
             textTransform: 'none',
             backgroundColor: '#B95252',

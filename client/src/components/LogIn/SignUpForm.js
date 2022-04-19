@@ -2,6 +2,7 @@ import { useMutation } from '@apollo/client';
 import {
   Button,
   Container,
+  FormControl,
   InputAdornment,
   TextField,
   Typography,
@@ -111,7 +112,6 @@ function SignUpForm({ setDialogState }) {
         </Typography>
         <TextField
           autoFocus
-          margin="dense"
           id="username"
           placeholder="username"
           type="text"
@@ -120,10 +120,8 @@ function SignUpForm({ setDialogState }) {
           helperText={handleError(error, 'username')}
           onChange={handleChange}
           value={formState.username}
-          sx={{ backgroundColor: 'white' }}
         />
         <TextField
-          margin="dense"
           id="email"
           placeholder="email"
           type="email"
@@ -132,20 +130,16 @@ function SignUpForm({ setDialogState }) {
           helperText={handleError(error, 'email')}
           onChange={handleChange}
           value={formState.email}
-          sx={{ backgroundColor: 'white' }}
         />
         <TextField
-          margin="dense"
           id="password"
           placeholder="password"
           type="password"
           required={true}
           onChange={handleChange}
           value={formState.password}
-          sx={{ backgroundColor: 'white' }}
         />
         <TextField
-          margin="dense"
           id="height"
           placeholder="height"
           type="number"
@@ -155,10 +149,8 @@ function SignUpForm({ setDialogState }) {
             endAdornment: <InputAdornment position="end">in</InputAdornment>,
           }}
           value={formState.height}
-          sx={{ backgroundColor: 'white' }}
         />
         <TextField
-          margin="dense"
           id="weight"
           placeholder="weight"
           type="number"
@@ -168,27 +160,22 @@ function SignUpForm({ setDialogState }) {
             endAdornment: <InputAdornment position="end">lbs</InputAdornment>,
           }}
           value={formState.weight}
-          sx={{ backgroundColor: 'white' }}
         />
         <TextField
-          margin="dense"
           id="shoeSize"
           placeholder="shoe size"
           type="text"
           required={true}
           onChange={handleChange}
           value={formState.shoeSize}
-          sx={{ backgroundColor: 'white' }}
         />
         {error ? <Typography>{handleError(error)}</Typography> : ''}
         <LoadingButton
           type="submit"
           variant="contained"
           loading={loading}
-          loadingPosition="end"
           sx={{
-            py: 1.5,
-            my: 2,
+            py: '16px',
             fontFamily: 'var(--serif)',
             textTransform: 'none',
             backgroundColor: '#B95252',
