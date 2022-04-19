@@ -1,4 +1,3 @@
-
 import { Link } from 'react-router-dom';
 
 import React from 'react';
@@ -7,13 +6,12 @@ import LogInDialog from './LogIn';
 import ProfileMenu from './ProfileMenu';
 
 import Auth from '../utils/auth';
+import Nav from './Nav';
 
 const Header = () => {
   return (
     <header>
-      <Link to="/">
-        <p>nav</p>
-      </Link>
+      <Nav />
 
       <Link to="/">
         <h1>Will It Fit?</h1>
