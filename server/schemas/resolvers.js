@@ -266,7 +266,23 @@ const resolvers = {
     // GET all users this user id is following
     following: async (parent, { _id }, context) => {
       if (context.user) {
-        return await User.findById({ _id }).populate('following');
+        return await User.findById({ _id })
+          .populate({
+            path: 'homepage',
+            populate: [
+              '_id',
+              'category',
+              'style',
+              'brand',
+              'name',
+              'gender',
+              'size',
+              'link',
+              'photo',
+              'color',
+              'review',
+            ],
+          });
       }
       throw new AuthenticationError('You need to be logged in!');
     },

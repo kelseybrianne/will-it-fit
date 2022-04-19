@@ -198,6 +198,19 @@ export const GET_FOLLOWING = gql`
       following {
         _id
       }
+      closet {
+        _id
+        category
+        style
+        brand
+        name
+        gender
+        size
+        link
+        photo
+        color
+        review
+      }
     }
   }
 `;
