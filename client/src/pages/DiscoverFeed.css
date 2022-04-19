@@ -1,26 +1,22 @@
 .discover-container {
   width: 100vh;
-  height: 100vw;
+  height: 150vw;
   overflow-y: auto;
   overflow-x: hidden;
-  transform: rotate(-90deg) translateY(-100vh);
+  transform: rotate(-90deg) translateY(-120vh);
   transform-origin: right top;
-  /* display: inline block; */
-  /* white-space: nowrap; */
-  /* IE and Edge hide scrollbar */
   -ms-overflow-style: none;
   /* Firefox hide scrollbar */
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
   /* -webkit-box-direction: inherit; */
-  perspective: 1px;
-  transform-style: preserve-3d;
+  /* perspective: 1px; */
+  /* transform-style: preserve-3d; */
   position: relative;
 }
 
 .second-wrapper {
-  /* transform: translateZ(-1px) scale(2); */
-  transform-style: preserve-3d;
+  /* transform-style: preserve-3d; */
   position: absolute;
   top: 0;
   right: 10vh;
@@ -36,10 +32,13 @@
 
 .img-div {
   transform-origin: right top;
-  margin: -165px;
+  margin-bottom: -188px;
+  width: 300px;
+  height: 65vh;
   z-index: 0;
   background: rgb(152, 152, 152);
-  overflow: hidden;
+  /* overflow: hidden; */
+  transform: rotate(90deg) translateX(460px) translateY(-50vh) 
 }
 
 .img {
@@ -48,26 +47,17 @@
   height: 100%;
   border-radius: 2px;
   z-index: 0;
+  /* transform: rotate(90deg) translateX(1831px) translateY(-590px); */
 }
 
 .img:hover {
-  opacity: .8;
+  opacity: 0.8;
 }
 
-.img-div-odd {
-  transform: rotate(90deg) translateX(496px) translateY(-580px);
-  width: 300px;
-  height: 480px;
-  height: 54.5vh;
-  z-index: 0;
-}
-
-.img-div-even {
-  width: 250px;
-  height: 400px;
-  height: 43.6vh;
-  transform: rotate(90deg) translateX(431px) translateY(-590px);
-  z-index: 0;
+@media screen and (min-width: 405px) {
+  .img-div {
+    transform: rotate(90deg) translateY(-55vh) 
+  }
 }
 
 @media screen and (min-width: 767px) {
@@ -87,7 +77,6 @@
   .img-div:hover,
   .img-div:focus {
     z-index: 101;
-    
   }
 
   .img-div:hover .view-closet,

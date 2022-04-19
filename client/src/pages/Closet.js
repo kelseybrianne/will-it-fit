@@ -1,20 +1,27 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import './Closet.css';
 import Items from '../components/Items.js';
 // eslint-disable-next-line no-unused-vars
 import Stack from '@mui/material/Stack';
 // import profilePic from '../assets/images/ivana-cajina-dnL6ZIpht2s-unsplash.jpg'
-import profilePic from '../assets/images/atikh-bana-_KaMTEmJnxY-unsplash.jpg'
+import profilePic from '../assets/images/atikh-bana-_KaMTEmJnxY-unsplash.jpg';
 import AddItem from '../components/AddItem';
 
 import { useMutation, useQuery } from '@apollo/client';
-import { GET_ME } from '../utils/queries';
+import { GET_USER } from '../utils/queries';
 
 const Closet = ({ windowSize }) => {
-  const { loading, data } = useQuery(GET_ME);
+  let { username } = useParams();
 
-  const userData = data?.me || {};
+  const { loading, data } = useQuery(GET_USER, {
+    variables: {
+      username: {username}
+    },
+  });
+
+  const userData = data?.user || {};
   console.log(userData);
 
   return (
