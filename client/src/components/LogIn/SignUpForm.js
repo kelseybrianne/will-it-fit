@@ -1,5 +1,13 @@
 import { useMutation } from '@apollo/client';
-import { Button, Container, TextField, Typography } from '@mui/material';
+import {
+  Button,
+  Container,
+  FormControl,
+  InputAdornment,
+  TextField,
+  Typography,
+} from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 import { Box } from '@mui/system';
 import { useState } from 'react';
 import auth from '../../utils/auth';
@@ -7,13 +15,13 @@ import { ADD_USER } from '../../utils/mutations';
 
 /** This is a dialog form for signing up for an account */
 function SignUpForm({ setDialogState }) {
-  const [signup, { error, data }] = useMutation(ADD_USER);
+  const [signup, { loading, error }] = useMutation(ADD_USER);
   const [formState, setFormState] = useState({
     username: '',
     email: '',
     password: '',
-    height: null,
-    weight: null,
+    height: '',
+    weight: '',
     shoeSize: '',
   });
 
@@ -25,25 +33,24 @@ function SignUpForm({ setDialogState }) {
         variables: { ...formState },
       });
       auth.login(data.addUser.token);
+      // clear form values
+      setFormState({
+        username: '',
+        email: '',
+        password: '',
+        height: '',
+        weight: '',
+        shoeSize: '',
+      });
     } catch (e) {
       console.error(e);
     }
-
-    // clear form values
-    setFormState({
-      username: '',
-      email: '',
-      password: '',
-      height: 0,
-      weight: 0,
-      shoeSize: '',
-    });
   };
   // update state based on form input changes
   const handleChange = (event) => {
     let { id, value, type } = event.target;
     if (type === 'number') {
-      value = value ? parseFloat(value) : undefined;
+      value = value ? parseFloat(value) : '';
     }
 
     setFormState({
@@ -51,10 +58,33 @@ function SignUpForm({ setDialogState }) {
       [id]: value,
     });
   };
+
+  const handleError = (error, field) => {
+    if (!error) {
+      return false;
+    }
+    let message = '';
+    if (error.message.indexOf(field) >= 0) {
+      message = `There was an error with the ${field}`;
+      switch (field) {
+        case 'username':
+          message = `${error.message}`;
+          break;
+        case 'email':
+          message = `${error.message}`;
+          break;
+        default:
+          break;
+      }
+    }
+    return message;
+  };
+
   return (
     <Container
       sx={{
         width: 320,
+        height: '100%',
         py: 4,
       }}
     >
@@ -65,7 +95,7 @@ function SignUpForm({ setDialogState }) {
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
-          alignContent: 'center',
+          height: '100%',
           textAlign: 'center',
           gap: 1,
         }}
@@ -82,65 +112,70 @@ function SignUpForm({ setDialogState }) {
         </Typography>
         <TextField
           autoFocus
-          margin="dense"
           id="username"
           placeholder="username"
           type="text"
+          required={true}
+          error={handleError(error, 'username')}
+          helperText={handleError(error, 'username')}
           onChange={handleChange}
           value={formState.username}
-          sx={{ backgroundColor: 'white' }}
         />
         <TextField
-          margin="dense"
           id="email"
           placeholder="email"
           type="email"
+          required={true}
+          error={handleError(error, 'email')}
+          helperText={handleError(error, 'email')}
           onChange={handleChange}
           value={formState.email}
-          sx={{ backgroundColor: 'white' }}
         />
         <TextField
-          margin="dense"
           id="password"
           placeholder="password"
           type="password"
+          required={true}
           onChange={handleChange}
           value={formState.password}
-          sx={{ backgroundColor: 'white' }}
         />
         <TextField
-          margin="dense"
           id="height"
           placeholder="height"
           type="number"
+          required={true}
           onChange={handleChange}
+          InputProps={{
+            endAdornment: <InputAdornment position="end">in</InputAdornment>,
+          }}
           value={formState.height}
-          sx={{ backgroundColor: 'white' }}
         />
         <TextField
-          margin="dense"
           id="weight"
           placeholder="weight"
           type="number"
+          required={true}
           onChange={handleChange}
+          InputProps={{
+            endAdornment: <InputAdornment position="end">lbs</InputAdornment>,
+          }}
           value={formState.weight}
-          sx={{ backgroundColor: 'white' }}
         />
         <TextField
-          margin="dense"
           id="shoeSize"
           placeholder="shoe size"
           type="text"
+          required={true}
           onChange={handleChange}
           value={formState.shoeSize}
-          sx={{ backgroundColor: 'white' }}
         />
-        <Button
+        {error ? <Typography>{handleError(error)}</Typography> : ''}
+        <LoadingButton
           type="submit"
           variant="contained"
+          loading={loading}
           sx={{
-            py: 1.5,
-            my: 2,
+            py: '16px',
             fontFamily: 'var(--serif)',
             textTransform: 'none',
             backgroundColor: '#B95252',
@@ -150,7 +185,7 @@ function SignUpForm({ setDialogState }) {
           }}
         >
           Sign up
-        </Button>
+        </LoadingButton>
         <Typography variant="subtitle1" sx={{ py: 2 }}>
           <span>Already have an account? </span>
           <span

@@ -1,0 +1,9 @@
+.MuiOutlinedInput-root {
+  background-color: white;
+  border-radius: 2px !important;
+}
+
+.MuiLoadingButton-root {
+  border-radius: 2px !important;
+  box-shadow: none !important;
+}
