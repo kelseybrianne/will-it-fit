@@ -1,5 +1,4 @@
 import {
-  Avatar,
   Divider,
   Drawer,
   IconButton,
@@ -8,13 +7,14 @@ import {
   Tooltip,
 } from '@mui/material';
 import { useState } from 'react';
-import LogoutIcon from '@mui/icons-material/Logout';
-import CheckroomIcon from '@mui/icons-material/Checkroom';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import auth from '../utils/auth';
+import MenuIcon from '@mui/icons-material/Menu';
+import HomeIcon from '@mui/icons-material/Home';
+import DynamicFeedIcon from '@mui/icons-material/DynamicFeed';
+import SearchIcon from '@mui/icons-material/Search';
+
 import { Link } from 'react-router-dom';
 
-export default function ProfileMenu() {
+export default function Nav() {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -34,47 +34,38 @@ export default function ProfileMenu() {
           aria-haspopup="true"
           aria-expanded={open ? 'true' : undefined}
         >
-          <Avatar sx={{ width: 24, height: 24 }} />
+          <MenuIcon />
         </IconButton>
       </Tooltip>
       <Drawer
         id="account-menu"
         open={open}
-        anchor="right"
+        anchor="left"
         onClose={handleClose}
         onClick={handleClose}
       >
-        <Link to="/profile">
+        <Link to="/">
           <MenuItem>
             <ListItemIcon>
-              <Avatar sx={{ width: 24, height: 24 }} />
+              <HomeIcon fontSize="small" />
             </ListItemIcon>
-            edit profile
+            home
           </MenuItem>
         </Link>
         <Divider />
-        <Link to="/closet">
+        <Link to="/discover">
           <MenuItem>
             <ListItemIcon>
-              <CheckroomIcon fontSize="small" />
+              <DynamicFeedIcon fontSize="small" />
             </ListItemIcon>
-            my closet
+            discover
           </MenuItem>
         </Link>
-        <Link to="/saved">
-          <MenuItem>
-            <ListItemIcon>
-              <FavoriteIcon fontSize="small" />
-            </ListItemIcon>
-            my saved items
-          </MenuItem>
-        </Link>
-        <Divider />
-        <MenuItem onClick={auth.logout}>
+        <MenuItem>
           <ListItemIcon>
-            <LogoutIcon fontSize="small" />
+            <SearchIcon fontSize="small" />
           </ListItemIcon>
-          log out
+          search
         </MenuItem>
       </Drawer>
     </>
