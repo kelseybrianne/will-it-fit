@@ -1,4 +1,3 @@
-
 import { Link } from 'react-router-dom';
 
 import React from 'react';
@@ -7,19 +6,12 @@ import LogInDialog from './LogIn';
 import ProfileMenu from './ProfileMenu';
 
 import Auth from '../utils/auth';
-import { useQuery } from '@apollo/client';
-import { GET_ME } from '../utils/queries';
+import Nav from './Nav';
 
 const Header = () => {
-  const { loading, data } = useQuery(GET_ME);
-
-  const userData = data?.me || {};
-
   return (
     <header>
-      <Link to="/">
-        <p>nav</p>
-      </Link>
+      <Nav />
 
       <Link to={"/"}>
         <h1>Will It Fit?</h1>
