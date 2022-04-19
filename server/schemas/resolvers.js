@@ -2,21 +2,31 @@ const { AuthenticationError } = require('apollo-server-express');
 const { GraphQLUpload } = require('graphql-upload');
 const { User, Item } = require('../models');
 const { signToken } = require('../utils/auth');
-const { cloudinary } = require('cloudinary');
+const cloudinary = require('cloudinary').v2;
 const rest = require('../utils/rest');
 const path = require('path');
 const fs = require('fs');
+require('dotenv').config();
 
-function generateRandomString(length) {
-  var result = '';
-  var characters =
-    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  var charactersLength = characters.length;
-  for (var i = 0; i < length; i++) {
-    result += characters.charAt(Math.floor(Math.random() * charactersLength));
-  }
-  return result;
-}
+const secret = 'CLOUDINARY_SECRET.env';
+
+// set your env variable CLOUDINARY_URL or set the following configuration
+cloudinary.config({
+  cloud_name: 'will-it-fit',
+  api_key: '748528683131313',
+  api_secret: secret,
+});
+
+// function generateRandomString(length) {
+//   var result = '';
+//   var characters =
+//     'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+//   var charactersLength = characters.length;
+//   for (var i = 0; i < length; i++) {
+//     result += characters.charAt(Math.floor(Math.random() * charactersLength));
+//   }
+//   return result;
+// }
 
 const resolvers = {
   Upload: GraphQLUpload,
@@ -24,7 +34,6 @@ const resolvers = {
   Query: {
     //Query users similar to user height and weight, by user id
     userMatches: async (parent, args, context) => {
-
       // const user = await User.findById(context.user._id);
       console.log(context.user);
       // adjust these numbers higher to broaden the scope of the serach
@@ -267,33 +276,38 @@ const resolvers = {
         const { createReadStream, filename, mimetype, encoding } = await file;
         console.log(file);
         const { ext, name } = path.parse(filename);
-        const randomName = generateRandomString(8) + ext;
+        // const randomName = generateRandomString(8) + ext;
 
         const stream = await createReadStream();
-        const pathName = path.join(__dirname, `../../uploads/${randomName}`);
+        const pathName = path.join(__dirname, `../../uploads/${filename}`);
+        console.log(pathName);
+        // await new Promise((resolve, reject) => {
+        //   const writeStream = fs.createWriteStream(pathName);
+        //   stream.pipe(writeStream).on('finish', resolve).on('error', reject);
+        // });
 
-        await new Promise((resolve, reject) => {
-          const writeStream = fs.createWriteStream(pathName);
-          stream.pipe(writeStream).on('finish', resolve).on('error', reject);
-        });
         // Cloudinary Code
-        // cloudinary.v2.uploader.upload("/home/sample.jpg",
-        // function(error, result) {await User.findByIdAndUpdate(
+        cloudinary.uploader.upload(pathName, async (error, result) => {
+          console.log(result);
+
+          const user = await User.findByIdAndUpdate(
+            { _id: context.user._id },
+            { $set: { primaryPhoto: result.url } },
+            { new: true }
+          );
+          console.log(user);
+        });
+
+        // const PORT = process.env.PORT || 3001;
+        // const url = `http://localhost:${PORT}/uploads/${randomName}`;
+        // const user = await User.findByIdAndUpdate(
         //   { _id: context.user._id },
         //   { $set: { primaryPhoto: url } },
         //   { new: true }
-        // );});
-
-        const PORT = process.env.PORT || 3000;
-        const url = `http://localhost:${PORT}/uploads/${randomName}`;
-        const user = await User.findByIdAndUpdate(
-          { _id: context.user._id },
-          { $set: { primaryPhoto: url } },
-          { new: true }
-        );
+        // );
         console.log(user);
         return {
-          url: `http://localhost:3000/uploads/${randomName}`,
+          url: user.primaryPhoto,
         };
       }
       throw new AuthenticationError('You need to be logged in!');

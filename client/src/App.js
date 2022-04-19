@@ -4,6 +4,7 @@ import {
   ApolloClient,
   ApolloProvider,
   InMemoryCache,
+  // eslint-disable-next-line no-unused-vars
   createHttpLink,
 } from '@apollo/client';
 import React from 'react';

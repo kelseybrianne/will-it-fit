@@ -4,7 +4,6 @@ import { Box } from '@mui/system';
 import { useState, useEffect } from 'react';
 import auth from '../../utils/auth';
 import {
-  ADD_PROFILE_PHOTO,
   ADD_USER,
   SINGLE_UPLOAD,
 } from '../../utils/mutations';
