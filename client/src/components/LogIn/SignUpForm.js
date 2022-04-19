@@ -21,7 +21,7 @@ function SignUpForm({ setDialogState }) {
   });
 
   let primaryPhoto = '';
-
+  // shows user image preview
   const handleFileInputChange = (e) => {
     const file = e.target.files[0];
     previewFile(file);
@@ -34,7 +34,7 @@ function SignUpForm({ setDialogState }) {
       setPreviewSource(reader.result);
     };
   };
-  // upload image to the server on form submission
+  // upload image to cloudinary, receive URL as res
   const uploadImage = async (base64EncodedImage) => {
     try {
       const response = await fetch('/api/upload', {

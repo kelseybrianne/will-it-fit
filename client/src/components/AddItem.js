@@ -33,11 +33,12 @@ const colorDB = [
   { label: 'Brown', value: 'Brown' },
 ];
 const AddItem = () => {
+  const [addItem] = useMutation(ADD_ITEM);
   const [open, setOpen] = React.useState(false);
+  const [previewSource, setPreviewSource] = React.useState(null);
   const [userFormData, setUserFromData] = React.useState({
     category: '',
     size: '',
-    photo: '',
     style: '',
     brand: '',
     name: '',
@@ -47,7 +48,41 @@ const AddItem = () => {
     review: '',
   });
 
-  const [addItem] = useMutation(ADD_ITEM);
+  let photo = '';
+  // shows user image preview
+  const handleFileInputChange = (e) => {
+    const file = e.target.files[0];
+    previewFile(file);
+  };
+
+  const previewFile = (file) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setPreviewSource(reader.result);
+    };
+  };
+
+  // upload image to cloudinary, receive URL as res
+  const uploadImage = async (base64EncodedImage) => {
+    try {
+      const response = await fetch('/api/upload', {
+        method: 'POST',
+        body: JSON.stringify({ data: base64EncodedImage }),
+        headers: { 'content-type': 'application/json' },
+      });
+
+      if (response.ok) {
+        const url = await response.json();
+        photo = url;
+      } else {
+        console.log(response);
+        return response;
+      }
+    } catch (error) {
+      return console.error(error);
+    }
+  };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -62,8 +97,9 @@ const AddItem = () => {
     event.preventDefault();
 
     try {
+      await uploadImage(previewSource);
       await addItem({
-        variables: { ...userFormData },
+        variables: { ...userFormData, photo: photo },
       });
     } catch (e) {
       console.error(e);
@@ -71,7 +107,6 @@ const AddItem = () => {
     setUserFromData({
       category: '',
       size: '',
-      photo: '',
       style: '',
       brand: '',
       name: '',
@@ -146,17 +181,6 @@ const AddItem = () => {
                 margin="dense"
                 onChange={handleChange}
                 value={userFormData.size}
-              />
-
-              {/* photo */}
-
-              <TextField
-                name="photo"
-                label="* Photo"
-                variant="filled"
-                margin="dense"
-                onChange={handleChange}
-                value={userFormData.photo}
               />
 
               {/* style */}
@@ -246,7 +270,7 @@ const AddItem = () => {
                   </MenuItem>
                 ))}
               </TextField>
-
+              <br />
               {/* review */}
               <TextareaAutosize
                 //  fullWidth ={true}
@@ -256,10 +280,39 @@ const AddItem = () => {
                 aria-label="minimum height"
                 minRows={5}
                 placeholder="Add your review here:"
-                style={{ m: 1, width: 450 }}
+                style={{ m: 1, width: 450, fontFamily: 'var(--sans)' }}
                 onChange={handleChange}
                 value={userFormData.review}
               />
+
+              {/* image upload */}
+              <input
+                accept="image/*"
+                type="file"
+                encType="multipart/form-data"
+                id="select-image"
+                style={{ display: 'none' }}
+                onChange={handleFileInputChange}
+              />
+              <label htmlFor="select-image">
+                <Button
+                  variant="contained"
+                  sx={{
+                    py: 1.5,
+                    mt: 2,
+                  }}
+                  color="primary"
+                  component="span"
+                >
+                  Upload Image
+                </Button>
+              </label>
+              {previewSource && (
+                <Box mt={2} textAlign="center">
+                  {/* <div>Image Preview:</div> */}
+                  <img src={previewSource} alt={previewSource} height="100px" />
+                </Box>
+              )}
 
               <Button
                 sx={{
@@ -279,7 +332,7 @@ const AddItem = () => {
                     userFormData.category &&
                     userFormData.name &&
                     userFormData.size &&
-                    userFormData.photo
+                    previewSource !== null
                   )
                 }
                 type="submit"
