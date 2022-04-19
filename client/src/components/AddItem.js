@@ -12,6 +12,8 @@ import background from '../assets/images/ihssan-rami-azouagh-1YCKCCrLEbU-unsplas
 import { useMutation } from '@apollo/client';
 import { ADD_ITEM } from '../utils/mutations';
 
+let filter = require('leo-profanity');
+
 // *arrays for drop downs*:
 
 // category
@@ -21,16 +23,15 @@ const categoryDB = [
   { label: 'Pants', value: 'Pants' },
   { label: 'Jeans', value: 'Jeans' },
   { label: 'Leggings', value: 'Leggings' },
-  { label: 'Skirt', value: 'Skirt' },
-  { label: 'Dress', value: 'Dress' },
+  { label: 'Skirts', value: 'Skirt' },
+  { label: 'Dresses', value: 'Dresses' },
   { label: 'T-shirt', value: 'Tshirt' },
   { label: 'Button-up Shirt', value: 'Button-up' },
   { label: 'Tank-top', value: 'Tank' },
   { label: 'Jacket', value: 'Jacket' },
   { label: 'Outdoor Wear', value: 'Outdoor' },
-  { label: 'Hat', value: 'Hat' },
-
-]
+  { label: 'Hats', value: 'Hat' },
+];
 
 // style
 const styleDB = [
@@ -45,7 +46,7 @@ const styleDB = [
   { label: 'Swimwear', value: 'Swimwear' },
   { label: 'Outerwear', value: 'Outerwear' },
   { label: 'Maternity', value: 'Maternity' },
-  { label: 'Sleep', value: 'Sleep' },
+  { label: 'Sleepwear', value: 'Sleep' },
   { label: 'Other', value: 'Other' },
 ];
 
@@ -132,7 +133,7 @@ const AddItem = () => {
         Add Item
       </Button>
 
-      <div style={{ backgroundImage: `url(${background})` }}>
+      <div>
         <Dialog open={open} onClose={() => setOpen(false)} id="form">
           <Container
             sx={{
@@ -163,9 +164,8 @@ const AddItem = () => {
               </Typography>
 
               {/* category */}
-
               <TextField
-                inputStyle={{ textAlign: 'center' }}
+                inputstyle={{ textAlign: 'center' }}
                 name="category"
                 label="* Category"
                 variant="filled"
@@ -173,42 +173,40 @@ const AddItem = () => {
                 onChange={handleChange}
                 value={userFormData.category}
                 select
-                >
-                  {categoryDB.map((option) => (
-                    <MenuItem
-                      size="large"
-                      key={option.value}
-                      value={option.value}
-                    >
-                      {option.label}
-                    </MenuItem>
-                  ))}
+              >
+                {categoryDB.map((option) => (
+                  <MenuItem
+                    size="large"
+                    key={option.value}
+                    value={option.value}
+                  >
+                    {option.label}
+                  </MenuItem>
+                ))}
               </TextField>
 
               {/* size */}
-
               <TextField
                 name="size"
+                // label= '* Size'
                 label="* Size"
                 variant="filled"
                 margin="dense"
                 onChange={handleChange}
-                value={userFormData.size}
+                value={filter.clean(userFormData.size)}
               />
 
               {/* photo */}
-
               <TextField
                 name="photo"
                 label="* Photo"
                 variant="filled"
                 margin="dense"
                 onChange={handleChange}
-                value={userFormData.photo}
+                value= {filter.clean(userFormData.photo)}
               />
 
               {/* style */}
-
               <TextField
                 name="style"
                 label="Style"
@@ -230,29 +228,26 @@ const AddItem = () => {
               </TextField>
 
               {/* brand */}
-
               <TextField
                 name="brand"
                 label="Brand"
                 variant="filled"
                 margin="dense"
                 onChange={handleChange}
-                value={userFormData.brand}
+                value= {filter.clean(userFormData.brand)}
               />
 
               {/* name */}
-
               <TextField
                 name="name"
                 label="* Name"
                 variant="filled"
                 margin="dense"
                 onChange={handleChange}
-                value={userFormData.name}
+                value= {filter.clean(userFormData.name)}
               />
 
               {/* gender - drop down menu */}
-
               <TextField
                 name="gender"
                 select
@@ -274,14 +269,13 @@ const AddItem = () => {
               </TextField>
 
               {/* link */}
-
               <TextField
                 name="link"
                 label="Link"
                 margin="dense"
                 variant="filled"
                 onChange={handleChange}
-                value={userFormData.link}
+                value= {filter.clean(userFormData.link)}
               />
 
               {/* color */}
@@ -316,7 +310,7 @@ const AddItem = () => {
                 placeholder="Add your review here:"
                 style={{ m: 1, width: 450 }}
                 onChange={handleChange}
-                value={userFormData.review}
+                value= {filter.clean(userFormData.review)}
               />
 
               <Button
