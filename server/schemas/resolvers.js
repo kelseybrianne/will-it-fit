@@ -2,6 +2,8 @@ const { AuthenticationError } = require('apollo-server-express');
 const { GraphQLUpload } = require('graphql-upload');
 const { User, Item } = require('../models');
 const { signToken } = require('../utils/auth');
+const { cloudinary } = require('cloudinary');
+const rest = require('../utils/rest');
 const path = require('path');
 const fs = require('fs');
 
@@ -21,8 +23,10 @@ const resolvers = {
 
   Query: {
     //Query users similar to user height and weight, by user id
-    userMatches: async (parent, args, {}) => {
-      console.log('inside user matches');
+    userMatches: async (parent, args, context) => {
+
+      // const user = await User.findById(context.user._id);
+      console.log(context.user);
       // adjust these numbers higher to broaden the scope of the serach
       let heightVar = 0.03;
       let weightVar = 0.05;
@@ -30,14 +34,14 @@ const resolvers = {
         $and: [
           {
             height: {
-              $gte: args.height - args.height * heightVar,
-              $lt: args.height + args.height * heightVar,
+              $gte: context.user.height - context.user.height * heightVar,
+              $lt: context.user.height + context.user.height * heightVar,
             },
           },
           {
             weight: {
-              $gte: args.weight - args.weight * weightVar,
-              $lt: args.weight + args.weight * weightVar,
+              $gte: context.user.weight - context.user.weight * weightVar,
+              $lt: context.user.weight + context.user.weight * weightVar,
             },
           },
         ],
@@ -272,8 +276,16 @@ const resolvers = {
           const writeStream = fs.createWriteStream(pathName);
           stream.pipe(writeStream).on('finish', resolve).on('error', reject);
         });
+        // Cloudinary Code
+        // cloudinary.v2.uploader.upload("/home/sample.jpg",
+        // function(error, result) {await User.findByIdAndUpdate(
+        //   { _id: context.user._id },
+        //   { $set: { primaryPhoto: url } },
+        //   { new: true }
+        // );});
 
-        const url = `http://localhost:3000/uploads/${randomName}`;
+        const PORT = process.env.PORT || 3000;
+        const url = `http://localhost:${PORT}/uploads/${randomName}`;
         const user = await User.findByIdAndUpdate(
           { _id: context.user._id },
           { $set: { primaryPhoto: url } },

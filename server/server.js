@@ -21,14 +21,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(graphqlUploadExpress());
 
-// express()
-//   .use(
-//     '/graphql',
-//     graphqlUploadExpress({ maxFileSize: 10000000, maxFiles: 10 }),
-//     graphqlHTTP({ schema })
-//   )
-//   .listen(3000);
-
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/build')));
 }

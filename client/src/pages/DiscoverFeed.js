@@ -9,16 +9,17 @@ import { GET_USERMATCHES, GET_ME } from '../utils/queries';
 
 const DiscoverFeed = () => {
   // Get logged in user data so you can use the weight and height to get matching users data.
-  const { data: data_me } = useQuery(GET_ME);
-  console.log(data_me?.me.height);
+  // const { data: data_me } = useQuery(GET_ME);
+  // console.log(data_me?.me.height);
 
-  const { data: data_users } = useQuery(GET_USERMATCHES, {
-    skip: !data_me,
-    variables: {
-      height: data_me && data_me.me.height,
-      weight: data_me && data_me.me.weight,
-    },
-  });
+  const { data: data_users } = useQuery(GET_USERMATCHES)
+  
+  //   skip: !data_me,
+  //   variables: {
+  //     height: data_me && data_me.me.height,
+  //     weight: data_me && data_me.me.weight,
+  //   },
+  // });
 
   // console.log(data_users)
   // console.log(data_users?.userMatches)

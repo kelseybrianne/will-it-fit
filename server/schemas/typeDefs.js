@@ -66,7 +66,7 @@ const typeDefs = gql`
     users: [User]
     me: User
 
-    userMatches(height: Float, weight: Float): [User]
+    userMatches: [User]
 
     item(_id: ID!): Item
     items: [Item]

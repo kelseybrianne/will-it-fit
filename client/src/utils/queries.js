@@ -79,8 +79,8 @@ export const GET_ME = gql`
 `;
 //get user matches by entering desired height and weight for match. Within 3% height, 5% weight - can change in server resolvers.js if you want to broaden or narrow scope.
 export const GET_USERMATCHES = gql`
-  query UserMatches($height: Float!, $weight: Float!) {
-    userMatches(height: $height, weight: $weight) {
+  query UserMatches {
+    userMatches {
       _id
       username
       height
