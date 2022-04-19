@@ -3,7 +3,7 @@ const path = require('path');
 const { ApolloServer } = require('apollo-server-express');
 const { typeDefs, resolvers } = require('./schemas');
 const { authMiddleware } = require('./utils/auth');
-const { graphqlUploadExpress } = require('graphql-upload');
+const { cloudinary } = require('./utils/cloudinary');
 // const schema = require('./schemas');
 // const graphqlHTTP = require('express-graphql');
 
@@ -17,10 +17,21 @@ const server = new ApolloServer({
   context: authMiddleware,
 });
 
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
-app.use(graphqlUploadExpress());
-
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
+app.use(express.json({ limit: '50mb' }));
+app.post('/api/upload', async (req, res) => {
+  try {
+    const fileStr = req.body.data;
+    const data = await cloudinary.uploader.upload(fileStr, {
+      upload_preset: 'ml_default',
+    });
+    console.log(data.url);
+    res.status(200).json(data.url);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ err: 'Something went wrong' });
+  }
+});
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/build')));
 }

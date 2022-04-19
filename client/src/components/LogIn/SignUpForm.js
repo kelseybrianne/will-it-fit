@@ -1,40 +1,29 @@
 import { useMutation } from '@apollo/client';
 import { Button, Container, TextField, Typography } from '@mui/material';
 import { Box } from '@mui/system';
+// import { responsePathAsArray } from 'graphql';
 import { useState, useEffect } from 'react';
 import auth from '../../utils/auth';
-import {
-  ADD_USER,
-  SINGLE_UPLOAD,
-} from '../../utils/mutations';
+import { ADD_USER } from '../../utils/mutations';
 
 /** This is a dialog form for signing up for an account */
 function SignUpForm({ setDialogState }) {
   const [signup, { error, data }] = useMutation(ADD_USER);
-  const [selectedImage, setSelectedImage] = useState(null);
-  const [imageUrl, setImageUrl] = useState(null);
+  const [fileInputState, setFileInputState] = useState('');
+  const [previewSource, setPreviewSource] = useState('');
+  const [photo, setPhoto] = useState('');
 
-  useEffect(() => {
-    console.log(selectedImage)
-    if (selectedImage) {
-      setImageUrl(URL.createObjectURL(selectedImage));
-    }
-  }, [selectedImage]);
+  const handleFileInputChange = (e) => {
+    const file = e.target.files[0];
+    previewFile(file);
+  };
 
-  const [singleUpload] = useMutation(SINGLE_UPLOAD, {
-    onCompleted: (data) => console.log(data + 'Inside uploadFile Mutation'),
-  });
-
-  const handleFileUpload = () => {
-    const file = selectedImage;
-    if (!file) {
-      return;
-    }
-    alert(file);
-    console.log(file + 'inside handlefileupload');
-    singleUpload({ variables: { file } });
-
-    return;
+  const previewFile = (file) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setPreviewSource(reader.result);
+    };
   };
 
   const [formState, setFormState] = useState({
@@ -47,24 +36,45 @@ function SignUpForm({ setDialogState }) {
     primaryPhoto: '',
   });
 
+  // upload image to the server on form submission
+  const uploadImage = async (base64EncodedImage) => {
+    try {
+     const response = await fetch('/api/upload', {
+        method: 'POST',
+        body: JSON.stringify({ data: base64EncodedImage }),
+        headers: { 'content-type': 'application/json' },
+      });
+
+      if (response.ok) {
+        const url = await response.json();
+        console.log(url);
+        setFormState({...formState, primaryPhoto:url});
+        return url
+      }
+      else{
+        console.log(response)
+        return response;
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   // submit form
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     try {
+      await uploadImage(previewSource);
+     
       const { data } = await signup({
-        variables: { ...formState },
+        variables: formState
       });
 
-      if (selectedImage) {
-        handleFileUpload();
-      }
       // then grab the user token. This step redirects them to the main feed.
       auth.login(data.addUser.token);
-      // if the user did select an image, upload it to the database.
     } catch (e) {
       console.error(e);
     }
-
     // clear form values
     setFormState({
       username: '',
@@ -75,7 +85,6 @@ function SignUpForm({ setDialogState }) {
       shoeSize: '',
       primaryPhoto: '',
     });
-    // add image to user account here? Or do it in the other route?
   };
   // update state based on form input changes
   const handleChange = (event) => {
@@ -89,6 +98,7 @@ function SignUpForm({ setDialogState }) {
       [id]: value,
     });
   };
+
   return (
     <Container
       sx={{
@@ -122,21 +132,21 @@ function SignUpForm({ setDialogState }) {
         <input
           accept="image/*"
           type="file"
+          encType="multipart/form-data"
           id="select-image"
           style={{ display: 'none' }}
           value={formState.primaryPhoto}
-          onChange={(e) => setSelectedImage(e.target.files[0])}
-          // onChange={handleFileUpload}
+          onChange={handleFileInputChange}
         />
         <label htmlFor="select-image">
           <Button variant="contained" color="primary" component="span">
             Upload Image
           </Button>
         </label>
-        {imageUrl && selectedImage && (
+        {previewSource && (
           <Box mt={2} textAlign="center">
             {/* <div>Image Preview:</div> */}
-            <img src={imageUrl} alt={selectedImage.name} height="100px" />
+            <img src={previewSource} alt={previewSource} height="100px" />
           </Box>
         )}
 

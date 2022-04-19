@@ -6,6 +6,7 @@
   "proxy": "http://localhost:3001/",
   "dependencies": {
     "@apollo/client": "^3.5.10",
+    "dotenv": "^16.0.0",
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
     "@mui/icons-material": "^5.6.1",
