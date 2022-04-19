@@ -1,8 +1,9 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import './DiscoverFeed.css';
 
 import { useQuery } from '@apollo/client';
-import { GET_USERMATCHES, GET_ME } from '../utils/queries';
+import { GET_USERMATCHES} from '../utils/queries';
 
 // let viewClosetEl = document.querySelector('.view-closet');
 // let imgDivEl = document.querySelector('.img-div');
@@ -10,7 +11,6 @@ import { GET_USERMATCHES, GET_ME } from '../utils/queries';
 const DiscoverFeed = () => {
   // Get logged in user data so you can use the weight and height to get matching users data.
   // const { data: data_me } = useQuery(GET_ME);
-  // console.log(data_me?.me.height);
 
   const { data: data_users } = useQuery(GET_USERMATCHES)
   
@@ -21,8 +21,6 @@ const DiscoverFeed = () => {
   //   },
   // });
 
-  // console.log(data_users)
-  // console.log(data_users?.userMatches)
 
   // const [hover, setHover] = useState('false');
 

@@ -43,7 +43,6 @@ const resolvers = {
             'review',
           ],
         });
-      console.log(userMatches.length);
       // if no matches, return the closets of 15 random users.
       if (userMatches.length !== 0) {
         return userMatches;

@@ -1,17 +1,15 @@
 import { useMutation } from '@apollo/client';
 import { Button, Container, TextField, Typography } from '@mui/material';
 import { Box } from '@mui/system';
-// import { responsePathAsArray } from 'graphql';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import auth from '../../utils/auth';
 import { ADD_USER } from '../../utils/mutations';
 
 /** This is a dialog form for signing up for an account */
 function SignUpForm({ setDialogState }) {
+  // eslint-disable-next-line no-unused-vars
   const [signup, { error, data }] = useMutation(ADD_USER);
-  const [fileInputState, setFileInputState] = useState('');
   const [previewSource, setPreviewSource] = useState('');
-  const [photo, setPhoto] = useState('');
 
   const [formState, setFormState] = useState({
     username: '',

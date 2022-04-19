@@ -34,7 +34,6 @@ db.once('open', async () => {
     await Item.deleteMany({});
 
     let userData = [];
-    // console.log(itemIndex());
     for (let i = 0; i < 5; i++) {
       // make a bunch of user data
 

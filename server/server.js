@@ -25,7 +25,6 @@ app.post('/api/upload', async (req, res) => {
     const data = await cloudinary.uploader.upload(fileStr, {
       upload_preset: 'ml_default',
     });
-    console.log(data.url);
     res.status(200).json(data.url);
   } catch (error) {
     console.error(error);

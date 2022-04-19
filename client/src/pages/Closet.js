@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from '@mui/material/Button';
+// import Button from '@mui/material/Button';
 import './Closet.css';
 import Items from '../components/Items.js';
 // eslint-disable-next-line no-unused-vars
@@ -8,28 +8,28 @@ import Stack from '@mui/material/Stack';
 import profilePic from '../assets/images/atikh-bana-_KaMTEmJnxY-unsplash.jpg'
 import AddItem from '../components/AddItem';
 
-import { useMutation, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
 
 const Closet = ({ windowSize }) => {
+  // eslint-disable-next-line no-unused-vars
   const { loading, data } = useQuery(GET_ME);
 
   const userData = data?.me || {};
-  console.log(userData);
 
   return (
     <div className="profile-page">
       <div className="white-div"></div>
       <div className="profile-head">
         <div className="profile-img-div">
-          <img src={profilePic} />
+          <img src={profilePic} alt={profilePic}/>
           <h2>rsherman</h2>
           <div className="folls-div">
-            <a href="">
+            <a href="tbd">
               <p>Following</p>
             </a>
             <p>|</p>
-            <a href="">
+            <a href="tbd">
               <p>Followers</p>
             </a>
           </div>
