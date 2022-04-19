@@ -86,7 +86,6 @@ const AddItem = () => {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    console.log('🤘', event.target);
     setUserFromData({
       ...userFormData,
       [name]: value,
@@ -115,7 +114,6 @@ const AddItem = () => {
       color: '',
       review: '',
     });
-    console.log('🤘', setUserFromData);
   };
 
   return (
