@@ -28,7 +28,9 @@ const categoryDB = [
   { label: 'T-shirt', value: 'Tshirt' },
   { label: 'Button-up Shirt', value: 'Button-up' },
   { label: 'Tank-top', value: 'Tank' },
+  { label: 'Active', value: 'Active' },
   { label: 'Jacket', value: 'Jacket' },
+  { label: 'Swimwear', value: 'Swimwear' },
   { label: 'Outdoor Wear', value: 'Outdoor' },
   { label: 'Hats', value: 'Hat' },
 ];
@@ -43,7 +45,6 @@ const styleDB = [
   { label: 'Casual', value: 'Casual' },
   { label: 'Business Casual', value: 'Business' },
   { label: 'Exotic', value: 'Exotic' },
-  { label: 'Swimwear', value: 'Swimwear' },
   { label: 'Outerwear', value: 'Outerwear' },
   { label: 'Maternity', value: 'Maternity' },
   { label: 'Sleepwear', value: 'Sleep' },
@@ -73,12 +74,12 @@ const colorDB = [
 const AddItem = () => {
   const [open, setOpen] = React.useState(false);
   const [userFormData, setUserFromData] = React.useState({
+    name: '',
     category: '',
     size: '',
     photo: '',
     style: '',
     brand: '',
-    name: '',
     gender: '',
     link: '',
     color: '',
@@ -107,12 +108,12 @@ const AddItem = () => {
       console.error(e);
     }
     setUserFromData({
+      name: '',
       category: '',
       size: '',
       photo: '',
       style: '',
       brand: '',
-      name: '',
       gender: '',
       link: '',
       color: '',
@@ -163,6 +164,16 @@ const AddItem = () => {
                 Add An Item:
               </Typography>
 
+              {/* name */}
+              <TextField
+                name="name"
+                label="* Name"
+                variant="filled"
+                margin="dense"
+                onChange={handleChange}
+                value={filter.clean(userFormData.name)}
+              />
+              
               {/* category */}
               <TextField
                 inputstyle={{ textAlign: 'center' }}
@@ -203,7 +214,7 @@ const AddItem = () => {
                 variant="filled"
                 margin="dense"
                 onChange={handleChange}
-                value= {filter.clean(userFormData.photo)}
+                value={filter.clean(userFormData.photo)}
               />
 
               {/* style */}
@@ -234,17 +245,7 @@ const AddItem = () => {
                 variant="filled"
                 margin="dense"
                 onChange={handleChange}
-                value= {filter.clean(userFormData.brand)}
-              />
-
-              {/* name */}
-              <TextField
-                name="name"
-                label="* Name"
-                variant="filled"
-                margin="dense"
-                onChange={handleChange}
-                value= {filter.clean(userFormData.name)}
+                value={filter.clean(userFormData.brand)}
               />
 
               {/* gender - drop down menu */}
@@ -275,7 +276,7 @@ const AddItem = () => {
                 margin="dense"
                 variant="filled"
                 onChange={handleChange}
-                value= {filter.clean(userFormData.link)}
+                value={filter.clean(userFormData.link)}
               />
 
               {/* color */}
@@ -310,7 +311,7 @@ const AddItem = () => {
                 placeholder="Add your review here:"
                 style={{ m: 1, width: 450 }}
                 onChange={handleChange}
-                value= {filter.clean(userFormData.review)}
+                value={filter.clean(userFormData.review)}
               />
 
               <Button
