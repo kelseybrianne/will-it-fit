@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { styled, Box } from '@mui/system';
@@ -15,21 +16,16 @@ import MenuItem from '@mui/material/MenuItem';
 import './Items.css';
 import './ItemModal.css';
 
-import { useMutation, useQuery } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import Auth from '../utils/auth';
-import { GET_ME } from '../utils/queries';
 
-const Items = ({ windowSize }) => {
+const Items = ({ windowSize, userData }) => {
   // handles opening and closing of MUI modal
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const { loading, data } = useQuery(GET_ME);
-
-  const userData = data?.me || {};
-
-  // more icon that opens edit/delete MUI menu 
+  // more icon that opens edit/delete MUI menu
   const [anchorEl, setAnchorEl] = React.useState(null);
   const openMenu = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -49,148 +45,131 @@ const Items = ({ windowSize }) => {
         cols={windowSize.width > 766 ? 3 : 2}
         gap={window.innerWidth > 339 ? 16 : 8}
       >
-        {images.map(({ id, img }) => (
-          <div key={id} className="item-list-wrapper">
-            {/* substitute heart icon for MoreVertIcon when closet does not belong to the person who is logged in */}
-            {/* <button>
+        {userData?.closet?.map(
+          ({
+            _id,
+            category,
+            brand,
+            gender,
+            name,
+            photo,
+            review,
+            size,
+            username,
+          }) => (
+            <div key={_id} className="item-list-wrapper">
+              {/* substitute heart icon for MoreVertIcon when closet does not belong to the person who is logged in */}
+              {/* <button>
               <FavoriteBorderIcon className="heart-icon icon" />
             </button> */}
-            <a type="button" onClick={handleOpen}>
-              <ImageListItem key={id}>
-                <MoreVertIcon
-                  id="basic-button"
-                  aria-controls={openMenu ? 'basic-menu' : undefined}
-                  aria-haspopup="true"
-                  aria-expanded={openMenu ? 'true' : undefined}
-                  onClick={handleClick}
-                  className="more-icon icon"
-                />
-                <Menu
-                  id="basic-menu"
-                  elevation={0}
-                  className="dropdown-menu"
-                  anchorEl={anchorEl}
-                  open={openMenu}
-                  onClose={handleCloseMenu}
-                  MenuListProps={{
-                    'aria-labelledby': 'basic-button',
-                  }}
-                >
-                  <MenuItem onClick={handleCloseMenu}>Edit</MenuItem>
-                  <MenuItem onClick={handleCloseMenu}>Delete</MenuItem>
-                </Menu>
-                <img
-                  src={`${img}?w=248&fit=crop&auto=format`}
-                  srcSet={`${img}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                  alt="alt goes here"
-                  loading="lazy"
-                  className="item-img"
-                />
-                <ImageListItemBar
-                  className="item-text"
-                  title="Name"
-                  subtitle="Brand Category"
-                  position="below"
-                />
-              </ImageListItem>
-            </a>
-            {/* modularizing the item modal is currently not working */}
-            {/* <ItemModal /> */}
-            <Modal
-              aria-labelledby="unstyled-modal-title"
-              aria-describedby="unstyled-modal-description"
-              open={open}
-              onClose={handleClose}
-              BackdropComponent={Backdrop}
-            >
-              <Box sx={style} className="modal-box">
-                {/* <a>
-                  <CloseIcon className="close-icon"></CloseIcon>
-                </a> */}
-                {/* <MoreVertIcon
-                  id="basic-button"
-                  aria-controls={openMenu ? 'basic-menu' : undefined}
-                  aria-haspopup="true"
-                  aria-expanded={openMenu ? 'true' : undefined}
-                  onClick={handleClick}
-                  className="more-icon icon"
-                />
-                <Menu
-                  id="basic-menu"
-                  elevation={0}
-                  className="dropdown-menu"
-                  anchorEl={anchorEl}
-                  open={openMenu}
-                  onClose={handleCloseMenu}
-                  MenuListProps={{
-                    'aria-labelledby': 'basic-button',
-                  }}
-                >
-                  <MenuItem onClick={handleCloseMenu}>Edit</MenuItem>
-                  <MenuItem onClick={handleCloseMenu}>Delete</MenuItem>
-                </Menu> */}
-                <div className="item-modal-pic">
-                  <img src={images[5].img} alt="img" />
-                </div>
-                <div className="item-modal-text">
-                  <div className="item-name-more-div">
-                    <h1>Name</h1>
-                    <MoreVertIcon
-                      id="basic-button"
-                      aria-controls={openMenu ? 'basic-menu' : undefined}
-                      aria-haspopup="true"
-                      aria-expanded={openMenu ? 'true' : undefined}
-                      onClick={handleClick}
-                      className="icon-p"
-                    />
-                    <Menu
-                      id="basic-menu"
-                      elevation={0}
-                      className="dropdown-menu"
-                      anchorEl={anchorEl}
-                      open={openMenu}
-                      onClose={handleCloseMenu}
-                      MenuListProps={{
-                        'aria-labelledby': 'basic-button',
-                      }}
-                    >
-                      <MenuItem onClick={handleCloseMenu}>Edit</MenuItem>
-                      <MenuItem onClick={handleCloseMenu}>Delete</MenuItem>
-                    </Menu>
+              <a type="button" onClick={handleOpen}>
+                <ImageListItem key={_id}>
+                  <MoreVertIcon
+                    id="basic-button"
+                    aria-controls={openMenu ? 'basic-menu' : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={openMenu ? 'true' : undefined}
+                    onClick={handleClick}
+                    className="more-icon icon"
+                  />
+                  <Menu
+                    id="basic-menu"
+                    elevation={0}
+                    className="dropdown-menu"
+                    anchorEl={anchorEl}
+                    open={openMenu}
+                    onClose={handleCloseMenu}
+                    MenuListProps={{
+                      'aria-labelledby': 'basic-button',
+                    }}
+                  >
+                    <MenuItem onClick={handleCloseMenu}>Edit</MenuItem>
+                    <MenuItem onClick={handleCloseMenu}>Delete</MenuItem>
+                  </Menu>
+                  <img
+                    src={`${photo}?w=248&fit=crop&auto=format`}
+                    srcSet={`${photo}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                    alt="alt goes here"
+                    loading="lazy"
+                    className="item-img"
+                  />
+                  <ImageListItemBar
+                    className="item-text"
+                    title={name}
+                    subtitle={`${brand} ${category}`}
+                    position="below"
+                  />
+                </ImageListItem>
+              </a>
+              {/* modularizing the item modal is currently not working */}
+              {/* <ItemModal /> */}
+              <Modal
+                aria-labelledby="unstyled-modal-title"
+                aria-describedby="unstyled-modal-description"
+                open={open}
+                onClose={handleClose}
+                BackdropComponent={Backdrop}
+              >
+                <Box sx={style} className="modal-box">
+                  <div className="item-modal-pic">
+                    <img src={photo} alt="img" />
                   </div>
-                  <p>Brand Category</p>
-                  <p>Size: size</p>
-                  <Button className="shop-btn" variant="contained">
-                    Shop
-                  </Button>
-                  <div className="review-div">
-                    <div className="review-header">
-                      <div className="avatar-pic-div">
-                        <img src={images[3].img} />
-                      </div>
-                      <div className="username-div">
-                        <a href="">
-                          <p className="username">rsherman</p>
-                        </a>
-                        <p className="user-measurements-displayed">
-                          5'5" | 140lbs
-                        </p>
-                      </div>
+                  <div className="item-modal-text">
+                    <div className="item-name-more-div">
+                      <h1>{name}</h1>
+                      <MoreVertIcon
+                        id="basic-button"
+                        aria-controls={openMenu ? 'basic-menu' : undefined}
+                        aria-haspopup="true"
+                        aria-expanded={openMenu ? 'true' : undefined}
+                        onClick={handleClick}
+                        className="icon-p"
+                      />
+                      <Menu
+                        id="basic-menu"
+                        elevation={0}
+                        className="dropdown-menu"
+                        anchorEl={anchorEl}
+                        open={openMenu}
+                        onClose={handleCloseMenu}
+                        MenuListProps={{
+                          'aria-labelledby': 'basic-button',
+                        }}
+                      >
+                        <MenuItem onClick={handleCloseMenu}>Edit</MenuItem>
+                        <MenuItem onClick={handleCloseMenu}>Delete</MenuItem>
+                      </Menu>
                     </div>
-                    <p className="review-content">
-                      I wish it was a little longer, but the look is a 10/10.
-                      Review: Lorem ipsum dolor sit amet, consectetur adipiscing
-                      elit, sed do eiusmod tempor incididunt ut labore et dolore
-                      magna aliqua. Ut enim ad minim veniam, quis nostrud
-                      exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                      consequat. Duis aute irure
-                    </p>
+                    <p>{`${brand} ${category}`}</p>
+                    <p>Size: {size}</p>
+                    <Button className="shop-btn" variant="contained">
+                      Shop
+                    </Button>
+                    <div className="review-div">
+                      <div className="review-header">
+                        <div className="avatar-pic-div">
+                          <img
+                            src={photo}
+                            alt="img-alt"
+                          />
+                        </div>
+                        <div className="username-div">
+                          <Link to={`/closet/${username}`}>
+                            <p className="username">{username}</p>
+                          </Link>
+                          <p className="user-measurements-displayed">
+                            5'5" | 140lbs
+                          </p>
+                        </div>
+                      </div>
+                      <p className="review-content">{review}</p>
+                    </div>
                   </div>
-                </div>
-              </Box>
-            </Modal>
-          </div>
-        ))}
+                </Box>
+              </Modal>
+            </div>
+          )
+        )}
       </ImageList>
     </div>
   );

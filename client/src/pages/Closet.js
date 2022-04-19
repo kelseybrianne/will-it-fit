@@ -17,7 +17,7 @@ const Closet = ({ windowSize }) => {
 
   const { loading, data } = useQuery(GET_USER, {
     variables: {
-      username: {username}
+      username: username
     },
   });
 
@@ -29,8 +29,8 @@ const Closet = ({ windowSize }) => {
       <div className="white-div"></div>
       <div className="profile-head">
         <div className="profile-img-div">
-          <img src={profilePic} />
-          <h2>rsherman</h2>
+          <img src={userData.primaryPhoto} />
+          <h2>{userData.username}</h2>
           <div className="folls-div">
             <a href="">
               <p>Following</p>
@@ -45,7 +45,7 @@ const Closet = ({ windowSize }) => {
           <AddItem />
         </div>
       </div>
-      <Items windowSize={windowSize} />
+      <Items userData={userData} windowSize={windowSize} />
     </div>
   );
 };
