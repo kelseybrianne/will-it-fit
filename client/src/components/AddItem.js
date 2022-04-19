@@ -138,7 +138,8 @@ const AddItem = () => {
         <Dialog open={open} onClose={() => setOpen(false)} id="form">
           <Container
             sx={{
-              maxWidth: 320,
+              backgroundColor: 'linen',
+              maxWidth: 500,
             }}
           >
             <Box
@@ -150,15 +151,16 @@ const AddItem = () => {
                 flexDirection: 'column',
                 justifyContent: 'center',
                 alignContent: 'center',
-                textAlign: 'center',
+                gap: 1,
               }}
             >
               <Typography
                 variant="h1"
                 sx={{
                   fontFamily: 'var(--serif)',
+                  textAlign: 'center',
                   fontSize: 20,
-                  py: 2,
+                  py: 1,
                 }}
               >
                 Add An Item:
@@ -168,18 +170,17 @@ const AddItem = () => {
               <TextField
                 name="name"
                 label="* Name"
-                variant="filled"
                 margin="dense"
                 onChange={handleChange}
                 value={filter.clean(userFormData.name)}
+                sx={{ backgroundColor: 'white' }}
               />
-              
+
               {/* category */}
               <TextField
-                inputstyle={{ textAlign: 'center' }}
                 name="category"
                 label="* Category"
-                variant="filled"
+                sx={{ backgroundColor: 'white' }}
                 margin="dense"
                 onChange={handleChange}
                 value={userFormData.category}
@@ -201,8 +202,7 @@ const AddItem = () => {
                 name="size"
                 // label= '* Size'
                 label="* Size"
-                variant="filled"
-                margin="dense"
+                sx={{ backgroundColor: 'white' }}                margin="dense"
                 onChange={handleChange}
                 value={filter.clean(userFormData.size)}
               />
@@ -211,8 +211,7 @@ const AddItem = () => {
               <TextField
                 name="photo"
                 label="* Photo"
-                variant="filled"
-                margin="dense"
+                sx={{ backgroundColor: 'white' }}                margin="dense"
                 onChange={handleChange}
                 value={filter.clean(userFormData.photo)}
               />
@@ -221,8 +220,7 @@ const AddItem = () => {
               <TextField
                 name="style"
                 label="Style"
-                variant="filled"
-                margin="dense"
+                sx={{ backgroundColor: 'white' }}                margin="dense"
                 onChange={handleChange}
                 value={userFormData.style}
                 select
@@ -242,7 +240,7 @@ const AddItem = () => {
               <TextField
                 name="brand"
                 label="Brand"
-                variant="filled"
+                sx={{ backgroundColor: 'white' }}                
                 margin="dense"
                 onChange={handleChange}
                 value={filter.clean(userFormData.brand)}
@@ -255,8 +253,7 @@ const AddItem = () => {
                 value={userFormData.gender}
                 label="Gender"
                 margin="dense"
-                variant="filled"
-                onChange={handleChange}
+                sx={{ backgroundColor: 'white' }}                onChange={handleChange}
               >
                 {genderDB.map((option) => (
                   <MenuItem
@@ -274,8 +271,7 @@ const AddItem = () => {
                 name="link"
                 label="Link"
                 margin="dense"
-                variant="filled"
-                onChange={handleChange}
+                sx={{ backgroundColor: 'white' }}                onChange={handleChange}
                 value={filter.clean(userFormData.link)}
               />
 
@@ -286,8 +282,7 @@ const AddItem = () => {
                 value={userFormData.color}
                 label="Color"
                 margin="dense"
-                variant="filled"
-                onChange={handleChange}
+                sx={{ backgroundColor: 'white' }}               onChange={handleChange}
               >
                 {colorDB.map((option) => (
                   <MenuItem
