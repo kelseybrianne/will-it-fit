@@ -72,7 +72,7 @@ const Items = ({ windowSize, userData }) => {
         cols={windowSize.width > 766 ? 3 : 2}
         gap={window.innerWidth > 339 ? 16 : 8}
       >
-        {userData?.closet?.map(
+        {userData?.closet ? userData.closet.map(
           ({
             _id,
             category,
@@ -197,7 +197,7 @@ const Items = ({ windowSize, userData }) => {
               </Modal>
             </div>
           )
-        )}
+        ) : "" }
       </ImageList>
     </div>
   );

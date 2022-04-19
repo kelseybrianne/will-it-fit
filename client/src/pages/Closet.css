@@ -106,8 +106,9 @@
   }
 
   .profile-img-div h2 {
-    font-size: 48px;
-    top: -37px;
+    font-size: 45px;
+    top: -35px;
+    inline-size: initial;
   }
 
   .folls-div {
