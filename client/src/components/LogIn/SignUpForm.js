@@ -13,6 +13,17 @@ function SignUpForm({ setDialogState }) {
   const [previewSource, setPreviewSource] = useState('');
   const [photo, setPhoto] = useState('');
 
+  const [formState, setFormState] = useState({
+    username: '',
+    email: '',
+    password: '',
+    height: null,
+    weight: null,
+    shoeSize: '',
+  });
+
+  let primaryPhoto = '';
+
   const handleFileInputChange = (e) => {
     const file = e.target.files[0];
     previewFile(file);
@@ -25,21 +36,10 @@ function SignUpForm({ setDialogState }) {
       setPreviewSource(reader.result);
     };
   };
-
-  const [formState, setFormState] = useState({
-    username: '',
-    email: '',
-    password: '',
-    height: null,
-    weight: null,
-    shoeSize: '',
-    primaryPhoto: '',
-  });
-
   // upload image to the server on form submission
   const uploadImage = async (base64EncodedImage) => {
     try {
-     const response = await fetch('/api/upload', {
+      const response = await fetch('/api/upload', {
         method: 'POST',
         body: JSON.stringify({ data: base64EncodedImage }),
         headers: { 'content-type': 'application/json' },
@@ -47,16 +47,13 @@ function SignUpForm({ setDialogState }) {
 
       if (response.ok) {
         const url = await response.json();
-        console.log(url);
-        setFormState({...formState, primaryPhoto:url});
-        return url
-      }
-      else{
-        console.log(response)
+        primaryPhoto = url;
+      } else {
+        console.log(response);
         return response;
       }
     } catch (error) {
-      console.error(error);
+      return console.error(error);
     }
   };
 
@@ -65,9 +62,9 @@ function SignUpForm({ setDialogState }) {
     event.preventDefault();
     try {
       await uploadImage(previewSource);
-     
+
       const { data } = await signup({
-        variables: formState
+        variables: { ...formState, primaryPhoto: primaryPhoto },
       });
 
       // then grab the user token. This step redirects them to the main feed.
@@ -83,7 +80,6 @@ function SignUpForm({ setDialogState }) {
       height: 0,
       weight: 0,
       shoeSize: '',
-      primaryPhoto: '',
     });
   };
   // update state based on form input changes
@@ -135,7 +131,6 @@ function SignUpForm({ setDialogState }) {
           encType="multipart/form-data"
           id="select-image"
           style={{ display: 'none' }}
-          value={formState.primaryPhoto}
           onChange={handleFileInputChange}
         />
         <label htmlFor="select-image">

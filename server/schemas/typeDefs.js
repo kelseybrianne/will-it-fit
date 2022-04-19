@@ -12,6 +12,7 @@ const typeDefs = gql`
     # weightUnits: String
     closet: [Item]
     primaryPhoto: String
+    shoeSize: String
     following: [User]
     followers: [User]
     savedItems: [Item]
@@ -28,6 +29,7 @@ const typeDefs = gql`
     # weightUnits: String
     closet: [Item]
     primaryPhoto: String
+    shoeSize: String
     following: [User]
     followers: [User]
     savedItems: [Item]
@@ -89,6 +91,7 @@ const typeDefs = gql`
       weight: Float!
       # weightUnits: String
       primaryPhoto: String
+      shoeSize: String
     ): Auth
 
     login(email: String!, password: String!): Auth

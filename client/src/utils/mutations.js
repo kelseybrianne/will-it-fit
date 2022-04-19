@@ -1,12 +1,5 @@
 import { gql } from '@apollo/client';
-// uploadfile
-export const SINGLE_UPLOAD = gql`
-  mutation ($file: Upload!) {
-    singleUpload(file: $file) {
-      url
-    }
-  }
-`;
+
 // addUser:
 export const ADD_USER = gql`
   mutation Mutation(
@@ -16,6 +9,7 @@ export const ADD_USER = gql`
     $height: Float!
     $weight: Float!
     $primaryPhoto: String
+    $shoeSize: String
   ) {
     addUser(
       username: $username
@@ -24,6 +18,7 @@ export const ADD_USER = gql`
       height: $height
       weight: $weight
       primaryPhoto: $primaryPhoto
+      shoeSize: $shoeSize
     ) {
       token
       user {
