@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import React from 'react';
 import './Header.css';
 import LogInDialog from './LogIn';
-import LogOut from './LogOut';
+import ProfileMenu from './ProfileMenu';
 
 import Auth from '../utils/auth';
 import { useQuery } from '@apollo/client';
@@ -21,11 +21,11 @@ const Header = () => {
         <p>nav</p>
       </Link>
 
-      <Link to={`/closet/${userData.username}`}>
+      <Link to={"/"}>
         <h1>Will It Fit?</h1>
       </Link>
 
-      {Auth.loggedIn() ? <LogOut /> : <LogInDialog />}
+      {Auth.loggedIn() ? <ProfileMenu /> : <LogInDialog />}
     </header>
   );
 };

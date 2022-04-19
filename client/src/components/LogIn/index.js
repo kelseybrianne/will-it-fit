@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { Box } from '@mui/system';
 import LogInForm from './LogInForm';
 import SignUpForm from './SignUpForm';
+import './index.css';
 
 /**
  * This is the main log in nav button with a dialog that contains
@@ -24,7 +25,7 @@ export default function LogIn() {
   };
 
   const backdropImage = require('../../assets/images/ihssan-rami-azouagh-1YCKCCrLEbU-unsplash.jpg');
-  console.log(backdropImage);
+
   return (
     <Box>
       <Link to={(location) => location} onClick={handleClickOpen}>
@@ -38,8 +39,10 @@ export default function LogIn() {
           width: '75%',
           minWidth: 380,
           margin: 'auto',
-          height: 'fit-content',
-          maxHeight: '100%',
+          height: 'max-content',
+          '@supports (-webkit-touch-callout: none)': {
+            height: '100%',
+          },
           overflowY: 'scroll',
         }}
         BackdropProps={{
@@ -51,7 +54,12 @@ export default function LogIn() {
             backgroundPosition: 'center bottom',
           },
         }}
-        PaperProps={{ sx: { backgroundColor: 'rgba(255, 255,255, 0.65)' } }}
+        PaperProps={{
+          sx: {
+            backgroundColor: 'rgba(255, 255,255, 0.85)',
+            borderRadius: '2px',
+          },
+        }}
       >
         <IconButton
           edge="start"
