@@ -6,8 +6,6 @@ import TextareaAutosize from '@mui/base/TextareaAutosize';
 import { Button, Typography, Container, Dialog } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
 
-import background from '../assets/images/ihssan-rami-azouagh-1YCKCCrLEbU-unsplash.jpg';
-
 // graphQL:
 import { useMutation } from '@apollo/client';
 import { ADD_ITEM } from '../utils/mutations';
