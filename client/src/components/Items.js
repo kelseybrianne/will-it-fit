@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
@@ -21,8 +21,35 @@ import Auth from '../utils/auth';
 
 const Items = ({ windowSize, userData }) => {
   // handles opening and closing of MUI modal
+  console.log(userData);
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
+  const [modalItemProps, setModalItemProps] = useState({
+    _id: '',
+    category: '',
+    brand: '',
+    name: '',
+    size: '',
+    link: '',
+    photo: '',
+    review: ''
+  })
+
+  const handleOpen = (e) => {
+    console.log(e.currentTarget);
+    const capitalizeFirstLetter = (str) => str.charAt(0).toUpperCase() + str.slice(1);
+ 
+    setModalItemProps({
+      _id: e.currentTarget.getAttribute('data-id'),
+      category: e.currentTarget.getAttribute('data-category'),
+      brand: capitalizeFirstLetter(e.currentTarget.getAttribute('data-brand')),
+      name: e.currentTarget.getAttribute('data-name'),
+      size: e.currentTarget.getAttribute('data-size'),
+      link: e.currentTarget.getAttribute('data-link'),
+      photo: e.currentTarget.getAttribute('data-photo'),
+      review: e.currentTarget.getAttribute('data-review'),
+    })
+    setOpen(true);
+  }
   const handleClose = () => setOpen(false);
 
   // more icon that opens edit/delete MUI menu
@@ -56,14 +83,15 @@ const Items = ({ windowSize, userData }) => {
             review,
             size,
             username,
+            link
           }) => (
             <div key={_id} className="item-list-wrapper">
               {/* substitute heart icon for MoreVertIcon when closet does not belong to the person who is logged in */}
               {/* <button>
               <FavoriteBorderIcon className="heart-icon icon" />
             </button> */}
-              <a type="button" onClick={handleOpen}>
-                <ImageListItem key={_id}>
+              <div data-id={_id} data-category={category} data-brand={brand} data-name={name} data-size={size} data-link={link} data-photo={photo} data-review={review} type="button" onClick={handleOpen}>
+                <ImageListItem >
                   <MoreVertIcon
                     id="basic-button"
                     aria-controls={openMenu ? 'basic-menu' : undefined}
@@ -100,7 +128,7 @@ const Items = ({ windowSize, userData }) => {
                     position="below"
                   />
                 </ImageListItem>
-              </a>
+              </div>
               {/* modularizing the item modal is currently not working */}
               {/* <ItemModal /> */}
               <Modal
@@ -112,11 +140,11 @@ const Items = ({ windowSize, userData }) => {
               >
                 <Box sx={style} className="modal-box">
                   <div className="item-modal-pic">
-                    <img src={photo} alt="img" />
+                    <img src={modalItemProps.photo} alt="img" />
                   </div>
                   <div className="item-modal-text">
                     <div className="item-name-more-div">
-                      <h1>{name}</h1>
+                      <h1>{modalItemProps.name}</h1>
                       <MoreVertIcon
                         id="basic-button"
                         aria-controls={openMenu ? 'basic-menu' : undefined}
@@ -140,8 +168,8 @@ const Items = ({ windowSize, userData }) => {
                         <MenuItem onClick={handleCloseMenu}>Delete</MenuItem>
                       </Menu>
                     </div>
-                    <p>{`${brand} ${category}`}</p>
-                    <p>Size: {size}</p>
+                    <p>{`${modalItemProps.brand} ${modalItemProps.category}`}</p>
+                    <p>Size: {modalItemProps.size}</p>
                     <Button className="shop-btn" variant="contained">
                       Shop
                     </Button>
@@ -149,20 +177,20 @@ const Items = ({ windowSize, userData }) => {
                       <div className="review-header">
                         <div className="avatar-pic-div">
                           <img
-                            src={photo}
+                            src={userData?.primaryPhoto}
                             alt="img-alt"
                           />
                         </div>
                         <div className="username-div">
-                          <Link to={`/closet/${username}`}>
-                            <p className="username">{username}</p>
+                          <Link to={`/closet/${userData.username}`}>
+                            <p className="username">{userData.username}</p>
                           </Link>
                           <p className="user-measurements-displayed">
-                            5'5" | 140lbs
+                            {userData.height}" | {userData.weight}lbs
                           </p>
                         </div>
                       </div>
-                      <p className="review-content">{review}</p>
+                      <p className="review-content">{modalItemProps.review}</p>
                     </div>
                   </div>
                 </Box>
