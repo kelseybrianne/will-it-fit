@@ -3,30 +3,39 @@ import { Button, Container, TextField, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { useState, useEffect } from 'react';
 import auth from '../../utils/auth';
-import { ADD_USER, SINGLE_UPLOAD } from '../../utils/mutations';
+import {
+  ADD_PROFILE_PHOTO,
+  ADD_USER,
+  SINGLE_UPLOAD,
+} from '../../utils/mutations';
 
 /** This is a dialog form for signing up for an account */
 function SignUpForm({ setDialogState }) {
   const [signup, { error, data }] = useMutation(ADD_USER);
-  // const [selectedImage, setSelectedImage] = useState(null);
-  // const [imageUrl, setImageUrl] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [imageUrl, setImageUrl] = useState(null);
 
-  // useEffect(() => {
-  //   if (selectedImage) {
-  //     setImageUrl(URL.createObjectURL(selectedImage));
-  //   }
-  // }, [selectedImage]);
+  useEffect(() => {
+    console.log(selectedImage)
+    if (selectedImage) {
+      setImageUrl(URL.createObjectURL(selectedImage));
+    }
+  }, [selectedImage]);
 
-  const [uploadFile] = useMutation(SINGLE_UPLOAD, {
-    onCompleted: (data) => console.log(data),
+  const [singleUpload] = useMutation(SINGLE_UPLOAD, {
+    onCompleted: (data) => console.log(data + 'Inside uploadFile Mutation'),
   });
-  const handleFileUpload = (e) => {
-    const file = e.target.files[0];
+
+  const handleFileUpload = () => {
+    const file = selectedImage;
     if (!file) {
       return;
     }
-    console.log(file);
-    uploadFile({ variables: { file } });
+    alert(file);
+    console.log(file + 'inside handlefileupload');
+    singleUpload({ variables: { file } });
+
+    return;
   };
 
   const [formState, setFormState] = useState({
@@ -36,21 +45,23 @@ function SignUpForm({ setDialogState }) {
     height: null,
     weight: null,
     shoeSize: '',
+    primaryPhoto: '',
   });
 
   // submit form
   const handleFormSubmit = async (event) => {
-    alert('handleformsubmit');
     event.preventDefault();
     try {
       const { data } = await signup({
         variables: { ...formState },
       });
 
-      // if (selectedImage) {
-      //   handleFileUpload();
-      // }
+      if (selectedImage) {
+        handleFileUpload();
+      }
+      // then grab the user token. This step redirects them to the main feed.
       auth.login(data.addUser.token);
+      // if the user did select an image, upload it to the database.
     } catch (e) {
       console.error(e);
     }
@@ -63,7 +74,9 @@ function SignUpForm({ setDialogState }) {
       height: 0,
       weight: 0,
       shoeSize: '',
+      primaryPhoto: '',
     });
+    // add image to user account here? Or do it in the other route?
   };
   // update state based on form input changes
   const handleChange = (event) => {
@@ -112,15 +125,21 @@ function SignUpForm({ setDialogState }) {
           type="file"
           id="select-image"
           style={{ display: 'none' }}
-          // onChange={(e) => setSelectedImage(e.target.files[0])}
-          onChange={handleFileUpload}
+          value={formState.primaryPhoto}
+          onChange={(e) => setSelectedImage(e.target.files[0])}
+          // onChange={handleFileUpload}
         />
         <label htmlFor="select-image">
           <Button variant="contained" color="primary" component="span">
             Upload Image
           </Button>
         </label>
-  
+        {imageUrl && selectedImage && (
+          <Box mt={2} textAlign="center">
+            {/* <div>Image Preview:</div> */}
+            <img src={imageUrl} alt={selectedImage.name} height="100px" />
+          </Box>
+        )}
 
         {/* Begin standard form questions */}
         <TextField

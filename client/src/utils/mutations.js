@@ -15,6 +15,7 @@ export const ADD_USER = gql`
     $password: String!
     $height: Float!
     $weight: Float!
+    $primaryPhoto: String
   ) {
     addUser(
       username: $username
@@ -22,6 +23,7 @@ export const ADD_USER = gql`
       password: $password
       height: $height
       weight: $weight
+      primaryPhoto: $primaryPhoto
     ) {
       token
       user {

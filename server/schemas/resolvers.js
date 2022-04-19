@@ -112,47 +112,6 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
-    // GET logged in user
-    // me: async (parent, { _id } ) => {
-    //   if (context.user) {
-    //     return await User.findOne({ _id })
-    //       .populate('closet')
-    //       .populate({
-    //         path: 'closet',
-    //         populate: [
-    //           '_id',
-    //           'category',
-    //           'style',
-    //           'brand',
-    //           'name',
-    //           'gender',
-    //           'size',
-    //           'link',
-    //           'photo',
-    //           'color',
-    //           'review',
-    //         ],
-    //       })
-    //       .populate('savedItems')
-    //       .populate({
-    //         path: 'savedItems',
-    //         populate: [
-    //           '_id',
-    //           'category',
-    //           'style',
-    //           'brand',
-    //           'name',
-    //           'gender',
-    //           'size',
-    //           'link',
-    //           'photo',
-    //           'color',
-    //           'review',
-    //         ],
-    //       });
-    //   }
-    //   throw new AuthenticationError('You need to be logged in!');
-    // },
 
     me: async (parent, args, context) => {
       // if (context.user) {
@@ -299,29 +258,38 @@ const resolvers = {
   Mutation: {
     // upload the file with the user id in the database.
     singleUpload: async (parent, { file }, context) => {
-      // if (context.user) {
-      const { createReadStream, filename, mimetype, encoding } = await file;
+      // console.log(context.user._id);
+      if (context.user) {
+        const { createReadStream, filename, mimetype, encoding } = await file;
+        console.log(file);
+        const { ext, name } = path.parse(filename);
+        const randomName = generateRandomString(8) + ext;
 
-      const { ext, name } = path.parse(filename);
-      const randomName = generateRandomString(8) + ext;
+        const stream = await createReadStream();
+        const pathName = path.join(__dirname, `../../uploads/${randomName}`);
 
-      const stream = await createReadStream();
-      const pathName = path.join(__dirname, `../../uploads/${randomName}`);
+        await new Promise((resolve, reject) => {
+          const writeStream = fs.createWriteStream(pathName);
+          stream.pipe(writeStream).on('finish', resolve).on('error', reject);
+        });
 
-      await new Promise((resolve, reject) => {
-        const writeStream = fs.createWriteStream(pathName);
-        stream.pipe(writeStream).on('finish', resolve).on('error', reject);
-      });
-
-      return {
-        url: `http://localhost:3000/uploads/${randomName}`,
-      };
+        const url = `http://localhost:3000/uploads/${randomName}`;
+        const user = await User.findByIdAndUpdate(
+          { _id: context.user._id },
+          { $set: { primaryPhoto: url } },
+          { new: true }
+        );
+        console.log(user);
+        return {
+          url: `http://localhost:3000/uploads/${randomName}`,
+        };
+      }
+      throw new AuthenticationError('You need to be logged in!');
     },
-    //   throw new AuthenticationError('You need to be logged in!');
-    // },
     // POST-CREATE new user
     addUser: async (parent, args) => {
       const user = await User.create(args);
+      console.log(args);
       const token = signToken(user);
       return { token, user };
     },

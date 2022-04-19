@@ -20,8 +20,8 @@ const DiscoverFeed = () => {
     },
   });
 
-  console.log(data_users)
-  console.log(data_users?.userMatches)
+  // console.log(data_users)
+  // console.log(data_users?.userMatches)
 
   // const [hover, setHover] = useState('false');
 
