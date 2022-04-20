@@ -25,14 +25,16 @@
 
 .profile-img-div h2 {
   font-size: 40px;
+  max-width: 75vw;
+  inline-size: 220px;
+  overflow-wrap: break-word;
   text-align: center;
-  /* transform: translateY(-28px); */
   font-weight: 300;
   position: absolute;
   left: 0;
   right: 0;
   margin: 0px auto;
-  top: -29px;
+  top: -25px;
 }
 
 .folls-div {
@@ -79,6 +81,10 @@
     width: 320px;
   }
 
+  .profile-img-div h2 {
+    inline-size: 320px;
+  }
+
   .folls-div {
     left: -85px;
     bottom: 50px;
@@ -100,8 +106,9 @@
   }
 
   .profile-img-div h2 {
-    font-size: 60px;
-    top: -45px;
+    font-size: 45px;
+    top: -35px;
+    inline-size: initial;
   }
 
   .folls-div {

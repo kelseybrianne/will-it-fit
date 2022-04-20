@@ -1,4 +1,5 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import './Closet.css';
 import Items from '../components/Items.js';
@@ -9,13 +10,18 @@ import profilePic from '../assets/images/atikh-bana-_KaMTEmJnxY-unsplash.jpg';
 import AddItem from '../components/AddItem';
 
 import { useMutation, useQuery } from '@apollo/client';
-import { GET_ME } from '../utils/queries';
-import DiscoverCarousel from '../components/DiscoverCarousel.js';
+import { GET_USER } from '../utils/queries';
 
 const Closet = ({ windowSize }) => {
-  const { loading, data } = useQuery(GET_ME);
+  let { username } = useParams();
 
-  const userData = data?.me || {};
+  const { loading, data } = useQuery(GET_USER, {
+    variables: {
+      username: username
+    },
+  });
+
+  const userData = data?.user || {};
   console.log(userData);
 
   return (
@@ -23,8 +29,8 @@ const Closet = ({ windowSize }) => {
       <div className="white-div"></div>
       <div className="profile-head">
         <div className="profile-img-div">
-          <img src={profilePic} />
-          <h2>rsherman</h2>
+          <img src={userData.primaryPhoto} />
+          <h2>{userData.username}</h2>
           <div className="folls-div">
             <a href="">
               <p>Following</p>
@@ -39,8 +45,7 @@ const Closet = ({ windowSize }) => {
           <AddItem />
         </div>
       </div>
-      {/* <DiscoverCarousel /> */}
-      <Items windowSize={windowSize} />
+      <Items userData={userData} windowSize={windowSize} />
     </div>
   );
 };

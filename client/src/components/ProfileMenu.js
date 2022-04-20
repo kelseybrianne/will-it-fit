@@ -7,14 +7,20 @@ import {
   MenuItem,
   Tooltip,
 } from '@mui/material';
+import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import LogoutIcon from '@mui/icons-material/Logout';
 import CheckroomIcon from '@mui/icons-material/Checkroom';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import auth from '../utils/auth';
-import { Link } from 'react-router-dom';
+import { useQuery } from '@apollo/client';
+import { GET_ME } from '../utils/queries';
 
 export default function ProfileMenu() {
+  const { loading, data } = useQuery(GET_ME);
+
+  const userData = data?.me || {};
+
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -53,7 +59,7 @@ export default function ProfileMenu() {
           </MenuItem>
         </Link>
         <Divider />
-        <Link to="/closet">
+        <Link to={`/closet/${userData.username}`}>
           <MenuItem>
             <ListItemIcon>
               <CheckroomIcon fontSize="small" />

@@ -48,7 +48,7 @@ function App() {
           <Routes>
             <Route path="/discover" element={<DiscoverFeed />} />
             <Route
-              path="/closet"
+              path="/closet/:username"
               element={<Closet windowSize={windowSize} />}
             />
           </Routes>
