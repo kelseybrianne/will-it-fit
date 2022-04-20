@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import './DiscoverCarousel.css';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
@@ -15,16 +15,19 @@ const DiscoverCarousel = () => {
 //   const carouselWidth = document.querySelector(
 //     '.carousel-container'
 //   ).offsetWidth();
-
+  const [currentPage, setCurrentPage] = useState(0);
   const ref = useRef();
 
   const nextPage = () => {
-    track.style.transform = `translateX(-${ref.current.offsetWidth}px`;
+    const newPage = currentPage + ref.current.offsetWidth
+    track.style.transform = `translateX(-${newPage}px`;
+    setCurrentPage(newPage);
+}
+const prevPage = () => {
+    const newPage = currentPage - ref.current.offsetWidth > 0 ? currentPage - ref.current.offsetWidth : 0
+    track.style.transform = `translateX(-${newPage}px)`;
+    setCurrentPage(newPage);
   }
-  const prevPage = () => {
-    track.style.transform = `translateX(${ref.current.offsetWidth}px`;
-  }
-
 
   const { data: data_me } = useQuery(GET_ME);
   console.log(data_me?.me.height);
