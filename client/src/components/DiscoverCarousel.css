@@ -12,6 +12,7 @@
 
 .carousel-container .track {
     display: flex;
+    transition: transform .5s;
 }
 
 .carousel-container .card-container {

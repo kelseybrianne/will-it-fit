@@ -25,7 +25,6 @@ const DiscoverFeed = () => {
   console.log(data_users);
   console.log(data_users?.userMatches);
 
-
   return (
     <div className="discover-feed-container">
       {/* <p className="view-closet">View Closet</p> */}
@@ -35,18 +34,18 @@ const DiscoverFeed = () => {
             ? data_users?.userMatches?.map(
                 ({ primaryPhoto, _id, username }) => (
                   <Link to={`/closet/${username}`}>
-                  <div
-                    key={_id}
-                    data-username={username}
-                    className={
-                      _id % 2 === 0
-                        ? 'img-div-even img-div'
-                        : 'img-div-odd img-div'
-                    }
-                  >
-                    <img alt="cool-pic" src={primaryPhoto} className="img" />
-                    <p className="view-closet">View Closet</p>
-                  </div>
+                    <div
+                      key={_id}
+                      data-username={username}
+                      className={
+                        _id % 2 === 0
+                          ? 'img-div-even img-div'
+                          : 'img-div-odd img-div'
+                      }
+                    >
+                      <img alt="cool-pic" src={primaryPhoto} className="img" />
+                      <p className="view-closet">View Closet</p>
+                    </div>
                   </Link>
                 )
               )
@@ -90,4 +89,3 @@ const images = [
 ];
 
 export default DiscoverFeed;
-
