@@ -1,5 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 const { Schema, model } = require('mongoose');
+let filter = require('leo-profanity');
 
 const itemSchema = new Schema(
   {
@@ -60,9 +61,23 @@ const itemSchema = new Schema(
       ref: 'User',
       required: true,
     },
+
+    review: {
+      type: String,
+    },
   },
   { timestamps: true }
 );
+
+itemSchema.pre('save', function (next) {
+  this.brand = filter.clean(this.brand);
+  this.name = filter.clean(this.name);
+  this.size = filter.clean(this.size);
+  this.link = filter.clean(this.link);
+  this.review = filter.clean(this.review);
+
+  next();
+});
 
 const Item = model('Item', itemSchema);
 

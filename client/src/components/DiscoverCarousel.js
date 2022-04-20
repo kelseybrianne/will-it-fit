@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import './DiscoverFeed.css';
+import './DiscoverCarousel.css';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import Auth from '../utils/auth';
@@ -8,7 +8,7 @@ import Auth from '../utils/auth';
 import { useQuery } from '@apollo/client';
 import { GET_USERMATCHES, GET_ME } from '../utils/queries';
 
-const DiscoverFeed = () => {
+const DiscoverCarousel = () => {
   const track = document.querySelector('.track');
 
   const [currentPage, setCurrentPage] = useState(0);
@@ -53,41 +53,33 @@ const DiscoverFeed = () => {
   });
 
   return (
-    <div className="carousel-div">
-      <div className="inner-carousel-div">
-        <div ref={ref} className="carousel-container" id="responsive-container">
-          <div className="carousel-inner">
-            <div className="track">
-              {Auth.loggedIn()
-                ? data_users?.userMatches?.map(
-                    ({ primaryPhoto, _id, username }) => (
-                      <Link to={`/closet/${username}`}>
-                        <div className="card-container">
-                          <img
-                            className="card"
-                            src={primaryPhoto}
-                            alt={username}
-                          />
-                        </div>
-                      </Link>
-                    )
-                  )
-                : images.map(({ id, img }) => (
-                    <div key={id} className="card-container" id="card-container">
-                      <img className="card" src={img} alt="profile-pic" />
+    <div ref={ref} className="carousel-container">
+      <div className="carousel-inner">
+        <div className="track">
+          {Auth.loggedIn()
+            ? data_users?.userMatches?.map(
+                ({ primaryPhoto, _id, username }) => (
+                  <Link to={`/closet/${username}`}>
+                    <div className="card-container">
+                      <img className="card" src={primaryPhoto} alt={username} />
                     </div>
-                  ))}
-            </div>
-          </div>
-          <div className="nav">
-            <button className="prev">
-              <ChevronLeftIcon onClick={prevPage} />
-            </button>
-            <button className="next">
-              <ChevronRightIcon onClick={nextPage} />
-            </button>
-          </div>
+                  </Link>
+                )
+              )
+            : images.map(({ id, img }) => (
+                <div key={id} className="card-container">
+                  <img className="card" src={img} alt="profile-pic" />
+                </div>
+              ))}
         </div>
+      </div>
+      <div className="nav">
+        <button className="prev">
+          <ChevronLeftIcon onClick={prevPage} />
+        </button>
+        <button className="next">
+          <ChevronRightIcon onClick={nextPage} />
+        </button>
       </div>
     </div>
   );
@@ -124,4 +116,4 @@ const images = [
   },
 ];
 
-export default DiscoverFeed;
+export default DiscoverCarousel;

@@ -13,7 +13,7 @@ const Header = () => {
     <header>
       <Nav />
 
-      <Link to="/">
+      <Link to={"/"}>
         <h1>Will It Fit?</h1>
       </Link>
 
