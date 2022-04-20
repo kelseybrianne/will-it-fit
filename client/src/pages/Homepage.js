@@ -3,7 +3,7 @@ import IconButton from '@mui/material/IconButton';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import './Closet.css';
-import Items from '../components/Items.js';
+import HomepageItems from '../components/HomepageItems';
 
 import { useQuery } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
@@ -30,7 +30,7 @@ const Homepage = ({ windowSize }) => {
         {/* toggle 'Following' and 'Follow' on click'*/}
         {/* <button className="unfollow">Following</button> */}
       </div>
-      <Items windowSize={windowSize} />
+      <HomepageItems windowSize={windowSize} />
     </div>
   );
 };

@@ -95,6 +95,7 @@ export const GET_ME = gql`
         review
       }
       following {
+        _id
         username
         weight
         height
@@ -235,6 +236,7 @@ export const GET_FOLLOWING = gql`
   query Query($id: ID!) {
     following(id: $id) {
       following {
+        _id
         username
         weight
         height

@@ -226,7 +226,7 @@ const resolvers = {
       if (context.user) {
         return await User.findById({ _id })
           .populate({
-            path: 'homepage',
+            path: 'following',
             populate: [
               '_id',
               'category',
