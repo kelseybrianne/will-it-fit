@@ -12,14 +12,20 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 // import CloseIcon from '@mui/icons-material/Close';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 // import ItemModal from './ItemModal.js';
 import './Items.css';
 import './ItemModal.css';
 
 import { useMutation } from '@apollo/client';
 import Auth from '../utils/auth';
+import { useQuery } from '@apollo/client';
+import { GET_ME } from '../utils/queries';
 
 const Items = ({ windowSize, userData }) => {
+  const { loading, data } = useQuery(GET_ME);
+  const me = data?.me || {};
+
   // handles opening and closing of MUI modal
   console.log(userData);
   const [open, setOpen] = React.useState(false);
@@ -65,7 +71,8 @@ const Items = ({ windowSize, userData }) => {
     e.stopPropagation();
     setAnchorEl(null);
   };
-
+  console.log(me.username);
+  console.log(userData.username);
   return (
     <div className="closet">
       <ImageList
@@ -89,9 +96,7 @@ const Items = ({ windowSize, userData }) => {
               }) => (
                 <div key={_id} className="item-list-wrapper cursor-pointer">
                   {/* substitute heart icon for MoreVertIcon when closet does not belong to the person who is logged in */}
-                  {/* <button>
-              <FavoriteBorderIcon className="heart-icon icon" />
-            </button> */}
+
                   <div
                     data-id={_id}
                     data-category={category}
@@ -105,14 +110,19 @@ const Items = ({ windowSize, userData }) => {
                     onClick={handleOpen}
                   >
                     <ImageListItem>
-                      <MoreVertIcon
-                        id="basic-button"
-                        aria-controls={openMenu ? 'basic-menu' : undefined}
-                        aria-haspopup="true"
-                        aria-expanded={openMenu ? 'true' : undefined}
-                        onClick={handleClick}
-                        className="more-icon icon"
-                      />
+                      {userData.username === me.username ? (
+                        <MoreVertIcon
+                          id="basic-button"
+                          aria-controls={openMenu ? 'basic-menu' : undefined}
+                          aria-haspopup="true"
+                          aria-expanded={openMenu ? 'true' : undefined}
+                          onClick={handleClick}
+                          className="more-icon icon"
+                        />
+                      ) : (
+                        <FavoriteBorderIcon className="heart-icon icon" />
+                      )}
+
                       <Menu
                         id="basic-menu"
                         elevation={0}
@@ -185,7 +195,11 @@ const Items = ({ windowSize, userData }) => {
                         </div>
                         <p>{`${modalItemProps.brand} ${modalItemProps.category}`}</p>
                         <p>Size: {modalItemProps.size}</p>
-                        <a href={modalItemProps.link} target="_blank" rel="noreferrer" >
+                        <a
+                          href={modalItemProps.link}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
                           <Button className="shop-btn" variant="contained">
                             Shop
                           </Button>
