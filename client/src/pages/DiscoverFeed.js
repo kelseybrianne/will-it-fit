@@ -44,13 +44,14 @@ const DiscoverFeed = () => {
   const { data: data_me } = useQuery(GET_ME);
   console.log(data_me?.me.height);
 
-  const { data: data_users } = useQuery(GET_USERMATCHES, {
-    skip: !data_me,
-    variables: {
-      height: data_me && data_me.me.height,
-      weight: data_me && data_me.me.weight,
-    },
-  });
+  const { data: data_users } = useQuery(GET_USERMATCHES)
+  
+  //   skip: !data_me,
+  //   variables: {
+  //     height: data_me && data_me.me.height,
+  //     weight: data_me && data_me.me.weight,
+  //   },
+  // });
 
   return (
     <div className="carousel-div">
@@ -62,7 +63,7 @@ const DiscoverFeed = () => {
                 ? data_users?.userMatches?.map(
                     ({ primaryPhoto, _id, username }) => (
                       <Link to={`/closet/${username}`}>
-                        <div className="card-container">
+                        <div className="card-container" id="card-container">
                           <img
                             className="card"
                             src={primaryPhoto}

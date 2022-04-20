@@ -2,6 +2,7 @@ import { useMutation } from '@apollo/client';
 import {
   Button,
   Container,
+  // eslint-disable-next-line no-unused-vars
   FormControl,
   InputAdornment,
   TextField,
@@ -15,6 +16,7 @@ import { ADD_USER } from '../../utils/mutations';
 
 /** This is a dialog form for signing up for an account */
 function SignUpForm({ setDialogState }) {
+  const [previewSource, setPreviewSource] = useState('');
   const [signup, { loading, error }] = useMutation(ADD_USER);
   const [formState, setFormState] = useState({
     username: '',
@@ -25,13 +27,52 @@ function SignUpForm({ setDialogState }) {
     shoeSize: '',
   });
 
+  let primaryPhoto = '';
+  // shows user image preview
+  const handleFileInputChange = (e) => {
+    const file = e.target.files[0];
+    previewFile(file);
+  };
+
+  const previewFile = (file) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setPreviewSource(reader.result);
+    };
+  };
+  // upload image to cloudinary, receive URL as res
+  const uploadImage = async (base64EncodedImage) => {
+    try {
+      const response = await fetch('/api/upload', {
+        method: 'POST',
+        body: JSON.stringify({ data: base64EncodedImage }),
+        headers: { 'content-type': 'application/json' },
+      });
+
+      if (response.ok) {
+        const url = await response.json();
+        primaryPhoto = url;
+      } else {
+        console.log(response);
+        return response;
+      }
+    } catch (error) {
+      return console.error(error);
+    }
+  };
+
   // submit form
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     try {
+      await uploadImage(previewSource);
+
       const { data } = await signup({
-        variables: { ...formState },
+        variables: { ...formState, primaryPhoto: primaryPhoto },
       });
+
+      // then grab the user token. This step redirects them to the main feed.
       auth.login(data.addUser.token);
       // clear form values
       setFormState({
@@ -110,6 +151,43 @@ function SignUpForm({ setDialogState }) {
         >
           Will It Fit?
         </Typography>
+        {/* image upload */}
+        <input
+          accept="image/*"
+          type="file"
+          encType="multipart/form-data"
+          id="select-image"
+          style={{ display: 'none' }}
+          onChange={handleFileInputChange}
+        />
+        <label htmlFor="select-image">
+          <Button
+            variant="contained"
+            className="MuiOutlinedInput-root"
+            sx={{
+              py: 1.5,
+              mb: 2,
+              fontFamily: 'var(--serif)',
+              textTransform: 'none',
+              width: '100%',
+              backgroundColor: '#5196B8',
+              ':hover': {
+                backgroundColor: '#5196B8AA',
+              },
+            }}
+            component="span"
+          >
+            Add Profile Photo
+          </Button>
+        </label>
+        {previewSource && (
+          <Box sx={{ justifyContent: 'center', textAlign: 'center' }}>
+            {/* <div>Image Preview:</div> */}
+            <img src={previewSource} alt={previewSource} height="100px" />
+          </Box>
+        )}
+
+        {/* Begin standard form questions */}
         <TextField
           autoFocus
           id="username"
@@ -169,6 +247,7 @@ function SignUpForm({ setDialogState }) {
           onChange={handleChange}
           value={formState.shoeSize}
         />
+
         {error ? <Typography>{handleError(error)}</Typography> : ''}
         <LoadingButton
           type="submit"

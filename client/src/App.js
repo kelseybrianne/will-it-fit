@@ -4,6 +4,7 @@ import {
   ApolloClient,
   ApolloProvider,
   InMemoryCache,
+  // eslint-disable-next-line no-unused-vars
   createHttpLink,
 } from '@apollo/client';
 import React from 'react';
@@ -16,6 +17,10 @@ import Homepage from './pages/Homepage';
 // import Router from './components/Router';
 
 // Construct our main GraphQL API endpoint
+// const httpLink = createHttpLink({
+//   uri: '/graphql',
+// });
+
 const httpLink = createHttpLink({
   uri: '/graphql',
 });
