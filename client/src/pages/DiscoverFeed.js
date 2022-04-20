@@ -66,6 +66,8 @@ const DiscoverFeed = () => {
                         <div className="card-container" id="card-container">
                           <img
                             className="card"
+                            // added contain property so large and horizontal images fit properly in gallery
+                            style = {{objectFit: 'contain'}}
                             src={primaryPhoto}
                             alt={username}
                           />

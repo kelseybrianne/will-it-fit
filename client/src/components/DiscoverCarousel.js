@@ -61,14 +61,14 @@ const DiscoverCarousel = () => {
                 ({ primaryPhoto, _id, username }) => (
                   <Link to={`/closet/${username}`}>
                     <div className="card-container">
-                      <img className="card" src={primaryPhoto} alt={username} />
+                      <img className="card" src={primaryPhoto} alt={username} style = {{objectFit: 'contain'}}/>
                     </div>
                   </Link>
                 )
               )
             : images.map(({ id, img }) => (
                 <div key={id} className="card-container">
-                  <img className="card" src={img} alt="profile-pic" />
+                  <img className="card" src={img} alt="profile-pic" style = {{objectFit: 'contain'}} />
                 </div>
               ))}
         </div>

@@ -33,7 +33,7 @@ const Closet = ({ windowSize }) => {
       <div className="white-div"></div>
       <div className="profile-head">
         <div className="profile-img-div">
-          <img src={userData.primaryPhoto} alt={userData.primaryPhoto}/>
+          <img src={userData.primaryPhoto} alt={userData.primaryPhoto} style = {{objectFit: 'contain'}}/>
           <h2>{userData.username}</h2>
           <div className="folls-div">
             <a href="tbd">
