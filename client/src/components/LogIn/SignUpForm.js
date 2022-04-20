@@ -163,11 +163,13 @@ function SignUpForm({ setDialogState }) {
         <label htmlFor="select-image">
           <Button
             variant="contained"
+            className="MuiOutlinedInput-root"
             sx={{
               py: 1.5,
               mb: 2,
               fontFamily: 'var(--serif)',
               textTransform: 'none',
+              width: '100%',
               backgroundColor: '#5196B8',
               ':hover': {
                 backgroundColor: '#5196B8AA',
@@ -179,7 +181,7 @@ function SignUpForm({ setDialogState }) {
           </Button>
         </label>
         {previewSource && (
-          <Box mt={2} textAlign="center">
+          <Box sx={{ justifyContent: 'center', textAlign: 'center' }}>
             {/* <div>Image Preview:</div> */}
             <img src={previewSource} alt={previewSource} height="100px" />
           </Box>
