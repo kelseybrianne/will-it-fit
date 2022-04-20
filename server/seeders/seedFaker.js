@@ -34,8 +34,7 @@ db.once('open', async () => {
     await Item.deleteMany({});
 
     let userData = [];
-    // console.log(itemIndex());
-    for (let i = 0; i < 500; i++) {
+    for (let i = 0; i < 5; i++) {
       // make a bunch of user data
 
       const firstName = faker.name.firstName();
@@ -43,7 +42,7 @@ db.once('open', async () => {
       const name = [firstName, lastName].join('');
 
       let closetData = [];
-      for (let i = 0; i < 5; i++) {
+      for (let i = 0; i < 2; i++) {
         let item = {
           category: randomCategory(),
           style: faker.commerce.productAdjective(),
@@ -61,7 +60,7 @@ db.once('open', async () => {
       }
       // create saved Items
       let savedItemData = [];
-      for (let i = 0; i < 5; i++) {
+      for (let i = 0; i < 2; i++) {
         let item = {
           category: randomCategory(),
           style: faker.commerce.productAdjective(),

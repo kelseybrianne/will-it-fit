@@ -5,8 +5,8 @@ const { signToken } = require('../utils/auth');
 const resolvers = {
   Query: {
     //Query users similar to user height and weight, by user id
-    userMatches: async (parent, args, {}) => {
-      console.log('inside user matches');
+    userMatches: async (parent, args, context) => {
+      // const user = await User.findById(context.user._id);
       // adjust these numbers higher to broaden the scope of the serach
       let heightVar = 0.03;
       let weightVar = 0.05;
@@ -14,14 +14,14 @@ const resolvers = {
         $and: [
           {
             height: {
-              $gte: args.height - args.height * heightVar,
-              $lt: args.height + args.height * heightVar,
+              $gte: context.user.height - context.user.height * heightVar,
+              $lt: context.user.height + context.user.height * heightVar,
             },
           },
           {
             weight: {
-              $gte: args.weight - args.weight * weightVar,
-              $lt: args.weight + args.weight * weightVar,
+              $gte: context.user.weight - context.user.weight * weightVar,
+              $lt: context.user.weight + context.user.weight * weightVar,
             },
           },
         ],
@@ -43,7 +43,6 @@ const resolvers = {
             'review',
           ],
         });
-      console.log(userMatches.length);
       // if no matches, return the closets of 15 random users.
       if (userMatches.length !== 0) {
         return userMatches;
@@ -96,47 +95,6 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
-    // GET logged in user
-    // me: async (parent, { _id } ) => {
-    //   if (context.user) {
-    //     return await User.findOne({ _id })
-    //       .populate('closet')
-    //       .populate({
-    //         path: 'closet',
-    //         populate: [
-    //           '_id',
-    //           'category',
-    //           'style',
-    //           'brand',
-    //           'name',
-    //           'gender',
-    //           'size',
-    //           'link',
-    //           'photo',
-    //           'color',
-    //           'review',
-    //         ],
-    //       })
-    //       .populate('savedItems')
-    //       .populate({
-    //         path: 'savedItems',
-    //         populate: [
-    //           '_id',
-    //           'category',
-    //           'style',
-    //           'brand',
-    //           'name',
-    //           'gender',
-    //           'size',
-    //           'link',
-    //           'photo',
-    //           'color',
-    //           'review',
-    //         ],
-    //       });
-    //   }
-    //   throw new AuthenticationError('You need to be logged in!');
-    // },
 
     me: async (parent, args, context) => {
       // if (context.user) {
