@@ -201,3 +201,25 @@ export const GET_FOLLOWING = gql`
     }
   }
 `;
+
+export const SEARCH_ITEMS = gql`
+  query Query($keyword: String) {
+    searchItems(keyword: $keyword) {
+      _id
+      category
+      style
+      brand
+      name
+      gender
+      size
+      link
+      photo
+      color
+      review
+      createdAt
+      height
+      weight
+      user_id
+    }
+  }
+`;
