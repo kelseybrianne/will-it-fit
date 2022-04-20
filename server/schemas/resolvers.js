@@ -220,8 +220,34 @@ const resolvers = {
       if (!context.user) {
         throw new AuthenticationError('You must be logged in to search');
       }
-      // $regex will scale poorly, but it works!
+
+      // show matches for 3% higher and lower
+      const multiplier = 0.03;
+      const { height, weight, _id: user_id } = context.user;
+
       const searchFilter = {
+        // match the similar height and weight
+        $and: [
+          {
+            height: {
+              $gte: height - height * multiplier,
+              $lt: height + height * multiplier,
+            },
+          },
+          {
+            weight: {
+              $gte: weight - weight * multiplier,
+              $lt: weight + weight * multiplier,
+            },
+          },
+          // not equal to the searching user's id
+          {
+            user_id: {
+              $ne: user_id,
+            },
+          },
+        ],
+        // $regex will scale poorly, but it works!
         $or: [
           { category: { $regex: keyword, $options: 'i' } },
           { style: { $regex: keyword, $options: 'i' } },
