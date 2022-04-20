@@ -15,6 +15,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import auth from '../utils/auth';
 import { useQuery } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
+import './ProfileMenu.css';
 
 export default function ProfileMenu() {
   const { loading, data } = useQuery(GET_ME);
@@ -43,7 +44,7 @@ export default function ProfileMenu() {
           {userData.primaryPhoto ? (
             <Avatar
               src={userData.primaryPhoto}
-              sx={{ width: 24, height: 24}}
+              sx={{ width: 30, height: 30}}
               style = {{objectFit:'contain'}}
               />
           ) : (
