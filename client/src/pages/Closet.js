@@ -39,7 +39,7 @@ const Closet = ({ windowSize }) => {
           <AddItem />
         </div>
       </div>
-      <DiscoverCarousel />
+      {/* <DiscoverCarousel /> */}
       <Items windowSize={windowSize} />
     </div>
   );

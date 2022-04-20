@@ -1,16 +1,46 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import './DiscoverFeed.css';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import Auth from '../utils/auth';
 
 import { useQuery } from '@apollo/client';
 import { GET_USERMATCHES, GET_ME } from '../utils/queries';
 
-// let viewClosetEl = document.querySelector('.view-closet');
-// let imgDivEl = document.querySelector('.img-div');
-
 const DiscoverFeed = () => {
-  // Get logged in user data so you can use the weight and height to get matching users data.
+  const track = document.querySelector('.track');
+
+  const [currentPage, setCurrentPage] = useState(0);
+  const ref = useRef();
+
+  const nextPage = () => {
+    let newPage;
+    // if width of container is less than 300px, only slide the width of one picture instead of by the width of the entire carousel container
+    ref.current.offsetWidth > 300
+      ? (newPage = currentPage + ref.current.offsetWidth)
+      : (newPage = currentPage + 200);
+
+    track.style.transform = `translateX(-${newPage}px`;
+    setCurrentPage(newPage);
+  };
+
+  const prevPage = () => {
+    let newPage;
+    // don't allow currentPage to go below 0
+    let newPageIsNotMobile =
+      currentPage - ref.current.offsetWidth > 0
+        ? currentPage - ref.current.offsetWidth
+        : 0;
+
+    ref.current.offsetWidth > 300
+      ? (newPage = newPageIsNotMobile)
+      : (newPage = currentPage - 200);
+
+    track.style.transform = `translateX(-${newPage}px)`;
+    setCurrentPage(newPage);
+  };
+
   const { data: data_me } = useQuery(GET_ME);
   console.log(data_me?.me.height);
 
@@ -22,39 +52,41 @@ const DiscoverFeed = () => {
     },
   });
 
-  console.log(data_users);
-  console.log(data_users?.userMatches);
-
   return (
-    <div className="discover-feed-container">
-      {/* <p className="view-closet">View Closet</p> */}
-      <div className="discover-container">
-        <div className="second-wrapper">
-          {Auth.loggedIn()
-            ? data_users?.userMatches?.map(
-                ({ primaryPhoto, _id, username }) => (
-                  <Link to={`/closet/${username}`}>
-                    <div
-                      key={_id}
-                      data-username={username}
-                      className={
-                        _id % 2 === 0
-                          ? 'img-div-even img-div'
-                          : 'img-div-odd img-div'
-                      }
-                    >
-                      <img alt="cool-pic" src={primaryPhoto} className="img" />
-                      <p className="view-closet">View Closet</p>
+    <div className="carousel-div">
+      <div className="inner-carousel-div">
+        <div ref={ref} className="carousel-container" id="responsive-container">
+          <div className="carousel-inner">
+            <div className="track">
+              {Auth.loggedIn()
+                ? data_users?.userMatches?.map(
+                    ({ primaryPhoto, _id, username }) => (
+                      <Link to={`/closet/${username}`}>
+                        <div className="card-container">
+                          <img
+                            className="card"
+                            src={primaryPhoto}
+                            alt={username}
+                          />
+                        </div>
+                      </Link>
+                    )
+                  )
+                : images.map(({ id, img }) => (
+                    <div key={id} className="card-container" id="card-container">
+                      <img className="card" src={img} alt="profile-pic" />
                     </div>
-                  </Link>
-                )
-              )
-            : images.map(({ id, img }) => (
-                <div key={id} className="img-div">
-                  <img alt="cool-pic" src={img} className="img" />
-                  {/* <p className="view-closet">View Closet</p> */}
-                </div>
-              ))}
+                  ))}
+            </div>
+          </div>
+          <div className="nav">
+            <button className="prev">
+              <ChevronLeftIcon onClick={prevPage} />
+            </button>
+            <button className="next">
+              <ChevronRightIcon onClick={nextPage} />
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -68,7 +100,7 @@ const images = [
   },
   {
     id: 2,
-    img: require('../assets/images/brooke-cagle-Ss3wTFJPAVY-unsplash.jpg'),
+    img: require('../assets/images/atikh-bana-_KaMTEmJnxY-unsplash.jpg'),
   },
   {
     id: 3,
@@ -85,6 +117,10 @@ const images = [
   {
     id: 6,
     img: require('../assets/images/huston-wilson-WyDr1KFS23Y-unsplash.jpg'),
+  },
+  {
+    id: 7,
+    img: require('../assets/images/brooke-cagle-Ss3wTFJPAVY-unsplash.jpg'),
   },
 ];
 
