@@ -23,29 +23,6 @@ const DiscoverFeed = () => {
   console.log(data_users)
   console.log(data_users?.userMatches)
 
-  // const [hover, setHover] = useState('false');
-
-  // if (imgDivEl) {
-  //   imgDivEl.addEventListener('mouseover', function (e) {
-  //     setHover('true');
-  //     viewClosetEl.style.top = e.pageY + 'px';
-  //     viewClosetEl.style.left = e.pageX + 'px';
-  //     viewClosetEl.style.display = 'block';
-  //   });
-  // }
-
-  // window.addEventListener('mousemove', cursor);
-
-  // function cursor(e) {
-  //   if (hover) {
-  //     viewClosetEl.style.top = e.pageY + 'px';
-  //     viewClosetEl.style.left = e.pageX + 'px';
-  //     viewClosetEl.style.display = 'block';
-  //   } else {
-  //     viewClosetEl.style.display = 'none';
-  //   }
-  // }
-
   return (
     <div className="discover-feed-container">
       {/* <p className="view-closet">View Closet</p> */}
