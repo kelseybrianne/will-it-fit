@@ -337,7 +337,16 @@ const resolvers = {
     // POST items to users' closet
     addItem: async (parent, args, context) => {
       if (context.user) {
-        const item = await new Item(args);
+        const { height, weight, _id } = context.user;
+        const item = await new Item({
+          // item args
+          ...args,
+
+          // user context stats
+          height,
+          weight,
+          user_id: _id,
+        });
         item.save();
         await User.findByIdAndUpdate(
           { _id: context.user._id },

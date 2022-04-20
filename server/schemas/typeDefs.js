@@ -46,6 +46,9 @@ const typeDefs = gql`
     color: String
     review: String
     createdAt: Float
+    height: Int
+    weight: Int
+    user_id: ID
   }
 
   type Auth {
