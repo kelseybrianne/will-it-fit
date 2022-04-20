@@ -26,6 +26,16 @@ const Search = () => {
     setSearchParams({ q: searchTerm });
   };
 
+  const calculateColumns = () => {
+    if (windowSize.width < 600) {
+      return 1;
+    }
+    if (windowSize.width < 900) {
+      return 2;
+    }
+    return 3;
+  };
+
   if (error) {
     return (
       <Container>
@@ -42,7 +52,7 @@ const Search = () => {
         sx={{
           pb: 2,
           display: 'grid',
-          textAlign: windowSize.width > 766 ? 'left' : 'center',
+          textAlign: 'center',
         }}
       >
         <TextField
@@ -66,17 +76,12 @@ const Search = () => {
       </Container>
       <Container>
         {loading ? 'Loading...' : ''}
-        <ImageList
-          variant="masonry"
-          cols={windowSize.width > 766 ? 3 : 2}
-          gap={windowSize.innerWidth > 339 ? 16 : 8}
-        >
+        <ImageList variant="masonry" cols={calculateColumns()} gap={8}>
           {data?.searchItems?.length ? (
-            data.searchItems.map((item) => (
-              <ImageListItem key={item.id}>
+            data.searchItems.map((item, index) => (
+              <ImageListItem key={item._id}>
                 <img
-                  src={item.photo}
-                  srcSet={item.photo}
+                  src={`${item.photo}?w=248&fit=crop&auto=format&random=${index}`}
                   alt={item.brand + ' ' + item.name + ' size ' + item.size}
                   loading="eager"
                 />
