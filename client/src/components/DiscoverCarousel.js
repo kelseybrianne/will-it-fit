@@ -4,18 +4,33 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import Auth from '../utils/auth';
 
+import { useQuery } from '@apollo/client';
+import { GET_USERMATCHES, GET_ME } from '../utils/queries';
+
 const DiscoverCarousel = () => {
+    const { data: data_me } = useQuery(GET_ME);
+    console.log(data_me?.me.height);
+  
+    const { data: data_users } = useQuery(GET_USERMATCHES, {
+      skip: !data_me,
+      variables: {
+        height: data_me && data_me.me.height,
+        weight: data_me && data_me.me.weight,
+      },
+    });
+
   return (
     <div className="carousel-container">
       <div className="carousel-inner">
         <div className="track">
-          {Auth.loggedIn() ? ( 
+          {Auth.loggedIn() ? data_users?.userMatches?.map(
+                ({ primaryPhoto, _id, username }) => ( 
             <div className="card-container">
-              <div className="card"></div>
+              <img className="card" src={primaryPhoto} alt={username} />
             </div>
-          ) : images.map(({ img }) => (
+          )) : images.map(({ img }) => (
             <div className="card-container">
-              <img className="card" src={img} />
+              <img className="card" src={img} alt="profile-pic" />
             </div>
           ))}
           <div className="card-container">
