@@ -31,13 +31,14 @@ const Items = ({ windowSize, userData }) => {
     size: '',
     link: '',
     photo: '',
-    review: ''
-  })
+    review: '',
+  });
 
   const handleOpen = (e) => {
     console.log(e.currentTarget);
-    const capitalizeFirstLetter = (str) => str.charAt(0).toUpperCase() + str.slice(1);
- 
+    const capitalizeFirstLetter = (str) =>
+      str.charAt(0).toUpperCase() + str.slice(1);
+
     setModalItemProps({
       _id: e.currentTarget.getAttribute('data-id'),
       category: e.currentTarget.getAttribute('data-category'),
@@ -47,9 +48,9 @@ const Items = ({ windowSize, userData }) => {
       link: e.currentTarget.getAttribute('data-link'),
       photo: e.currentTarget.getAttribute('data-photo'),
       review: e.currentTarget.getAttribute('data-review'),
-    })
+    });
     setOpen(true);
-  }
+  };
   const handleClose = () => setOpen(false);
 
   // more icon that opens edit/delete MUI menu
@@ -72,86 +73,45 @@ const Items = ({ windowSize, userData }) => {
         cols={windowSize.width > 766 ? 3 : 2}
         gap={window.innerWidth > 339 ? 16 : 8}
       >
-        {userData?.closet ? userData.closet.map(
-          ({
-            _id,
-            category,
-            brand,
-            gender,
-            name,
-            photo,
-            review,
-            size,
-            username,
-            link
-          }) => (
-            <div key={_id} className="item-list-wrapper">
-              {/* substitute heart icon for MoreVertIcon when closet does not belong to the person who is logged in */}
-              {/* <button>
+        {userData?.closet
+          ? userData.closet.map(
+              ({
+                _id,
+                category,
+                brand,
+                gender,
+                name,
+                photo,
+                review,
+                size,
+                username,
+                link,
+              }) => (
+                <div key={_id} className="item-list-wrapper cursor-pointer">
+                  {/* substitute heart icon for MoreVertIcon when closet does not belong to the person who is logged in */}
+                  {/* <button>
               <FavoriteBorderIcon className="heart-icon icon" />
             </button> */}
-              <div data-id={_id} data-category={category} data-brand={brand} data-name={name} data-size={size} data-link={link} data-photo={photo} data-review={review} type="button" onClick={handleOpen}>
-                <ImageListItem >
-                  <MoreVertIcon
-                    id="basic-button"
-                    aria-controls={openMenu ? 'basic-menu' : undefined}
-                    aria-haspopup="true"
-                    aria-expanded={openMenu ? 'true' : undefined}
-                    onClick={handleClick}
-                    className="more-icon icon"
-                  />
-                  <Menu
-                    id="basic-menu"
-                    elevation={0}
-                    className="dropdown-menu"
-                    anchorEl={anchorEl}
-                    open={openMenu}
-                    onClose={handleCloseMenu}
-                    MenuListProps={{
-                      'aria-labelledby': 'basic-button',
-                    }}
+                  <div
+                    data-id={_id}
+                    data-category={category}
+                    data-brand={brand}
+                    data-name={name}
+                    data-size={size}
+                    data-link={link}
+                    data-photo={photo}
+                    data-review={review}
+                    type="button"
+                    onClick={handleOpen}
                   >
-                    <MenuItem onClick={handleCloseMenu}>Edit</MenuItem>
-                    <MenuItem onClick={handleCloseMenu}>Delete</MenuItem>
-                  </Menu>
-                  <img
-                    src={`${photo}?w=248&fit=crop&auto=format`}
-                    srcSet={`${photo}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                    alt="alt goes here"
-                    loading="lazy"
-                    className="item-img"
-                  />
-                  <ImageListItemBar
-                    className="item-text"
-                    title={name}
-                    subtitle={`${brand} ${category}`}
-                    position="below"
-                  />
-                </ImageListItem>
-              </div>
-              {/* modularizing the item modal is currently not working */}
-              {/* <ItemModal /> */}
-              <Modal
-                aria-labelledby="unstyled-modal-title"
-                aria-describedby="unstyled-modal-description"
-                open={open}
-                onClose={handleClose}
-                BackdropComponent={Backdrop}
-              >
-                <Box sx={style} className="modal-box">
-                  <div className="item-modal-pic">
-                    <img src={modalItemProps.photo} alt="img" />
-                  </div>
-                  <div className="item-modal-text">
-                    <div className="item-name-more-div">
-                      <h1>{modalItemProps.name}</h1>
+                    <ImageListItem>
                       <MoreVertIcon
                         id="basic-button"
                         aria-controls={openMenu ? 'basic-menu' : undefined}
                         aria-haspopup="true"
                         aria-expanded={openMenu ? 'true' : undefined}
                         onClick={handleClick}
-                        className="icon-p"
+                        className="more-icon icon"
                       />
                       <Menu
                         id="basic-menu"
@@ -167,37 +127,94 @@ const Items = ({ windowSize, userData }) => {
                         <MenuItem onClick={handleCloseMenu}>Edit</MenuItem>
                         <MenuItem onClick={handleCloseMenu}>Delete</MenuItem>
                       </Menu>
-                    </div>
-                    <p>{`${modalItemProps.brand} ${modalItemProps.category}`}</p>
-                    <p>Size: {modalItemProps.size}</p>
-                    <Button className="shop-btn" variant="contained">
-                      Shop
-                    </Button>
-                    <div className="review-div">
-                      <div className="review-header">
-                        <div className="avatar-pic-div">
-                          <img
-                            src={userData?.primaryPhoto}
-                            alt="img-alt"
+                      <img
+                        src={`${photo}?w=248&fit=crop&auto=format`}
+                        srcSet={`${photo}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                        alt="alt goes here"
+                        loading="lazy"
+                        className="item-img"
+                      />
+                      <ImageListItemBar
+                        className="item-text"
+                        title={name}
+                        subtitle={`${brand} ${category}`}
+                        position="below"
+                      />
+                    </ImageListItem>
+                  </div>
+                  {/* modularizing the item modal is currently not working */}
+                  {/* <ItemModal /> */}
+                  <Modal
+                    aria-labelledby="unstyled-modal-title"
+                    aria-describedby="unstyled-modal-description"
+                    open={open}
+                    onClose={handleClose}
+                    BackdropComponent={Backdrop}
+                  >
+                    <Box sx={style} className="modal-box">
+                      <div className="item-modal-pic">
+                        <img src={modalItemProps.photo} alt="img" />
+                      </div>
+                      <div className="item-modal-text">
+                        <div className="item-name-more-div">
+                          <h1>{modalItemProps.name}</h1>
+                          <MoreVertIcon
+                            id="basic-button"
+                            aria-controls={openMenu ? 'basic-menu' : undefined}
+                            aria-haspopup="true"
+                            aria-expanded={openMenu ? 'true' : undefined}
+                            onClick={handleClick}
+                            className="icon-p"
                           />
+                          <Menu
+                            id="basic-menu"
+                            elevation={0}
+                            className="dropdown-menu"
+                            anchorEl={anchorEl}
+                            open={openMenu}
+                            onClose={handleCloseMenu}
+                            MenuListProps={{
+                              'aria-labelledby': 'basic-button',
+                            }}
+                          >
+                            <MenuItem onClick={handleCloseMenu}>Edit</MenuItem>
+                            <MenuItem onClick={handleCloseMenu}>
+                              Delete
+                            </MenuItem>
+                          </Menu>
                         </div>
-                        <div className="username-div">
-                          <Link to={`/closet/${userData.username}`}>
-                            <p className="username">{userData.username}</p>
-                          </Link>
-                          <p className="user-measurements-displayed">
-                            {userData.height}" | {userData.weight}lbs
+                        <p>{`${modalItemProps.brand} ${modalItemProps.category}`}</p>
+                        <p>Size: {modalItemProps.size}</p>
+                        <a href={modalItemProps.link} target="_blank" rel="noreferrer" >
+                          <Button className="shop-btn" variant="contained">
+                            Shop
+                          </Button>
+                        </a>
+                        <div className="review-div">
+                          <div className="review-header">
+                            <div className="avatar-pic-div">
+                              <img src={userData?.primaryPhoto} alt="img-alt" />
+                            </div>
+                            <div className="username-div">
+                              <Link to={`/closet/${userData.username}`}>
+                                <p className="username">{userData.username}</p>
+                              </Link>
+                              <p className="user-measurements-displayed">
+                                {userData.height}" | {userData.weight}lbs
+                              </p>
+                            </div>
+                          </div>
+                          <p className="review-content">
+                            {modalItemProps.review}
                           </p>
                         </div>
                       </div>
-                      <p className="review-content">{modalItemProps.review}</p>
-                    </div>
-                  </div>
-                </Box>
-              </Modal>
-            </div>
-          )
-        ) : "" }
+                    </Box>
+                  </Modal>
+                </div>
+              )
+            )
+          : ''}
       </ImageList>
     </div>
   );
@@ -240,7 +257,6 @@ const Backdrop = styled(BackdropUnstyled)`
   left: 0;
   background-color: rgba(0, 0, 0, 0.5);
   -webkit-tap-highlight-color: transparent;
-  opacity: 0.3;
 `;
 
 const style = (theme) => ({

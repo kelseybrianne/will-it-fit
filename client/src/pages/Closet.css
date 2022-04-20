@@ -16,11 +16,13 @@
   margin: 0px auto;
   position: relative;
   transform: translateY(-120px);
+  border-radius: 2px;
 }
 
 .profile-img-div img {
     height: 100%;
     width: 100%;
+    border-radius: 2px;
 }
 
 .profile-img-div h2 {
