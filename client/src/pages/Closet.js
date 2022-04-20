@@ -8,6 +8,7 @@ import Stack from '@mui/material/Stack';
 // import profilePic from '../assets/images/ivana-cajina-dnL6ZIpht2s-unsplash.jpg'
 import profilePic from '../assets/images/atikh-bana-_KaMTEmJnxY-unsplash.jpg';
 import AddItem from '../components/AddItem';
+import DiscoverCarousel from '../components/DiscoverCarousel';
 
 import { useMutation, useQuery } from '@apollo/client';
 import { GET_USER } from '../utils/queries';
@@ -45,6 +46,7 @@ const Closet = ({ windowSize }) => {
           <AddItem />
         </div>
       </div>
+      <DiscoverCarousel />
       <Items userData={userData} windowSize={windowSize} />
     </div>
   );

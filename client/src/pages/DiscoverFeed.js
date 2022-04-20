@@ -62,7 +62,7 @@ const DiscoverFeed = () => {
                 ? data_users?.userMatches?.map(
                     ({ primaryPhoto, _id, username }) => (
                       <Link to={`/closet/${username}`}>
-                        <div className="card-container">
+                        <div className="card-container" id="card-container">
                           <img
                             className="card"
                             src={primaryPhoto}
