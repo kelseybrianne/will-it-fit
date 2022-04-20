@@ -128,13 +128,12 @@ const Items = ({ windowSize, userData }) => {
                         <MenuItem onClick={handleCloseMenu}>Delete</MenuItem>
                       </Menu>
                       <img
-                        // added contain property so large and horizontal images fit properly in gallery
-                        style={{ objectFit: 'contain' }}
                         src={`${photo}?w=248&fit=crop&auto=format`}
                         srcSet={`${photo}?w=248&fit=crop&auto=format&dpr=2 2x`}
                         alt="alt goes here"
                         loading="lazy"
                         className="item-img"
+                        style={{ objectFit: 'contain' }}
                       />
                       <ImageListItemBar
                         className="item-text"
@@ -155,7 +154,11 @@ const Items = ({ windowSize, userData }) => {
                   >
                     <Box sx={style} className="modal-box">
                       <div className="item-modal-pic">
-                        <img src={modalItemProps.photo} alt="img" />
+                        <img
+                          src={modalItemProps.photo}
+                          alt="img"
+                          style={{ objectFit: 'contain' }}
+                        />
                       </div>
                       <div className="item-modal-text">
                         <div className="item-name-more-div">
@@ -194,9 +197,9 @@ const Items = ({ windowSize, userData }) => {
                           <div className="review-header">
                             <div className="avatar-pic-div">
                               <img
-                                style={{ objectFit: 'contain' }}
                                 src={userData?.primaryPhoto}
                                 alt="img-alt"
+                                style={{ objectFit: 'contain' }}
                               />
                             </div>
                             <div className="username-div">
