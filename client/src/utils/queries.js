@@ -35,6 +35,24 @@ export const GET_USER = gql`
         color
         review
       }
+      following {
+        username
+        weight
+        height
+        closet {
+          _id
+          category
+          style
+          brand
+          name
+          gender
+          size
+          link
+          photo
+          color
+          review
+        }
+      }
     }
   }
 `;
@@ -73,6 +91,24 @@ export const GET_ME = gql`
         photo
         color
         review
+      }
+      following {
+        username
+        weight
+        height
+        closet {
+          _id
+          category
+          style
+          brand
+          name
+          gender
+          size
+          link
+          photo
+          color
+          review
+        }
       }
     }
   }
@@ -194,9 +230,11 @@ export const GET_FOLLOWERS = gql`
 
 export const GET_FOLLOWING = gql`
   query Query($id: ID!) {
-    following(_id: $id) {
+    following(id: $id) {
       following {
-        _id
+        username
+        weight
+        height
       }
       closet {
         _id

@@ -1,0 +1,87 @@
+
+  
+  .folls-div {
+    display: flex;
+    text-align: flex-start;
+    padding: 10px;
+    transform: rotate(-90deg);
+    position: absolute;
+    left: -85px;
+    bottom: 50px;
+    font-size: 10px;
+  }
+  
+  .folls-div p {
+    margin-right: 10px;
+  }
+  
+  .profile-head button {
+    padding: 10px;
+    width: 130px;
+    height: 45px;
+    position: absolute;
+    bottom: -80px;
+    left: 0;
+    right: 0;
+    margin: 0px auto;
+    border: none;
+    border-radius: 2px !important;
+    background-color: white;
+    color: black;
+    display: inline;
+  }
+  
+  .profile-head button:hover {
+    background-color: rgb(249, 249, 249);
+  }
+  
+  .unfollow {
+    color: rgb(79, 79, 79);
+  }
+  
+  @media screen and (min-width: 500px) {
+    .profile-img-div {
+      width: 320px;
+    }
+  
+    .folls-div {
+      left: -85px;
+      bottom: 50px;
+    }
+  }
+  
+  @media screen and (min-width: 767px) {
+    .white-div {
+      height: 175px;
+    }
+  
+    .profile-img-div {
+      width: 35%;
+      height: auto;
+      max-width: 800px;
+      /* max-height: 600px; */
+      transform: translateY(-120px);
+      object-fit: cover;
+    }
+  
+    .profile-img-div h2 {
+      font-size: 60px;
+      top: -45px;
+    }
+  
+    .folls-div {
+      left: -100px;
+      bottom: 65px;
+      font-size: 12px;
+    }
+  
+    .folls-div p {
+      margin-right: 15px;
+      font-weight: 1;
+    }
+  
+    .profile-head button {
+      bottom: -90px;
+    }
+  }
+  
