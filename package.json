@@ -29,14 +29,7 @@
     "eslint-config-prettier": "8.4.0",
     "prettier": "2.5.1"
   },
-<<<<<<< HEAD
-  "browser": {
-    "fs": false,
-    "path": false,
-    "os": false
-=======
   "dependencies": {
     "leo-profanity": "^1.5.0"
->>>>>>> main
   }
 }
