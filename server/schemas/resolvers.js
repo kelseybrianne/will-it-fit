@@ -241,6 +241,17 @@ const resolvers = {
   Mutation: {
     // POST-CREATE new user
     addUser: async (parent, args) => {
+      const duplicateUsername = await User.findOne({ username: args.username });
+
+      if (duplicateUsername) {
+        throw new Error('This username is already taken');
+      }
+
+      const duplicateEmail = await User.findOne({ email: args.email });
+      if (duplicateEmail) {
+        throw new Error('This email is already taken');
+      }
+
       const user = await User.create(args);
       const token = signToken(user);
       return { token, user };
@@ -254,7 +265,7 @@ const resolvers = {
       }
       const correctPw = await user.isCorrectPassword(password);
       if (!correctPw) {
-        throw new AuthenticationError('Incorrect enmail or password entered');
+        throw new AuthenticationError('Hmm that does not match our records');
       }
 
       const token = signToken(user);
