@@ -14,7 +14,8 @@ import MenuItem from '@mui/material/MenuItem';
 // import ItemModal from './ItemModal.js';
 import './Items.css';
 import './ItemModal.css';
-
+import IconButton from '@mui/material/IconButton';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import { useMutation, useQuery } from '@apollo/client';
 import Auth from '../utils/auth';
 import { GET_ME } from '../utils/queries';
@@ -28,8 +29,11 @@ const Items = ({ windowSize }) => {
   const { loading, data } = useQuery(GET_ME);
 
   const userData = data?.me || {};
+  
+  const [follow, setFollow] = React.useState(false);
 
-  // more icon that opens edit/delete MUI menu 
+
+  // more icon that opens edit/delete MUI menu
   const [anchorEl, setAnchorEl] = React.useState(null);
   const openMenu = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -86,6 +90,15 @@ const Items = ({ windowSize }) => {
                   loading="lazy"
                   className="item-img"
                 />
+                <IconButton
+                  value="check"
+                  selected={follow}
+                  onChange={() => {
+                    setFollow(!follow);
+                  }}
+                >
+                  <FavoriteIcon className="unfollow" />
+                </IconButton>
                 <ImageListItemBar
                   className="item-text"
                   title="Name"

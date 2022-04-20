@@ -1,5 +1,5 @@
 import React from 'react';
-import ToggleButton from '@mui/material/ToggleButton';
+import IconButton from '@mui/material/IconButton';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import './Closet.css';
@@ -15,40 +15,24 @@ const Homepage = ({ windowSize }) => {
 
   const [follow, setFollow] = React.useState(false);
 
-
   return (
     <div className="profile-page">
       <div className="profile-head">
-           <ToggleButton
-      value="check"
-      selected={follow}
-      onChange={() => {
-        setFollow(!follow);
-        
-      }}
-    >
-      <FavoriteIcon className="unfollow" />
-    </ToggleButton>
-    {/* toggle 'Following' and 'Follow' on click'*/} 
+        {/* <IconButton
+          value="check"
+          selected={follow}
+          onChange={() => {
+            setFollow(!follow);
+          }}
+        >
+          <FavoriteIcon className="unfollow" />
+        </IconButton> */}
+        {/* toggle 'Following' and 'Follow' on click'*/}
         {/* <button className="unfollow">Following</button> */}
       </div>
       <Items windowSize={windowSize} />
-   
- 
-</div>
-
-
+    </div>
   );
 };
-
- 
-
-
-
-
-
-
-
-
 
 export default Homepage;
