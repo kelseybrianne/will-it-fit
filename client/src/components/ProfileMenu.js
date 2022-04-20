@@ -40,7 +40,14 @@ export default function ProfileMenu() {
           aria-haspopup="true"
           aria-expanded={open ? 'true' : undefined}
         >
-          <Avatar sx={{ width: 24, height: 24 }} />
+          {userData.primaryPhoto ? (
+            <Avatar
+              src={userData.primaryPhoto}
+              sx={{ width: 24, height: 24 }}
+            />
+          ) : (
+            <Avatar sx={{ width: 24, height: 24 }} />
+          )}
         </IconButton>
       </Tooltip>
       <Drawer
@@ -53,7 +60,14 @@ export default function ProfileMenu() {
         <Link to="/profile">
           <MenuItem>
             <ListItemIcon>
-              <Avatar sx={{ width: 24, height: 24 }} />
+              {userData.primaryPhoto ? (
+                <Avatar
+                  src={userData.primaryPhoto}
+                  sx={{ width: 24, height: 24 }}
+                />
+              ) : (
+                <Avatar sx={{ width: 24, height: 24 }} />
+              )}
             </ListItemIcon>
             edit profile
           </MenuItem>
