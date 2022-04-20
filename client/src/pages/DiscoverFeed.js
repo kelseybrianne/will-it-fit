@@ -1,5 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './DiscoverFeed.css';
+import Auth from '../utils/auth';
 
 import { useQuery } from '@apollo/client';
 import { GET_USERMATCHES, GET_ME } from '../utils/queries';
@@ -20,26 +22,40 @@ const DiscoverFeed = () => {
     },
   });
 
-  console.log(data_users)
-  console.log(data_users?.userMatches)
+  console.log(data_users);
+  console.log(data_users?.userMatches);
+
 
   return (
     <div className="discover-feed-container">
       {/* <p className="view-closet">View Closet</p> */}
       <div className="discover-container">
         <div className="second-wrapper">
-          {data_users?.userMatches?.map(({ primaryPhoto, _id, username }) => (
-            <div
-              key={_id}
-              data-username={username}
-              className={
-                _id % 2 === 0 ? 'img-div-even img-div' : 'img-div-odd img-div'
-              }
-            >
-              <img alt="cool-pic" src={primaryPhoto} className="img" />
-              <p className="view-closet">View Closet</p>
-            </div>
-          ))}
+          {Auth.loggedIn()
+            ? data_users?.userMatches?.map(
+                ({ primaryPhoto, _id, username }) => (
+                  <Link to={`/closet/${username}`}>
+                  <div
+                    key={_id}
+                    data-username={username}
+                    className={
+                      _id % 2 === 0
+                        ? 'img-div-even img-div'
+                        : 'img-div-odd img-div'
+                    }
+                  >
+                    <img alt="cool-pic" src={primaryPhoto} className="img" />
+                    <p className="view-closet">View Closet</p>
+                  </div>
+                  </Link>
+                )
+              )
+            : images.map(({ id, img }) => (
+                <div key={id} className="img-div">
+                  <img alt="cool-pic" src={img} className="img" />
+                  {/* <p className="view-closet">View Closet</p> */}
+                </div>
+              ))}
         </div>
       </div>
     </div>
@@ -74,3 +90,4 @@ const images = [
 ];
 
 export default DiscoverFeed;
+

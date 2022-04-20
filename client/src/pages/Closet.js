@@ -10,7 +10,7 @@ import AddItem from '../components/AddItem';
 
 import { useMutation, useQuery } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
-import DiscoverCarousel from '../components/DiscoverCarousel';
+import DiscoverCarousel from '../components/DiscoverCarousel.js';
 
 const Closet = ({ windowSize }) => {
   const { loading, data } = useQuery(GET_ME);
