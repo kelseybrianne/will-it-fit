@@ -6,19 +6,56 @@ import TextareaAutosize from '@mui/base/TextareaAutosize';
 import { Button, Typography, Container, Dialog } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
 
-import background from '../assets/images/ihssan-rami-azouagh-1YCKCCrLEbU-unsplash.jpg';
-
 // graphQL:
 import { useMutation } from '@apollo/client';
 import { ADD_ITEM } from '../utils/mutations';
 
-// array to make the gender a drop down
+let filter = require('leo-profanity');
+
+// *arrays for drop downs*:
+
+// category
+const categoryDB = [
+  { label: 'Shoes', value: 'Shoes' },
+  { label: 'Socks', value: 'Socks' },
+  { label: 'Pants', value: 'Pants' },
+  { label: 'Jeans', value: 'Jeans' },
+  { label: 'Leggings', value: 'Leggings' },
+  { label: 'Skirts', value: 'Skirt' },
+  { label: 'Dresses', value: 'Dresses' },
+  { label: 'T-shirt', value: 'Tshirt' },
+  { label: 'Button-up Shirt', value: 'Button-up' },
+  { label: 'Tank-top', value: 'Tank' },
+  { label: 'Active', value: 'Active' },
+  { label: 'Jacket', value: 'Jacket' },
+  { label: 'Swimwear', value: 'Swimwear' },
+  { label: 'Outdoor Wear', value: 'Outdoor' },
+  { label: 'Hats', value: 'Hat' },
+];
+
+// style
+const styleDB = [
+  { label: 'Street Wear', value: 'Street' },
+  { label: 'Formal Wear', value: 'Formal' },
+  { label: 'Vintage', value: 'Vintage' },
+  { label: 'Sporty', value: 'Sport' },
+  { label: 'Artsy', value: 'Artsy' },
+  { label: 'Casual', value: 'Casual' },
+  { label: 'Business Casual', value: 'Business' },
+  { label: 'Exotic', value: 'Exotic' },
+  { label: 'Outerwear', value: 'Outerwear' },
+  { label: 'Maternity', value: 'Maternity' },
+  { label: 'Sleepwear', value: 'Sleep' },
+  { label: 'Other', value: 'Other' },
+];
+
+// gender
 const genderDB = [
   { label: 'Womens', value: 'Womens' },
   { label: 'Mens', value: 'Mens' },
   { label: 'Unisex', value: 'Unisex' },
 ];
-// array of colors for the drop down
+//  colors
 const colorDB = [
   { label: 'Red', value: 'Red' },
   { label: 'Orange', value: 'Orange' },
@@ -37,11 +74,11 @@ const AddItem = () => {
   const [open, setOpen] = React.useState(false);
   const [previewSource, setPreviewSource] = React.useState(null);
   const [userFormData, setUserFromData] = React.useState({
+    name: '',
     category: '',
     size: '',
     style: '',
     brand: '',
-    name: '',
     gender: '',
     link: '',
     color: '',
@@ -104,11 +141,11 @@ const AddItem = () => {
       console.error(e);
     }
     setUserFromData({
+      name: '',
       category: '',
       size: '',
       style: '',
       brand: '',
-      name: '',
       gender: '',
       link: '',
       color: '',
@@ -128,11 +165,12 @@ const AddItem = () => {
         Add Item
       </Button>
 
-      <div style={{ backgroundImage: `url(${background})` }}>
+      <div>
         <Dialog open={open} onClose={() => setOpen(false)} id="form">
           <Container
             sx={{
-              maxWidth: 320,
+              backgroundColor: 'linen',
+              maxWidth: 500,
             }}
           >
             <Box
@@ -144,86 +182,100 @@ const AddItem = () => {
                 flexDirection: 'column',
                 justifyContent: 'center',
                 alignContent: 'center',
-                textAlign: 'center',
+                gap: 1,
               }}
             >
               <Typography
                 variant="h1"
                 sx={{
                   fontFamily: 'var(--serif)',
+                  textAlign: 'center',
                   fontSize: 20,
-                  py: 2,
+                  py: 1,
                 }}
               >
                 Add An Item:
               </Typography>
 
-              {/* category */}
-
-              <TextField
-                inputStyle={{ textAlign: 'center' }}
-                name="category"
-                label="* Category"
-                variant="filled"
-                margin="dense"
-                onChange={handleChange}
-                value={userFormData.category}
-              />
-
-              {/* size */}
-
-              <TextField
-                name="size"
-                label="* Size"
-                variant="filled"
-                margin="dense"
-                onChange={handleChange}
-                value={userFormData.size}
-              />
-
-              {/* style */}
-
-              <TextField
-                name="style"
-                label="Style"
-                variant="filled"
-                margin="dense"
-                onChange={handleChange}
-                value={userFormData.style}
-              />
-
-              {/* brand */}
-
-              <TextField
-                name="brand"
-                label="Brand"
-                variant="filled"
-                margin="dense"
-                onChange={handleChange}
-                value={userFormData.brand}
-              />
-
               {/* name */}
-
               <TextField
                 name="name"
                 label="* Name"
-                variant="filled"
                 margin="dense"
                 onChange={handleChange}
-                value={userFormData.name}
+                value={filter.clean(userFormData.name)}
+                sx={{ backgroundColor: 'white' }}
+              />
+
+              {/* category */}
+              <TextField
+                name="category"
+                label="* Category"
+                sx={{ backgroundColor: 'white' }}
+                margin="dense"
+                onChange={handleChange}
+                value={userFormData.category}
+                select
+              >
+                {categoryDB.map((option) => (
+                  <MenuItem
+                    size="large"
+                    key={option.value}
+                    value={option.value}
+                  >
+                    {option.label}
+                  </MenuItem>
+                ))}
+              </TextField>
+
+              {/* size */}
+              <TextField
+                name="size"
+                // label= '* Size'
+                label="* Size"
+                sx={{ backgroundColor: 'white' }}                margin="dense"
+                onChange={handleChange}
+                value={filter.clean(userFormData.size)}
+              />
+              
+              {/* style */}
+              <TextField
+                name="style"
+                label="Style"
+                sx={{ backgroundColor: 'white' }}                margin="dense"
+                onChange={handleChange}
+                value={userFormData.style}
+                select
+              >
+                {styleDB.map((option) => (
+                  <MenuItem
+                    size="large"
+                    key={option.value}
+                    value={option.value}
+                  >
+                    {option.label}
+                  </MenuItem>
+                ))}
+              </TextField>
+
+              {/* brand */}
+              <TextField
+                name="brand"
+                label="Brand"
+                sx={{ backgroundColor: 'white' }}                
+                margin="dense"
+                onChange={handleChange}
+                value={filter.clean(userFormData.brand)}
               />
 
               {/* gender - drop down menu */}
-
               <TextField
                 name="gender"
                 select
                 value={userFormData.gender}
                 label="Gender"
                 margin="dense"
-                variant="filled"
-                onChange={handleChange}
+                sx={{ backgroundColor: 'white' }}                onChange={handleChange}
               >
                 {genderDB.map((option) => (
                   <MenuItem
@@ -237,26 +289,22 @@ const AddItem = () => {
               </TextField>
 
               {/* link */}
-
               <TextField
                 name="link"
                 label="Link"
                 margin="dense"
-                variant="filled"
-                onChange={handleChange}
-                value={userFormData.link}
+                sx={{ backgroundColor: 'white' }}                onChange={handleChange}
+                value={filter.clean(userFormData.link)}
               />
 
               {/* color */}
-
               <TextField
                 name="color"
                 select
                 value={userFormData.color}
                 label="Color"
                 margin="dense"
-                variant="filled"
-                onChange={handleChange}
+                sx={{ backgroundColor: 'white' }}               onChange={handleChange}
               >
                 {colorDB.map((option) => (
                   <MenuItem
@@ -280,7 +328,7 @@ const AddItem = () => {
                 placeholder="Add your review here:"
                 style={{ m: 1, width: 450, fontFamily: 'var(--sans)' }}
                 onChange={handleChange}
-                value={userFormData.review}
+                value={filter.clean(userFormData.review)}
               />
 
               {/* image upload */}
