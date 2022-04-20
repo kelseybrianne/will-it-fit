@@ -215,6 +215,27 @@ const resolvers = {
       ]);
     },
 
+    // GET items that match the keyword and the user's stats
+    searchItems: async (parent, { keyword }, context) => {
+      if (!context.user) {
+        throw new AuthenticationError('You must be logged in to search');
+      }
+      // $regex will scale poorly, but it works!
+      const searchFilter = {
+        $or: [
+          { category: { $regex: keyword, $options: 'i' } },
+          { style: { $regex: keyword, $options: 'i' } },
+          { brand: { $regex: keyword, $options: 'i' } },
+          { name: { $regex: keyword, $options: 'i' } },
+          { size: { $regex: keyword, $options: 'i' } },
+          { color: { $regex: keyword, $options: 'i' } },
+          { review: { $regex: keyword, $options: 'i' } },
+        ],
+      };
+
+      return await Item.find(searchFilter);
+    },
+
     // GET user closet (ITEMS), based on user id entered in args
     closet: async (parent, { _id }, context) => {
       if (context.user) {

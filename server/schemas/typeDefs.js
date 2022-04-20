@@ -45,6 +45,7 @@ const typeDefs = gql`
     photo: String!
     color: String
     review: String
+    createdAt: Float
   }
 
   type Auth {
@@ -67,6 +68,8 @@ const typeDefs = gql`
 
     following(_id: ID!): User
     followers(_id: ID!): User
+
+    searchItems(keyword: String): [Item]
   }
 
   type Mutation {
