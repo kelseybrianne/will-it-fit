@@ -16,7 +16,6 @@ import { ADD_USER } from '../../utils/mutations';
 
 /** This is a dialog form for signing up for an account */
 function SignUpForm({ setDialogState }) {
-
   const [previewSource, setPreviewSource] = useState('');
   const [signup, { loading, error }] = useMutation(ADD_USER);
   const [formState, setFormState] = useState({
@@ -162,8 +161,21 @@ function SignUpForm({ setDialogState }) {
           onChange={handleFileInputChange}
         />
         <label htmlFor="select-image">
-          <Button variant="contained" color="primary" component="span">
-            Upload Image
+          <Button
+            variant="contained"
+            sx={{
+              py: 1.5,
+              mb: 2,
+              fontFamily: 'var(--serif)',
+              textTransform: 'none',
+              backgroundColor: '#5196B8',
+              ':hover': {
+                backgroundColor: '#5196B8AA',
+              },
+            }}
+            component="span"
+          >
+            Add Profile Photo
           </Button>
         </label>
         {previewSource && (
