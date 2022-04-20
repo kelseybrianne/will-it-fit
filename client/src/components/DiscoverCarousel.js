@@ -9,25 +9,37 @@ import { useQuery } from '@apollo/client';
 import { GET_USERMATCHES, GET_ME } from '../utils/queries';
 
 const DiscoverCarousel = () => {
-  const prev = document.querySelector('.prev');
-  const next = document.querySelector('.next');
   const track = document.querySelector('.track');
-//   const carouselWidth = document.querySelector(
-//     '.carousel-container'
-//   ).offsetWidth();
+
   const [currentPage, setCurrentPage] = useState(0);
   const ref = useRef();
 
   const nextPage = () => {
-    const newPage = currentPage + ref.current.offsetWidth
+    let newPage;
+    // if width of container is less than 300px, only slide the width of one picture instead of by the width of the entire carousel container
+    ref.current.offsetWidth > 300
+      ? (newPage = currentPage + ref.current.offsetWidth)
+      : (newPage = currentPage + 200);
+
     track.style.transform = `translateX(-${newPage}px`;
     setCurrentPage(newPage);
-}
-const prevPage = () => {
-    const newPage = currentPage - ref.current.offsetWidth > 0 ? currentPage - ref.current.offsetWidth : 0
+  };
+
+  const prevPage = () => {
+    let newPage;
+    // don't allow currentPage to go below 0
+    let newPageIsNotMobile =
+      currentPage - ref.current.offsetWidth > 0
+        ? currentPage - ref.current.offsetWidth
+        : 0;
+
+    ref.current.offsetWidth > 300
+      ? (newPage = newPageIsNotMobile)
+      : (newPage = currentPage - 200);
+
     track.style.transform = `translateX(-${newPage}px)`;
     setCurrentPage(newPage);
-  }
+  };
 
   const { data: data_me } = useQuery(GET_ME);
   console.log(data_me?.me.height);
@@ -59,15 +71,6 @@ const prevPage = () => {
                   <img className="card" src={img} alt="profile-pic" />
                 </div>
               ))}
-          <div className="card-container">
-            <div className="card"></div>
-          </div>
-          <div className="card-container">
-            <div className="card"></div>
-          </div>
-          <div className="card-container">
-            <div className="card"></div>
-          </div>
         </div>
       </div>
       <div className="nav">
