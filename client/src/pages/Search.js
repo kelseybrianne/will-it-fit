@@ -18,7 +18,7 @@ const Search = () => {
   let [searchParams, setSearchParams] = useSearchParams();
   const [searchTerm, setSearchTerm] = useState(searchParams.get('q') || '');
   const windowSize = useWindowSize();
-  const { loading, data } = useQuery(SEARCH_ITEMS, {
+  const { loading, data, error } = useQuery(SEARCH_ITEMS, {
     variables: { keyword: searchParams.get('q') || '' },
   });
   const handleSubmit = (e) => {
@@ -26,11 +26,25 @@ const Search = () => {
     setSearchParams({ q: searchTerm });
   };
 
-  console.log({ data });
+  if (error) {
+    return (
+      <Container>
+        <Typography>{error.message}</Typography>
+      </Container>
+    );
+  }
 
   return (
     <>
-      <Container component={'form'} onSubmit={handleSubmit}>
+      <Container
+        component={'form'}
+        onSubmit={handleSubmit}
+        sx={{
+          pb: 2,
+          display: 'grid',
+          textAlign: windowSize.width > 766 ? 'left' : 'center',
+        }}
+      >
         <TextField
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
@@ -40,6 +54,10 @@ const Search = () => {
                 <SearchIcon />
               </InputAdornment>
             ),
+          }}
+          sx={{
+            margin: 'auto',
+            borderRadius: '2px',
           }}
         />
         <Typography variant="h2">
@@ -53,24 +71,29 @@ const Search = () => {
           cols={windowSize.width > 766 ? 3 : 2}
           gap={windowSize.innerWidth > 339 ? 16 : 8}
         >
-          {data
-            ? data.searchItems.map((item) => (
-                <ImageListItem key={item.id}>
-                  <img
-                    src={item.photo}
-                    srcSet={item.photo}
-                    alt={item.brand + ' ' + item.name + ' size ' + item.size}
-                    loading="eager"
-                  />
-                  <ImageListItemBar
-                    className="item-text"
-                    title={item.brand + ' ' + item.name}
-                    subtitle={item.category + ' size ' + item.size}
-                    position="below"
-                  />
-                </ImageListItem>
-              ))
-            : ''}
+          {data?.searchItems?.length ? (
+            data.searchItems.map((item) => (
+              <ImageListItem key={item.id}>
+                <img
+                  src={item.photo}
+                  srcSet={item.photo}
+                  alt={item.brand + ' ' + item.name + ' size ' + item.size}
+                  loading="eager"
+                />
+                <ImageListItemBar
+                  className="item-text"
+                  title={item.brand + ' ' + item.name}
+                  subtitle={item.category + ' size ' + item.size}
+                  position="below"
+                  sx={{
+                    width: '100%',
+                  }}
+                />
+              </ImageListItem>
+            ))
+          ) : (
+            <Typography>No results found</Typography>
+          )}
         </ImageList>
       </Container>
     </>
