@@ -34,7 +34,7 @@ db.once('open', async () => {
     await Item.deleteMany({});
 
     // console.log(itemIndex());
-    for (let i = 0; i < 250; i++) {
+    for (let i = 0; i < 500; i++) {
       // make a bunch of user data
       const firstName = faker.name.firstName();
       const lastName = faker.name.lastName();
@@ -49,10 +49,11 @@ db.once('open', async () => {
         primaryPhoto: faker.image.avatar(),
         closet: [],
         savedItems: [],
+        followers: [],
+        following: [],
       });
 
       await newUser.save();
-
       for (let i = 0; i < 5; i++) {
         let item = {
           category: randomCategory(),
@@ -62,7 +63,7 @@ db.once('open', async () => {
           gender: gender(),
           size: faker.mersenne.rand(0, 20),
           link: faker.internet.url(),
-          photo: 'https://source.unsplash.com/300x200?clothes',
+          photo: 'https://source.unsplash.com/300x300?clothes',
           color: faker.internet.color(),
           review: faker.commerce.productDescription(),
           height: newUser.height,
@@ -82,7 +83,7 @@ db.once('open', async () => {
           gender: gender(),
           size: faker.mersenne.rand(0, 20),
           link: faker.internet.url(),
-          photo: faker.image.fashion(),
+          photo: 'https://source.unsplash.com/300x300?clothes',
           color: faker.internet.color(),
           review: faker.commerce.productDescription(),
           height: newUser.height,

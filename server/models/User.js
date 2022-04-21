@@ -42,6 +42,7 @@ const userSchema = new Schema(
 
     primaryPhoto: {
       type: String,
+      required: [true, 'photo is required'],
     },
 
     following: [
@@ -68,6 +69,7 @@ const userSchema = new Schema(
     toJSON: {
       virtuals: true,
     },
+    timestamps: true,
   }
 );
 

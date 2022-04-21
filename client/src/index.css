@@ -8,3 +8,7 @@ a {
   color: inherit;
 }
 
+.cursor-pointer {
+  cursor: pointer;
+}
+
