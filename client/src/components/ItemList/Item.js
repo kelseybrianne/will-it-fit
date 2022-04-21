@@ -71,7 +71,7 @@ export default function Item({ item }) {
     review,
     size,
     link,
-    user_id,
+    user,
     height,
     weight,
   } = item;
@@ -194,11 +194,11 @@ export default function Item({ item }) {
             <div className="review-div">
               <div className="review-header">
                 <div className="avatar-pic-div">
-                  <img src={'TODO'} alt="img-alt" />
+                  <img src={user.primaryPhoto} alt="img-alt" />
                 </div>
                 <div className="username-div-modal">
-                  <Link to={`/closet/${'TODO'}`}>
-                    <p className="username">{'TODO'}</p>
+                  <Link to={`/closet/${user.username}`}>
+                    <p className="username">{user.username}</p>
                   </Link>
                   <p className="user-measurements-displayed">
                     {height}" | {weight}lbs

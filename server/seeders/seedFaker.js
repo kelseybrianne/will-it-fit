@@ -129,6 +129,7 @@ db.once('open', async () => {
           height: newUser.height,
           weight: newUser.weight,
           user_id: newUser._id,
+          user: newUser._id,
         };
         let itemData = await Item.create(item);
         newUser.closet.push(itemData._id);
@@ -149,6 +150,7 @@ db.once('open', async () => {
           height: newUser.height,
           weight: newUser.weight,
           user_id: newUser._id,
+          user: newUser._id,
         };
         let itemData = await Item.create(item);
         newUser.savedItems.push(itemData._id);

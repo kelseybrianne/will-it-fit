@@ -217,7 +217,7 @@ const resolvers = {
         ],
       };
 
-      return await Item.find(searchFilter);
+      return await Item.find(searchFilter).populate('user');
     },
 
     // GET user closet (ITEMS), based on user id entered in args

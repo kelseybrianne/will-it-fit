@@ -222,7 +222,10 @@ export const SEARCH_ITEMS = gql`
       createdAt
       height
       weight
-      user_id
+      user {
+        primaryPhoto
+        username
+      }
     }
   }
 `;
