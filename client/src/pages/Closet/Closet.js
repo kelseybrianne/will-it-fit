@@ -3,18 +3,18 @@ import { useParams } from 'react-router-dom';
 // eslint-disable-next-line no-unused-vars
 import Button from '@mui/material/Button';
 import './Closet.css';
-import Items from '../components/Items.js';
+import Items from '../../components/ClosetItems/Items.js';
 // eslint-disable-next-line no-unused-vars
 import Stack from '@mui/material/Stack';
 // import profilePic from '../assets/images/ivana-cajina-dnL6ZIpht2s-unsplash.jpg'
 // eslint-disable-next-line no-unused-vars
-import profilePic from '../assets/images/atikh-bana-_KaMTEmJnxY-unsplash.jpg';
-import AddItem from '../components/AddItem';
-import DiscoverCarousel from '../components/DiscoverCarousel';
+import AddItem from '../../components/AddItem/index.js';
+import DiscoverCarousel from '../../components/DiscoverCarousel/DiscoverCarousel.js';
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
+import images from '../../assets/images.js'
 
 import { useQuery } from '@apollo/client';
-import { GET_USER } from '../utils/queries';
+import { GET_USER } from '../../utils/queries';
 
 const Closet = ({ windowSize }) => {
   let { username } = useParams();

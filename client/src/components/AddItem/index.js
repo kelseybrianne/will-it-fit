@@ -9,7 +9,7 @@ import './AddItem.css';
 
 // graphQL:
 import { useMutation } from '@apollo/client';
-import { ADD_ITEM } from '../utils/mutations';
+import { ADD_ITEM } from '../../utils/mutations';
 
 let filter = require('leo-profanity');
 

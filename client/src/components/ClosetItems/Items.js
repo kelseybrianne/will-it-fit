@@ -18,9 +18,9 @@ import './Items.css';
 import './ItemModal.css';
 
 import { useMutation } from '@apollo/client';
-import Auth from '../utils/auth';
+import Auth from '../../utils/auth';
 import { useQuery } from '@apollo/client';
-import { GET_ME } from '../utils/queries';
+import { GET_ME } from '../../utils/queries';
 
 const Items = ({ windowSize, userData }) => {
   const { loading, data } = useQuery(GET_ME);
@@ -279,44 +279,5 @@ const style = (theme) => ({
   border: 'none',
   overflow: 'auto',
 });
-
-const images = [
-  {
-    id: 1,
-    img: require('../assets/images/rayul-_M6gy9oHgII-unsplash.jpg'),
-  },
-  {
-    id: 2,
-    img: require('../assets/images/brooke-cagle-Ss3wTFJPAVY-unsplash.jpg'),
-  },
-  {
-    id: 3,
-    img: require('../assets/images/ivana-cajina-dnL6ZIpht2s-unsplash.jpg'),
-  },
-  {
-    id: 4,
-    img: require('../assets/images/atikh-bana-_KaMTEmJnxY-unsplash.jpg'),
-  },
-  {
-    id: 5,
-    img: require('../assets/images/dom-hill-nimElTcTNyY-unsplash.jpg'),
-  },
-  {
-    id: 6,
-    img: require('../assets/images/warion-taipei-vSqmb2IX3DM-unsplash.jpg'),
-  },
-  {
-    id: 7,
-    img: require('../assets/images/jasmin-chew-txy8AZU04iw-unsplash.jpg'),
-  },
-  {
-    id: 8,
-    img: require('../assets/images/noah-buscher-8A7fD6Y5VF8-unsplash.jpg'),
-  },
-  {
-    id: 9,
-    img: require('../assets/images/huston-wilson-WyDr1KFS23Y-unsplash.jpg'),
-  },
-];
 
 export default Items;
