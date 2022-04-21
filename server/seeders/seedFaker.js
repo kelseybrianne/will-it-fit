@@ -33,75 +33,111 @@ db.once('open', async () => {
     await User.deleteMany({});
     await Item.deleteMany({});
 
-    let userData = [];
-    for (let i = 0; i < 5; i++) {
+    // console.log(itemIndex());
+    for (let i = 0; i < 15; i++) {
       // make a bunch of user data
-
       const firstName = faker.name.firstName();
       const lastName = faker.name.lastName();
       const name = [firstName, lastName].join('');
 
-      let closetData = [];
-      for (let i = 0; i < 2; i++) {
-        let item = {
-          category: randomCategory(),
-          style: faker.commerce.productAdjective(),
-          brand: faker.commerce.productMaterial(),
-          name: faker.commerce.productName(),
-          gender: gender(),
-          size: faker.mersenne.rand(0, 20),
-          link: faker.internet.url(),
-          photo: faker.image.fashion(),
-          color: faker.internet.color(),
-          review: faker.commerce.productDescription(),
-        };
-        let itemData = await Item.create(item);
-        closetData.push(itemData._id);
-      }
-      // create saved Items
-      let savedItemData = [];
-      for (let i = 0; i < 2; i++) {
-        let item = {
-          category: randomCategory(),
-          style: faker.commerce.productAdjective(),
-          brand: faker.commerce.productMaterial(),
-          name: faker.commerce.productName(),
-          gender: gender(),
-          size: faker.mersenne.rand(0, 20),
-          link: faker.internet.url(),
-          photo: faker.image.fashion(),
-          color: faker.internet.color(),
-          review: faker.commerce.productDescription(),
-        };
-        let itemData = await Item.create(item);
-        savedItemData.push(itemData._id);
-      }
-
-      let newUser = {
+      let newUser = new User({
         username: name,
         email: faker.internet.email(),
         password: 'password',
         weight: faker.mersenne.rand(100, 300),
         height: faker.mersenne.rand(55, 85),
         primaryPhoto: faker.image.avatar(),
-        closet: closetData,
-        savedItems: savedItemData,
+        closet: [],
+        savedItems: [],
         followers: [],
         following: [],
-      };
-      userData.push(newUser);
+      });
+
+      await newUser.save();
+
+      for (let i = 0; i < 5; i++) {
+        let item = {
+          category: randomCategory(),
+          style: faker.commerce.productAdjective(),
+          brand: faker.commerce.productMaterial(),
+          name: faker.commerce.productName(),
+          gender: gender(),
+          size: faker.mersenne.rand(0, 20),
+          link: faker.internet.url(),
+          photo: faker.image.fashion(),
+          color: faker.internet.color(),
+          review: faker.commerce.productDescription(),
+          height: newUser.height,
+          weight: newUser.weight,
+          user_id: newUser._id,
+        };
+        let itemData = await Item.create(item);
+        newUser.closet.push(itemData._id);
+      }
+      // create saved Items
+      for (let i = 0; i < 5; i++) {
+        let item = {
+          category: randomCategory(),
+          style: faker.commerce.productAdjective(),
+          brand: faker.commerce.productMaterial(),
+          name: faker.commerce.productName(),
+          gender: gender(),
+          size: faker.mersenne.rand(0, 20),
+          link: faker.internet.url(),
+          photo: faker.image.fashion(),
+          color: faker.internet.color(),
+          review: faker.commerce.productDescription(),
+          height: newUser.height,
+          weight: newUser.weight,
+          user_id: newUser._id,
+        };
+        let itemData = await Item.create(item);
+        newUser.savedItems.push(itemData._id);
+      }
+
+      // save the closet and savedItems to the user in the database
+      await newUser.save();
+    }
+    // get 10 random user ID's
+    
+    const followingId = await User.aggregate(
+      [ { $sample: { size: 3 } } ]
+    )
+    let list = [];
+    for (i = 0; i < followingId.length; i++) {
+      list.push(followingId[i]._id);
+
     }
 
-    // // For each of the users that exist, add 2 items.
-    // tags.forEach(() => makePost(getRandomPost(50)));
 
-    await User.create(userData);
+    const followId = await User.find({}).limit(10);
+  
+    console.log(followId[0]._id);
 
+    let list2 = [];
+    for (i = 0; i < followId.length; i++) {
+      list2.push(followId[i]._id);
+      
+    }
+    console.log(list);
+    console.log(list2);
+    // push 10 users into each us Array.
+    User.find(
+      {},
+      {
+        $set: { followers: list, following: list2 },
+      },
+      { new: true }
+    );
+    await User.save();
+    
     console.log('Database seeded! :)');
-
     console.log('all done!');
     process.exit(0);
   } catch (err) {
     throw err;
   }
 });
+
+// // For each of the users that exist, add 2 items.
+// tags.forEach(() => makePost(getRandomPost(50)));
