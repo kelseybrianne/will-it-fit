@@ -193,8 +193,8 @@ const Items = ({ windowSize, userData }) => {
                             </MenuItem>
                           </Menu>
                         </div>
-                        <p>{`${modalItemProps.brand} ${modalItemProps.category}`}</p>
-                        <p>Size: {modalItemProps.size}</p>
+                        <p className="item-desc">{`${modalItemProps.brand} ${modalItemProps.category}`}</p>
+                        <p className="item-desc">Size: {modalItemProps.size}</p>
                         <a
                           href={modalItemProps.link}
                           target="_blank"
@@ -209,7 +209,7 @@ const Items = ({ windowSize, userData }) => {
                             <div className="avatar-pic-div">
                               <img src={userData?.primaryPhoto} alt="img-alt" />
                             </div>
-                            <div className="username-div">
+                            <div className="username-div-modal">
                               <Link to={`/closet/${userData.username}`}>
                                 <p className="username">{userData.username}</p>
                               </Link>
@@ -270,7 +270,7 @@ const Backdrop = styled(BackdropUnstyled)`
   top: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.5);
-  -webkit-tap-highlight-color: transparent;
+  opacity: .5;
 `;
 
 const style = (theme) => ({

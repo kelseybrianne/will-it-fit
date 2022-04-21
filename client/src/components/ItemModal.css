@@ -78,6 +78,7 @@ a {
 .review-header {
     display: flex;
     align-items: flex-start;
+    justify-content: flex-start;
 }
 
 .avatar-pic-div {
@@ -93,8 +94,8 @@ a {
     object-fit: cover;
 }
 
-.username-div {
-    padding-left: 10px;
+.username-div-modal {
+    padding-left: 8px;
 }
 
 .user-measurements-displayed {
