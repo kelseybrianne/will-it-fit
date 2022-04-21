@@ -42,16 +42,17 @@ const DiscoverCarousel = () => {
     setCurrentPage(newPage);
   };
 
-  const { data: data_me } = useQuery(GET_ME);
-  console.log(data_me?.me.height);
+  // const { data: data_me } = useQuery(GET_ME);
 
-  const { data: data_users } = useQuery(GET_USERMATCHES, {
-    skip: !data_me,
-    variables: {
-      height: data_me && data_me.me.height,
-      weight: data_me && data_me.me.weight,
-    },
-  });
+  const { data: data_users } = useQuery(GET_USERMATCHES)
+  //   , 
+  //   {
+  //   skip: !data_me,
+  //   variables: {
+  //     height: data_me && data_me.me.height,
+  //     weight: data_me && data_me.me.weight,
+  //   },
+  // });
 
   return (
     <div ref={ref} className="carousel-container">
