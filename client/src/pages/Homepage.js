@@ -1,40 +1,84 @@
-import React from 'react';
-import IconButton from '@mui/material/IconButton';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import ItemList from '../components/ItemList/ItemList.js'
+import { useParams } from 'react-router-dom';
+// eslint-disable-next-line no-unused-vars
+import Button from '@mui/material/Button';
+import './Closet/Closet.css';
+// eslint-disable-next-line no-unused-vars
+import Stack from '@mui/material/Stack';
+// import profilePic from '../assets/images/ivana-cajina-dnL6ZIpht2s-unsplash.jpg'
+// eslint-disable-next-line no-unused-vars
+import DiscoverCarousel from '../components/DiscoverCarousel/DiscoverCarousel.js';
+import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
+import auth from '../utils/auth'
+ 
 
 
-import HomepageItems from '../components/HomepageItems';
-// import Items from '../components/Items.js'
-import './Closet/Closet.css'
 import { useQuery } from '@apollo/client';
-import { GET_ME } from '../utils/queries';
+import { GET_FOLLOWERS, GET_USER } from '../utils/queries';
+import ItemList from '../components/ItemList/ItemList.js';
+
+
 
 const Homepage = ({ windowSize }) => {
-  const { loading, data } = useQuery(GET_ME);
-  const userData = data?.me || {};
-  console.log(userData);
+  let { username } = useParams();
 
-  // const [follow, setFollow] = React.useState(false);
+  // eslint-disable-next-line no-unused-vars
+  const { loading, data } = useQuery(GET_USER, {
+    variables: {
+      username: username,
+    },
+  });
+
+const { followers } = useQuery(GET_FOLLOWERS)
+console.log(followers)
+
+  const discoverCarousel = document.querySelector('.toggle-discover-carousel');
+  const toggleDiscoverCarousel = () => {
+    discoverCarousel.style.display === 'none'
+      ? (discoverCarousel.style.display = 'block')
+      : (discoverCarousel.style.display = 'none');
+  };
+
+  const userData = data?.user || {};
 
   return (
     <div className="profile-page">
+      <div className="white-div"></div>
       <div className="profile-head">
-        {/* <IconButton
-          value="check"
-          selected={follow}
-          onChange={() => {
-            setFollow(!follow);
-          }}
-        >
-          <FavoriteIcon className="unfollow" />
-        </IconButton> */}
-        {/* toggle 'Following' and 'Follow' on click'*/}
-        {/* <button className="unfollow">Following</button> */}
+        <div className="profile-img-div">
+          <img src={userData.primaryPhoto} alt={userData.primaryPhoto} />
+          {/* <h2>{userData.username}</h2> */}
+          <div className="folls-div">
+            <a href="tbd">
+              <p>Following</p>
+            </a>
+            <p>|</p>
+            <a href="tbd">
+              <p>Followers</p>
+            </a>
+          </div>
+          {/* toggle 'Following' and 'Follow' on click'*/}
+          {/* <button className="unfollow">Following</button> */}
+        </div>
+        <div className="username-div">
+          <h2 className="closet-username">{userData.username}</h2>
+          <div className="btns-div">
+            <Button
+              variant="contained"
+              className="discover-btn"
+              onClick={toggleDiscoverCarousel}
+            >
+              <PersonAddAltIcon />
+            </Button>
+          </div>
+        </div>
       </div>
-      {/* <HomepageItems windowSize={windowSize} /> */}
-      <ItemList windowSize={windowSize} />
+      <div className="toggle-discover-carousel">
+        <DiscoverCarousel />
+      </div>
+      {/* <Items userData={userData} windowSize={windowSize} /> */}
+      <div className="closet">
+        <ItemList items={userData.closet} />
+      </div>
     </div>
   );
 };
