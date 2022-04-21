@@ -12,6 +12,7 @@ const typeDefs = gql`
     # weightUnits: String
     closet: [Item]
     primaryPhoto: String
+    shoeSize: String
     following: [User]
     followers: [User]
     savedItems: [Item]
@@ -28,6 +29,7 @@ const typeDefs = gql`
     # weightUnits: String
     closet: [Item]
     primaryPhoto: String
+    shoeSize: String
     following: [User]
     followers: [User]
     savedItems: [Item]
@@ -56,12 +58,21 @@ const typeDefs = gql`
     user: User
   }
 
+  scalar Upload
+
+  type File {
+    filename: String!
+    mimetype: String!
+    encoding: String!
+    url: String!
+  }
+
   type Query {
     user(username: String!): User
     users: [User]
     me: User
 
-    userMatches(height: Float, weight: Float): [User]
+    userMatches: [User]
 
     item(_id: ID!): Item
     items: [Item]
@@ -76,6 +87,7 @@ const typeDefs = gql`
   }
 
   type Mutation {
+    singleUpload(file: Upload!): File!
     addUser(
       username: String!
       email: String!
@@ -85,6 +97,7 @@ const typeDefs = gql`
       weight: Float!
       # weightUnits: String
       primaryPhoto: String
+      shoeSize: String
     ): Auth
 
     login(email: String!, password: String!): Auth
