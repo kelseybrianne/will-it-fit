@@ -5,8 +5,8 @@
 }
 
 .white-div {
-  height: 20vh;
-  min-height: 150px;
+  height: 15vh;
+  min-height: 120px;
   background-color: white;
 }
 
@@ -112,7 +112,7 @@
 
 @media screen and (min-width: 767px) {
   .white-div {
-    height: 175px;
+    height: 140px;
   }
 
   .profile-img-div {
