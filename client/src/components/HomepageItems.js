@@ -12,7 +12,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 // import CloseIcon from '@mui/icons-material/Close';
 // import ItemModal from './ItemModal.js';
-
+import './i'
 import IconButton from '@mui/material/IconButton';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { useMutation, useQuery } from '@apollo/client';
