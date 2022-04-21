@@ -10,6 +10,7 @@ import './AddItem.css';
 // graphQL:
 import { useMutation } from '@apollo/client';
 import { ADD_ITEM } from '../../utils/mutations';
+import uploadImage from '../../utils/uploadImage';
 
 let filter = require('leo-profanity');
 
@@ -86,7 +87,6 @@ const AddItem = () => {
     review: '',
   });
 
-  let photo = '';
   // shows user image preview
   const handleFileInputChange = (e) => {
     const file = e.target.files[0];
@@ -101,27 +101,6 @@ const AddItem = () => {
     };
   };
 
-  // upload image to cloudinary, receive URL as res
-  const uploadImage = async (base64EncodedImage) => {
-    try {
-      const response = await fetch('/api/upload', {
-        method: 'POST',
-        body: JSON.stringify({ data: base64EncodedImage }),
-        headers: { 'content-type': 'application/json' },
-      });
-
-      if (response.ok) {
-        const url = await response.json();
-        photo = url;
-      } else {
-        console.log(response);
-        return response;
-      }
-    } catch (error) {
-      return console.error(error);
-    }
-  };
-
   const handleChange = (event) => {
     const { name, value } = event.target;
     setUserFromData({
@@ -132,9 +111,8 @@ const AddItem = () => {
 
   const formSubmit = async (event) => {
     event.preventDefault();
-    window.location.reload(false);
     try {
-      await uploadImage(previewSource);
+      const photo = await uploadImage(previewSource);
       await addItem({
         variables: { ...userFormData, photo: photo },
       });
@@ -152,6 +130,8 @@ const AddItem = () => {
       color: '',
       review: '',
     });
+    // This has to happen at the end so it doesn't prevent image upload
+    window.location.reload(false);
   };
 
   return (
