@@ -15,7 +15,6 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import auth from '../utils/auth';
 import { useQuery } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
-import './ProfileMenu.css';
 
 export default function ProfileMenu() {
   const { loading, data } = useQuery(GET_ME);
