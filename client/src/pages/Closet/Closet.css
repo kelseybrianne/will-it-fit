@@ -74,6 +74,7 @@
 .username-div button {
   padding: 10px;
   width: 120px;
+  width: auto;
   height: 45px;
   border: none;
   border-radius: 2px !important;
@@ -116,7 +117,7 @@
   }
 
   .profile-img-div {
-    width: 30%;
+    width: 25%;
     height: auto;
     max-width: 800px;
     transform: translateY(-120px);

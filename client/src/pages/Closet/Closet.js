@@ -15,6 +15,7 @@ import images from '../../assets/images.js'
 
 import { useQuery } from '@apollo/client';
 import { GET_USER } from '../../utils/queries';
+import EditProfile from '../../components/EditProfile/EditProfile';
 
 const Closet = ({ windowSize }) => {
   let { username } = useParams();
@@ -65,6 +66,7 @@ const Closet = ({ windowSize }) => {
             >
               <PersonAddAltIcon />
             </Button>
+            <EditProfile />
           </div>
         </div>
       </div>
