@@ -157,33 +157,23 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
     // GET all users this user id is following
-    following: async (parent, { _id }, context) => {
+    following: async (parent, args, context) => {
       if (context.user) {
-        return await User.findById({ _id })
-          .populate({
-            path: 'following',
-            populate: [
-              '_id',
-              'category',
-              'style',
-              'brand',
-              'name',
-              'gender',
-              'size',
-              'link',
-              'photo',
-              'color',
-              'review',
-            ],
-          });
+        return await User.findById(context.user._id).populate({
+          path: 'following',
+          populate: ['_id'],
+        });
       }
       throw new AuthenticationError('You need to be logged in!');
     },
 
     // GET all followers of the user _id entered in args.
-    followers: async (parent, { _id }, context) => {
+    followers: async (parent, args, context) => {
       if (context.user) {
-        return await User.findById({ _id }).populate('followers');
+        return await User.findById(context.user._id).populate({
+          path: 'followers',
+          populate: ['_id', 'closet'],
+        });
       }
       throw new AuthenticationError('You need to be logged in!');
     },
