@@ -1,9 +1,7 @@
-import React, { useRef } from 'react';
 import { useParams } from 'react-router-dom';
 // eslint-disable-next-line no-unused-vars
 import Button from '@mui/material/Button';
 import './Closet.css';
-import Items from '../../components/ClosetItems/Items.js';
 // eslint-disable-next-line no-unused-vars
 import Stack from '@mui/material/Stack';
 // import profilePic from '../assets/images/ivana-cajina-dnL6ZIpht2s-unsplash.jpg'
@@ -11,11 +9,11 @@ import Stack from '@mui/material/Stack';
 import AddItem from '../../components/AddItem/index.js';
 import DiscoverCarousel from '../../components/DiscoverCarousel/DiscoverCarousel.js';
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
-import images from '../../assets/images.js'
 
 import { useQuery } from '@apollo/client';
 import { GET_USER } from '../../utils/queries';
 import EditProfile from '../../components/EditProfile/EditProfile';
+import ItemList from '../../components/ItemList';
 
 const Closet = ({ windowSize }) => {
   let { username } = useParams();
@@ -73,7 +71,10 @@ const Closet = ({ windowSize }) => {
       <div className="toggle-discover-carousel">
         <DiscoverCarousel />
       </div>
-      <Items userData={userData} windowSize={windowSize} />
+      {/* <Items userData={userData} windowSize={windowSize} /> */}
+      <div className="closet">
+        <ItemList items={userData.closet} />
+      </div>
     </div>
   );
 };
