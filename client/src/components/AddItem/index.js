@@ -5,7 +5,7 @@ import TextField from '@mui/material/TextField';
 import TextareaAutosize from '@mui/base/TextareaAutosize';
 import { Button, Typography, Container, Dialog } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
-import './AddItem.css';
+import './addItem.css';
 
 // graphQL:
 import { useMutation } from '@apollo/client';
