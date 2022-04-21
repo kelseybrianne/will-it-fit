@@ -19,6 +19,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import { useMutation, useQuery } from '@apollo/client';
 import Auth from '../utils/auth';
 import { GET_ME } from '../utils/queries';
+import { ADD_FOLLOWING, REMOVE_FOLLOWING } from '../utils/mutations';
 
 const HomepageItems = ({ windowSize }) => {
   // handles opening and closing of MUI modal
@@ -29,9 +30,13 @@ const HomepageItems = ({ windowSize }) => {
   const { loading, data } = useQuery(GET_ME);
 
   const userData = data?.me || {};
-  
+
+  // follow button
   const [follow, setFollow] = React.useState(false);
 
+  const [addFollowing] = useMutation(ADD_FOLLOWING);
+
+  const [removeFollowing] = useMutation(REMOVE_FOLLOWING);
 
   // more icon that opens edit/delete MUI menu
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -55,34 +60,8 @@ const HomepageItems = ({ windowSize }) => {
       >
         {images.map(({ id, img }) => (
           <div key={id} className="item-list-wrapper">
-            {/* substitute heart icon for MoreVertIcon when closet does not belong to the person who is logged in */}
-            {/* <button>
-              <FavoriteBorderIcon className="heart-icon icon" />
-            </button> */}
             <a type="button" onClick={handleOpen}>
               <ImageListItem key={id}>
-                <MoreVertIcon
-                  id="basic-button"
-                  aria-controls={openMenu ? 'basic-menu' : undefined}
-                  aria-haspopup="true"
-                  aria-expanded={openMenu ? 'true' : undefined}
-                  onClick={handleClick}
-                  className="more-icon icon"
-                />
-                <Menu
-                  id="basic-menu"
-                  elevation={0}
-                  className="dropdown-menu"
-                  anchorEl={anchorEl}
-                  open={openMenu}
-                  onClose={handleCloseMenu}
-                  MenuListProps={{
-                    'aria-labelledby': 'basic-button',
-                  }}
-                >
-                  <MenuItem onClick={handleCloseMenu}>Edit</MenuItem>
-                  <MenuItem onClick={handleCloseMenu}>Delete</MenuItem>
-                </Menu>
                 <img
                   src={`${img}?w=248&fit=crop&auto=format`}
                   srcSet={`${img}?w=248&fit=crop&auto=format&dpr=2 2x`}
@@ -90,19 +69,24 @@ const HomepageItems = ({ windowSize }) => {
                   loading="lazy"
                   className="item-img"
                 />
-                <IconButton
-                  value="check"
-                  selected={follow}
-                  onChange={() => {
-                    setFollow(!follow);
-                  }}
-                >
-                  <FavoriteIcon className="unfollow" />
-                </IconButton>
+
+                {/* follow button */}
+                <div>
+                  <IconButton
+                    size="large"
+                    value={true}
+                    selected={follow}
+                    onChange={() => {
+                      setFollow(!follow);
+                    }}
+                  >
+                    <FavoriteIcon aria-label="follow" className="unfollow" />
+                  </IconButton>
+                </div>
+
                 <ImageListItemBar
                   className="item-text"
                   title="Name"
-                  subtitle="Brand Category"
                   position="below"
                 />
               </ImageListItem>

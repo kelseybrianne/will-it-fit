@@ -13,12 +13,12 @@ const Homepage = ({ windowSize }) => {
   const userData = data?.me || {};
   console.log(userData);
 
-  const [follow, setFollow] = React.useState(false);
+  // const [follow, setFollow] = React.useState(false);
 
   return (
     <div className="profile-page">
       <div className="profile-head">
-        <IconButton
+        {/* <IconButton
           value="check"
           selected={follow}
           onChange={() => {
@@ -26,7 +26,7 @@ const Homepage = ({ windowSize }) => {
           }}
         >
           <FavoriteIcon className="unfollow" />
-        </IconButton>
+        </IconButton> */}
         {/* toggle 'Following' and 'Follow' on click'*/}
         {/* <button className="unfollow">Following</button> */}
       </div>
