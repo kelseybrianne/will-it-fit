@@ -21,6 +21,12 @@ export const GET_USER = gql`
         photo
         color
         review
+        height
+        weight
+        user {
+          primaryPhoto
+          username
+        }
       }
       primaryPhoto
       savedItems {
@@ -35,6 +41,12 @@ export const GET_USER = gql`
         photo
         color
         review
+        height
+        weight
+        user {
+          primaryPhoto
+          username
+        }
       }
       following {
         username
@@ -79,6 +91,12 @@ export const GET_ME = gql`
         photo
         color
         review
+        height
+        weight
+        user {
+          primaryPhoto
+          username
+        }
       }
       primaryPhoto
       savedItems {
@@ -93,6 +111,12 @@ export const GET_ME = gql`
         photo
         color
         review
+        height
+        weight
+        user {
+          primaryPhoto
+          username
+        }
       }
       following {
         _id
@@ -138,6 +162,12 @@ export const GET_USERMATCHES = gql`
         photo
         color
         review
+        height
+        weight
+        user {
+          primaryPhoto
+          username
+        }
       }
     }
   }
@@ -157,6 +187,12 @@ export const GET_ITEM = gql`
       photo
       color
       review
+      height
+      weight
+      user {
+        primaryPhoto
+        username
+      }
     }
   }
 `;
@@ -176,6 +212,12 @@ export const GET_ITEMS = gql`
       photo
       color
       review
+      height
+      weight
+      user {
+        primaryPhoto
+        username
+      }
     }
   }
 `;
@@ -196,6 +238,12 @@ export const GET_USERCLOSET = gql`
         gender
         link
         _id
+        height
+        weight
+        user {
+          primaryPhoto
+          username
+        }
       }
     }
   }
@@ -217,6 +265,12 @@ export const GET_FAVORITES = gql`
         photo
         color
         review
+        height
+        weight
+        user {
+          primaryPhoto
+          username
+        }
       }
     }
   }
@@ -275,7 +329,10 @@ export const SEARCH_ITEMS = gql`
       createdAt
       height
       weight
-      user_id
+      user {
+        primaryPhoto
+        username
+      }
     }
   }
 `;

@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import './DiscoverCarousel.css';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import Auth from '../../utils/auth'
-import images from '../../assets/images.js'
+import Auth from '../../utils/auth';
+import images from '../../assets/images.js';
 
 import { useQuery } from '@apollo/client';
 import { GET_USERMATCHES, GET_ME } from '../../utils/queries';
@@ -43,7 +43,6 @@ const DiscoverCarousel = () => {
   };
 
   const { data: data_me } = useQuery(GET_ME);
-  console.log(data_me?.me.height);
 
   const { data: data_users } = useQuery(GET_USERMATCHES, {
     skip: !data_me,
