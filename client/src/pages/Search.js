@@ -1,8 +1,5 @@
 import {
   Container,
-  ImageList,
-  ImageListItem,
-  ImageListItemBar,
   InputAdornment,
   TextField,
   Typography,
@@ -12,28 +9,17 @@ import { useSearchParams } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
 import { useQuery } from '@apollo/client';
 import { SEARCH_ITEMS } from '../utils/queries';
-import useWindowSize from '../utils/useWindowSize';
+import ItemList from '../components/ItemList/';
 
 const Search = () => {
   let [searchParams, setSearchParams] = useSearchParams();
   const [searchTerm, setSearchTerm] = useState(searchParams.get('q') || '');
-  const windowSize = useWindowSize();
   const { loading, data, error } = useQuery(SEARCH_ITEMS, {
     variables: { keyword: searchParams.get('q') || '' },
   });
   const handleSubmit = (e) => {
     e.preventDefault();
     setSearchParams({ q: searchTerm });
-  };
-
-  const calculateColumns = () => {
-    if (windowSize.width < 600) {
-      return 1;
-    }
-    if (windowSize.width < 900) {
-      return 2;
-    }
-    return 3;
   };
 
   if (error) {
@@ -76,30 +62,11 @@ const Search = () => {
       </Container>
       <Container>
         {loading ? 'Loading...' : ''}
-        <ImageList variant="masonry" cols={calculateColumns()} gap={8}>
-          {data?.searchItems?.length ? (
-            data.searchItems.map((item, index) => (
-              <ImageListItem key={item._id}>
-                <img
-                  src={`${item.photo}?w=248&fit=crop&auto=format&random=${index}`}
-                  alt={item.brand + ' ' + item.name + ' size ' + item.size}
-                  loading="eager"
-                />
-                <ImageListItemBar
-                  className="item-text"
-                  title={item.brand + ' ' + item.name}
-                  subtitle={item.category + ' size ' + item.size}
-                  position="below"
-                  sx={{
-                    width: '100%',
-                  }}
-                />
-              </ImageListItem>
-            ))
-          ) : (
-            <Typography>No results found</Typography>
-          )}
-        </ImageList>
+        {data?.searchItems?.length ? (
+          <ItemList items={data.searchItems}></ItemList>
+        ) : (
+          <Typography>No results found</Typography>
+        )}
       </Container>
     </>
   );

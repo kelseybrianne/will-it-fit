@@ -51,6 +51,7 @@ const typeDefs = gql`
     height: Int
     weight: Int
     user_id: ID
+    user: User
   }
 
   type Auth {
@@ -80,7 +81,7 @@ const typeDefs = gql`
     closet(_id: ID!): User
     savedItems(_id: ID!): User
 
-    following(_id: ID!): User
+    following(_id: ID!): [User]
     followers(_id: ID!): User
 
     searchItems(keyword: String): [Item]
