@@ -13,6 +13,7 @@ import { Box } from '@mui/system';
 import { useState } from 'react';
 import auth from '../../utils/auth';
 import { ADD_USER } from '../../utils/mutations';
+import uploadImage from '../../utils/uploadImage';
 
 /** This is a dialog form for signing up for an account */
 function SignUpForm({ setDialogState }) {
@@ -27,7 +28,6 @@ function SignUpForm({ setDialogState }) {
     shoeSize: '',
   });
 
-  let primaryPhoto = '';
   // shows user image preview
   const handleFileInputChange = (e) => {
     const file = e.target.files[0];
@@ -41,32 +41,12 @@ function SignUpForm({ setDialogState }) {
       setPreviewSource(reader.result);
     };
   };
-  // upload image to cloudinary, receive URL as res
-  const uploadImage = async (base64EncodedImage) => {
-    try {
-      const response = await fetch('/api/upload', {
-        method: 'POST',
-        body: JSON.stringify({ data: base64EncodedImage }),
-        headers: { 'content-type': 'application/json' },
-      });
-
-      if (response.ok) {
-        const url = await response.json();
-        primaryPhoto = url;
-      } else {
-        console.log(response);
-        return response;
-      }
-    } catch (error) {
-      return console.error(error);
-    }
-  };
 
   // submit form
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     try {
-      await uploadImage(previewSource);
+      const primaryPhoto = await uploadImage(previewSource);
 
       const { data } = await signup({
         variables: { ...formState, primaryPhoto: primaryPhoto },
