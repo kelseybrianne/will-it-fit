@@ -2,7 +2,6 @@ import { useParams } from 'react-router-dom';
 // eslint-disable-next-line no-unused-vars
 import Button from '@mui/material/Button';
 import './Closet.css';
-import Items from '../../components/ClosetItems/Items.js';
 // eslint-disable-next-line no-unused-vars
 import Stack from '@mui/material/Stack';
 // import profilePic from '../assets/images/ivana-cajina-dnL6ZIpht2s-unsplash.jpg'
