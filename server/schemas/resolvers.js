@@ -173,6 +173,53 @@ const resolvers = {
       ]);
     },
 
+    // GET items that match the keyword and the user's stats
+    searchItems: async (parent, { keyword }, context) => {
+      if (!context.user) {
+        throw new AuthenticationError('You must be logged in to search');
+      }
+
+      // show matches for 3% higher and lower
+      const multiplier = 0.03;
+      const { height, weight, _id: user_id } = context.user;
+
+      const searchFilter = {
+        // match the similar height and weight
+        $and: [
+          {
+            height: {
+              $gte: height - height * multiplier,
+              $lt: height + height * multiplier,
+            },
+          },
+          {
+            weight: {
+              $gte: weight - weight * multiplier,
+              $lt: weight + weight * multiplier,
+            },
+          },
+          // not equal to the searching user's id
+          {
+            user_id: {
+              $ne: user_id,
+            },
+          },
+        ],
+        // $regex will scale poorly, but it works!
+        $or: [
+          { category: { $regex: keyword, $options: 'i' } },
+          { style: { $regex: keyword, $options: 'i' } },
+          { brand: { $regex: keyword, $options: 'i' } },
+          { name: { $regex: keyword, $options: 'i' } },
+          { size: { $regex: keyword, $options: 'i' } },
+          { color: { $regex: keyword, $options: 'i' } },
+          { review: { $regex: keyword, $options: 'i' } },
+        ],
+      };
+
+      return await Item.find(searchFilter);
+    },
+
     // GET user closet (ITEMS), based on user id entered in args
     closet: async (parent, { _id }, context) => {
       if (context.user) {
@@ -290,7 +337,16 @@ const resolvers = {
     // POST items to users' closet
     addItem: async (parent, args, context) => {
       if (context.user) {
-        const item = await new Item(args);
+        const { height, weight, _id } = context.user;
+        const item = await new Item({
+          // item args
+          ...args,
+
+          // user context stats
+          height,
+          weight,
+          user_id: _id,
+        });
         item.save();
         await User.findByIdAndUpdate(
           { _id: context.user._id },

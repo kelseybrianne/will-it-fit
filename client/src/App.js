@@ -13,8 +13,12 @@ import Header from './components/Header';
 import DiscoverFeed from './pages/DiscoverFeed';
 import Closet from './pages/Closet';
 import { setContext } from '@apollo/client/link/context';
+<<<<<<< HEAD
 import Homepage from './pages/Homepage';
 // import Router from './components/Router';
+=======
+import Search from './pages/Search';
+>>>>>>> 05db6bb6428986e255c726f4a01a55c5ea76a6f6
 
 // Construct our main GraphQL API endpoint
 // const httpLink = createHttpLink({
@@ -60,6 +64,7 @@ function App() {
               path="/homepage"
               element={<Homepage windowSize={windowSize} />}
             />
+            <Route path="/search" element={<Search />} />
           </Routes>
         </>
       </Router>

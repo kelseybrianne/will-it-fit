@@ -4,6 +4,7 @@ import {
   IconButton,
   ListItemIcon,
   MenuItem,
+  TextField,
   Tooltip,
 } from '@mui/material';
 import { useState } from 'react';
@@ -61,12 +62,14 @@ export default function Nav() {
             discover
           </MenuItem>
         </Link>
-        <MenuItem>
-          <ListItemIcon>
-            <SearchIcon fontSize="small" />
-          </ListItemIcon>
-          search
-        </MenuItem>
+        <Link to="/search">
+          <MenuItem>
+            <ListItemIcon>
+              <SearchIcon fontSize="small" />
+            </ListItemIcon>
+            search
+          </MenuItem>
+        </Link>
       </Drawer>
     </>
   );
