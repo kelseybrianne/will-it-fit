@@ -1,6 +1,5 @@
 import ImageList from '@mui/material/ImageList';
 import './Items.css';
-import './ItemModal.css';
 
 import useWindowSize from '../../utils/useWindowSize';
 import Item from './Item';
