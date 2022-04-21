@@ -17,67 +17,68 @@ const category = [
   'shirt',
 ];
 
-const images = [
-  'https://unsplash.com/photos/-uJ3N7HLiEg',
-  'https://unsplash.com/photos/0UECcInuCR4',
-  'https://unsplash.com/photos/xZSEvSlHRv8',
-  'https://unsplash.com/photos/jC7nVH_Sw8k',
-  'https://unsplash.com/photos/1rwF1RX7mbg',
-  'https://unsplash.com/photos/APpHYr9TcMA',
-  'https://unsplash.com/photos/txy8AZU04iw',
-  'https://unsplash.com/photos/k6aQzmIbR1s',
-  'https://unsplash.com/photos/6PJ0Pi43HFE',
-  'https://unsplash.com/photos/tBDwxspVp7A',
-  'https://unsplash.com/photos/NCf_mwCXq4s',
-  'https://unsplash.com/photos/spyYrp2y7Ao',
-  'https://unsplash.com/photos/rygrPAseHmY',
-  'https://unsplash.com/photos/KNeZ-p90bQA',
-  'https://unsplash.com/photos/OCmNJnFx44U',
-  'https://unsplash.com/photos/aiI9YfIWhoc',
-  'https://unsplash.com/photos/XM_zJuffRvI',
-  'https://unsplash.com/photos/YhjJ_6UlknU',
-  'https://unsplash.com/photos/Y9WVpVdZMLY',
-  'https://unsplash.com/photos/HxUbEr2lmYY',
-  'https://unsplash.com/photos/UW1NMEXThHg',
-  'https://unsplash.com/photos/6NVrH0HB_DE',
-  'https://unsplash.com/photos/cLii71lpzr4',
-  'https://unsplash.com/photos/2smIJSbqOfE',
-  'https://unsplash.com/photos/uED_eXXHNuQ',
-  'https://unsplash.com/photos/kWmLbazpO58',
-  'https://unsplash.com/photos/lIRJBv2wI60',
-  'https://unsplash.com/photos/dwKiHoqqxk8',
-  'https://unsplash.com/photos/PqbL_mxmaUE',
-  'https://unsplash.com/photos/Y4fKN-RlMV4',
-  'https://unsplash.com/photos/87DgFV9SOc4',
-  'https://unsplash.com/photos/g3CMh2nqj_w',
-  'https://unsplash.com/photos/q4ExhrHaSLY',
-  'https://unsplash.com/photos/GIJilzvYLP8',
-  'https://unsplash.com/photos/Hng0RpHDgHI',
-  'https://unsplash.com/photos/CjB-8NY5at8',
-  'https://unsplash.com/photos/WIWVM_Z1x7c',
-  'https://unsplash.com/photos/Lss2BdwBKho',
-  'https://unsplash.com/photos/6TIoPIpMvLc',
-  'https://unsplash.com/photos/iQsdMs7kIA8',
-  'https://unsplash.com/photos/qQB04yQdosk',
-  'https://unsplash.com/photos/i49yJtWD57w',
-  'https://unsplash.com/photos/HXADYXS-fLo',
-  'https://unsplash.com/photos/Ej0mAvW6GWM',
-  'https://unsplash.com/photos/X2UprmSxIHQ',
-  'https://unsplash.com/photos/9wM5SCjhsOM',
-  'https://unsplash.com/photos/nYnwq0iN2jI',
-  'https://unsplash.com/photos/d8eFSV4p6Og',
-  'https://unsplash.com/photos/PPrPaki9cKo',
-  'https://unsplash.com/photos/Pi_HEJgdMdA',
-  'https://unsplash.com/photos/6EGcJ6CF3ko',
-];
+// const images = [
+//   'https://unsplash.com/photos/-uJ3N7HLiEg',
+//   'https://unsplash.com/photos/0UECcInuCR4',
+//   'https://unsplash.com/photos/xZSEvSlHRv8',
+//   'https://unsplash.com/photos/jC7nVH_Sw8k',
+//   'https://unsplash.com/photos/1rwF1RX7mbg',
+//   'https://unsplash.com/photos/APpHYr9TcMA',
+//   'https://unsplash.com/photos/txy8AZU04iw',
+//   'https://unsplash.com/photos/k6aQzmIbR1s',
+//   'https://unsplash.com/photos/6PJ0Pi43HFE',
+//   'https://unsplash.com/photos/tBDwxspVp7A',
+//   'https://unsplash.com/photos/NCf_mwCXq4s',
+//   'https://unsplash.com/photos/spyYrp2y7Ao',
+//   'https://unsplash.com/photos/rygrPAseHmY',
+//   'https://unsplash.com/photos/KNeZ-p90bQA',
+//   'https://unsplash.com/photos/OCmNJnFx44U',
+//   'https://unsplash.com/photos/aiI9YfIWhoc',
+//   'https://unsplash.com/photos/XM_zJuffRvI',
+//   'https://unsplash.com/photos/YhjJ_6UlknU',
+//   'https://unsplash.com/photos/Y9WVpVdZMLY',
+//   'https://unsplash.com/photos/HxUbEr2lmYY',
+//   'https://unsplash.com/photos/UW1NMEXThHg',
+//   'https://unsplash.com/photos/6NVrH0HB_DE',
+//   'https://unsplash.com/photos/cLii71lpzr4',
+//   'https://unsplash.com/photos/2smIJSbqOfE',
+//   'https://unsplash.com/photos/uED_eXXHNuQ',
+//   'https://unsplash.com/photos/kWmLbazpO58',
+//   'https://unsplash.com/photos/lIRJBv2wI60',
+//   'https://unsplash.com/photos/dwKiHoqqxk8',
+//   'https://unsplash.com/photos/PqbL_mxmaUE',
+//   'https://unsplash.com/photos/Y4fKN-RlMV4',
+//   'https://unsplash.com/photos/87DgFV9SOc4',
+//   'https://unsplash.com/photos/g3CMh2nqj_w',
+//   'https://unsplash.com/photos/q4ExhrHaSLY',
+//   'https://unsplash.com/photos/GIJilzvYLP8',
+//   'https://unsplash.com/photos/Hng0RpHDgHI',
+//   'https://unsplash.com/photos/CjB-8NY5at8',
+//   'https://unsplash.com/photos/WIWVM_Z1x7c',
+//   'https://unsplash.com/photos/Lss2BdwBKho',
+//   'https://unsplash.com/photos/6TIoPIpMvLc',
+//   'https://unsplash.com/photos/iQsdMs7kIA8',
+//   'https://unsplash.com/photos/qQB04yQdosk',
+//   'https://unsplash.com/photos/i49yJtWD57w',
+//   'https://unsplash.com/photos/HXADYXS-fLo',
+//   'https://unsplash.com/photos/Ej0mAvW6GWM',
+//   'https://unsplash.com/photos/X2UprmSxIHQ',
+//   'https://unsplash.com/photos/9wM5SCjhsOM',
+//   'https://unsplash.com/photos/nYnwq0iN2jI',
+//   'https://unsplash.com/photos/d8eFSV4p6Og',
+//   'https://unsplash.com/photos/PPrPaki9cKo',
+//   'https://unsplash.com/photos/Pi_HEJgdMdA',
+//   'https://unsplash.com/photos/6EGcJ6CF3ko',
+// ];
 function randomCategory() {
   const index = Math.floor(Math.random() * 11);
   return category[index];
 }
 
 function randomPicture() {
-  const index = Math.floor(Math.random() * 49);
-  return images[index];
+  const width = 100 + Math.floor(Math.random() * 100);
+  const height = 100 + Math.floor(Math.random() * 100);
+  return `https://picsum.photos/${width}/${height}`;
 }
 
 const genderOptions = ['mens', 'womens', 'any'];
@@ -88,8 +89,8 @@ function gender() {
 
 db.once('open', async () => {
   try {
-    await User.deleteMany({});
-    await Item.deleteMany({});
+    await User.deleteMany();
+    await Item.deleteMany();
 
     // console.log(itemIndex());
     for (let i = 0; i < 500; i++) {

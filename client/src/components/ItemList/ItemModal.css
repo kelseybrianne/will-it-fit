@@ -1,0 +1,138 @@
+a {
+    cursor: pointer;
+}
+
+.modal-box:focus-visible {
+    outline: none;
+}
+
+.modal-box {
+    display: flex;
+    flex-direction: column;
+    max-height: 90vh;
+    max-width: 90vw;
+    position: relative;
+    border-radius: 2px;
+}
+
+.close-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.item-modal-pic {
+    height: 90vh;
+    width: 100%;
+    background-color: black;
+    align-self: center;
+}
+
+.item-modal-pic img {
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+}
+
+.item-modal-text {
+    z-index: 100;
+    padding: 10px;
+}
+
+.item-name-more-div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.item-modal-text h1 {
+    padding-bottom: 8px;
+}
+
+.item-modal-text p {
+    padding-bottom: 8px;
+}
+
+/* p {
+    line-height: 1.3;
+} */
+
+.shop-btn {
+    padding: 5px !important;
+    width: 120px;
+    height: 40px;
+    border: none;
+    background-color: white !important;
+    color: black !important;
+    margin: 4px 0px 12px 0px !important;
+    border-radius: 2px !important;
+}
+
+.review-div {
+    background-color: white;
+    padding: 10px;
+    border-radius: 2px
+}
+
+.review-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.avatar-pic-div {
+    height: 40px;
+    width: 40px;
+    border-radius: 50px;
+    overflow: hidden;
+}
+
+.avatar-pic-div img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.username-div-modal {
+    padding-left: 8px;
+}
+
+.user-measurements-displayed {
+    font-size: 12px;
+}
+
+.username {
+    font-weight: 600;
+}
+
+.review-content {
+    padding: 10px 0px;
+}
+
+@media screen and (min-width: 500px) {
+    .modal-box {
+        width: 900;
+        max-height: 90vh;
+        flex-direction: row;
+    }
+
+    .item-modal-text {
+        padding: 20px;
+        width: 45%;
+    }
+
+    .item-modal-pic {
+        width: 55%;
+    }
+
+    /* .review-div {
+        margin: 20px 0px;
+    } */
+
+    .shop-btn {
+        margin-bottom: 15px!important;
+        background-color: #B95252 !important;
+        color: white !important;
+    }
+}

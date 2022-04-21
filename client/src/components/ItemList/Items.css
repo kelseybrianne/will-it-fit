@@ -1,0 +1,106 @@
+a {
+    cursor: pointer;
+}
+
+.closet {
+    /* width: 85vw; */
+    margin: 0px 8px;
+}
+
+.item-list-wrapper {
+    position: relative;
+}
+
+.item-img {
+    border-radius: 2px;
+}
+
+.item-img:hover {
+    opacity: .9;
+}
+
+.item-text {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 13ch;
+}
+
+.icon {
+    position: absolute;
+    border-radius: 50px;
+    visibility: hidden;
+    z-index: 5;
+}
+
+.icon-p {
+    cursor: pointer;
+}
+
+.heart-icon {
+    color: rgb(0, 0, 0);
+    left: 5px;
+    top: 5px;
+    background-color: white;
+    padding: 5px;
+} 
+
+.more-icon {
+    color: rgb(10, 10, 10);
+    left: 3px;
+    top: 10px;
+}
+
+.item-list-wrapper:hover .heart-icon,
+.item-list-wrapper:hover .more-icon,
+.modal-box:hover .more-icon {
+    visibility: visible;
+}
+
+#basic-menu {
+    
+    border-radius: 2px;
+}
+
+.dropdown-menu {
+    border-radius: 2px;
+}
+
+@media (hover: none) {
+    .icon {
+        visibility: visible;
+    }
+}
+
+@media screen and (min-width: 375px) {
+    .item-text {
+        width: 19ch;
+    }
+}
+
+@media screen and (min-width: 440px) {
+    .closet {
+        margin: 0px 16px;
+    }
+
+    .item-text {
+        width: 22ch;
+    }
+}
+
+@media screen and (min-width: 767px) {
+    .closet {
+        width: 85vw;
+        margin: 0px auto;
+    }
+
+    .item-text {
+        width: 23ch;
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    .closet {
+        width: 65vw;
+    }
+}
