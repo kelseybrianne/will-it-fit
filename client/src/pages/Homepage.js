@@ -8,15 +8,12 @@ import Stack from '@mui/material/Stack';
 // eslint-disable-next-line no-unused-vars
 import DiscoverCarousel from '../components/DiscoverCarousel/DiscoverCarousel.js';
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
-import auth from '../utils/auth'
- 
+import auth from '../utils/auth';
 
-
-import { useQuery } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { GET_FOLLOWERS, GET_USER } from '../utils/queries';
 import ItemList from '../components/ItemList/ItemList.js';
-
-
+import { Container } from '@mui/material';
 
 const Homepage = ({ windowSize }) => {
   let { username } = useParams();
@@ -28,8 +25,11 @@ const Homepage = ({ windowSize }) => {
     },
   });
 
-const { followers } = useQuery(GET_FOLLOWERS)
-console.log(followers)
+  const { followers } = useQuery(GET_FOLLOWERS);
+  console.log(followers);
+
+  // const [ addFollowing] = useMutation(ADD_FOLLOWING);
+  // const [removeFollowing] = useMutation(REMOVE_FOLLOWING);
 
   const discoverCarousel = document.querySelector('.toggle-discover-carousel');
   const toggleDiscoverCarousel = () => {
@@ -78,6 +78,33 @@ console.log(followers)
       {/* <Items userData={userData} windowSize={windowSize} /> */}
       <div className="closet">
         <ItemList items={userData.closet} />
+      </div>
+      <div>
+        <h2>
+          {userData.following?.length
+            ? `Viewing ${userData.following?.length} saved ${
+                userData.following?.length === 1 ? 'followers' : 'followers'
+              }:`
+            : "You don't follow anyone!"}
+        </h2>
+        {/* <Container>
+          {userData.following?.map((following) => {
+            return (
+              <div key={book.bookId}>
+                {folloing.primaryPhoto ? (
+                  <img
+                    src={book.image}
+                    alt={`The cover for ${book.title}`}
+                    variant="top"
+                  />
+                ) : null}
+                <div>
+                  <h5>{following.username}</h5>
+                </div>
+              </div>
+            );
+          })}
+        </Container> */}
       </div>
     </div>
   );
