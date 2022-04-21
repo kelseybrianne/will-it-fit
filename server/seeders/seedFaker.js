@@ -34,7 +34,7 @@ db.once('open', async () => {
     await Item.deleteMany({});
 
     // console.log(itemIndex());
-    for (let i = 0; i < 15; i++) {
+    for (let i = 0; i < 250; i++) {
       // make a bunch of user data
       const firstName = faker.name.firstName();
       const lastName = faker.name.lastName();
@@ -49,8 +49,6 @@ db.once('open', async () => {
         primaryPhoto: faker.image.avatar(),
         closet: [],
         savedItems: [],
-        followers: [],
-        following: [],
       });
 
       await newUser.save();
@@ -99,41 +97,44 @@ db.once('open', async () => {
       await newUser.save();
     }
     // get 10 random user ID's
-    
-    const followingId = await User.aggregate(
-      [ { $sample: { size: 3 } } ]
-    )
+
+
+    const followingId = await User.aggregate([{ $sample: { size: 10 } }]);
     let list = [];
     for (i = 0; i < followingId.length; i++) {
       list.push(followingId[i]._id);
-
     }
 
+    const followerId = await User.aggregate([{ $sample: { size: 10 } }]);
 
-    const followId = await User.find({}).limit(10);
-  
-    console.log(followId[0]._id);
+    console.log(followerId[0]._id);
 
     let list2 = [];
-    for (i = 0; i < followId.length; i++) {
-      list2.push(followId[i]._id);
-      
+    for (i = 0; i < followerId.length; i++) {
+      list2.push(followerId[i]._id);
     }
+
     console.log(list);
     console.log(list2);
     // push 10 users into each us Array.
-    User.find(
-      {},
-      {
-        $set: { followers: list, following: list2 },
-      },
-      { new: true }
-    );
-    await User.save();
-    
+
+    for (let i = 0; i < 15; i++) {
+
+      await User.updateMany(
+        {},
+        {
+          $addToSet: {
+            following: list,
+            followers: list2
+          },
+        }
+      );
+    }
+
     console.log('Database seeded! :)');
     console.log('all done!');
     process.exit(0);
+
   } catch (err) {
     throw err;
   }
