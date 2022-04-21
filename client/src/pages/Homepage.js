@@ -4,6 +4,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import './Closet.css';
 import HomepageItems from '../components/HomepageItems';
+// import Items from '../components/Items.js'
 
 import { useQuery } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
@@ -31,6 +32,7 @@ const Homepage = ({ windowSize }) => {
         {/* <button className="unfollow">Following</button> */}
       </div>
       <HomepageItems windowSize={windowSize} />
+      {/* <Items windowSize={windowSize} /> */}
     </div>
   );
 };
