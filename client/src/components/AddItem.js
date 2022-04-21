@@ -233,16 +233,18 @@ const AddItem = () => {
                 name="size"
                 // label= '* Size'
                 label="* Size"
-                sx={{ backgroundColor: 'white' }}                margin="dense"
+                sx={{ backgroundColor: 'white' }}
+                margin="dense"
                 onChange={handleChange}
                 value={filter.clean(userFormData.size)}
               />
-              
+
               {/* style */}
               <TextField
                 name="style"
                 label="Style"
-                sx={{ backgroundColor: 'white' }}                margin="dense"
+                sx={{ backgroundColor: 'white' }}
+                margin="dense"
                 onChange={handleChange}
                 value={userFormData.style}
                 select
@@ -262,7 +264,7 @@ const AddItem = () => {
               <TextField
                 name="brand"
                 label="Brand"
-                sx={{ backgroundColor: 'white' }}                
+                sx={{ backgroundColor: 'white' }}
                 margin="dense"
                 onChange={handleChange}
                 value={filter.clean(userFormData.brand)}
@@ -275,7 +277,8 @@ const AddItem = () => {
                 value={userFormData.gender}
                 label="Gender"
                 margin="dense"
-                sx={{ backgroundColor: 'white' }}                onChange={handleChange}
+                sx={{ backgroundColor: 'white' }}
+                onChange={handleChange}
               >
                 {genderDB.map((option) => (
                   <MenuItem
@@ -293,7 +296,8 @@ const AddItem = () => {
                 name="link"
                 label="Link"
                 margin="dense"
-                sx={{ backgroundColor: 'white' }}                onChange={handleChange}
+                sx={{ backgroundColor: 'white' }}
+                onChange={handleChange}
                 value={filter.clean(userFormData.link)}
               />
 
@@ -304,7 +308,8 @@ const AddItem = () => {
                 value={userFormData.color}
                 label="Color"
                 margin="dense"
-                sx={{ backgroundColor: 'white' }}               onChange={handleChange}
+                sx={{ backgroundColor: 'white' }}
+                onChange={handleChange}
               >
                 {colorDB.map((option) => (
                   <MenuItem
@@ -343,9 +348,17 @@ const AddItem = () => {
               <label htmlFor="select-image">
                 <Button
                   variant="contained"
+                  className="MuiOutlinedInput-root"
                   sx={{
                     py: 1.5,
                     mt: 2,
+                    fontFamily: 'var(--serif)',
+                    textTransform: 'none',
+                    width: '100%',
+                    backgroundColor: '#5196B8',
+                    ':hover': {
+                      backgroundColor: '#5196B8AA',
+                    },
                   }}
                   color="primary"
                   component="span"
