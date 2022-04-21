@@ -51,6 +51,7 @@ const typeDefs = gql`
     height: Int
     weight: Int
     user_id: ID
+    user: User
   }
 
   type Auth {
