@@ -98,7 +98,6 @@ db.once('open', async () => {
     }
     // get 10 random user ID's
 
-
     const followingId = await User.aggregate([{ $sample: { size: 10 } }]);
     let list = [];
     for (i = 0; i < followingId.length; i++) {
@@ -106,9 +105,6 @@ db.once('open', async () => {
     }
 
     const followerId = await User.aggregate([{ $sample: { size: 10 } }]);
-
-    console.log(followerId[0]._id);
-
     let list2 = [];
     for (i = 0; i < followerId.length; i++) {
       list2.push(followerId[i]._id);
@@ -118,23 +114,20 @@ db.once('open', async () => {
     console.log(list2);
     // push 10 users into each us Array.
 
-    for (let i = 0; i < 15; i++) {
+    await User.updateMany(
+      {},
+      {
+        $addToSet: {
+          following: list,
+          followers: list2,
+        },
+      }
+    );
 
-      await User.updateMany(
-        {},
-        {
-          $addToSet: {
-            following: list,
-            followers: list2
-          },
-        }
-      );
-    }
 
     console.log('Database seeded! :)');
     console.log('all done!');
     process.exit(0);
-
   } catch (err) {
     throw err;
   }
