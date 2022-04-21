@@ -10,10 +10,10 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-// import CloseIcon from '@mui/icons-material/Close';
-// import ItemModal from './ItemModal.js';
-import './Items.css';
-import './ItemModal.css';
+
+// Need this:
+import ItemList from './ItemList/ItemList.js'
+
 import IconButton from '@mui/material/IconButton';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { useMutation, useQuery } from '@apollo/client';
