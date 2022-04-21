@@ -43,7 +43,6 @@ const DiscoverCarousel = () => {
   };
 
   const { data: data_me } = useQuery(GET_ME);
-  console.log(data_me?.me.height);
 
   const { data: data_users } = useQuery(GET_USERMATCHES, {
     skip: !data_me,
