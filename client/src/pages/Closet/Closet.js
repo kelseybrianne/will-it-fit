@@ -64,7 +64,7 @@ const Closet = ({ windowSize }) => {
               className="discover-btn"
               onClick={toggleDiscoverCarousel}
             >
-              <PersonAddAltIcon />
+              <PersonAddAltIcon  style={{ fontSize: 16 }} />
             </Button>
             <EditProfile />
           </div>

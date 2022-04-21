@@ -38,7 +38,7 @@
 }
 
 .username-div .closet-username {
-  font-size: 40px;
+  font-size: 24px;
   text-align: center;
   font-weight: 300;
   width: 100%;
@@ -72,16 +72,19 @@
 }
 
 .username-div button {
-  padding: 10px;
   width: 120px;
-  width: auto;
-  height: 45px;
   border: none;
+  width: auto;
   border-radius: 2px !important;
   background-color: white;
   color: black;
   display: inline;
   margin-right: 8px;
+  font-size: 14px;
+}
+
+.discover-btn {
+  /* font-size: 50px; */
 }
 
 .username-div button:hover {
@@ -141,5 +144,11 @@
   .folls-div p {
     margin-right: 15px;
     font-weight: 1;
+  }
+}
+
+@media screen and (min-width: 930px) {
+  .username-div button {
+    max-height: 80px
   }
 }
