@@ -45,7 +45,7 @@ export default function ProfileMenu() {
             <Avatar
               src={userData.primaryPhoto}
               sx={{ width: 30, height: 30}}
-              style = {{objectFit:'contain'}}
+              style = {{objectFit:'cover'}}
               />
           ) : (
             <Avatar sx={{ width: 24, height: 24 }} />
@@ -66,7 +66,7 @@ export default function ProfileMenu() {
                 <Avatar
                   src={userData.primaryPhoto}
                   sx={{ width: 24, height: 24 }}
-                  style = {{objectFit: 'contain'}}
+                  style = {{objectFit: 'cover'}}
                 />
               ) : (
                 <Avatar sx={{ width: 24, height: 24 }} />
