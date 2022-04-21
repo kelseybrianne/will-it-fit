@@ -281,6 +281,22 @@ export const GET_FOLLOWERS = gql`
     followers(_id: $id) {
       followers {
         _id
+        username
+        weight
+        height
+      }
+      closet {
+        _id
+        category
+        style
+        brand
+        name
+        gender
+        size
+        link
+        photo
+        color
+        review
       }
     }
   }
