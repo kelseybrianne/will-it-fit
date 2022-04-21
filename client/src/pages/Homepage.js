@@ -2,10 +2,11 @@ import React from 'react';
 import IconButton from '@mui/material/IconButton';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import './Closet.css';
+
+
 import HomepageItems from '../components/HomepageItems';
 // import Items from '../components/Items.js'
-
+import './Closet/Closet.css'
 import { useQuery } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
 
