@@ -132,7 +132,7 @@ const AddItem = () => {
 
   const formSubmit = async (event) => {
     event.preventDefault();
-
+    window.location.reload(false);
     try {
       await uploadImage(previewSource);
       await addItem({
