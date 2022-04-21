@@ -42,8 +42,7 @@ const DiscoverFeed = () => {
     setCurrentPage(newPage);
   };
 
-  const { data: data_me } = useQuery(GET_ME);
-  console.log(data_me?.me.height);
+  // const { data: data_me } = useQuery(GET_ME);
 
   const { data: data_users } = useQuery(GET_USERMATCHES)
   
@@ -63,7 +62,7 @@ const DiscoverFeed = () => {
               {Auth.loggedIn()
                 ? data_users?.userMatches?.map(
                     ({ primaryPhoto, _id, username }) => (
-                      <Link to={`/closet/${username}`}>
+                      <Link to={`/closet/${username}`} key={_id}>
                         <div className="card-container" id="card-container">
                           <img
                             className="card"

@@ -60,7 +60,7 @@ const DiscoverCarousel = () => {
           {Auth.loggedIn()
             ? data_users?.userMatches?.map(
                 ({ primaryPhoto, _id, username }) => (
-                  <Link to={`/closet/${username}`}>
+                  <Link to={`/closet/${username}`} key={_id}>
                     <div className="card-container">
                       <img className="card" src={primaryPhoto} alt={username} />
                     </div>
