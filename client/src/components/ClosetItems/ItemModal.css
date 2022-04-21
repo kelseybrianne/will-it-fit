@@ -12,6 +12,7 @@ a {
     max-height: 90vh;
     max-width: 90vw;
     position: relative;
+    border-radius: 2px;
 }
 
 .close-icon {
@@ -71,11 +72,13 @@ a {
 .review-div {
     background-color: white;
     padding: 10px;
+    border-radius: 2px
 }
 
 .review-header {
     display: flex;
     align-items: flex-start;
+    justify-content: flex-start;
 }
 
 .avatar-pic-div {
@@ -91,8 +94,8 @@ a {
     object-fit: cover;
 }
 
-.username-div {
-    padding-left: 10px;
+.username-div-modal {
+    padding-left: 8px;
 }
 
 .user-measurements-displayed {
@@ -128,6 +131,8 @@ a {
     } */
 
     .shop-btn {
-        /* margin: 20px 0px !important; */
+        margin-bottom: 15px!important;
+        background-color: #B95252 !important;
+        color: white !important;
     }
 }

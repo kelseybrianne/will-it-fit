@@ -5,9 +5,15 @@
 }
 
 .white-div {
-  height: 20vh;
-  min-height: 150px;
+  height: 15vh;
+  min-height: 120px;
   background-color: white;
+}
+
+.profile-head {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 .profile-img-div {
@@ -16,25 +22,28 @@
   margin: 0px auto;
   position: relative;
   transform: translateY(-120px);
+  border-radius: 2px;
+  margin-bottom: -120px;
 }
 
 .profile-img-div img {
     height: 100%;
     width: 100%;
+    border-radius: 2px;
 }
 
-.profile-img-div h2 {
+.username-div {
+  width: 220px;
+  margin: 0px auto 40px;
+}
+
+.username-div .closet-username {
   font-size: 40px;
-  max-width: 75vw;
-  inline-size: 220px;
-  overflow-wrap: break-word;
   text-align: center;
   font-weight: 300;
-  position: absolute;
-  left: 0;
-  right: 0;
-  margin: 0px auto;
-  top: -25px;
+  width: 100%;
+  padding: 30px 0px 20px 0px;
+  border-bottom: 1px solid rgb(209, 209, 209);
 }
 
 .folls-div {
@@ -52,23 +61,29 @@
   margin-right: 10px;
 }
 
-.profile-head button {
+.btns-div {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.discover-btn {
+  width: 10px !important;
+}
+
+.username-div button {
   padding: 10px;
-  width: 130px;
+  width: 120px;
   height: 45px;
-  position: absolute;
-  bottom: -80px;
-  left: 0;
-  right: 0;
-  margin: 0px auto;
   border: none;
   border-radius: 2px !important;
   background-color: white;
   color: black;
   display: inline;
+  margin-right: 8px;
 }
 
-.profile-head button:hover {
+.username-div button:hover {
   background-color: rgb(249, 249, 249);
 }
 
@@ -76,13 +91,17 @@
   color: rgb(79, 79, 79);
 }
 
+.toggle-discover-carousel {
+  display: none;
+}
+
 @media screen and (min-width: 500px) {
   .profile-img-div {
     width: 320px;
   }
 
-  .profile-img-div h2 {
-    inline-size: 320px;
+  .username-div {
+    width: 320px;
   }
 
   .folls-div {
@@ -93,22 +112,23 @@
 
 @media screen and (min-width: 767px) {
   .white-div {
-    height: 175px;
+    height: 140px;
   }
 
   .profile-img-div {
-    width: 35%;
+    width: 30%;
     height: auto;
     max-width: 800px;
-    /* max-height: 600px; */
     transform: translateY(-120px);
     object-fit: cover;
   }
 
-  .profile-img-div h2 {
+  .username-div {
+    width: 30%;
+  }
+
+  .username-div h2 {
     font-size: 45px;
-    top: -35px;
-    inline-size: initial;
   }
 
   .folls-div {
@@ -120,9 +140,5 @@
   .folls-div p {
     margin-right: 15px;
     font-weight: 1;
-  }
-
-  .profile-head button {
-    bottom: -90px;
   }
 }
