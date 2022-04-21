@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom';
 import './DiscoverFeed.css';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import Auth from '../utils/auth';
+import Auth from '../../utils/auth';
+import images from '../../assets/images.js'
 
 import { useQuery } from '@apollo/client';
-import { GET_USERMATCHES, GET_ME } from '../utils/queries';
+import { GET_USERMATCHES, GET_ME } from '../../utils/queries';
 
 const DiscoverFeed = () => {
   const track = document.querySelector('.track');
@@ -41,8 +42,7 @@ const DiscoverFeed = () => {
     setCurrentPage(newPage);
   };
 
-  const { data: data_me } = useQuery(GET_ME);
-  console.log(data_me?.me.height);
+  // const { data: data_me } = useQuery(GET_ME);
 
   const { data: data_users } = useQuery(GET_USERMATCHES)
   
@@ -62,7 +62,7 @@ const DiscoverFeed = () => {
               {Auth.loggedIn()
                 ? data_users?.userMatches?.map(
                     ({ primaryPhoto, _id, username }) => (
-                      <Link to={`/closet/${username}`}>
+                      <Link to={`/closet/${username}`} key={_id}>
                         <div className="card-container" id="card-container">
                           <img
                             className="card"
@@ -93,36 +93,5 @@ const DiscoverFeed = () => {
     </div>
   );
 };
-
-const images = [
-  {
-    id: 1,
-    img: require('../assets/images/rayul-_M6gy9oHgII-unsplash.jpg'),
-  },
-  {
-    id: 2,
-    img: require('../assets/images/atikh-bana-_KaMTEmJnxY-unsplash.jpg'),
-  },
-  {
-    id: 3,
-    img: require('../assets/images/ivana-cajina-dnL6ZIpht2s-unsplash.jpg'),
-  },
-  {
-    id: 4,
-    img: require('../assets/images/daniel-monteiro-VMeHP3mNJL4-unsplash.jpg'),
-  },
-  {
-    id: 5,
-    img: require('../assets/images/dom-hill-nimElTcTNyY-unsplash.jpg'),
-  },
-  {
-    id: 6,
-    img: require('../assets/images/huston-wilson-WyDr1KFS23Y-unsplash.jpg'),
-  },
-  {
-    id: 7,
-    img: require('../assets/images/brooke-cagle-Ss3wTFJPAVY-unsplash.jpg'),
-  },
-];
 
 export default DiscoverFeed;

@@ -11,6 +11,7 @@ import { useState } from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
 import HomeIcon from '@mui/icons-material/Home';
 import DynamicFeedIcon from '@mui/icons-material/DynamicFeed';
+import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 import SearchIcon from '@mui/icons-material/Search';
 
 import { Link } from 'react-router-dom';
@@ -57,7 +58,7 @@ export default function Nav() {
         <Link to="/discover">
           <MenuItem>
             <ListItemIcon>
-              <DynamicFeedIcon fontSize="small" />
+              <PersonAddAltIcon fontSize="small" />
             </ListItemIcon>
             discover
           </MenuItem>

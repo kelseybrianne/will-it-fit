@@ -5,10 +5,11 @@ import TextField from '@mui/material/TextField';
 import TextareaAutosize from '@mui/base/TextareaAutosize';
 import { Button, Typography, Container, Dialog } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
+import './AddItem.css';
 
 // graphQL:
 import { useMutation } from '@apollo/client';
-import { ADD_ITEM } from '../utils/mutations';
+import { ADD_ITEM } from '../../utils/mutations';
 
 let filter = require('leo-profanity');
 
@@ -131,7 +132,7 @@ const AddItem = () => {
 
   const formSubmit = async (event) => {
     event.preventDefault();
-
+    window.location.reload(false);
     try {
       await uploadImage(previewSource);
       await addItem({
@@ -169,8 +170,9 @@ const AddItem = () => {
         <Dialog open={open} onClose={() => setOpen(false)} id="form">
           <Container
             sx={{
-              backgroundColor: 'linen',
+              backgroundColor: '#f3f3f3',
               maxWidth: 500,
+              py: 3,
             }}
           >
             <Box
@@ -182,7 +184,6 @@ const AddItem = () => {
                 flexDirection: 'column',
                 justifyContent: 'center',
                 alignContent: 'center',
-                gap: 1,
               }}
             >
               <Typography
@@ -190,8 +191,8 @@ const AddItem = () => {
                 sx={{
                   fontFamily: 'var(--serif)',
                   textAlign: 'center',
-                  fontSize: 20,
-                  py: 1,
+                  fontSize: 25,
+                  padding: '10px 0px 30px',
                 }}
               >
                 Add An Item:
@@ -199,20 +200,25 @@ const AddItem = () => {
 
               {/* name */}
               <TextField
+                className="input"
                 name="name"
                 label="* Name"
-                margin="dense"
                 onChange={handleChange}
                 value={filter.clean(userFormData.name)}
-                sx={{ backgroundColor: 'white' }}
+                sx={{
+                  backgroundColor: 'white',
+                  '& .MuiInputBase-input-MuiOutlinedInput-input': {
+                    border: 'none',
+                  },
+                }}
               />
 
               {/* category */}
               <TextField
+                className="input"
                 name="category"
                 label="* Category"
                 sx={{ backgroundColor: 'white' }}
-                margin="dense"
                 onChange={handleChange}
                 value={userFormData.category}
                 select
@@ -230,19 +236,21 @@ const AddItem = () => {
 
               {/* size */}
               <TextField
+                className="input"
                 name="size"
                 // label= '* Size'
                 label="* Size"
-                sx={{ backgroundColor: 'white' }}                margin="dense"
+                sx={{ backgroundColor: 'white' }}
                 onChange={handleChange}
                 value={filter.clean(userFormData.size)}
               />
-              
+
               {/* style */}
               <TextField
+                className="input"
                 name="style"
                 label="Style"
-                sx={{ backgroundColor: 'white' }}                margin="dense"
+                sx={{ backgroundColor: 'white' }}
                 onChange={handleChange}
                 value={userFormData.style}
                 select
@@ -260,22 +268,23 @@ const AddItem = () => {
 
               {/* brand */}
               <TextField
+                className="input"
                 name="brand"
                 label="Brand"
-                sx={{ backgroundColor: 'white' }}                
-                margin="dense"
+                sx={{ backgroundColor: 'white' }}
                 onChange={handleChange}
                 value={filter.clean(userFormData.brand)}
               />
 
               {/* gender - drop down menu */}
               <TextField
+                className="input"
                 name="gender"
                 select
                 value={userFormData.gender}
                 label="Gender"
-                margin="dense"
-                sx={{ backgroundColor: 'white' }}                onChange={handleChange}
+                sx={{ backgroundColor: 'white' }}
+                onChange={handleChange}
               >
                 {genderDB.map((option) => (
                   <MenuItem
@@ -290,21 +299,23 @@ const AddItem = () => {
 
               {/* link */}
               <TextField
+                className="input"
                 name="link"
                 label="Link"
-                margin="dense"
-                sx={{ backgroundColor: 'white' }}                onChange={handleChange}
+                sx={{ backgroundColor: 'white' }}
+                onChange={handleChange}
                 value={filter.clean(userFormData.link)}
               />
 
               {/* color */}
               <TextField
+                className="input"
                 name="color"
                 select
                 value={userFormData.color}
                 label="Color"
-                margin="dense"
-                sx={{ backgroundColor: 'white' }}               onChange={handleChange}
+                sx={{ backgroundColor: 'white' }}
+                onChange={handleChange}
               >
                 {colorDB.map((option) => (
                   <MenuItem
@@ -320,9 +331,9 @@ const AddItem = () => {
               {/* review */}
               <TextareaAutosize
                 //  fullWidth ={true}
+                className="textarea-input"
                 name="review"
                 variant="filled"
-                margin="dense"
                 aria-label="minimum height"
                 minRows={5}
                 placeholder="Add your review here:"
@@ -343,11 +354,19 @@ const AddItem = () => {
               <label htmlFor="select-image">
                 <Button
                   variant="contained"
+                  className="MuiOutlinedInput-root"
                   sx={{
                     py: 1.5,
                     mt: 2,
+                    fontFamily: 'var(--serif)',
+                    textTransform: 'none',
+                    width: '100%',
+                    backgroundColor: '#5196B8',
+                    ':hover': {
+                      backgroundColor: '#5196B8AA',
+                    },
                   }}
-                  color="primary"
+                  // color="primary"
                   component="span"
                 >
                   Upload Image
@@ -384,7 +403,7 @@ const AddItem = () => {
                 type="submit"
                 variant="contained"
               >
-                Submit Item
+                Add
               </Button>
             </Box>
           </Container>

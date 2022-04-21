@@ -8,7 +8,7 @@ export const ADD_USER = gql`
     $password: String!
     $height: Float!
     $weight: Float!
-    $primaryPhoto: String
+    $primaryPhoto: String!
     $shoeSize: String
   ) {
     addUser(
