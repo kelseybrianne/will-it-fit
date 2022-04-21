@@ -14,6 +14,7 @@ import {
 } from '@mui/material';
 import { forwardRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import auth from '../../utils/auth';
 
 const Modal = styled(ModalUnstyled)`
   position: fixed;
@@ -96,14 +97,14 @@ export default function Item({ item }) {
     setAnchorEl(null);
   };
 
-  console.log(photo);
+  const me = auth.getProfile(); // me.data.username
 
   return (
     <div key={_id} className="item-list-wrapper cursor-pointer">
       {/* substitute heart icon for MoreVertIcon when closet does not belong to the person who is logged in */}
 
       <ImageListItem onClick={handleOpen}>
-        {true ? ( // need to check if it's the currently logged in user's item
+        {me.data.username === user.username ? ( // need to check if it's the currently logged in user's item
           <MoreVert
             id="basic-button"
             aria-controls={openMenu ? 'basic-menu' : undefined}
@@ -161,14 +162,18 @@ export default function Item({ item }) {
           <div className="item-modal-text">
             <div className="item-name-more-div">
               <h1>{name}</h1>
-              <MoreVert
-                id="basic-button"
-                aria-controls={openMenu ? 'basic-menu' : undefined}
-                aria-haspopup="true"
-                aria-expanded={openMenu ? 'true' : undefined}
-                onClick={handleClick}
-                className="icon-p"
-              />
+              {me.data.username === user.username ? (
+                <MoreVert
+                  id="basic-button"
+                  aria-controls={openMenu ? 'basic-menu' : undefined}
+                  aria-haspopup="true"
+                  aria-expanded={openMenu ? 'true' : undefined}
+                  onClick={handleClick}
+                  className="icon-p"
+                />
+              ) : (
+                ''
+              )}
               <Menu
                 id="basic-menu"
                 elevation={0}
