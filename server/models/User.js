@@ -42,6 +42,7 @@ const userSchema = new Schema(
 
     primaryPhoto: {
       type: String,
+      required: [true, 'photo is required'],
     },
 
     following: [

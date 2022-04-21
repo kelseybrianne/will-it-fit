@@ -354,12 +354,16 @@ const AddItem = () => {
               <label htmlFor="select-image">
                 <Button
                   variant="contained"
+                  className="MuiOutlinedInput-root"
                   sx={{
                     py: 1.5,
                     mt: 2,
-                    backgroundColor: '#B95252',
+                    fontFamily: 'var(--serif)',
+                    textTransform: 'none',
+                    width: '100%',
+                    backgroundColor: '#5196B8',
                     ':hover': {
-                      backgroundColor: '#B95252AA',
+                      backgroundColor: '#5196B8AA',
                     },
                   }}
                   // color="primary"
