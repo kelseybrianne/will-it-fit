@@ -98,6 +98,10 @@ export default function Item({ item }) {
   };
 
   const me = auth.getProfile(); // me.data.username
+  if (!user) {
+    console.log('no user');
+    return <></>;
+  }
 
   return (
     <div key={_id} className="item-list-wrapper cursor-pointer">

@@ -16,7 +16,7 @@ import { GET_USER } from '../../utils/queries';
 import EditProfile from '../../components/EditProfile/EditProfile';
 import ItemList from '../../components/ItemList';
 
-const Closet = ({ windowSize }) => {
+const Closet = () => {
   let { username } = useParams();
 
   // eslint-disable-next-line no-unused-vars
@@ -91,7 +91,6 @@ const Closet = ({ windowSize }) => {
       <div className="toggle-discover-carousel">
         <DiscoverCarousel />
       </div>
-      {/* <Items userData={userData} windowSize={windowSize} /> */}
       <div className="closet">
         <ItemList items={userData.closet} />
       </div>
