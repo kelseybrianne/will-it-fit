@@ -1,82 +1,110 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import { Button, Typography, Container, Dialog } from '@mui/material';
+import {
+  Button,
+  Typography,
+  Container,
+  Dialog,
+  InputAdornment,
+} from '@mui/material';
 
 // graphQL:
-// import { useMutation } from '@apollo/client';
-// import { ADD_ITEM } from '../../utils/mutations';
+import { useMutation } from '@apollo/client';
+import { EDIT_PROFILE, EDIT_PROFILEPHOTO } from '../../utils/mutations';
 
+// image upload
+import uploadImage from '../../utils/uploadImage';
 const EditProfile = () => {
-  //   const [addItem] = useMutation(ADD_ITEM);
-  // useMutation(EDIT_PROFILE)
+
+  const [editProfile, { loading, error }] = useMutation(EDIT_PROFILE);
+  const [editProfilePhoto, { error: image_error }] =
+    useMutation(EDIT_PROFILEPHOTO);
   const [open, setOpen] = React.useState(false);
-  //   const [previewSource, setPreviewSource] = React.useState(null);
+  const [previewSource, setPreviewSource] = React.useState(null);
   const [userFormData, setUserFromData] = React.useState({
     height: '',
     weight: '',
   });
 
-  //   let photo = '';
-  //   // shows user image preview
-  //   const handleFileInputChange = (e) => {
-  //     const file = e.target.files[0];
-  //     previewFile(file);
-  //   };
+  // shows user image preview
+  const handleFileInputChange = (e) => {
+    const file = e.target.files[0];
+    previewFile(file);
+  };
 
-  //   const previewFile = (file) => {
-  //     const reader = new FileReader();
-  //     reader.readAsDataURL(file);
-  //     reader.onloadend = () => {
-  //       setPreviewSource(reader.result);
-  //     };
-  //   };
+  const previewFile = (file) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setPreviewSource(reader.result);
+    };
+  };
 
-  // upload image to cloudinary, receive URL as res
-  //   const uploadImage = async (base64EncodedImage) => {
-  //     try {
-  //       const response = await fetch('/api/upload', {
-  //         method: 'POST',
-  //         body: JSON.stringify({ data: base64EncodedImage }),
-  //         headers: { 'content-type': 'application/json' },
-  //       });
+  const formSubmit = async (event) => {
+    event.preventDefault();
+    // only call edit profile photo if a photo was added. Otherwise proceed to update height and weight.
+    try {
+      if (previewSource) {
+        const primaryPhoto = await uploadImage(previewSource);
+        await editProfilePhoto({
+          variables: { primaryPhoto: primaryPhoto },
+        });
+      }
+      // update height and weight
+      await editProfile({
+        variables: { ...userFormData },
+      });
+    } catch (e) {
+      console.error(e);
+    }
+    setUserFromData({
+      height: '',
+      weight: '',
+    });
+    window.location.reload(false);
+  };
 
-  //       if (response.ok) {
-  //         const url = await response.json();
-  //         photo = url;
-  //       } else {
-  //         console.log(response);
-  //         return response;
-  //       }
-  //     } catch (error) {
-  //       return console.error(error);
-  //     }
-  //   };
-
+  // update state based on form input changes
   const handleChange = (event) => {
-    const { name, value } = event.target;
+    let { id, value, type } = event.target;
+    if (type === 'number') {
+      value = value ? parseFloat(value) : '';
+    }
     setUserFromData({
       ...userFormData,
-      [name]: value,
+      [id]: value,
     });
   };
 
-  //   const formSubmit = async (event) => {
-  //     event.preventDefault();
-  //     window.location.reload(false);
-  //     try {
-  //       //   await uploadImage(previewSource);
-  //       await addItem({
-  //         variables: { ...userFormData, photo: photo },
-  //       });
-  //     } catch (e) {
-  //       console.error(e);
-  //     }
-  //     setUserFromData({
-  //       height: '',
-  //       weight: '',
-  //     });
-  //   };
+  const handleError = (error, field) => {
+    if (!error) {
+      return false;
+    }
+    let message = '';
+    if (error.message.indexOf(field) >= 0) {
+      message = `There was an error with the ${field}`;
+      switch (field) {
+        case 'weight':
+          message = `${error.message}`;
+          break;
+        case 'height':
+          message = `${error.message}`;
+          break;
+        default:
+          break;
+      }
+    }
+    return message;
+  };
+
+  const handleImageError = (image_error) => {
+    if (!image_error) {
+      return false;
+    }
+    let message = 'There was an error uploading your image.';
+    return message;
+  };
   return (
     <div>
       <Button
@@ -99,7 +127,7 @@ const EditProfile = () => {
             }}
           >
             <Box
-              //   onSubmit={formSubmit}
+              onSubmit={formSubmit}
               component="form"
               sx={{
                 display: 'flex',
@@ -115,43 +143,57 @@ const EditProfile = () => {
                   fontFamily: 'var(--serif)',
                   textAlign: 'center',
                   fontSize: 25,
+                  py: 2,
                   padding: '10px 0px 30px',
                 }}
               >
                 Edit Profile
               </Typography>
-
-              {/* height */}
               <TextField
-                className="input"
-                name="height"
-                label="* Height"
+                id="height"
+                placeholder="height"
+                type="number"
+                required={true}
+                error={handleError(error, 'height')}
+                helperText={handleError(error, 'height')}
                 onChange={handleChange}
-                value={userFormData.height}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">in</InputAdornment>
+                  ),
+                }}
                 sx={{
                   backgroundColor: 'white',
                   '& .MuiInputBase-input-MuiOutlinedInput-input': {
                     border: 'none',
                   },
                 }}
+                value={userFormData.height}
               />
-
-              {/* weight */}
               <TextField
-                className="input"
-                name="weight"
-                label="* Weight"
-                sx={{ backgroundColor: 'white' }}
+                id="weight"
+                placeholder="weight"
+                type="number"
+                required={true}
                 onChange={handleChange}
+                error={handleError(error, 'weight')}
+                helperText={handleError(error, 'weight')}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">lbs</InputAdornment>
+                  ),
+                }}
+                sx={{ my: 2, backgroundColor: 'white' }}
                 value={userFormData.weight}
               />
-              {/* image upload */}
 
-              {/* <input
+              <input
                 accept="image/*"
                 type="file"
                 encType="multipart/form-data"
                 id="select-image"
+                error={handleImageError(image_error)}
+                helperText={handleImageError(image_error)}
                 style={{ display: 'none' }}
                 onChange={handleFileInputChange}
               />
@@ -175,13 +217,13 @@ const EditProfile = () => {
                 >
                   Upload Image
                 </Button>
-              </label> */}
-              {/* {previewSource && (
+              </label>
+              {previewSource && (
                 <Box mt={2} textAlign="center">
                   <div>Image Preview:</div>
                   <img src={previewSource} alt={previewSource} height="100px" />
                 </Box>
-              )} */}
+              )}
 
               <Button
                 sx={{
