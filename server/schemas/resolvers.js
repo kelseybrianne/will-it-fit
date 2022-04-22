@@ -1,5 +1,7 @@
 const { AuthenticationError } = require('apollo-server-express');
+const { default: mongoose } = require('mongoose');
 const { User, Item } = require('../models');
+const { $where } = require('../models/Item');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -159,6 +161,20 @@ const resolvers = {
         return user.savedItems;
       }
       throw new AuthenticationError('You need to be logged in!');
+    },
+    // Returns a list of items that match the user's following
+    feed: async (parent, args, context) => {
+      if (!context.user) {
+        throw new AuthenticationError('You need to be logged in!');
+      }
+      const user = await User.findById(context.user._id);
+      const { following } = user;
+      const feed = await Item.find({
+        user_id: {
+          $in: following,
+        },
+      }).populate('user');
+      return feed;
     },
     // GET all closet items of all users this user id is following
     following: async (parent, args, context) => {

@@ -84,6 +84,8 @@ const typeDefs = gql`
     following: [User]
     followers: [User]
 
+    feed: [Item]
+
     searchItems(keyword: String): [Item]
   }
 
