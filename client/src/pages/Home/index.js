@@ -7,10 +7,6 @@ import { GET_FEED } from '../../utils/queries';
 export default function Home() {
   const { data, error, loading } = useQuery(GET_FEED);
 
-  console.log(data?.feed);
-  //   console.log(data?[0].following);
-  //   const items = data?.following.closet._id;
-
   if (error) {
     return <Typography>{error.message}</Typography>;
   }
