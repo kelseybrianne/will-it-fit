@@ -15,6 +15,10 @@ import {
 import { forwardRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import auth from '../../utils/auth';
+import { useMutation } from '@apollo/client';
+import { REMOVE_ITEM } from '../../utils/mutations';
+
+  
 
 const Modal = styled(ModalUnstyled)`
   position: fixed;
@@ -77,12 +81,27 @@ export default function Item({ item }) {
     weight,
   } = item;
 
+  // *Remove item function *
+  const [removeItem] = useMutation(REMOVE_ITEM);
+  const deleteItem = async (item) => {
+      try {
+         await removeItem({
+          variables: { _id : item._id}
+        });
+        console.log('🤘',_id)
+        // window.location.reload();
+      } catch (e) {
+        console.error(e);
+      }
+    };
+
   const [open, setOpen] = useState(false);
 
   const handleOpen = (e) => {
     setOpen(true);
   };
   const handleClose = () => setOpen(false);
+
 
   // more icon that opens edit/delete MUI menu
   const [anchorEl, setAnchorEl] = useState(null);
@@ -102,6 +121,8 @@ export default function Item({ item }) {
     console.log('no user');
     return <></>;
   }
+
+
 
   return (
     <div key={_id} className="item-list-wrapper cursor-pointer">
@@ -133,7 +154,7 @@ export default function Item({ item }) {
           }}
         >
           <MenuItem onClick={handleCloseMenu}>Edit</MenuItem>
-          <MenuItem onClick={handleCloseMenu}>Delete</MenuItem>
+          <MenuItem id={_id} onClick={() => deleteItem(`${_id}`)} > Delete</MenuItem>
         </Menu>
         <img
           src={`${photo}?w=248&fit=crop&auto=format`}
@@ -190,7 +211,7 @@ export default function Item({ item }) {
                 }}
               >
                 <MenuItem onClick={handleCloseMenu}>Edit</MenuItem>
-                <MenuItem onClick={handleCloseMenu}>Delete</MenuItem>
+                <MenuItem onClick={() => deleteItem(`${_id}`)}>Delete</MenuItem>
               </Menu>
             </div>
             <p className="item-desc">{`${brand} ${category}`}</p>
