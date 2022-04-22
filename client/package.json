@@ -2,7 +2,7 @@
   "name": "will-it-fit",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://kelseybrianne.github.io/will-it-fit",
+  "homepage": "https://will-it-fit-app.herokuapp.com/",
   "proxy": "http://localhost:3001/",
   "dependencies": {
     "@apollo/client": "^3.5.10",
