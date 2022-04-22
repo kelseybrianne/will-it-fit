@@ -13,8 +13,8 @@ export default function Home() {
   const { data, error, loading } = useQuery(GET_FOLLOWING);
 
   console.log(data?.following);
-  console.log(data?[0].following);
-//   const items = data?.following.closet._id;
+  //   console.log(data?[0].following);
+  //   const items = data?.following.closet._id;
 
   if (error) {
     return <Typography>{error.message}</Typography>;

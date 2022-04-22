@@ -9,14 +9,14 @@ import Stack from '@mui/material/Stack';
 import AddItem from '../../components/AddItem/index.js';
 import DiscoverCarousel from '../../components/DiscoverCarousel/DiscoverCarousel.js';
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
-import placeholderProfilePic from "../../assets/images/mukuko-studio-mU88MlEFcoU-unsplash.jpg"
+import placeholderProfilePic from '../../assets/images/mukuko-studio-mU88MlEFcoU-unsplash.jpg';
 
 import { useQuery } from '@apollo/client';
 import { GET_USER } from '../../utils/queries';
 import EditProfile from '../../components/EditProfile/EditProfile';
 import ItemList from '../../components/ItemList';
 
-const Closet = ({ windowSize }) => {
+const Closet = () => {
   let { username } = useParams();
 
   // eslint-disable-next-line no-unused-vars
@@ -40,7 +40,14 @@ const Closet = ({ windowSize }) => {
       <div className="white-div"></div>
       <div className="profile-head">
         <div className="profile-img-div">
-          <img src={userData.primaryPhoto ? userData.primaryPhoto : placeholderProfilePic} alt={userData.primaryPhoto} />
+          <img
+            src={
+              userData.primaryPhoto
+                ? userData.primaryPhoto
+                : placeholderProfilePic
+            }
+            alt={userData.primaryPhoto}
+          />
           {/* <h2>{userData.username}</h2> */}
           <div className="folls-div">
             <a href="tbd">
@@ -68,7 +75,7 @@ const Closet = ({ windowSize }) => {
               <a href="tbd">
                 <p>Following</p>
               </a>
-              
+
               <p>|</p>
               <a href="tbd">
                 <p>Followers</p>
@@ -91,7 +98,6 @@ const Closet = ({ windowSize }) => {
       <div className="toggle-discover-carousel">
         <DiscoverCarousel />
       </div>
-      {/* <Items userData={userData} windowSize={windowSize} /> */}
       <div className="closet">
         <ItemList items={userData.closet} />
       </div>

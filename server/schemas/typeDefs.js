@@ -114,6 +114,8 @@ const typeDefs = gql`
       photo: String!
       color: String
       review: String
+      user: ID!
+      user_id: ID!
     ): Item
     removeItem(_id: ID!): User
 
