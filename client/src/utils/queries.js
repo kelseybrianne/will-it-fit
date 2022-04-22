@@ -281,57 +281,14 @@ export const GET_FOLLOWERS = gql`
   query Query($id: ID!) {
     followers(_id: $id) {
       followers {
-<<<<<<< HEAD
-        _id
-        username
-        weight
-        height
-      }
-      closet {
-        _id
-        category
-        style
-        brand
-        name
-        gender
-        size
-        link
-        photo
-        color
-        review
-=======
         closet {
           _id
         }
->>>>>>> ded022eece3a0677339c6dfd0f44e2e1f1c82e97
       }
     }
   }
 `;
 
-<<<<<<< HEAD
-export const GET_FOLLOWING = gql`
-  query Query($id: ID!) {
-    following(id: $id) {
-      following {
-        _id
-        username
-        weight
-        height
-      }
-      closet {
-        _id
-        category
-        style
-        brand
-        name
-        gender
-        size
-        link
-        photo
-        color
-        review
-=======
 export const GET_FEED = gql`
   query feed {
     feed {
@@ -345,7 +302,6 @@ export const GET_FEED = gql`
         _id
         username
         primaryPhoto
->>>>>>> ded022eece3a0677339c6dfd0f44e2e1f1c82e97
       }
       brand
       name
