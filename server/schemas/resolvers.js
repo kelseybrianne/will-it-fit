@@ -160,12 +160,19 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
-    // GET all users this user id is following
-    following: async (parent, { _id }, context) => {
+    // GET all closet items of all users this user id is following
+    following: async (parent, args, context) => {
       if (context.user) {
-        return await User.findById({ _id }).populate('following');
+        const user = await User.findById({ _id: context.user._id })
+          .populate('following')
+          .populate({
+            path: 'closet',
+            select: '_id',
+          });
+        return user;
       }
-      throw new AuthenticationError('You need to be logged in!');
+
+      throw new AuthenticationError('Benjamin Dreewes!');
     },
 
     // GET all followers of the user _id entered in args.

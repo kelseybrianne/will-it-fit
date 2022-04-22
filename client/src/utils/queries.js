@@ -244,20 +244,23 @@ export const GET_FOLLOWERS = gql`
   query Query($id: ID!) {
     followers(_id: $id) {
       followers {
-        _id
+        closet {
+          _id
+        }
       }
     }
   }
 `;
 
 export const GET_FOLLOWING = gql`
-  query Query($id: ID!) {
-    following(_id: $id) {
-      following {
+query Following {
+  following {
+      closet {
         _id
-      }
     }
-  }
+
+        }
+}
 `;
 
 export const SEARCH_ITEMS = gql`

@@ -81,8 +81,8 @@ const typeDefs = gql`
     closet(_id: ID!): [Item]
     savedItems(_id: ID!): [Item]
 
-    following(_id: ID!): [User]
-    followers(_id: ID!): [User]
+    following: [User]
+    followers: [User]
 
     searchItems(keyword: String): [Item]
   }
