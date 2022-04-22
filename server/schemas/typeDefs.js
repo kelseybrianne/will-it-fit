@@ -120,9 +120,11 @@ const typeDefs = gql`
     addFavorite(_id: ID!): User
     removeFavorite(_id: ID!): User
 
-    addPhoto(_id: ID!, photo: String!): Item
+    editPhoto(_id: ID!, photo: String!): Item
 
-    addProfilePhoto(_id: ID!, primaryPhoto: String!): User
+    editProfile(height: Float!, weight: Float!): User
+    editProfilePhoto(primaryPhoto: String!): User
+
     removeProfilePhoto(_id: ID!): User
 
     addFollowing(_id: ID!): User

@@ -206,6 +206,12 @@ function SignUpForm({ setDialogState }) {
           InputProps={{
             endAdornment: <InputAdornment position="end">in</InputAdornment>,
           }}
+          sx={{
+            backgroundColor: 'white',
+            '& .MuiInputBase-input-MuiOutlinedInput-input': {
+              border: 'none',
+            },
+          }}
           value={formState.height}
         />
         <TextField
@@ -217,6 +223,7 @@ function SignUpForm({ setDialogState }) {
           InputProps={{
             endAdornment: <InputAdornment position="end">lbs</InputAdornment>,
           }}
+          sx={{ backgroundColor: 'white' }}
           value={formState.weight}
         />
         <TextField
