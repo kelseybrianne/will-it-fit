@@ -216,25 +216,26 @@ export const GET_USERCLOSET = gql`
 export const GET_FAVORITES = gql`
   query SavedItems($id: ID!) {
     savedItems(_id: $id) {
-      savedItems {
+      _id
+      height
+      weight
+      category
+      style
+      user_id
+      user {
         _id
-        category
-        style
-        brand
-        name
-        gender
-        size
-        link
-        photo
-        color
-        review
-        height
-        weight
-        user {
-          primaryPhoto
-          username
-        }
+        username
+        primaryPhoto
       }
+      brand
+      name
+      gender
+      size
+      link
+      photo
+      color
+      review
+      createdAt
     }
   }
 `;
