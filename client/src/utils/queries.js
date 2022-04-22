@@ -244,20 +244,40 @@ export const GET_FOLLOWERS = gql`
   query Query($id: ID!) {
     followers(_id: $id) {
       followers {
-        _id
+        closet {
+          _id
+        }
       }
     }
   }
 `;
 
-export const GET_FOLLOWING = gql`
-  query Query($id: ID!) {
-    following(_id: $id) {
-      following {
+export const GET_FEED = gql`
+  query feed {
+    feed {
+      _id
+      height
+      weight
+      category
+      style
+      user_id
+      user {
         _id
+        username
+        primaryPhoto
       }
+      brand
+      name
+      gender
+      size
+      link
+      photo
+      color
+      review
+      createdAt
     }
-  }
+      }
+
 `;
 
 export const SEARCH_ITEMS = gql`

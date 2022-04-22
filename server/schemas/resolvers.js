@@ -160,12 +160,30 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
-    // GET all users this user id is following
-    following: async (parent, { _id }, context) => {
-      if (context.user) {
-        return await User.findById({ _id }).populate('following');
+    // Returns a list of items that match the user's following
+    feed: async (parent, args, context) => {
+      if (!context.user) {
+        throw new AuthenticationError('You need to be logged in!');
       }
-      throw new AuthenticationError('You need to be logged in!');
+      const user = await User.findById(context.user._id);
+      const { following } = user;
+      const feed = await Item.find({
+        user_id: {
+          $in: following,
+        },
+      }).populate('user');
+      return feed;
+    },
+    // GET all user id's of who logged in user is following
+    following: async (parent, args, context) => {
+      if (context.user) {
+        const user = await User.findById({ _id: context.user._id }).populate(
+          'following'
+        );
+        return user;
+      }
+
+      throw new AuthenticationError('Benjamin Dreewes!');
     },
 
     // GET all followers of the user _id entered in args.
