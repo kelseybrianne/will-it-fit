@@ -78,11 +78,13 @@ const typeDefs = gql`
     item(_id: ID!): Item
     items: [Item]
 
-    closet(_id: ID!): User
-    savedItems(_id: ID!): User
+    closet(_id: ID!): [Item]
+    savedItems(_id: ID!): [Item]
 
-    following(_id: ID!): [User]
-    followers(_id: ID!): User
+    followers: [User]
+    following: [User]
+    # returns all data associated with items of all followers so we can pull user ID's OR item ID's from query.
+    feed: [Item]
 
     searchItems(keyword: String): [Item]
   }
@@ -114,15 +116,19 @@ const typeDefs = gql`
       photo: String!
       color: String
       review: String
+      user: ID!
+      user_id: ID!
     ): Item
     removeItem(_id: ID!): User
 
     addFavorite(_id: ID!): User
     removeFavorite(_id: ID!): User
 
-    addPhoto(_id: ID!, photo: String!): Item
+    editPhoto(_id: ID!, photo: String!): Item
 
-    addProfilePhoto(_id: ID!, primaryPhoto: String!): User
+    editProfile(height: Float!, weight: Float!): User
+    editProfilePhoto(primaryPhoto: String!): User
+
     removeProfilePhoto(_id: ID!): User
 
     addFollowing(_id: ID!): User
