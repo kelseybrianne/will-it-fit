@@ -10,6 +10,7 @@ import AddItem from '../../components/AddItem/index.js';
 import DiscoverCarousel from '../../components/DiscoverCarousel/DiscoverCarousel.js';
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 import placeholderProfilePic from '../../assets/images/mukuko-studio-mU88MlEFcoU-unsplash.jpg';
+import auth from '../../utils/auth';
 
 import { useQuery } from '@apollo/client';
 import { GET_USER } from '../../utils/queries';
@@ -34,6 +35,7 @@ const Closet = () => {
   };
 
   const userData = data?.user || {};
+  const me = auth.getProfile(); // me.data.username
 
   return (
     <div className="profile-page">
@@ -82,17 +84,29 @@ const Closet = () => {
               </a>
             </div>
           </div>
+          {/* If closet does not belong to the person logged in,return a 'Follow/Following' button instead of the Add Item, Discover, and Edit Profile buttons*/}
+          {me.data.username === username ?
           <div className="btns-div">
-            <AddItem />
-            <Button
-              variant="contained"
-              className="discover-btn"
-              onClick={toggleDiscoverCarousel}
-            >
-              <PersonAddAltIcon style={{ fontSize: 16 }} />
-            </Button>
-            <EditProfile />
-          </div>
+          <AddItem />
+          <Button
+            variant="contained"
+            className="discover-btn"
+            onClick={toggleDiscoverCarousel}
+          >
+            <PersonAddAltIcon style={{ fontSize: 16 }} />
+          </Button>
+          <EditProfile />
+        </div> :
+        <div className="btns-div">
+          <Button
+            variant="contained"
+            className="discover-btn"
+            // onClick={followUser}
+          >
+            Follow
+          </Button>
+          </div>}
+          
         </div>
       </div>
       <div className="toggle-discover-carousel">

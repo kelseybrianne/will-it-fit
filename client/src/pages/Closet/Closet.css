@@ -22,7 +22,6 @@
   margin: 0px auto;
   position: relative;
   transform: translateY(-120px);
-  border-radius: 2px;
   margin-bottom: -120px;
 }
 
@@ -90,7 +89,7 @@
   width: 120px;
   border: none;
   width: auto;
-  border-radius: 2px !important;
+  border-radius: 3px !important;
   background-color: white;
   color: black;
   display: inline;
