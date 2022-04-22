@@ -1,7 +1,6 @@
 import { useQuery } from '@apollo/client';
 import { Container, Typography } from '@mui/material';
 import ItemList from '../../components/ItemList';
-import auth from '../../utils/auth';
 import { GET_FEED } from '../../utils/queries';
 
 export default function Home() {
