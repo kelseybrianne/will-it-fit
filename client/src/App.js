@@ -13,6 +13,7 @@ import DiscoverFeed from './pages/DiscoverFeed/DiscoverFeed.js';
 import Closet from './pages/Closet/Closet';
 import { setContext } from '@apollo/client/link/context';
 import Search from './pages/Search';
+import SavedItems from './pages/SavedItems/index.js';
 
 // Construct our main GraphQL API endpoint
 // const httpLink = createHttpLink({
@@ -51,6 +52,7 @@ function App() {
             <Route path="/discover" element={<DiscoverFeed />} />
             <Route path="/closet/:username" element={<Closet />} />
             <Route path="/search" element={<Search />} />
+            <Route path="/saved" element={<SavedItems />} />
           </Routes>
         </>
       </Router>
