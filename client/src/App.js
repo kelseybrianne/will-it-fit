@@ -1,5 +1,4 @@
 // import Header from "./components/Header";
-import { useState, useEffect } from 'react';
 import {
   ApolloClient,
   ApolloProvider,
