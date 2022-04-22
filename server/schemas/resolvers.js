@@ -89,19 +89,6 @@ const resolvers = {
       return await Item.find({}).populate('user');
     },
 
-    feed: async (parent, args, context) => {
-      if (!context.user) {
-        throw new AuthenticationError('You need to be logged in!');
-      }
-      const user = await User.findById(context.user._id);
-      const { following } = user;
-      const feed = await Item.find({
-        user_id: {
-          $in: following,
-        },
-      }).populate('user');
-      return feed;
-    },
     // GET items that match the keyword and the user's stats
     searchItems: async (parent, { keyword }, context) => {
       if (!context.user) {
@@ -187,15 +174,12 @@ const resolvers = {
       }).populate('user');
       return feed;
     },
-    // GET all closet items of all users this user id is following
+    // GET all user id's of who logged in user is following
     following: async (parent, args, context) => {
       if (context.user) {
-        const user = await User.findById({ _id: context.user._id })
-          .populate('following')
-          .populate({
-            path: 'closet',
-            select: '_id',
-          });
+        const user = await User.findById({ _id: context.user._id }).populate(
+          'following'
+        );
         return user;
       }
 

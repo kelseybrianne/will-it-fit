@@ -81,9 +81,9 @@ const typeDefs = gql`
     closet(_id: ID!): [Item]
     savedItems(_id: ID!): [Item]
 
-    following: [User]
     followers: [User]
-
+    following: [User]
+    # returns all data associated with items of all followers so we can pull user ID's OR item ID's from query.
     feed: [Item]
 
     searchItems(keyword: String): [Item]
