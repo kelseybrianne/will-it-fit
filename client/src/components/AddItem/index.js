@@ -117,7 +117,6 @@ const AddItem = () => {
 
   const formSubmit = async (event) => {
     event.preventDefault();
-    console.log('Profile id', me.data._id);
     try {
       const photo = await uploadImage(previewSource);
       await addItem({
