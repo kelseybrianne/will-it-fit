@@ -16,8 +16,10 @@ import { EDIT_PROFILE, EDIT_PROFILEPHOTO } from '../../utils/mutations';
 // image upload
 import uploadImage from '../../utils/uploadImage';
 const EditProfile = () => {
-  const [editProfile] = useMutation(EDIT_PROFILE);
-  const [editProfilePhoto] = useMutation(EDIT_PROFILEPHOTO);
+
+  const [editProfile, { loading, error }] = useMutation(EDIT_PROFILE);
+  const [editProfilePhoto, { error: image_error }] =
+    useMutation(EDIT_PROFILEPHOTO);
   const [open, setOpen] = React.useState(false);
   const [previewSource, setPreviewSource] = React.useState(null);
   const [userFormData, setUserFromData] = React.useState({
@@ -25,8 +27,6 @@ const EditProfile = () => {
     weight: '',
   });
 
-  let primaryPhoto = '';
-  // shows user image preview
   // shows user image preview
   const handleFileInputChange = (e) => {
     const file = e.target.files[0];
@@ -75,6 +75,35 @@ const EditProfile = () => {
       ...userFormData,
       [id]: value,
     });
+  };
+
+  const handleError = (error, field) => {
+    if (!error) {
+      return false;
+    }
+    let message = '';
+    if (error.message.indexOf(field) >= 0) {
+      message = `There was an error with the ${field}`;
+      switch (field) {
+        case 'weight':
+          message = `${error.message}`;
+          break;
+        case 'height':
+          message = `${error.message}`;
+          break;
+        default:
+          break;
+      }
+    }
+    return message;
+  };
+
+  const handleImageError = (image_error) => {
+    if (!image_error) {
+      return false;
+    }
+    let message = 'There was an error uploading your image.';
+    return message;
   };
   return (
     <div>
@@ -125,6 +154,8 @@ const EditProfile = () => {
                 placeholder="height"
                 type="number"
                 required={true}
+                error={handleError(error, 'height')}
+                helperText={handleError(error, 'height')}
                 onChange={handleChange}
                 InputProps={{
                   endAdornment: (
@@ -145,6 +176,8 @@ const EditProfile = () => {
                 type="number"
                 required={true}
                 onChange={handleChange}
+                error={handleError(error, 'weight')}
+                helperText={handleError(error, 'weight')}
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position="end">lbs</InputAdornment>
@@ -154,37 +187,13 @@ const EditProfile = () => {
                 value={userFormData.weight}
               />
 
-              {/* height */}
-              {/* <TextField
-                id="height"
-                className="input"
-                name="height"
-                label="* Height"
-                type="number"
-                onChange={handleChange}
-                value={userFormData.height}
-               
-              /> */}
-
-              {/* weight */}
-              {/* <TextField
-                id="weight"
-                className="input"
-                name="weight"
-                type="number"
-                label="* Weight"
-                sx={{ backgroundColor: 'white' }}
-                onChange={handleChange}
-                value={userFormData.weight}
-              /> */}
-
-              {/* image upload */}
-
               <input
                 accept="image/*"
                 type="file"
                 encType="multipart/form-data"
                 id="select-image"
+                error={handleImageError(image_error)}
+                helperText={handleImageError(image_error)}
                 style={{ display: 'none' }}
                 onChange={handleFileInputChange}
               />
