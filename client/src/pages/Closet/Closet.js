@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 // eslint-disable-next-line no-unused-vars
 import Button from '@mui/material/Button';
@@ -19,6 +20,13 @@ import ItemList from '../../components/ItemList';
 
 const Closet = () => {
   let { username } = useParams();
+  const [followingState, setFollowingState] = useState('notFollowing');
+
+  const handleFollowUser = () => {
+    followingState === 'notFollowing'
+      ? setFollowingState('following')
+      : setFollowingState('notFollowing');
+  };
 
   // eslint-disable-next-line no-unused-vars
   const { loading, data } = useQuery(GET_USER, {
@@ -85,28 +93,31 @@ const Closet = () => {
             </div>
           </div>
           {/* If closet does not belong to the person logged in,return a 'Follow/Following' button instead of the Add Item, Discover, and Edit Profile buttons*/}
-          {me.data.username === username ?
-          <div className="btns-div">
-          <AddItem />
-          <Button
-            variant="contained"
-            className="discover-btn"
-            onClick={toggleDiscoverCarousel}
-          >
-            <PersonAddAltIcon style={{ fontSize: 16 }} />
-          </Button>
-          <EditProfile />
-        </div> :
-        <div className="btns-div">
-          <Button
-            variant="contained"
-            className="discover-btn"
-            // onClick={followUser}
-          >
-            Follow
-          </Button>
-          </div>}
-          
+          {me.data.username === username ? (
+            <div className="btns-div">
+              <AddItem />
+              <Button
+                variant="contained"
+                className="discover-btn"
+                onClick={toggleDiscoverCarousel}
+              >
+                <PersonAddAltIcon style={{ fontSize: 16 }} />
+              </Button>
+              <EditProfile />
+            </div>
+          ) : (
+            <div className="btns-div">
+              <Button
+                variant="contained"
+                className={
+                  followingState === 'following' ? 'following-btn' : ''
+                }
+                onClick={handleFollowUser}
+              >
+                {followingState === 'notFollowing' ? 'Follow' : 'Following'}
+              </Button>
+            </div>
+          )}
         </div>
       </div>
       <div className="toggle-discover-carousel">

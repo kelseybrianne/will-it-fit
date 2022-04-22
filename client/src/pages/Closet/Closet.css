@@ -80,10 +80,9 @@
   margin-top: 20px;
 }
 
-/* .discover-btn {
-  width: 10px !important;
-  padding-bottom: 5px;
-} */
+.following-btn {
+  background-color: rgb(197, 197, 197) !important;
+}
 
 .username-div button {
   width: 120px;
@@ -95,10 +94,6 @@
   display: inline;
   margin-right: 8px;
   font-size: 14px;
-}
-
-.discover-btn {
-  /* font-size: 50px; */
 }
 
 .username-div button:hover {
