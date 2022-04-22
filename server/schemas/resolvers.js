@@ -1,7 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { default: mongoose } = require('mongoose');
 const { User, Item } = require('../models');
-const { $where } = require('../models/Item');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
