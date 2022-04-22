@@ -2,17 +2,12 @@ import { useQuery } from '@apollo/client';
 import { Container, Typography } from '@mui/material';
 import ItemList from '../../components/ItemList';
 import auth from '../../utils/auth';
-import {
-  GET_FAVORITES,
-  GET_USERCLOSET,
-  GET_FOLLOWING,
-} from '../../utils/queries';
+import { GET_FEED } from '../../utils/queries';
 
 export default function Home() {
-  const me = auth.getProfile();
-  const { data, error, loading } = useQuery(GET_FOLLOWING);
+  const { data, error, loading } = useQuery(GET_FEED);
 
-  console.log(data?.following);
+  console.log(data?.feed);
   //   console.log(data?[0].following);
   //   const items = data?.following.closet._id;
 
@@ -35,7 +30,7 @@ export default function Home() {
       >
         The latest and greatest from people you follow:
       </h1>
-      <ItemList items={data?.following.closet._id}></ItemList>
+      <ItemList items={data?.feed}></ItemList>
     </Container>
   );
 }

@@ -252,15 +252,32 @@ export const GET_FOLLOWERS = gql`
   }
 `;
 
-export const GET_FOLLOWING = gql`
-query Following {
-  following {
-      closet {
+export const GET_FEED = gql`
+  query feed {
+    feed {
+      _id
+      height
+      weight
+      category
+      style
+      user_id
+      user {
         _id
+        username
+        primaryPhoto
+      }
+      brand
+      name
+      gender
+      size
+      link
+      photo
+      color
+      review
+      createdAt
     }
+      }
 
-        }
-}
 `;
 
 export const SEARCH_ITEMS = gql`
