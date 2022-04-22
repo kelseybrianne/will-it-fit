@@ -176,7 +176,7 @@ export default function Item({ item }) {
                   className="icon-p"
                 />
               ) : (
-                ''
+                <FavoriteBorder className="icon-p" />
               )}
               <Menu
                 id="basic-menu"

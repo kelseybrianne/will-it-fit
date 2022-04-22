@@ -5,7 +5,6 @@ import Button from '@mui/material/Button';
 import './Closet.css';
 // eslint-disable-next-line no-unused-vars
 import Stack from '@mui/material/Stack';
-// import profilePic from '../assets/images/ivana-cajina-dnL6ZIpht2s-unsplash.jpg'
 // eslint-disable-next-line no-unused-vars
 import AddItem from '../../components/AddItem/index.js';
 import DiscoverCarousel from '../../components/DiscoverCarousel/DiscoverCarousel.js';
@@ -58,7 +57,6 @@ const Closet = () => {
             }
             alt={userData.primaryPhoto}
           />
-          {/* <h2>{userData.username}</h2> */}
           <div className="folls-div">
             <a href="tbd">
               <p>Following</p>
@@ -75,8 +73,6 @@ const Closet = () => {
               <p>Followers</p>
             </a>
           </div>
-          {/* toggle 'Following' and 'Follow' on click'*/}
-          {/* <button className="unfollow">Following</button> */}
         </div>
         <div className="username-div">
           <div className="border-bottom">
