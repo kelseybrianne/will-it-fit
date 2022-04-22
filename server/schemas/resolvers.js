@@ -235,18 +235,27 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
     // POST photo to an item. Also UPDATES any existing photo in the database for this item.
-    addPhoto: async (parent, args, context) => {
+    editPhoto: async (parent, args, context) => {
       if (context.user) {
         return await Item.findByIdAndUpdate(
           { _id: args._id },
-          { $set: { photo: args.photo } },
-          { new: true }
+          { $set: { photo: args.photo } }
+        );
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
+
+    editProfile: async (parent, args, context) => {
+      if (context.user) {
+        return await User.findByIdAndUpdate(
+          { _id: context.user._id },
+          { $set: { height: args.height, weight: args.weight } }
         );
       }
       throw new AuthenticationError('You need to be logged in!');
     },
     // POST photo to a USER. Also UPDATES any existing photo in the database for this user.
-    addProfilePhoto: async (parent, args, context) => {
+    editProfilePhoto: async (parent, args, context) => {
       if (context.user) {
         return await User.findByIdAndUpdate(
           { _id: context.user._id },
