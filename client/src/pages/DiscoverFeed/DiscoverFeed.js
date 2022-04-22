@@ -4,7 +4,7 @@ import './DiscoverFeed.css';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import Auth from '../../utils/auth';
-import images from '../../assets/images.js'
+import images from '../../assets/images.js';
 
 import { useQuery } from '@apollo/client';
 import { GET_USERMATCHES, GET_ME } from '../../utils/queries';
@@ -44,8 +44,8 @@ const DiscoverFeed = () => {
 
   // const { data: data_me } = useQuery(GET_ME);
 
-  const { data: data_users } = useQuery(GET_USERMATCHES)
-  
+  const { data: data_users } = useQuery(GET_USERMATCHES);
+
   //   skip: !data_me,
   //   variables: {
   //     height: data_me && data_me.me.height,
@@ -74,7 +74,11 @@ const DiscoverFeed = () => {
                     )
                   )
                 : images.map(({ id, img }) => (
-                    <div key={id} className="card-container" id="card-container">
+                    <div
+                      key={id}
+                      className="card-container"
+                      id="card-container"
+                    >
                       <img className="card" src={img} alt="profile-pic" />
                     </div>
                   ))}
