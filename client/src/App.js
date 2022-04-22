@@ -18,6 +18,7 @@ import Search from './pages/Search';
 import SavedItems from './pages/SavedItems/index.js';
 import Home from './pages/Home/index.js';
 
+
 // Construct our main GraphQL API endpoint
 // const httpLink = createHttpLink({
 //   uri: '/graphql',
@@ -57,6 +58,7 @@ function App() {
             <Route path="/closet/:username" element={<Closet />} />
             <Route path="/search" element={<Search />} />
             <Route path="/saved" element={<SavedItems />} />
+            <Route path="/homepage" element={<Homepage />} />
           </Routes>
         </>
       </Router>

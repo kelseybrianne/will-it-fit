@@ -26,6 +26,7 @@ export default function Home() {
         The latest and greatest from people you follow:
       </h1>
       <ItemList items={data?.feed}></ItemList>
+    
     </Container>
   );
 }
