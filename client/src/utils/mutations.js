@@ -51,6 +51,8 @@ export const ADD_ITEM = gql`
     $link: String
     $color: String
     $review: String
+    $user: String!
+    $user_id: String!
   ) {
     addItem(
       category: $category
@@ -63,6 +65,8 @@ export const ADD_ITEM = gql`
       link: $link
       color: $color
       review: $review
+      user: $user
+      user_id: $user_id
     ) {
       _id
     }
