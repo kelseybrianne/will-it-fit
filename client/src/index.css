@@ -3,6 +3,10 @@
   --sans: 'Inter', sans-serif;
 }
 
+.body-container {
+  min-height: calc(100vh - 200px);
+}
+
 a {
   text-decoration: none;
   color: inherit;

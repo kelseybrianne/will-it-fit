@@ -1,0 +1,36 @@
+.footer {
+    display: flex;
+    flex-direction: column;
+    padding: 50px;
+    background-color: #ffffff;
+    background-color: #B95252;
+    align-items: center;
+    height: 200px;
+    justify-content: center;
+    color: white;
+}
+
+.footer p {
+    padding-bottom: 8px;
+    font-size: 12px;
+}
+
+.left {
+    text-align: center;
+}
+
+.contributors {
+    display: flex;
+}
+
+@media screen and (min-width: 767px) {
+    .footer {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .left {
+        text-align: left;
+    }
+
+}
