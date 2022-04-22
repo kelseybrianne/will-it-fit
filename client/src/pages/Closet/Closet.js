@@ -1,15 +1,16 @@
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 // eslint-disable-next-line no-unused-vars
 import Button from '@mui/material/Button';
 import './Closet.css';
 // eslint-disable-next-line no-unused-vars
 import Stack from '@mui/material/Stack';
-// import profilePic from '../assets/images/ivana-cajina-dnL6ZIpht2s-unsplash.jpg'
 // eslint-disable-next-line no-unused-vars
 import AddItem from '../../components/AddItem/index.js';
 import DiscoverCarousel from '../../components/DiscoverCarousel/DiscoverCarousel.js';
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 import placeholderProfilePic from '../../assets/images/mukuko-studio-mU88MlEFcoU-unsplash.jpg';
+import auth from '../../utils/auth';
 
 import { useQuery } from '@apollo/client';
 import { GET_USER } from '../../utils/queries';
@@ -18,6 +19,13 @@ import ItemList from '../../components/ItemList';
 
 const Closet = () => {
   let { username } = useParams();
+  const [followingState, setFollowingState] = useState('notFollowing');
+
+  const handleFollowUser = () => {
+    followingState === 'notFollowing'
+      ? setFollowingState('following')
+      : setFollowingState('notFollowing');
+  };
 
   // eslint-disable-next-line no-unused-vars
   const { loading, data } = useQuery(GET_USER, {
@@ -34,6 +42,7 @@ const Closet = () => {
   };
 
   const userData = data?.user || {};
+  const me = auth.getProfile(); // me.data.username
 
   return (
     <div className="profile-page">
@@ -48,7 +57,6 @@ const Closet = () => {
             }
             alt={userData.primaryPhoto}
           />
-          {/* <h2>{userData.username}</h2> */}
           <div className="folls-div">
             <a href="tbd">
               <p>Following</p>
@@ -65,8 +73,6 @@ const Closet = () => {
               <p>Followers</p>
             </a>
           </div>
-          {/* toggle 'Following' and 'Follow' on click'*/}
-          {/* <button className="unfollow">Following</button> */}
         </div>
         <div className="username-div">
           <div className="border-bottom">
@@ -82,17 +88,32 @@ const Closet = () => {
               </a>
             </div>
           </div>
-          <div className="btns-div">
-            <AddItem />
-            <Button
-              variant="contained"
-              className="discover-btn"
-              onClick={toggleDiscoverCarousel}
-            >
-              <PersonAddAltIcon style={{ fontSize: 16 }} />
-            </Button>
-            <EditProfile />
-          </div>
+          {/* If closet does not belong to the person logged in,return a 'Follow/Following' button instead of the Add Item, Discover, and Edit Profile buttons*/}
+          {me.data.username === username ? (
+            <div className="btns-div">
+              <AddItem />
+              <Button
+                variant="contained"
+                className="discover-btn"
+                onClick={toggleDiscoverCarousel}
+              >
+                <PersonAddAltIcon style={{ fontSize: 16 }} />
+              </Button>
+              <EditProfile />
+            </div>
+          ) : (
+            <div className="btns-div">
+              <Button
+                variant="contained"
+                className={
+                  followingState === 'following' ? 'following-btn' : ''
+                }
+                onClick={handleFollowUser}
+              >
+                {followingState === 'notFollowing' ? 'Follow' : 'Following'}
+              </Button>
+            </div>
+          )}
         </div>
       </div>
       <div className="toggle-discover-carousel">
