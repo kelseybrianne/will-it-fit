@@ -217,6 +217,7 @@ const resolvers = {
           // user context stats
           height,
           weight,
+          user: _id,
           user_id: _id,
         });
         item.save();
