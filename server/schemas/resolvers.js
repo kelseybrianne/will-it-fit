@@ -149,10 +149,14 @@ const resolvers = {
     // GET users savedItems (FAVORITES), pull from user id entered in args
     savedItems: async (parent, { _id }, context) => {
       if (context.user) {
-        return await User.findById({ _id }).populate('savedItems').populate({
-          path: 'savedItems',
-          populate: 'user',
-        });
+        const user = await User.findById({ _id })
+          .populate('savedItems')
+          .populate({
+            path: 'savedItems',
+            populate: 'user',
+          });
+
+        return user.savedItems;
       }
       throw new AuthenticationError('You need to be logged in!');
     },

@@ -78,11 +78,11 @@ const typeDefs = gql`
     item(_id: ID!): Item
     items: [Item]
 
-    closet(_id: ID!): User
-    savedItems(_id: ID!): User
+    closet(_id: ID!): [Item]
+    savedItems(_id: ID!): [Item]
 
     following(_id: ID!): [User]
-    followers(_id: ID!): User
+    followers(_id: ID!): [User]
 
     searchItems(keyword: String): [Item]
   }
