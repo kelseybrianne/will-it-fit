@@ -4,7 +4,7 @@ import './Items.css';
 import useWindowSize from '../../utils/useWindowSize';
 import Item from './Item';
 
-const ItemList = ({ items }) => {
+const ItemList = ({ items, savedItems }) => {
   const windowSize = useWindowSize();
 
   return (
@@ -13,7 +13,11 @@ const ItemList = ({ items }) => {
       cols={windowSize.width > 766 ? 3 : 2}
       gap={windowSize.width > 439 ? 16 : 8}
     >
-      {items ? items.map((item) => <Item key={item._id} item={item} />) : ''}
+      {items
+        ? items.map((item) => (
+            <Item key={item._id} item={item} savedItems={savedItems} />
+          ))
+        : ''}
     </ImageList>
   );
 };

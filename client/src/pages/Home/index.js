@@ -1,24 +1,30 @@
 import { useQuery } from '@apollo/client';
 import { Container, Typography } from '@mui/material';
 import ItemList from '../../components/ItemList';
-import { GET_FEED } from '../../utils/queries';
 import DiscoverFeed from '../../components/DiscoverCarousel/DiscoverCarousel'
-import styles from './Home.module.css'
+import { GET_FEED, GET_ME } from '../../utils/queries';
+import styles from './Home.module.css';
 
 import auth from '../../utils/auth'
 export default function Home() {
   const { data, error, loading } = useQuery(GET_FEED);
+  const {
+    data: me,
+    error: meError,
+    loading: meLoading,
+  } = useQuery(GET_ME, { fetchPolicy: 'no-cache' });
 
-  if (error) {
-    return <Typography>{error.message}</Typography>;
+  if (error || meError) {
+    console.error(error || meError);
+    return <Typography>Oops... something didn't fit...</Typography>;
   }
 
-  if (loading) {
+  if (loading || meLoading) {
     //   import spinner
     return <Typography>Loading...</Typography>;
   }
 
-  {auth.loggedIn() ? <Home /> : <DiscoverFeed />}
+  // {auth.loggedIn() ? <Home /> : <DiscoverFeed />}
 
   return (
     <Container className={styles.feed}>
@@ -30,8 +36,7 @@ export default function Home() {
       >
         The latest and greatest from people you follow:
       </h1>
-      <ItemList items={data?.feed}></ItemList>
-    
+      <ItemList items={data?.feed} savedItems={me.me.savedItems}></ItemList>
     </Container>
   );
 }

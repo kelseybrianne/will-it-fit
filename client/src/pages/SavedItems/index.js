@@ -7,11 +7,13 @@ import { GET_FAVORITES } from '../../utils/queries';
 export default function SavedItems() {
   const me = auth.getProfile();
   const { data, error, loading } = useQuery(GET_FAVORITES, {
+    fetchPolicy: 'no-cache', // this is needed to get the latest data
     variables: { id: me.data._id },
   });
 
   if (error) {
-    return <Typography>{error.message}</Typography>;
+    console.error(error);
+    return <Typography>Oops... something didn't fit...</Typography>;
   }
 
   if (loading) {
@@ -22,8 +24,21 @@ export default function SavedItems() {
     <div>
       <h2 className="page-header">Saved Items</h2>
       <div className="item-list-container">
-        <ItemList items={data?.savedItems}></ItemList>
+        <ItemList savedItems={data?.savedItems} items={data?.savedItems}></ItemList>
       </div>
     </div>
+    // <Container>
+    //   <h1
+    //     style={{
+    //       padding: '2rem 0',
+    //     }}
+    //   >
+    //     Saved Items
+    //   </h1>
+    //   <ItemList
+    //     items={data?.savedItems}
+    //     savedItems={data?.savedItems}
+    //   ></ItemList>
+    // </Container>
   );
 }
