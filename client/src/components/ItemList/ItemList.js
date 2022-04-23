@@ -11,7 +11,7 @@ const ItemList = ({ items, savedItems }) => {
     <ImageList
       variant="masonry"
       cols={windowSize.width > 766 ? 3 : 2}
-      gap={windowSize.width > 339 ? 16 : 8}
+      gap={windowSize.width > 439 ? 16 : 8}
     >
       {items
         ? items.map((item) => (

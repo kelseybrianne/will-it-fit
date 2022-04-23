@@ -29,18 +29,24 @@ export default function SavedItems() {
   }
 
   return (
-    <Container>
-      <h1
-        style={{
-          padding: '2rem 0',
-        }}
-      >
-        Saved Items
-      </h1>
-      <ItemList
-        items={data?.savedItems}
-        savedItems={data?.savedItems}
-      ></ItemList>
-    </Container>
+    <div>
+      <h2 className="page-header">Saved Items</h2>
+      <div className="item-list-container">
+        <ItemList savedItems={data?.savedItems} items={data?.savedItems}></ItemList>
+      </div>
+    </div>
+    // <Container>
+    //   <h1
+    //     style={{
+    //       padding: '2rem 0',
+    //     }}
+    //   >
+    //     Saved Items
+    //   </h1>
+    //   <ItemList
+    //     items={data?.savedItems}
+    //     savedItems={data?.savedItems}
+    //   ></ItemList>
+    // </Container>
   );
 }

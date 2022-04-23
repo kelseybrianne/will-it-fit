@@ -10,8 +10,9 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Stack from '@mui/material/Stack';
 import SearchIcon from '@mui/icons-material/Search';
 import { useQuery } from '@apollo/client';
-import { SEARCH_ITEMS, GET_ME } from '../utils/queries';
-import ItemList from '../components/ItemList/';
+import './Search.css'
+import { SEARCH_ITEMS, GET_ME } from '../../utils/queries';
+import ItemList from '../../components/ItemList/';
 
 const Search = () => {
   let [searchParams, setSearchParams] = useSearchParams();
@@ -55,7 +56,8 @@ const Search = () => {
         component={'form'}
         onSubmit={handleSubmit}
         sx={{
-          pb: 2,
+          pt: 3,
+          pb: 5,
           display: 'grid',
           textAlign: 'center',
         }}
@@ -75,11 +77,11 @@ const Search = () => {
             borderRadius: '2px',
           }}
         />
-        <Typography variant="h2">
+        <h2 className="responsive-header">
           Searching for {searchTerm ? searchTerm : '...'} that fit
-        </Typography>
+        </h2>
       </Container>
-      <Container>
+      <div className="item-list-container">
         {loading || meLoading ? 'Loading...' : ''}
         {data?.searchItems?.length ? (
           <ItemList
@@ -89,7 +91,15 @@ const Search = () => {
         ) : (
           <Typography>No results found</Typography>
         )}
-      </Container>
+      </div>
+        {/* <div className="item-list-container">
+          {loading ? 'Loading...' : ''}
+          {data?.searchItems?.length ? (
+            <ItemList items={data.searchItems}></ItemList>
+          ) : (
+            <Typography>No results found</Typography>
+          )}
+        </div> */}
     </>
   );
 };

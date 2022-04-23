@@ -2,7 +2,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 30px;
+  padding: 30px 18px 30px 3px;
   z-index: 1;
 }
 
@@ -16,5 +16,9 @@ h1 {
 @media screen and (min-width: 767px) {
   h1 {
     font-size: 30px;
+  }
+
+  header {
+    padding: 30px;
   }
 }

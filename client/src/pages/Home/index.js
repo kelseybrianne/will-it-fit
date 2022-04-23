@@ -4,9 +4,11 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Stack from '@mui/material/Stack';
 
 import ItemList from '../../components/ItemList';
+import DiscoverFeed from '../../components/DiscoverCarousel/DiscoverCarousel'
 import { GET_FEED, GET_ME } from '../../utils/queries';
 import styles from './Home.module.css';
 
+import auth from '../../utils/auth'
 export default function Home() {
   const { data, error, loading } = useQuery(GET_FEED);
   const {
@@ -25,6 +27,8 @@ export default function Home() {
       return <Stack alignItems = 'center' sx={{ zIndex: 'modal' }}><p><CircularProgress /></p></Stack>
      }
   }
+
+  // {auth.loggedIn() ? <Home /> : <DiscoverFeed />}
 
   return (
     <Container className={styles.feed}>

@@ -116,6 +116,25 @@ export const GET_ME = gql`
           username
         }
       }
+      following {
+        _id
+        username
+        weight
+        height
+        closet {
+          _id
+          category
+          style
+          brand
+          name
+          gender
+          size
+          link
+          photo
+          color
+          review
+        }
+      }
     }
   }
 `;

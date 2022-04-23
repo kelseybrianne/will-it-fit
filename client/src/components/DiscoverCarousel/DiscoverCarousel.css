@@ -1,7 +1,6 @@
 .carousel-container {
     width: 65vw;
     margin: 50px auto;
-    /* background: gray; */
     min-height: 200px;
     position: relative;
 }
@@ -19,7 +18,6 @@
     width: 200px;
     flex-shrink: 0;
     height: 250px;
-    /* border: 1px solid #aaa; */
     padding-right: 15px;
     box-sizing: border-box;
 }

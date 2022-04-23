@@ -117,7 +117,7 @@ export const ADD_FOLLOWER = gql`
   }
 `;
 
-// addFollowing:
+// addFollowing: 
 export const ADD_FOLLOWING = gql`
   mutation Mutation($id: ID!) {
     addFollowing(_id: $id) {
@@ -160,7 +160,7 @@ export const REMOVE_FOLLOWER = gql`
     }
   }
 `;
-// removeFollowing:
+// removeFollowing: user unfollows another user
 export const REMOVE_FOLLOWING = gql`
   mutation Mutation($id: ID!) {
     removeFollowing(_id: $id) {
@@ -168,3 +168,5 @@ export const REMOVE_FOLLOWING = gql`
     }
   }
 `;
+
+
