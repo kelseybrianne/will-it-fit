@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { ModalUnstyled } from '@mui/base';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
-import FavoriteIcon from '@mui/icons-material/Favorite';
 import MoreVert from '@mui/icons-material/MoreVert';
 import {
   Box,
@@ -17,6 +16,9 @@ import { forwardRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import auth from '../../utils/auth';
 import ToggleHeartIcons from './ToggleHeartIcons';
+import { useMutation, useQuery } from '@apollo/client';
+import { GET_ME } from '../../utils/queries';
+import { ADD_FAVORITE, REMOVE_FAVORITE } from '../../utils/mutations';
 
 const Modal = styled(ModalUnstyled)`
   position: fixed;
@@ -65,8 +67,7 @@ const style = (theme) => ({
 });
 
 export default function Item({ item }) {
-  const [saved, setSaved] = useState(false);
-
+  // deconstruct the item object
   const {
     _id,
     category,
@@ -80,12 +81,22 @@ export default function Item({ item }) {
     height,
     weight,
   } = item;
+  // get the currently logged in user from the token cookie
+  const me = auth.getProfile(); // me.data.username
 
+  // Gets the current user's saved items
+  const { data: userData } = useQuery(GET_ME);
+
+  // sets the saved state based on whether it is in the array or not
+  let savedItems = userData.me.savedItems.map((item) => item._id);
+  const [saved, setSaved] = useState(savedItems.indexOf(item._id) >= 0);
+
+  // state for the modal being open or not
   const [open, setOpen] = useState(false);
 
   const handleOpen = (e) => {
     setOpen(true);
-    console.log('Modal opened')
+    console.log('Modal opened');
   };
   const handleClose = () => setOpen(false);
 
@@ -102,17 +113,19 @@ export default function Item({ item }) {
     setAnchorEl(null);
   };
 
-  const me = auth.getProfile(); // me.data.username
-  if (!user) {
-    console.log('no user');
-    return <></>;
-  }
-
+  // function for toggling saved
+  const [addFavorite] = useMutation(ADD_FAVORITE, { variables: { id: _id } });
+  const [removeFavorite] = useMutation(REMOVE_FAVORITE, {
+    variables: { id: _id },
+  });
   const toggleHeartIcon = (e) => {
-    console.log('Heart toggled')
-    setSaved((prevIcon) => {
-      return !prevIcon;
-    });
+    // console.log('Heart toggled');
+    if (saved) {
+      removeFavorite();
+    } else {
+      addFavorite();
+    }
+    setSaved(!saved);
   };
 
   return (
