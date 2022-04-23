@@ -5,6 +5,8 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import Auth from '../../utils/auth';
 import images from '../../assets/images.js';
+import CircularProgress from '@mui/material/CircularProgress';
+import Stack from '@mui/material/Stack';
 
 import { useQuery } from '@apollo/client';
 import { GET_USERMATCHES } from '../../utils/queries';
@@ -44,7 +46,10 @@ const DiscoverFeed = () => {
 
   // const { data: data_me } = useQuery(GET_ME);
 
-  const { data: data_users } = useQuery(GET_USERMATCHES);
+  const { data: data_users, loading } = useQuery(GET_USERMATCHES);
+  if (loading ) {
+    return <Stack alignItems = 'center' sx={{ zIndex: 'modal' }}><p><CircularProgress /></p></Stack>
+   }
 
   return (
     <div className="carousel-div">

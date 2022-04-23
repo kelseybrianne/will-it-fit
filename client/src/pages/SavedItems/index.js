@@ -1,5 +1,7 @@
 import { useQuery } from '@apollo/client';
 import { Container, Typography } from '@mui/material';
+import CircularProgress from '@mui/material/CircularProgress';
+import Stack from '@mui/material/Stack';
 import ItemList from '../../components/ItemList';
 import auth from '../../utils/auth';
 import { GET_FAVORITES } from '../../utils/queries';
@@ -17,7 +19,13 @@ export default function SavedItems() {
   }
 
   if (loading) {
-    return <Typography>Loading...</Typography>;
+    return (
+      <Stack alignItems="center" sx={{ zIndex: 'modal' }}>
+        <p>
+          <CircularProgress />
+        </p>
+      </Stack>
+    );
   }
 
   return (
