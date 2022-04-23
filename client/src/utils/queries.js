@@ -253,25 +253,26 @@ export const GET_USERCLOSET = gql`
 export const GET_FAVORITES = gql`
   query SavedItems($id: ID!) {
     savedItems(_id: $id) {
-      savedItems {
+      _id
+      height
+      weight
+      category
+      style
+      user_id
+      user {
         _id
-        category
-        style
-        brand
-        name
-        gender
-        size
-        link
-        photo
-        color
-        review
-        height
-        weight
-        user {
-          primaryPhoto
-          username
-        }
+        username
+        primaryPhoto
       }
+      brand
+      name
+      gender
+      size
+      link
+      photo
+      color
+      review
+      createdAt
     }
   }
 `;
@@ -280,52 +281,40 @@ export const GET_FOLLOWERS = gql`
   query Query($id: ID!) {
     followers(_id: $id) {
       followers {
-        _id
-        username
-        weight
-        height
-      }
-      closet {
-        _id
-        category
-        style
-        brand
-        name
-        gender
-        size
-        link
-        photo
-        color
-        review
+        closet {
+          _id
+        }
       }
     }
   }
 `;
 
-export const GET_FOLLOWING = gql`
-  query Query($id: ID!) {
-    following(id: $id) {
-      following {
+export const GET_FEED = gql`
+  query feed {
+    feed {
+      _id
+      height
+      weight
+      category
+      style
+      user_id
+      user {
         _id
         username
-        weight
-        height
+        primaryPhoto
       }
-      closet {
-        _id
-        category
-        style
-        brand
-        name
-        gender
-        size
-        link
-        photo
-        color
-        review
-      }
+      brand
+      name
+      gender
+      size
+      link
+      photo
+      color
+      review
+      createdAt
     }
-  }
+      }
+
 `;
 
 export const SEARCH_ITEMS = gql`

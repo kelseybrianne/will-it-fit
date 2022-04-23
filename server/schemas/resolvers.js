@@ -149,22 +149,41 @@ const resolvers = {
     // GET users savedItems (FAVORITES), pull from user id entered in args
     savedItems: async (parent, { _id }, context) => {
       if (context.user) {
-        return await User.findById({ _id }).populate('savedItems').populate({
-          path: 'savedItems',
-          populate: 'user',
-        });
+        const user = await User.findById({ _id })
+          .populate('savedItems')
+          .populate({
+            path: 'savedItems',
+            populate: 'user',
+          });
+
+        return user.savedItems;
       }
       throw new AuthenticationError('You need to be logged in!');
     },
-    // GET all users this user id is following
+    // Returns a list of items that match the user's following
+    feed: async (parent, args, context) => {
+      if (!context.user) {
+        throw new AuthenticationError('You need to be logged in!');
+      }
+      const user = await User.findById(context.user._id);
+      const { following } = user;
+      const feed = await Item.find({
+        user_id: {
+          $in: following,
+        },
+      }).populate('user');
+      return feed;
+    },
+    // GET all user id's of who logged in user is following
     following: async (parent, args, context) => {
       if (context.user) {
-        return await User.findById(context.user._id).populate({
-          path: 'following',
-          populate: ['_id'],
-        });
+        const user = await User.findById({ _id: context.user._id }).populate(
+          'following'
+        );
+        return user;
       }
-      throw new AuthenticationError('You need to be logged in!');
+
+      throw new AuthenticationError('Benjamin Dreewes!');
     },
 
     // GET all followers of the user _id entered in args.
@@ -223,6 +242,7 @@ const resolvers = {
           // user context stats
           height,
           weight,
+          user: _id,
           user_id: _id,
         });
         item.save();
@@ -236,18 +256,27 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
     // POST photo to an item. Also UPDATES any existing photo in the database for this item.
-    addPhoto: async (parent, args, context) => {
+    editPhoto: async (parent, args, context) => {
       if (context.user) {
         return await Item.findByIdAndUpdate(
           { _id: args._id },
-          { $set: { photo: args.photo } },
-          { new: true }
+          { $set: { photo: args.photo } }
+        );
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
+
+    editProfile: async (parent, args, context) => {
+      if (context.user) {
+        return await User.findByIdAndUpdate(
+          { _id: context.user._id },
+          { $set: { height: args.height, weight: args.weight } }
         );
       }
       throw new AuthenticationError('You need to be logged in!');
     },
     // POST photo to a USER. Also UPDATES any existing photo in the database for this user.
-    addProfilePhoto: async (parent, args, context) => {
+    editProfilePhoto: async (parent, args, context) => {
       if (context.user) {
         return await User.findByIdAndUpdate(
           { _id: context.user._id },

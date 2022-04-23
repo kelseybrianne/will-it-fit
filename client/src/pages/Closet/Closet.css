@@ -22,7 +22,6 @@
   margin: 0px auto;
   position: relative;
   transform: translateY(-120px);
-  border-radius: 2px;
   margin-bottom: -120px;
 }
 
@@ -37,13 +36,18 @@
   margin: 0px auto 40px;
 }
 
+.border-bottom {
+
+  padding: 20px 0px;
+  border-bottom: 1px solid rgb(209, 209, 209);
+}
+
 .username-div .closet-username {
-  font-size: 40px;
+  font-size: 24px;
   text-align: center;
   font-weight: 300;
   width: 100%;
-  padding: 30px 0px 20px 0px;
-  border-bottom: 1px solid rgb(209, 209, 209);
+  padding-bottom: 8px;
 }
 
 .folls-div {
@@ -61,34 +65,39 @@
   margin-right: 10px;
 }
 
+.followers-div {
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+}
+.followers-div p {
+  margin-right: 10px;
+}
+
 .btns-div {
   display: flex;
   justify-content: center;
   margin-top: 20px;
 }
 
-.discover-btn {
-  width: 10px !important;
+.following-btn {
+  background-color: rgb(197, 197, 197) !important;
 }
 
 .username-div button {
-  padding: 10px;
   width: 120px;
-  height: 45px;
   border: none;
-  border-radius: 2px !important;
+  width: auto;
+  border-radius: 3px !important;
   background-color: white;
   color: black;
   display: inline;
   margin-right: 8px;
+  font-size: 14px;
 }
 
 .username-div button:hover {
   background-color: rgb(249, 249, 249);
-}
-
-.unfollow {
-  color: rgb(79, 79, 79);
 }
 
 .toggle-discover-carousel {
@@ -116,7 +125,7 @@
   }
 
   .profile-img-div {
-    width: 30%;
+    width: 25%;
     height: auto;
     max-width: 800px;
     transform: translateY(-120px);
@@ -140,5 +149,11 @@
   .folls-div p {
     margin-right: 15px;
     font-weight: 1;
+  }
+}
+
+@media screen and (min-width: 930px) {
+  .username-div button {
+    max-height: 80px
   }
 }

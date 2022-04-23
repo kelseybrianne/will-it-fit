@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
 import React from 'react';
-import './Header.css'
+import './Header.css';
 import LogInDialog from '../LogIn';
 import ProfileMenu from '../ProfileMenu';
 
@@ -13,7 +13,7 @@ const Header = () => {
     <header>
       <Nav />
 
-      <Link to={"/"}>
+      <Link to={'/'}>
         <h1>Will It Fit?</h1>
       </Link>
 

@@ -51,6 +51,8 @@ export const ADD_ITEM = gql`
     $link: String
     $color: String
     $review: String
+    $user: ID!
+    $user_id: ID!
   ) {
     addItem(
       category: $category
@@ -63,23 +65,36 @@ export const ADD_ITEM = gql`
       link: $link
       color: $color
       review: $review
+      user: $user
+      user_id: $user_id
     ) {
       _id
     }
   }
 `;
-// addItemPhoto:
-export const ADD_PHOTO = gql`
-  mutation Mutation($id: ID!, $photo: String!) {
-    addPhoto(_id: $id, photo: $photo) {
+
+// edit Item photo
+export const EDIT_PHOTO = gql`
+  mutation editPhoto($id: ID!, $photo: String!) {
+    editPhoto(_id: $id, photo: $photo) {
       _id
     }
   }
 `;
-// addProfilePhoto:
-export const ADD_PROFILE_PHOTO = gql`
-  mutation Mutation($id: ID!, $primaryPhoto: String!) {
-    addProfilePhoto(_id: $id, primaryPhoto: $primaryPhoto) {
+
+// edit Primary Profile photo
+export const EDIT_PROFILEPHOTO = gql`
+  mutation editProfilePhoto($primaryPhoto: String!) {
+    editProfilePhoto(primaryPhoto: $primaryPhoto) {
+      _id
+    }
+  }
+`;
+
+// edit Item photo
+export const EDIT_PROFILE = gql`
+  mutation editProfile($height: Float!, $weight: Float!) {
+    editProfile(height: $height, weight: $weight) {
       _id
     }
   }

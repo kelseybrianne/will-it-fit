@@ -98,6 +98,10 @@ export default function Item({ item }) {
   };
 
   const me = auth.getProfile(); // me.data.username
+  if (!user) {
+    console.log('no user');
+    return <></>;
+  }
 
   return (
     <div key={_id} className="item-list-wrapper cursor-pointer">
@@ -172,7 +176,7 @@ export default function Item({ item }) {
                   className="icon-p"
                 />
               ) : (
-                ''
+                <FavoriteBorder className="icon-p" />
               )}
               <Menu
                 id="basic-menu"

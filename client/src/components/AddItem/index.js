@@ -11,6 +11,7 @@ import './AddItem.css';
 import { useMutation } from '@apollo/client';
 import { ADD_ITEM } from '../../utils/mutations';
 import uploadImage from '../../utils/uploadImage';
+import auth from '../../utils/auth';
 
 let filter = require('leo-profanity');
 
@@ -71,7 +72,10 @@ const colorDB = [
   { label: 'Black', value: 'Black' },
   { label: 'Brown', value: 'Brown' },
 ];
+
 const AddItem = () => {
+  const me = auth.getProfile();
+
   const [addItem] = useMutation(ADD_ITEM);
   const [open, setOpen] = React.useState(false);
   const [previewSource, setPreviewSource] = React.useState(null);
@@ -85,6 +89,8 @@ const AddItem = () => {
     link: '',
     color: '',
     review: '',
+    user_id: me.data._id,
+    user: me.data._id,
   });
 
   // shows user image preview
@@ -114,12 +120,18 @@ const AddItem = () => {
     try {
       const photo = await uploadImage(previewSource);
       await addItem({
-        variables: { ...userFormData, photo: photo },
+        variables: {
+          ...userFormData,
+          photo: photo,
+          user_id: me.data._id,
+          user: me.data._id,
+        },
       });
     } catch (e) {
       console.error(e);
     }
     setUserFromData({
+      ...userFormData,
       name: '',
       category: '',
       size: '',
