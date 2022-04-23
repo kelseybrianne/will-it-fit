@@ -11,7 +11,7 @@ const typeDefs = gql`
     weight: Float!
     # weightUnits: String
     closet: [Item]
-    primaryPhoto: String!
+    primaryPhoto: String
     shoeSize: String
     following: [User]
     followers: [User]
@@ -28,7 +28,7 @@ const typeDefs = gql`
     weight: Float!
     # weightUnits: String
     closet: [Item]
-    primaryPhoto: String!
+    primaryPhoto: String
     shoeSize: String
     following: [User]
     followers: [User]
