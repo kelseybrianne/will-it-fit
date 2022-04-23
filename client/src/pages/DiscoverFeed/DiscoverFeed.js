@@ -7,7 +7,7 @@ import Auth from '../../utils/auth';
 import images from '../../assets/images.js';
 
 import { useQuery } from '@apollo/client';
-import { GET_USERMATCHES, GET_ME } from '../../utils/queries';
+import { GET_USERMATCHES } from '../../utils/queries';
 
 const DiscoverFeed = () => {
   const track = document.querySelector('.track');

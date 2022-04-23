@@ -27,7 +27,10 @@ export default function SavedItems() {
       >
         Saved Items
       </h1>
-      <ItemList items={data?.savedItems}></ItemList>
+      <ItemList
+        items={data?.savedItems}
+        savedItems={data?.savedItems}
+      ></ItemList>
     </Container>
   );
 }

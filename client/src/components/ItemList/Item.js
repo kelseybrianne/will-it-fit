@@ -7,7 +7,6 @@ import MoreVert from '@mui/icons-material/MoreVert';
 import {
   Box,
   Button,
-  CircularProgress,
   ImageListItem,
   ImageListItemBar,
   Menu,
@@ -17,8 +16,7 @@ import { forwardRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import auth from '../../utils/auth';
 import ToggleHeartIcons from './ToggleHeartIcons';
-import { useMutation, useQuery } from '@apollo/client';
-import { GET_ME } from '../../utils/queries';
+import { useMutation } from '@apollo/client';
 import { ADD_FAVORITE, REMOVE_FAVORITE } from '../../utils/mutations';
 
 const Modal = styled(ModalUnstyled)`
