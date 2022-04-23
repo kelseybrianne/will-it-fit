@@ -13,7 +13,7 @@ import DiscoverFeed from './pages/DiscoverFeed/DiscoverFeed.js';
 import Closet from './pages/Closet/Closet';
 import { setContext } from '@apollo/client/link/context';
 // import Router from './components/Router';
-import Search from './pages/Search/Search.js';
+import Search from './pages/Search/Search.js'
 import SavedItems from './pages/SavedItems/index.js';
 import Home from './pages/Home/index.js';
 import Footer from './components/Footer/Footer.js';
