@@ -16,6 +16,7 @@ import { setContext } from '@apollo/client/link/context';
 import Search from './pages/Search/Search.js';
 import SavedItems from './pages/SavedItems/index.js';
 import Home from './pages/Home/index.js';
+import Footer from './components/Footer/Footer.js';
 
 // Construct our main GraphQL API endpoint
 // const httpLink = createHttpLink({
@@ -48,7 +49,7 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
-        <>
+        <div className="body-container">
           <Header />
           <Routes>
             <Route path="/discover" element={<DiscoverFeed />} />
@@ -57,7 +58,10 @@ function App() {
             <Route path="/search" element={<Search />} />
             <Route path="/saved" element={<SavedItems />} />
           </Routes>
-        </>
+        </div>
+        <div className="footer-container">
+          <Footer />
+        </div>
       </Router>
     </ApolloProvider>
   );

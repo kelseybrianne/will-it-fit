@@ -3,6 +3,7 @@ import { Container, Typography } from '@mui/material';
 import ItemList from '../../components/ItemList';
 import { GET_FEED } from '../../utils/queries';
 import DiscoverFeed from '../../components/DiscoverCarousel/DiscoverCarousel'
+import styles from './Home.module.css'
 
 import auth from '../../utils/auth'
 export default function Home() {
@@ -20,7 +21,7 @@ export default function Home() {
   {auth.loggedIn() ? <Home /> : <DiscoverFeed />}
 
   return (
-    <Container>
+    <Container className={styles.feed}>
       <h1
         style={{
           padding: '2rem 0',
