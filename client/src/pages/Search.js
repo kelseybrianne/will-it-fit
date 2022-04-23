@@ -14,7 +14,11 @@ import ItemList from '../components/ItemList/';
 const Search = () => {
   let [searchParams, setSearchParams] = useSearchParams();
   const [searchTerm, setSearchTerm] = useState(searchParams.get('q') || '');
-  const { data: me } = useQuery(GET_ME, { fetchPolicy: 'no-cache' });
+  const {
+    data: me,
+    error: meError,
+    loading: meLoading,
+  } = useQuery(GET_ME, { fetchPolicy: 'no-cache' });
   const { loading, data, error } = useQuery(SEARCH_ITEMS, {
     fetchPolicy: 'no-cache',
     variables: { keyword: searchParams.get('q') || '' },
@@ -24,14 +28,15 @@ const Search = () => {
     setSearchParams({ q: searchTerm });
   };
 
-  if (error) {
+  if (error || meError) {
+    console.error(error || meError);
     return (
       <Container>
-        <Typography>{error.message}</Typography>
+        <Typography>Oops... something didn't fit...</Typography>
       </Container>
     );
   }
-  
+
   return (
     <>
       <Container
@@ -63,7 +68,7 @@ const Search = () => {
         </Typography>
       </Container>
       <Container>
-        {loading ? 'Loading...' : ''}
+        {loading || meLoading ? 'Loading...' : ''}
         {data?.searchItems?.length ? (
           <ItemList
             items={data.searchItems}

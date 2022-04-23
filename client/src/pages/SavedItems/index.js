@@ -12,7 +12,8 @@ export default function SavedItems() {
   });
 
   if (error) {
-    return <Typography>{error.message}</Typography>;
+    console.error(error);
+    return <Typography>Oops... something didn't fit...</Typography>;
   }
 
   if (loading) {
