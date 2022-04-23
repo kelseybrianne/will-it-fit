@@ -1,5 +1,8 @@
 import { useQuery } from '@apollo/client';
 import { Container, Typography } from '@mui/material';
+import CircularProgress from '@mui/material/CircularProgress';
+import Stack from '@mui/material/Stack';
+
 import ItemList from '../../components/ItemList';
 import DiscoverFeed from '../../components/DiscoverCarousel/DiscoverCarousel'
 import { GET_FEED, GET_ME } from '../../utils/queries';
@@ -20,8 +23,9 @@ export default function Home() {
   }
 
   if (loading || meLoading) {
-    //   import spinner
-    return <Typography>Loading...</Typography>;
+    if (loading || meLoading ) {
+      return <Stack alignItems = 'center' sx={{ zIndex: 'modal' }}><p><CircularProgress /></p></Stack>
+     }
   }
 
   // {auth.loggedIn() ? <Home /> : <DiscoverFeed />}
