@@ -54,43 +54,52 @@ const DiscoverFeed = () => {
   // });
 
   return (
-    <div className="carousel-div">
-      <div className="inner-carousel-div">
-        <div ref={ref} className="carousel-container" id="responsive-container">
-          <div className="carousel-inner">
-            <div className="track">
-              {Auth.loggedIn()
-                ? data_users?.userMatches?.map(
-                    ({ primaryPhoto, _id, username }) => (
-                      <Link to={`/closet/${username}`} key={_id}>
-                        <div className="card-container" id="card-container">
-                          <img
-                            className="card"
-                            src={primaryPhoto}
-                            alt={username}
-                          />
-                        </div>
-                      </Link>
+    <div>
+      <div className="carousel-div">
+        <div className="inner-carousel-div">
+          <h2 className="discover-header">
+            Discover users you match with
+          </h2>
+          <div
+            ref={ref}
+            className="carousel-container"
+            id="responsive-container"
+          >
+            <div className="carousel-inner">
+              <div className="track">
+                {Auth.loggedIn()
+                  ? data_users?.userMatches?.map(
+                      ({ primaryPhoto, _id, username }) => (
+                        <Link to={`/closet/${username}`} key={_id}>
+                          <div className="card-container" id="card-container">
+                            <img
+                              className="card"
+                              src={primaryPhoto}
+                              alt={username}
+                            />
+                          </div>
+                        </Link>
+                      )
                     )
-                  )
-                : images.map(({ id, img }) => (
-                    <div
-                      key={id}
-                      className="card-container"
-                      id="card-container"
-                    >
-                      <img className="card" src={img} alt="profile-pic" />
-                    </div>
-                  ))}
+                  : images.map(({ id, img }) => (
+                      <div
+                        key={id}
+                        className="card-container"
+                        id="card-container"
+                      >
+                        <img className="card" src={img} alt="profile-pic" />
+                      </div>
+                    ))}
+              </div>
             </div>
-          </div>
-          <div className="nav">
-            <button className="prev">
-              <ChevronLeftIcon onClick={prevPage} />
-            </button>
-            <button className="next">
-              <ChevronRightIcon onClick={nextPage} />
-            </button>
+            <div className="nav">
+              <button className="prev">
+                <ChevronLeftIcon onClick={prevPage} />
+              </button>
+              <button className="next">
+                <ChevronRightIcon onClick={nextPage} />
+              </button>
+            </div>
           </div>
         </div>
       </div>
