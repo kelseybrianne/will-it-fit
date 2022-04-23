@@ -27,9 +27,9 @@ const Closet = () => {
 
   const [followingState, setFollowingState] = useState('notFollowing');
   const [addFollowing, { loadingAddFollowing, errorAddFollowing }] =
-    useMutation(ADD_FOLLOWING);
+    useMutation(ADD_FOLLOWING, { refetchQueries: [GET_USER] });
   const [removeFollowing, { loadingRemoveFollowing, errorRemoveFollowing }] =
-    useMutation(REMOVE_FOLLOWING);
+    useMutation(REMOVE_FOLLOWING, { refetchQueries: [GET_USER] });
 
   // eslint-disable-next-line no-unused-vars
   // Get data on the closet you're viewing, including followers/following
