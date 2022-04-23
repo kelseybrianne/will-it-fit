@@ -8,13 +8,19 @@ import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
 import { useQuery } from '@apollo/client';
-import { SEARCH_ITEMS } from '../utils/queries';
+import { SEARCH_ITEMS, GET_ME } from '../utils/queries';
 import ItemList from '../components/ItemList/';
 
 const Search = () => {
   let [searchParams, setSearchParams] = useSearchParams();
   const [searchTerm, setSearchTerm] = useState(searchParams.get('q') || '');
+  const {
+    data: me,
+    error: meError,
+    loading: meLoading,
+  } = useQuery(GET_ME, { fetchPolicy: 'no-cache' });
   const { loading, data, error } = useQuery(SEARCH_ITEMS, {
+    fetchPolicy: 'no-cache',
     variables: { keyword: searchParams.get('q') || '' },
   });
   const handleSubmit = (e) => {
@@ -22,14 +28,15 @@ const Search = () => {
     setSearchParams({ q: searchTerm });
   };
 
-  if (error) {
+  if (error || meError) {
+    console.error(error || meError);
     return (
       <Container>
-        <Typography>{error.message}</Typography>
+        <Typography>Oops... something didn't fit...</Typography>
       </Container>
     );
   }
-  
+
   return (
     <>
       <Container
@@ -61,9 +68,12 @@ const Search = () => {
         </Typography>
       </Container>
       <Container>
-        {loading ? 'Loading...' : ''}
+        {loading || meLoading ? 'Loading...' : ''}
         {data?.searchItems?.length ? (
-          <ItemList items={data.searchItems}></ItemList>
+          <ItemList
+            items={data.searchItems}
+            savedItems={me?.me.savedItems}
+          ></ItemList>
         ) : (
           <Typography>No results found</Typography>
         )}
