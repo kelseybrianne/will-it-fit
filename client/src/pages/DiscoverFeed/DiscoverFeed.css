@@ -17,7 +17,7 @@
 }
 
 .carousel-container #card-container {
-  height: 270px
+  height: 270px;
 }
 
 @media screen and (min-width: 500px) {
