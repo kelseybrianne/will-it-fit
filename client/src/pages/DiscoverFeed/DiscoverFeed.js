@@ -57,7 +57,7 @@ const DiscoverFeed = () => {
     <div>
       <div className="carousel-div">
         <div className="inner-carousel-div">
-          <h2 className="discover-header">
+          <h2 className="page-header">
             Discover users you match with
           </h2>
           <div
