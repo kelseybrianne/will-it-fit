@@ -175,12 +175,12 @@ const Items = ({ windowSize, userData }) => {
                     </Button>
                     <div className="review-div">
                       <div className="review-header">
-                        <div className="avatar-pic-div">
+                        {/* <div className="avatar-pic-div">
                           <img
                             src={userData?.primaryPhoto}
                             alt="img-alt"
                           />
-                        </div>
+                        </div> */}
                         <div className="username-div">
                           <Link to={`/closet/${userData.username}`}>
                             <p className="username">{userData.username}</p>
