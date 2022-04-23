@@ -8,13 +8,15 @@ import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
 import { useQuery } from '@apollo/client';
-import { SEARCH_ITEMS } from '../utils/queries';
+import { SEARCH_ITEMS, GET_ME } from '../utils/queries';
 import ItemList from '../components/ItemList/';
 
 const Search = () => {
   let [searchParams, setSearchParams] = useSearchParams();
   const [searchTerm, setSearchTerm] = useState(searchParams.get('q') || '');
+  const { data: me } = useQuery(GET_ME);
   const { loading, data, error } = useQuery(SEARCH_ITEMS, {
+    fetchPolicy: 'no-cache',
     variables: { keyword: searchParams.get('q') || '' },
   });
   const handleSubmit = (e) => {
@@ -63,7 +65,10 @@ const Search = () => {
       <Container>
         {loading ? 'Loading...' : ''}
         {data?.searchItems?.length ? (
-          <ItemList items={data.searchItems}></ItemList>
+          <ItemList
+            items={data.searchItems}
+            savedItems={me?.me.savedItems}
+          ></ItemList>
         ) : (
           <Typography>No results found</Typography>
         )}
