@@ -1,6 +1,14 @@
 :root {
   --serif: 'Chonburi', cursive;
   --sans: 'Inter', sans-serif;
+  --green: #C9CEBD;
+  --red: #B85151;
+  --light-gray: #e9e9e9;
+  --dark-gray: #4A5759;
+}
+
+.body-container {
+  min-height: calc(100vh - 200px);
 }
 
 a {
