@@ -29,7 +29,7 @@ const Search = () => {
       </Container>
     );
   }
-
+  
   return (
     <>
       <Container
