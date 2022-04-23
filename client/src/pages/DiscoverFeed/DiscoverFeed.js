@@ -46,13 +46,6 @@ const DiscoverFeed = () => {
 
   const { data: data_users } = useQuery(GET_USERMATCHES);
 
-  //   skip: !data_me,
-  //   variables: {
-  //     height: data_me && data_me.me.height,
-  //     weight: data_me && data_me.me.weight,
-  //   },
-  // });
-
   return (
     <div className="carousel-div">
       <div className="inner-carousel-div">

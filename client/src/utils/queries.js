@@ -11,9 +11,13 @@ export const GET_USER = gql`
       shoeSize
       following {
         _id
+        username
+        primaryPhoto
       }
       followers {
         _id
+        username
+        primaryPhoto
       }
       closet {
         _id
@@ -67,6 +71,12 @@ export const GET_ME = gql`
       height
       weight
       shoeSize
+      following {
+        _id
+      }
+      followers {
+        _id
+      }
       closet {
         _id
         category

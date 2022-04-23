@@ -13,13 +13,14 @@ import placeholderProfilePic from '../../assets/images/mukuko-studio-mU88MlEFcoU
 import auth from '../../utils/auth';
 
 import { useQuery, useMutation } from '@apollo/client';
-import { GET_USER, GET_FOLLOWERS } from '../../utils/queries';
+import { GET_USER } from '../../utils/queries';
 import { ADD_FOLLOWING, REMOVE_FOLLOWING } from '../../utils/mutations';
 import EditProfile from '../../components/EditProfile/EditProfile';
+import Followers from '../../components/Followers/Followers';
+import Following from '../../components/Following/Following';
 import ItemList from '../../components/ItemList';
 
 const Closet = () => {
-
   let { username } = useParams();
   const [followingState, setFollowingState] = useState('notFollowing');
   const [addFollowing, { loadingAddFollowing, errorAddFollowing }] =
@@ -35,39 +36,32 @@ const Closet = () => {
     },
   });
   const userData = data?.user || {};
-  console.log(userData);
-  console.log(userData?.following);
-  const following = userData?.following;
-  console.log(following?.length)
   const followers = userData?.followers;
-  console.log(followers?.length)
 
   const me = auth.getProfile(); // me.data.username
   // if you already follow this user, button should be set at Following at page load.
 
-  useEffect(()=> {
-    if(followers?.length) {
-  for (let i = 0; i < followers?.length; i++) {
-    console.log(followers[i]?._id)
-    console.log(me.data._id)
-    if (followers[i]?._id === me.data._id) {
-      
-      setFollowingState('following');
-      console.log('id found a match?')
-      //  we should exit out of for loop once a match is found
-      return;
+  useEffect(() => {
+    if (followers?.length) {
+      for (let i = 0; i < followers?.length; i++) {
+        console.log(followers[i]?._id);
+        console.log(me.data._id);
+        if (followers[i]?._id === me.data._id) {
+          setFollowingState('following');
+          console.log('id found a match?');
+          //  we should exit out of for loop once a match is found
+          return;
+        }
+        console.log('id did not match');
+      }
     }
-    console.log('id did not match')
-  }
-};
-return;
-}, [followers, me.data._id]);
+    return;
+  }, [followers, me.data._id]);
 
   // when user clicks the follower/following button, take an action to add or remove the follow.
   const handleFollowUser = async () => {
     const id = userData?._id;
     if (followingState === 'notFollowing') {
-      console.log(followingState);
       // if the user isn't following the person we add them as a follower and then set the button to say following.
       await addFollowing({
         variables: { id },
@@ -104,33 +98,13 @@ return;
             }
             alt={userData.primaryPhoto}
           />
-          <div className="folls-div">
-            <a href="FollowingPage/Modal">
-              <p>Following</p>
-            </a>
-            {/* {following.map((data) => (
-          <li className="list-group-item" key={data}>
-            {`${data} `}
-          </li>
-        ))} */}
-            <p>|</p>
-            <a href="FollowersPage/Modal">
-              <p>Followers</p>
-            </a>
-          </div>
         </div>
         <div className="username-div">
           <div className="border-bottom">
             <h2 className="closet-username">{userData.username}</h2>
             <div className="followers-div">
-              <a href="tbd">
-                <p>Following</p>
-              </a>
-
-              <p>|</p>
-              <a href="tbd">
-                <p>Followers</p>
-              </a>
+              <Following />
+              <Followers />
             </div>
           </div>
           {/* If closet does not belong to the person logged in,return a 'Follow/Following' button instead of the Add Item, Discover, and Edit Profile buttons*/}

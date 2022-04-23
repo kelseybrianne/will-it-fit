@@ -59,6 +59,10 @@ const resolvers = {
           .populate('following')
           .populate({
             path: 'following',
+          })
+          .populate('followers')
+          .populate({
+            path: 'followers',
           });
       }
       throw new AuthenticationError('You need to be logged in!');
@@ -194,9 +198,9 @@ const resolvers = {
     followers: async (parent, { _id }, context) => {
       if (context.user) {
         const list = await User.findById({ _id }).populate('following');
-      console.log(list);
-      return list
-    }
+        console.log(list);
+        return list;
+      }
       throw new AuthenticationError('You need to be logged in!');
     },
   },
