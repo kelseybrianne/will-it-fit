@@ -58,24 +58,6 @@ export const GET_USER = gql`
           username
         }
       }
-      following {
-        username
-        weight
-        height
-        closet {
-          _id
-          category
-          style
-          brand
-          name
-          gender
-          size
-          link
-          photo
-          color
-          review
-        }
-      }
     }
   }
 `;

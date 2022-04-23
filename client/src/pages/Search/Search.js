@@ -9,8 +9,8 @@ import { useSearchParams } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
 import { useQuery } from '@apollo/client';
 import './Search.css'
-import { SEARCH_ITEMS, GET_ME } from '../utils/queries';
-import ItemList from '../components/ItemList/';
+import { SEARCH_ITEMS, GET_ME } from '../../utils/queries';
+import ItemList from '../../components/ItemList/';
 
 const Search = () => {
   let [searchParams, setSearchParams] = useSearchParams();

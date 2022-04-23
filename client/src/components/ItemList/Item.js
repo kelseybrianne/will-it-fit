@@ -195,7 +195,7 @@ export default function Item({ item, savedItems }) {
         </Menu>
         <img
           src={`${photo}?w=248&fit=crop&auto=format`}
-          srcSet={`${photo}?w=248&fit=crop&auto=format&dpr=2 2x`}
+          // srcSet={`${photo}?w=248&fit=crop&auto=format&dpr=2 2x`}
           alt="alt goes here"
           loading="lazy"
           className="item-img"
