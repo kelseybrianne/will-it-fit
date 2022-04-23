@@ -57,6 +57,10 @@ function App() {
             <Route path="/closet/:username" element={<Closet />} />
             <Route path="/search" element={<Search />} />
             <Route path="/saved" element={<SavedItems />} />
+            <Route
+              path="*"
+              element={<h2 className="page-header">Wrong page!</h2>}
+            />
           </Routes>
         </div>
         <div className="footer-container">
