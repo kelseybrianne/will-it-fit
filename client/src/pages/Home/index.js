@@ -28,10 +28,6 @@ export default function Home() {
   return (
     <div>
       <h2
-        style={{
-          padding: '2rem 0',
-          testAlign: 'center',
-        }}
         className="page-header"
       >
         The latest and greatest from people you follow:
