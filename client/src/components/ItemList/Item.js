@@ -213,7 +213,10 @@ export default function Item({ item, savedItems }) {
                   className="icon-p"
                 />
               ) : (
-                <FavoriteBorder className="icon-p icon heart-icon" />
+                <ToggleHeartIcons
+                  saved={saved}
+                  toggleHeartIcon={toggleHeartIcon}
+                />
               )}
               <Menu
                 id="basic-menu"
