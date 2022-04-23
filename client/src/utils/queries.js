@@ -9,6 +9,16 @@ export const GET_USER = gql`
       height
       weight
       shoeSize
+      following {
+        _id
+        username
+        primaryPhoto
+      }
+      followers {
+        _id
+        username
+        primaryPhoto
+      }
       closet {
         _id
         category
@@ -79,6 +89,12 @@ export const GET_ME = gql`
       height
       weight
       shoeSize
+      following {
+        _id
+      }
+      followers {
+        _id
+      }
       closet {
         _id
         category
@@ -277,13 +293,23 @@ export const GET_FAVORITES = gql`
   }
 `;
 
+export const GET_FOLLOWING = gql`
+  query Following {
+    following {
+      _id
+      following {
+        _id
+      }
+    }
+  }
+`;
+
 export const GET_FOLLOWERS = gql`
-  query Query($id: ID!) {
-    followers(_id: $id) {
-      followers {
-        closet {
-          _id
-        }
+  query Following {
+    following {
+      _id
+      following {
+        _id
       }
     }
   }
@@ -313,8 +339,7 @@ export const GET_FEED = gql`
       review
       createdAt
     }
-      }
-
+  }
 `;
 
 export const SEARCH_ITEMS = gql`

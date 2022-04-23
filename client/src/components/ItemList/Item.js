@@ -16,6 +16,8 @@ import {
 import { forwardRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import auth from '../../utils/auth';
+import { useMutation } from '@apollo/client';
+import { REMOVE_ITEM } from '../../utils/mutations';
 import ToggleHeartIcons from './ToggleHeartIcons';
 
 const Modal = styled(ModalUnstyled)`
@@ -81,6 +83,23 @@ export default function Item({ item }) {
     weight,
   } = item;
 
+  // *Remove item function *
+  const [removeItem] = useMutation(REMOVE_ITEM);
+  const deleteItem = async (id) => {
+    try {
+      await removeItem({
+        variables: { id },
+      });
+
+      window.location.reload();
+    } catch (e) {
+      console.error(e);
+    }
+  };
+const handleDelete = (e) => {
+e.stopPropagation();
+deleteItem(e.currentTarget.getAttribute("data-id"))
+}
   const [open, setOpen] = useState(false);
 
   const handleOpen = (e) => {
@@ -147,7 +166,7 @@ export default function Item({ item }) {
           }}
         >
           <MenuItem onClick={handleCloseMenu}>Edit</MenuItem>
-          <MenuItem onClick={handleCloseMenu}>Delete</MenuItem>
+          <MenuItem data-id={_id} onClick={handleDelete} > Delete</MenuItem>
         </Menu>
         <img
           src={`${photo}?w=248&fit=crop&auto=format`}
@@ -212,7 +231,7 @@ export default function Item({ item }) {
                 }}
               >
                 <MenuItem onClick={handleCloseMenu}>Edit</MenuItem>
-                <MenuItem onClick={handleCloseMenu}>Delete</MenuItem>
+                <MenuItem data-id={_id} onClick={handleDelete} > Delete</MenuItem>
               </Menu>
             </div>
             <p className="item-desc">{`${brand} ${category}`}</p>
