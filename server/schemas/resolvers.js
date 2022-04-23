@@ -80,6 +80,14 @@ const resolvers = {
         .populate({
           path: 'savedItems',
           populate: 'user',
+        })
+        .populate('following')
+        .populate({
+          path: 'following',
+        })
+        .populate('followers')
+        .populate({
+          path: 'followers',
         });
       return userData;
       // }
