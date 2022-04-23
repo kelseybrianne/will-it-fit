@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/client';
 import { Container, Typography } from '@mui/material';
 import ItemList from '../../components/ItemList';
 import { GET_FEED } from '../../utils/queries';
+import DiscoverCarousel from '../../components/DiscoverCarousel/DiscoverCarousel.js'
 
 export default function Home() {
   const { data, error, loading } = useQuery(GET_FEED);
