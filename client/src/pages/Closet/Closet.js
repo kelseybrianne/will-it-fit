@@ -58,20 +58,6 @@ const Closet = () => {
             alt={userData.primaryPhoto}
           />
           <div className="folls-div">
-            <a href="tbd">
-              <p>Following</p>
-            </a>
-            <p>|</p>
-            {/* <p
-              className="cursor-pointer discover-btn"
-              onClick={toggleDiscoverCarousel}
-            >
-              <PersonAddAltIcon style={{ fontSize: 16 }} />
-            </p>
-            <p>|</p> */}
-            <a href="tbd">
-              <p>Followers</p>
-            </a>
           </div>
         </div>
         <div className="username-div">
