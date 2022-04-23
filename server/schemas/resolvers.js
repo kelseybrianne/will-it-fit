@@ -82,13 +82,13 @@ const resolvers = {
           populate: 'user',
         })
         .populate('followers')
-          .populate({
+        .populate({
           path: 'followers',
-          })
-          .populate('following')
-          .populate({
-            path: 'following',
-          })
+        })
+        .populate('following')
+        .populate({
+          path: 'following',
+        });
       return userData;
       // }
       // throw new AuthenticationError('You need to be logged in!');
