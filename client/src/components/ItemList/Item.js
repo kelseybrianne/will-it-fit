@@ -7,6 +7,7 @@ import MoreVert from '@mui/icons-material/MoreVert';
 import {
   Box,
   Button,
+  CircularProgress,
   ImageListItem,
   ImageListItemBar,
   Menu,
@@ -66,7 +67,7 @@ const style = (theme) => ({
   overflow: 'auto',
 });
 
-export default function Item({ item }) {
+export default function Item({ item, savedItems }) {
   // deconstruct the item object
   const {
     _id,
@@ -84,12 +85,12 @@ export default function Item({ item }) {
   // get the currently logged in user from the token cookie
   const me = auth.getProfile(); // me.data.username
 
-  // Gets the current user's saved items
-  const { data: userData } = useQuery(GET_ME);
-
   // sets the saved state based on whether it is in the array or not
-  let savedItems = userData.me.savedItems.map((item) => item._id);
-  const [saved, setSaved] = useState(savedItems.indexOf(item._id) >= 0);
+  const [saved, setSaved] = useState(
+    savedItems?.reduce((prevFound, item) => {
+      return prevFound || item._id === _id;
+    }, false)
+  );
 
   // state for the modal being open or not
   const [open, setOpen] = useState(false);
@@ -133,7 +134,7 @@ export default function Item({ item }) {
       {/* substitute heart icon for MoreVertIcon when closet does not belong to the person who is logged in */}
 
       <ImageListItem onClick={handleOpen}>
-        {me.data.username === user.username ? ( // need to check if it's the currently logged in user's item
+        {me?.data?.username === user?.username ? ( // need to check if it's the currently logged in user's item
           <MoreVert
             id="basic-button"
             aria-controls={openMenu ? 'basic-menu' : undefined}
