@@ -14,7 +14,7 @@ import ItemList from '../components/ItemList/';
 const Search = () => {
   let [searchParams, setSearchParams] = useSearchParams();
   const [searchTerm, setSearchTerm] = useState(searchParams.get('q') || '');
-  const { data: me } = useQuery(GET_ME);
+  const { data: me } = useQuery(GET_ME, { fetchPolicy: 'no-cache' });
   const { loading, data, error } = useQuery(SEARCH_ITEMS, {
     fetchPolicy: 'no-cache',
     variables: { keyword: searchParams.get('q') || '' },

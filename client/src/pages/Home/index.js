@@ -5,7 +5,7 @@ import { GET_FEED, GET_ME } from '../../utils/queries';
 
 export default function Home() {
   const { data, error, loading } = useQuery(GET_FEED);
-  const { data: me } = useQuery(GET_ME);
+  const { data: me } = useQuery(GET_ME, { fetchPolicy: 'no-cache' });
 
   if (error) {
     return <Typography>{error.message}</Typography>;
