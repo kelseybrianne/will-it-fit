@@ -195,10 +195,9 @@ const resolvers = {
     },
 
     // GET all followers of the user _id entered in args.
-    followers: async (parent, { _id }, context) => {
+    followers: async (parent, args, context) => {
       if (context.user) {
         const list = await User.findById({ _id }).populate('following');
-        console.log(list);
         return list;
       }
       throw new AuthenticationError('You need to be logged in!');

@@ -97,6 +97,8 @@ const Closet = () => {
             }
             alt={userData.primaryPhoto}
           />
+          {/* <div className="folls-div">
+          </div> */}
         </div>
         <div className="username-div">
           <div className="border-bottom">
@@ -137,7 +139,7 @@ const Closet = () => {
       <div className="toggle-discover-carousel">
         <DiscoverCarousel />
       </div>
-      <div className="closet">
+      <div className="item-list-container">
         <ItemList items={userData.closet} />
       </div>
     </div>
