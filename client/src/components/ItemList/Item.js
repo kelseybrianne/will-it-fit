@@ -207,14 +207,14 @@ export default function Item({ item, savedItems }) {
           subtitle={`${brand} ${category}`}
           position="below"
         />
-        <div className="avatar-pic-div">
+        {/* <div className="avatar-pic-div">
           <Avatar src={user.primaryPhoto} alt={user.username} />
         </div>
         <ImageListItemBar
           subtitle={`${user.username}`}
           className="item-text"
           position="below"
-        />
+        />  */}
       </ImageListItem>
 
       {/* modularizing the item modal is currently not working */}

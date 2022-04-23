@@ -4,11 +4,10 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Stack from '@mui/material/Stack';
 
 import ItemList from '../../components/ItemList';
-import DiscoverFeed from '../../components/DiscoverCarousel/DiscoverCarousel'
+import DiscoverFeed from '../../components/DiscoverCarousel/DiscoverCarousel';
 import { GET_FEED, GET_ME } from '../../utils/queries';
-import styles from './Home.module.css';
 
-import auth from '../../utils/auth'
+import auth from '../../utils/auth';
 export default function Home() {
   const { data, error, loading } = useQuery(GET_FEED);
   const {
@@ -31,16 +30,15 @@ export default function Home() {
   // {auth.loggedIn() ? <Home /> : <DiscoverFeed />}
 
   return (
-    <Container className={styles.feed}>
-      <h1
-        style={{
-          padding: '2rem 0',
-          testAlign: 'center',
-        }}
+    <div>
+      <h2
+        className="page-header"
       >
         The latest and greatest from people you follow:
-      </h1>
-      <ItemList items={data?.feed} savedItems={me.me.savedItems}></ItemList>
-    </Container>
+      </h2>
+      <div className="item-list-container">
+        <ItemList items={data?.feed} savedItems={me.me.savedItems}></ItemList>
+      </div>
+    </div>
   );
 }
