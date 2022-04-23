@@ -14,7 +14,6 @@ import {
 } from '@mui/material';
 import auth from '../../utils/auth';
 import { useParams } from 'react-router-dom';
-
 // graphQL:
 import { useQuery } from '@apollo/client';
 import { GET_USER } from '../../utils/queries';
@@ -37,7 +36,7 @@ const Following = () => {
   );
 
   const userData = data?.user || {};
-
+  
   return (
     <div>
       <Button

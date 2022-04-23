@@ -6,6 +6,7 @@ import {
   ListItemIcon,
   MenuItem,
   Tooltip,
+  Typography
 } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
@@ -16,11 +17,11 @@ import auth from '../utils/auth';
 import { useQuery } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
 // import EditProfile from '../components/EditProfile/EditProfile.js';
-
 export default function ProfileMenu() {
   const { loading, data } = useQuery(GET_ME);
 
-  const userData = data?.me || {};
+  const userData = data?.me;
+console.log(userData)
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -30,6 +31,10 @@ export default function ProfileMenu() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  if (loading  || !userData)  {
+    //   import spinner
+    return <Typography>Loading...</Typography>;
+  }
   return (
     <>
       <Tooltip title="Account settings">

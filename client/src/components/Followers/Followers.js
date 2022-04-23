@@ -25,15 +25,12 @@ const Followers = () => {
   const [dense, setDense] = React.useState(false);
 
   const me = auth.getProfile();
-  const { loading, data } = useQuery(
-    GET_USER, {
-
+  const { loading, data } = useQuery(GET_USER, {
     fetchPolicy: 'no-cache',
     variables: {
-        username: username,
-      },
-    }
-  );
+      username: username,
+    },
+  });
 
   const userData = data?.user || {};
 

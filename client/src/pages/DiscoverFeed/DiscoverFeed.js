@@ -7,6 +7,8 @@ import Auth from '../../utils/auth';
 import images from '../../assets/images.js';
 import { Snackbar, Button, IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
+import CircularProgress from '@mui/material/CircularProgress';
+import Stack from '@mui/material/Stack';
 
 import { useQuery } from '@apollo/client';
 import { GET_USERMATCHES } from '../../utils/queries';
@@ -45,8 +47,6 @@ const DiscoverFeed = () => {
   };
 
   // const { data: data_me } = useQuery(GET_ME);
-
-  const { data: data_users } = useQuery(GET_USERMATCHES);
   const [open, setOpen] = React.useState(false);
 
   const handleClick = () => {
@@ -76,6 +76,11 @@ const DiscoverFeed = () => {
       </IconButton>
     </React.Fragment>
   );
+
+  const { data: data_users, loading } = useQuery(GET_USERMATCHES);
+  if (loading ) {
+    return <Stack alignItems = 'center' sx={{ zIndex: 'modal' }}><p><CircularProgress /></p></Stack>
+   }
 
   return (
     <div>
