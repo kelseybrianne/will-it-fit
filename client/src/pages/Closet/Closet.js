@@ -33,8 +33,10 @@ const Closet = () => {
   const { loading, data } = useQuery(GET_USER, {
     variables: {
       username: username,
-    },
-  });
+    }, 
+  }, { fetchPolicy:
+    'no-cache' }
+  );
   const userData = data?.user || {};
   const followers = userData?.followers;
 
@@ -44,15 +46,12 @@ const Closet = () => {
   useEffect(() => {
     if (followers?.length) {
       for (let i = 0; i < followers?.length; i++) {
-        console.log(followers[i]?._id);
-        console.log(me.data._id);
         if (followers[i]?._id === me.data._id) {
           setFollowingState('following');
-          console.log('id found a match?');
+
           //  we should exit out of for loop once a match is found
           return;
         }
-        console.log('id did not match');
       }
     }
     return;

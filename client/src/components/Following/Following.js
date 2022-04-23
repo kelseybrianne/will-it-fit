@@ -13,21 +13,28 @@ import {
   List,
 } from '@mui/material';
 import auth from '../../utils/auth';
+import { useParams } from 'react-router-dom';
 
 // graphQL:
 import { useQuery } from '@apollo/client';
 import { GET_USER } from '../../utils/queries';
 
 const Following = () => {
+  let { username } = useParams();
   const [open, setOpen] = React.useState(false);
   const [dense, setDense] = React.useState(false);
 
   const me = auth.getProfile();
-  const { loading, data } = useQuery(GET_USER, {
+
+  const { loading, data } = useQuery(
+    GET_USER, {
+
+    fetchPolicy: 'no-cache',
     variables: {
-      username: me.data.username,
-    },
-  });
+        username: username,
+      },
+    }
+  );
 
   const userData = data?.user || {};
 
@@ -70,14 +77,16 @@ const Following = () => {
                 padding: '10px 0px 30px',
               }}
             >
-              Folks you follow
+              {username === me.data.username
+                ? 'Folks I follow'
+                : `Folks ${username}
+               follows`}
             </Typography>
             <List dense={dense} sx={{ width: '100%', maxWidth: 360 }}>
               {userData?.following?.map(({ primaryPhoto, _id, username }) => (
-                <>
+                <div key={_id}>
                   <Link
                     to={`/closet/${username}`}
-                    key={_id}
                     onClick={() => {
                       setOpen(false);
                     }}
@@ -105,7 +114,7 @@ const Following = () => {
                   </Link>
 
                   <Divider variant="inset" component="li" />
-                </>
+                </div>
               ))}
             </List>
           </Container>
