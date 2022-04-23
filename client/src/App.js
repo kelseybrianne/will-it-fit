@@ -12,7 +12,6 @@ import Header from './components/Header/Header.js';
 import DiscoverFeed from './pages/DiscoverFeed/DiscoverFeed.js';
 import Closet from './pages/Closet/Closet';
 import { setContext } from '@apollo/client/link/context';
-import Homepage from './pages/Homepage';
 // import Router from './components/Router';
 import Search from './pages/Search';
 import SavedItems from './pages/SavedItems/index.js';

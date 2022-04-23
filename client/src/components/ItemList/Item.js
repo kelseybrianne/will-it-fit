@@ -148,6 +148,11 @@ export default function Item({ item }) {
           subtitle={`${brand} ${category}`}
           position="below"
         />
+        <ImageListItemBar
+          className="item-text"
+          subtitle={`${user.username}`}
+          position="below"
+        />
       </ImageListItem>
 
       {/* modularizing the item modal is currently not working */}
