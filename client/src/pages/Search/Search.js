@@ -6,6 +6,8 @@ import {
 } from '@mui/material';
 import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import CircularProgress from '@mui/material/CircularProgress';
+import Stack from '@mui/material/Stack';
 import SearchIcon from '@mui/icons-material/Search';
 import { useQuery } from '@apollo/client';
 import './Search.css'
@@ -35,6 +37,16 @@ const Search = () => {
       <Container>
         <Typography>Oops... something didn't fit...</Typography>
       </Container>
+    );
+  }
+
+  if (loading || meLoading) {
+    return (
+      <Stack alignItems="center" sx={{ zIndex: 'modal' }}>
+        <p>
+          <CircularProgress />
+        </p>
+      </Stack>
     );
   }
 

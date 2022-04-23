@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import { ModalUnstyled } from '@mui/base';
 import MoreVert from '@mui/icons-material/MoreVert';
 import {
+  Avatar,
   Box,
   Button,
   ImageListItem,
@@ -207,13 +208,13 @@ export default function Item({ item, savedItems }) {
           position="below"
         />
         {/* <div className="avatar-pic-div">
-          <img src={user.primaryPhoto} alt="img-alt" />
+          <Avatar src={user.primaryPhoto} alt={user.username} />
         </div>
         <ImageListItemBar
-        subtitle={`${user.username}`}
-          className="item-text" 
+          subtitle={`${user.username}`}
+          className="item-text"
           position="below"
-        /> */}
+        />  */}
       </ImageListItem>
 
       {/* modularizing the item modal is currently not working */}
@@ -275,7 +276,7 @@ export default function Item({ item, savedItems }) {
             <div className="review-div">
               <div className="review-header">
                 <div className="avatar-pic-div">
-                  <img src={user.primaryPhoto} alt="img-alt" />
+                  <Avatar src={user.primaryPhoto} alt={user.username} />
                 </div>
                 <div className="username-div-modal">
                   <Link to={`/closet/${user.username}`}>

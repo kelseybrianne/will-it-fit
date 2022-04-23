@@ -46,10 +46,15 @@ function SignUpForm({ setDialogState }) {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     try {
-      const primaryPhoto = await uploadImage(previewSource);
+      let variables = { ...formState };
+      // conditionally
+      if (previewSource) {
+        const primaryPhoto = await uploadImage(previewSource);
+        variables = { ...variables, primaryPhoto };
+      }
 
       const { data } = await signup({
-        variables: { ...formState, primaryPhoto: primaryPhoto },
+        variables,
       });
 
       // then grab the user token. This step redirects them to the main feed.
@@ -100,6 +105,7 @@ function SignUpForm({ setDialogState }) {
     }
     return message;
   };
+  
 
   return (
     <Container

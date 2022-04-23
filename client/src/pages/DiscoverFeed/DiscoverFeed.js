@@ -5,6 +5,10 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import Auth from '../../utils/auth';
 import images from '../../assets/images.js';
+import { Snackbar, Button, IconButton } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
+import CircularProgress from '@mui/material/CircularProgress';
+import Stack from '@mui/material/Stack';
 
 import { useQuery } from '@apollo/client';
 import { GET_USERMATCHES } from '../../utils/queries';
@@ -43,16 +47,46 @@ const DiscoverFeed = () => {
   };
 
   // const { data: data_me } = useQuery(GET_ME);
+  const [open, setOpen] = React.useState(false);
 
-  const { data: data_users } = useQuery(GET_USERMATCHES);
+  const handleClick = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  const action = (
+    <React.Fragment>
+      {/* <Button color="secondary" size="small" onClick={handleClose}>
+        UNDO
+      </Button> */}
+      <IconButton
+        size="small"
+        aria-label="close"
+        color="inherit"
+        onClick={handleClose}
+      >
+        <CloseIcon fontSize="small" />
+      </IconButton>
+    </React.Fragment>
+  );
+
+  const { data: data_users, loading } = useQuery(GET_USERMATCHES);
+  if (loading ) {
+    return <Stack alignItems = 'center' sx={{ zIndex: 'modal' }}><p><CircularProgress /></p></Stack>
+   }
 
   return (
     <div>
       <div className="carousel-div">
         <div className="inner-carousel-div">
-          <h2 className="page-header">
-            Discover users you match with
-          </h2>
+          <h2 className="page-header">Discover users you match with</h2>
           <div
             ref={ref}
             className="carousel-container"
@@ -63,13 +97,18 @@ const DiscoverFeed = () => {
                 {Auth.loggedIn()
                   ? data_users?.userMatches?.map(
                       ({ primaryPhoto, _id, username }) => (
-                        <Link to={`/closet/${username}`} key={_id}>
+                        <Link
+                          className="discover-profile-hover"
+                          to={`/closet/${username}`}
+                          key={_id}
+                        >
                           <div className="card-container" id="card-container">
                             <img
                               className="card"
                               src={primaryPhoto}
                               alt={username}
                             />
+                            <div className="view-on-hover">Follow</div>
                           </div>
                         </Link>
                       )
@@ -77,8 +116,9 @@ const DiscoverFeed = () => {
                   : images.map(({ id, img }) => (
                       <div
                         key={id}
-                        className="card-container"
+                        className="card-container cursor-pointer"
                         id="card-container"
+                        onClick={handleClick}
                       >
                         <img className="card" src={img} alt="profile-pic" />
                       </div>
@@ -96,6 +136,14 @@ const DiscoverFeed = () => {
           </div>
         </div>
       </div>
+      <Snackbar
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        message="You must be logged in to view closets"
+        action={action}
+        className="snackbar"
+      />
     </div>
   );
 };
