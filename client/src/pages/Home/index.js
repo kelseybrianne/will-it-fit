@@ -2,8 +2,9 @@ import { useQuery } from '@apollo/client';
 import { Container, Typography } from '@mui/material';
 import ItemList from '../../components/ItemList';
 import { GET_FEED } from '../../utils/queries';
-import DiscoverCarousel from '../../components/DiscoverCarousel/DiscoverCarousel.js'
+import DiscoverFeed from '../../components/DiscoverCarousel/DiscoverCarousel'
 
+import auth from '../../utils/auth'
 export default function Home() {
   const { data, error, loading } = useQuery(GET_FEED);
 
@@ -15,6 +16,8 @@ export default function Home() {
     //   import spinner
     return <Typography>Loading...</Typography>;
   }
+
+  {auth.loggedIn() ? <Home /> : <DiscoverFeed />}
 
   return (
     <Container>
