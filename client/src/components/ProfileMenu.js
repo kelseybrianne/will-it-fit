@@ -15,7 +15,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import auth from '../utils/auth';
 import { useQuery } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
-import EditProfile from '../components/EditProfile/EditProfile.js';
+// import EditProfile from '../components/EditProfile/EditProfile.js';
 
 export default function ProfileMenu() {
   const { loading, data } = useQuery(GET_ME);

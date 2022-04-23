@@ -2,7 +2,6 @@ import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { ModalUnstyled } from '@mui/base';
-import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import MoreVert from '@mui/icons-material/MoreVert';
 import {
   Box,
@@ -16,8 +15,9 @@ import {
 import { forwardRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import auth from '../../utils/auth';
-import ToggleHeartIcons from './ToggleHeartIcons';
 import { useMutation } from '@apollo/client';
+import { REMOVE_ITEM } from '../../utils/mutations';
+import ToggleHeartIcons from './ToggleHeartIcons';
 import { ADD_FAVORITE, REMOVE_FAVORITE } from '../../utils/mutations';
 
 const Modal = styled(ModalUnstyled)`
@@ -90,6 +90,24 @@ export default function Item({ item, savedItems }) {
       return prevFound || item._id === _id;
     }, false)
   );
+
+  // *Remove item function *
+  const [removeItem] = useMutation(REMOVE_ITEM);
+  const deleteItem = async (id) => {
+    try {
+      await removeItem({
+        variables: { id },
+      });
+
+      window.location.reload();
+    } catch (e) {
+      console.error(e);
+    }
+  };
+  const handleDelete = (e) => {
+    e.stopPropagation();
+    deleteItem(e.currentTarget.getAttribute('data-id'));
+  };
 
   // state for the modal being open or not
   const [open, setOpen] = useState(false);
@@ -170,7 +188,10 @@ export default function Item({ item, savedItems }) {
           }}
         >
           <MenuItem onClick={handleCloseMenu}>Edit</MenuItem>
-          <MenuItem onClick={handleCloseMenu}>Delete</MenuItem>
+          <MenuItem data-id={_id} onClick={handleDelete}>
+            {' '}
+            Delete
+          </MenuItem>
         </Menu>
         <img
           src={`${photo}?w=248&fit=crop&auto=format`}
@@ -230,7 +251,10 @@ export default function Item({ item, savedItems }) {
                 }}
               >
                 <MenuItem onClick={handleCloseMenu}>Edit</MenuItem>
-                <MenuItem onClick={handleCloseMenu}>Delete</MenuItem>
+                <MenuItem data-id={_id} onClick={handleDelete}>
+                  {' '}
+                  Delete
+                </MenuItem>
               </Menu>
             </div>
             <p className="item-desc">{`${brand} ${category}`}</p>
