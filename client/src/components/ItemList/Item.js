@@ -2,8 +2,6 @@ import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { ModalUnstyled } from '@mui/base';
-import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
-import FavoriteIcon from '@mui/icons-material/Favorite';
 import MoreVert from '@mui/icons-material/MoreVert';
 import {
   Box,
@@ -12,6 +10,7 @@ import {
   ImageListItemBar,
   Menu,
   MenuItem,
+  Snackbar,
 } from '@mui/material';
 import { forwardRef, useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -19,6 +18,7 @@ import auth from '../../utils/auth';
 import { useMutation } from '@apollo/client';
 import { REMOVE_ITEM } from '../../utils/mutations';
 import ToggleHeartIcons from './ToggleHeartIcons';
+import { ADD_FAVORITE, REMOVE_FAVORITE } from '../../utils/mutations';
 
 const Modal = styled(ModalUnstyled)`
   position: fixed;
@@ -66,9 +66,8 @@ const style = (theme) => ({
   overflow: 'auto',
 });
 
-export default function Item({ item }) {
-  const [saved, setSaved] = useState(false);
-
+export default function Item({ item, savedItems }) {
+  // deconstruct the item object
   const {
     _id,
     category,
@@ -82,6 +81,15 @@ export default function Item({ item }) {
     height,
     weight,
   } = item;
+  // get the currently logged in user from the token cookie
+  const me = auth.getProfile(); // me.data.username
+
+  // sets the saved state based on whether it is in the array or not
+  const [saved, setSaved] = useState(
+    savedItems?.reduce((prevFound, item) => {
+      return prevFound || item._id === _id;
+    }, false)
+  );
 
   // *Remove item function *
   const [removeItem] = useMutation(REMOVE_ITEM);
@@ -96,15 +104,17 @@ export default function Item({ item }) {
       console.error(e);
     }
   };
-const handleDelete = (e) => {
-e.stopPropagation();
-deleteItem(e.currentTarget.getAttribute("data-id"))
-}
+  const handleDelete = (e) => {
+    e.stopPropagation();
+    deleteItem(e.currentTarget.getAttribute('data-id'));
+  };
+
+  // state for the modal being open or not
   const [open, setOpen] = useState(false);
 
   const handleOpen = (e) => {
     setOpen(true);
-    console.log('Modal opened')
+    console.log('Modal opened');
   };
   const handleClose = () => setOpen(false);
 
@@ -121,25 +131,37 @@ deleteItem(e.currentTarget.getAttribute("data-id"))
     setAnchorEl(null);
   };
 
-  const me = auth.getProfile(); // me.data.username
-  if (!user) {
-    console.log('no user');
-    return <></>;
-  }
-
+  // function for toggling saved
+  const [addFavorite] = useMutation(ADD_FAVORITE, { variables: { id: _id } });
+  const [removeFavorite] = useMutation(REMOVE_FAVORITE, {
+    variables: { id: _id },
+  });
   const toggleHeartIcon = (e) => {
-    console.log('Heart toggled')
-    setSaved((prevIcon) => {
-      return !prevIcon;
-    });
+    // console.log('Heart toggled');
+    if (saved) {
+      removeFavorite().then(() => {
+        setSnackBarMessage('Removed');
+        setOpenSnackBar(true);
+      });
+    } else {
+      addFavorite().then(() => {
+        setSnackBarMessage('Saved');
+        setOpenSnackBar(true);
+      });
+    }
+    setSaved(!saved);
   };
+
+  // Snackbar state
+  const [openSnackBar, setOpenSnackBar] = useState(false);
+  const [snackBarMessage, setSnackBarMessage] = useState('');
 
   return (
     <div key={_id} className="item-list-wrapper cursor-pointer">
       {/* substitute heart icon for MoreVertIcon when closet does not belong to the person who is logged in */}
 
       <ImageListItem onClick={handleOpen}>
-        {me.data.username === user.username ? ( // need to check if it's the currently logged in user's item
+        {me?.data?.username === user?.username ? ( // need to check if it's the currently logged in user's item
           <MoreVert
             id="basic-button"
             aria-controls={openMenu ? 'basic-menu' : undefined}
@@ -166,7 +188,10 @@ deleteItem(e.currentTarget.getAttribute("data-id"))
           }}
         >
           <MenuItem onClick={handleCloseMenu}>Edit</MenuItem>
-          <MenuItem data-id={_id} onClick={handleDelete} > Delete</MenuItem>
+          <MenuItem data-id={_id} onClick={handleDelete}>
+            {' '}
+            Delete
+          </MenuItem>
         </Menu>
         <img
           src={`${photo}?w=248&fit=crop&auto=format`}
@@ -209,7 +234,10 @@ deleteItem(e.currentTarget.getAttribute("data-id"))
                   className="icon-p"
                 />
               ) : (
-                <FavoriteBorder className="icon-p icon heart-icon" />
+                <ToggleHeartIcons
+                  saved={saved}
+                  toggleHeartIcon={toggleHeartIcon}
+                />
               )}
               <Menu
                 id="basic-menu"
@@ -223,7 +251,10 @@ deleteItem(e.currentTarget.getAttribute("data-id"))
                 }}
               >
                 <MenuItem onClick={handleCloseMenu}>Edit</MenuItem>
-                <MenuItem data-id={_id} onClick={handleDelete} > Delete</MenuItem>
+                <MenuItem data-id={_id} onClick={handleDelete}>
+                  {' '}
+                  Delete
+                </MenuItem>
               </Menu>
             </div>
             <p className="item-desc">{`${brand} ${category}`}</p>
@@ -252,6 +283,12 @@ deleteItem(e.currentTarget.getAttribute("data-id"))
           </div>
         </Box>
       </Modal>
+      <Snackbar
+        open={openSnackBar}
+        onClose={() => setOpenSnackBar(false)}
+        autoHideDuration={3000}
+        message={snackBarMessage}
+      />
     </div>
   );
 }
