@@ -11,6 +11,7 @@ import {
   ImageListItemBar,
   Menu,
   MenuItem,
+  Snackbar,
 } from '@mui/material';
 import { forwardRef, useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -120,12 +121,22 @@ export default function Item({ item, savedItems }) {
   const toggleHeartIcon = (e) => {
     // console.log('Heart toggled');
     if (saved) {
-      removeFavorite();
+      removeFavorite().then(() => {
+        setSnackBarMessage('Removed');
+        setOpenSnackBar(true);
+      });
     } else {
-      addFavorite();
+      addFavorite().then(() => {
+        setSnackBarMessage('Saved');
+        setOpenSnackBar(true);
+      });
     }
     setSaved(!saved);
   };
+
+  // Snackbar state
+  const [openSnackBar, setOpenSnackBar] = useState(false);
+  const [snackBarMessage, setSnackBarMessage] = useState('');
 
   return (
     <div key={_id} className="item-list-wrapper cursor-pointer">
@@ -245,6 +256,12 @@ export default function Item({ item, savedItems }) {
           </div>
         </Box>
       </Modal>
+      <Snackbar
+        open={openSnackBar}
+        onClose={() => setOpenSnackBar(false)}
+        autoHideDuration={3000}
+        message={snackBarMessage}
+      />
     </div>
   );
 }

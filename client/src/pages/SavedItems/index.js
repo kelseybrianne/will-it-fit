@@ -7,6 +7,7 @@ import { GET_FAVORITES } from '../../utils/queries';
 export default function SavedItems() {
   const me = auth.getProfile();
   const { data, error, loading } = useQuery(GET_FAVORITES, {
+    fetchPolicy: 'no-cache', // this is needed to get the latest data
     variables: { id: me.data._id },
   });
 
