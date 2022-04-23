@@ -45,6 +45,10 @@ a {
     padding: 5px;
 } 
 
+.saved-icon {
+    color: #B95252;
+}
+
 .more-icon {
     color: rgb(10, 10, 10);
     left: 3px;
@@ -53,7 +57,8 @@ a {
 
 .item-list-wrapper:hover .heart-icon,
 .item-list-wrapper:hover .more-icon,
-.modal-box:hover .more-icon {
+.modal-box:hover .more-icon, 
+.modal-box:hover .heart-icon {
     visibility: visible;
 }
 

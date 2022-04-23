@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { ModalUnstyled } from '@mui/base';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import MoreVert from '@mui/icons-material/MoreVert';
 import {
   Box,
@@ -17,6 +18,7 @@ import { Link } from 'react-router-dom';
 import auth from '../../utils/auth';
 import { useMutation } from '@apollo/client';
 import { REMOVE_ITEM } from '../../utils/mutations';
+import ToggleHeartIcons from './ToggleHeartIcons';
 
 const Modal = styled(ModalUnstyled)`
   position: fixed;
@@ -65,6 +67,8 @@ const style = (theme) => ({
 });
 
 export default function Item({ item }) {
+  const [saved, setSaved] = useState(false);
+
   const {
     _id,
     category,
@@ -92,11 +96,15 @@ export default function Item({ item }) {
       console.error(e);
     }
   };
-
+const handleDelete = (e) => {
+e.stopPropagation();
+deleteItem(e.currentTarget.getAttribute("data-id"))
+}
   const [open, setOpen] = useState(false);
 
   const handleOpen = (e) => {
     setOpen(true);
+    console.log('Modal opened')
   };
   const handleClose = () => setOpen(false);
 
@@ -119,6 +127,13 @@ export default function Item({ item }) {
     return <></>;
   }
 
+  const toggleHeartIcon = (e) => {
+    console.log('Heart toggled')
+    setSaved((prevIcon) => {
+      return !prevIcon;
+    });
+  };
+
   return (
     <div key={_id} className="item-list-wrapper cursor-pointer">
       {/* substitute heart icon for MoreVertIcon when closet does not belong to the person who is logged in */}
@@ -134,7 +149,9 @@ export default function Item({ item }) {
             className="more-icon icon"
           />
         ) : (
-          <FavoriteBorder className="heart-icon icon" />
+          // TOGGLE IMAGES
+          // <FavoriteBorder className="heart-icon icon" />
+          <ToggleHeartIcons saved={saved} toggleHeartIcon={toggleHeartIcon} />
         )}
 
         <Menu
@@ -149,7 +166,7 @@ export default function Item({ item }) {
           }}
         >
           <MenuItem onClick={handleCloseMenu}>Edit</MenuItem>
-          <MenuItem onClick={() => deleteItem(_id)}> Delete</MenuItem>
+          <MenuItem data-id={_id} onClick={handleDelete} > Delete</MenuItem>
         </Menu>
         <img
           src={`${photo}?w=248&fit=crop&auto=format`}
@@ -192,7 +209,7 @@ export default function Item({ item }) {
                   className="icon-p"
                 />
               ) : (
-                ''
+                <FavoriteBorder className="icon-p icon heart-icon" />
               )}
               <Menu
                 id="basic-menu"
@@ -206,7 +223,7 @@ export default function Item({ item }) {
                 }}
               >
                 <MenuItem onClick={handleCloseMenu}>Edit</MenuItem>
-                <MenuItem onClick={() => deleteItem(_id)}> Delete</MenuItem>
+                <MenuItem data-id={_id} onClick={handleDelete} > Delete</MenuItem>
               </Menu>
             </div>
             <p className="item-desc">{`${brand} ${category}`}</p>
