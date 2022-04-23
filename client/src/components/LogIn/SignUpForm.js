@@ -105,6 +105,7 @@ function SignUpForm({ setDialogState }) {
     }
     return message;
   };
+  
 
   return (
     <Container

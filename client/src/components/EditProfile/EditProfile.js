@@ -7,6 +7,8 @@ import {
   Container,
   Dialog,
   InputAdornment,
+  CircularProgress,
+  Stack,
 } from '@mui/material';
 
 // graphQL:
@@ -16,9 +18,8 @@ import { EDIT_PROFILE, EDIT_PROFILEPHOTO } from '../../utils/mutations';
 // image upload
 import uploadImage from '../../utils/uploadImage';
 const EditProfile = () => {
-
   const [editProfile, { loading, error }] = useMutation(EDIT_PROFILE);
-  const [editProfilePhoto, { error: image_error }] =
+  const [editProfilePhoto, { error: image_error, loading: image_loading }] =
     useMutation(EDIT_PROFILEPHOTO);
   const [open, setOpen] = React.useState(false);
   const [previewSource, setPreviewSource] = React.useState(null);
@@ -105,6 +106,16 @@ const EditProfile = () => {
     let message = 'There was an error uploading your image.';
     return message;
   };
+
+  if (loading || image_loading) {
+    return (
+      <Stack alignItems="center" sx={{ zIndex: 'modal' }}>
+        <p>
+          <CircularProgress />
+        </p>
+      </Stack>
+    );
+  }
   return (
     <div>
       <Button
