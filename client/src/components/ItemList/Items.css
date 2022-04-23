@@ -2,7 +2,7 @@ a {
     cursor: pointer;
 }
 
-.closet {
+.item-list-container {
     /* width: 85vw; */
     margin: 0px 8px;
 }
@@ -45,6 +45,10 @@ a {
     padding: 5px;
 } 
 
+.saved-icon {
+    color: #B95252;
+}
+
 .more-icon {
     color: rgb(10, 10, 10);
     left: 3px;
@@ -53,7 +57,8 @@ a {
 
 .item-list-wrapper:hover .heart-icon,
 .item-list-wrapper:hover .more-icon,
-.modal-box:hover .more-icon {
+.modal-box:hover .more-icon, 
+.modal-box:hover .heart-icon {
     visibility: visible;
 }
 
@@ -79,7 +84,7 @@ a {
 }
 
 @media screen and (min-width: 440px) {
-    .closet {
+    .item-list-container {
         margin: 0px 16px;
     }
 
@@ -89,7 +94,7 @@ a {
 }
 
 @media screen and (min-width: 767px) {
-    .closet {
+    .item-list-container {
         width: 85vw;
         margin: 0px auto;
     }
@@ -100,7 +105,7 @@ a {
 }
 
 @media screen and (min-width: 1000px) {
-    .closet {
+    .item-list-container {
         width: 65vw;
     }
 }

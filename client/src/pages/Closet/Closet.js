@@ -119,7 +119,7 @@ const Closet = () => {
       <div className="toggle-discover-carousel">
         <DiscoverCarousel />
       </div>
-      <div className="closet">
+      <div className="item-list-container">
         <ItemList items={userData.closet} />
       </div>
     </div>

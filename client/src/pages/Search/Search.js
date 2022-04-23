@@ -8,8 +8,9 @@ import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
 import { useQuery } from '@apollo/client';
-import { SEARCH_ITEMS } from '../utils/queries';
-import ItemList from '../components/ItemList/';
+import { SEARCH_ITEMS } from '../../utils/queries';
+import ItemList from '../../components/ItemList';
+import './Search.css'
 
 const Search = () => {
   let [searchParams, setSearchParams] = useSearchParams();
@@ -36,7 +37,8 @@ const Search = () => {
         component={'form'}
         onSubmit={handleSubmit}
         sx={{
-          pb: 2,
+          pt: 3,
+          pb: 5,
           display: 'grid',
           textAlign: 'center',
         }}
@@ -56,18 +58,18 @@ const Search = () => {
             borderRadius: '2px',
           }}
         />
-        <Typography variant="h2">
+        <h2 className="responsive-header">
           Searching for {searchTerm ? searchTerm : '...'} that fit
-        </Typography>
+        </h2>
       </Container>
-      <Container>
-        {loading ? 'Loading...' : ''}
-        {data?.searchItems?.length ? (
-          <ItemList items={data.searchItems}></ItemList>
-        ) : (
-          <Typography>No results found</Typography>
-        )}
-      </Container>
+        <div className="item-list-container">
+          {loading ? 'Loading...' : ''}
+          {data?.searchItems?.length ? (
+            <ItemList items={data.searchItems}></ItemList>
+          ) : (
+            <Typography>No results found</Typography>
+          )}
+        </div>
     </>
   );
 };
