@@ -81,8 +81,8 @@ const typeDefs = gql`
     closet(_id: ID!): [Item]
     savedItems(_id: ID!): [Item]
 
-    followers: [User]
-    following: [User]
+    followers(_id: ID!): User
+    following: User
     # returns all data associated with items of all followers so we can pull user ID's OR item ID's from query.
     feed: [Item]
 
@@ -130,7 +130,7 @@ const typeDefs = gql`
     editProfilePhoto(primaryPhoto: String!): User
 
     removeProfilePhoto(_id: ID!): User
-
+    # these are the ones to use, remove others after testing.
     addFollowing(_id: ID!): User
     removeFollowing(_id: ID!): User
 

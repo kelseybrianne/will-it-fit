@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 // eslint-disable-next-line no-unused-vars
 import Button from '@mui/material/Button';
@@ -12,27 +12,77 @@ import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 import placeholderProfilePic from '../../assets/images/mukuko-studio-mU88MlEFcoU-unsplash.jpg';
 import auth from '../../utils/auth';
 
-import { useQuery } from '@apollo/client';
-import { GET_USER } from '../../utils/queries';
+import { useQuery, useMutation } from '@apollo/client';
+import { GET_USER, GET_FOLLOWERS } from '../../utils/queries';
+import { ADD_FOLLOWING, REMOVE_FOLLOWING } from '../../utils/mutations';
 import EditProfile from '../../components/EditProfile/EditProfile';
 import ItemList from '../../components/ItemList';
 
 const Closet = () => {
+
   let { username } = useParams();
   const [followingState, setFollowingState] = useState('notFollowing');
-
-  const handleFollowUser = () => {
-    followingState === 'notFollowing'
-      ? setFollowingState('following')
-      : setFollowingState('notFollowing');
-  };
+  const [addFollowing, { loadingAddFollowing, errorAddFollowing }] =
+    useMutation(ADD_FOLLOWING);
+  const [removeFollowing, { loadingRemoveFollowing, errorRemoveFollowing }] =
+    useMutation(REMOVE_FOLLOWING);
 
   // eslint-disable-next-line no-unused-vars
+  // Get data on the closet you're viewing, including followers/following
   const { loading, data } = useQuery(GET_USER, {
     variables: {
       username: username,
     },
   });
+  const userData = data?.user || {};
+  console.log(userData);
+  console.log(userData?.following);
+  const following = userData?.following;
+  console.log(following?.length)
+  const followers = userData?.followers;
+  console.log(followers?.length)
+
+  const me = auth.getProfile(); // me.data.username
+  // if you already follow this user, button should be set at Following at page load.
+
+  useEffect(()=> {
+    if(followers?.length) {
+  for (let i = 0; i < followers?.length; i++) {
+    console.log(followers[i]?._id)
+    console.log(me.data._id)
+    if (followers[i]?._id === me.data._id) {
+      
+      setFollowingState('following');
+      console.log('id found a match?')
+      //  we should exit out of for loop once a match is found
+      return;
+    }
+    console.log('id did not match')
+  }
+};
+return;
+}, [followers, me.data._id]);
+
+  // when user clicks the follower/following button, take an action to add or remove the follow.
+  const handleFollowUser = async () => {
+    const id = userData?._id;
+    if (followingState === 'notFollowing') {
+      console.log(followingState);
+      // if the user isn't following the person we add them as a follower and then set the button to say following.
+      await addFollowing({
+        variables: { id },
+      });
+      setFollowingState('following');
+      return;
+    }
+
+    // when user clicks the following button it removes that person from the users following list. Then sets the button back to 'Follow'
+    await removeFollowing({
+      variables: { id },
+    });
+    setFollowingState('notFollowing');
+    return;
+  };
 
   const discoverCarousel = document.querySelector('.toggle-discover-carousel');
   const toggleDiscoverCarousel = () => {
@@ -40,9 +90,6 @@ const Closet = () => {
       ? (discoverCarousel.style.display = 'block')
       : (discoverCarousel.style.display = 'none');
   };
-
-  const userData = data?.user || {};
-  const me = auth.getProfile(); // me.data.username
 
   return (
     <div className="profile-page">
@@ -58,18 +105,16 @@ const Closet = () => {
             alt={userData.primaryPhoto}
           />
           <div className="folls-div">
-            <a href="tbd">
+            <a href="FollowingPage/Modal">
               <p>Following</p>
             </a>
+            {/* {following.map((data) => (
+          <li className="list-group-item" key={data}>
+            {`${data} `}
+          </li>
+        ))} */}
             <p>|</p>
-            {/* <p
-              className="cursor-pointer discover-btn"
-              onClick={toggleDiscoverCarousel}
-            >
-              <PersonAddAltIcon style={{ fontSize: 16 }} />
-            </p>
-            <p>|</p> */}
-            <a href="tbd">
+            <a href="FollowersPage/Modal">
               <p>Followers</p>
             </a>
           </div>
