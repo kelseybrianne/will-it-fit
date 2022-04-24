@@ -25,9 +25,8 @@ const DiscoverCarousel = () => {
 
     trackRef.current.style.transform = `translateX(-${newPage}px`;
     setCurrentPage(newPage);
-
     // If you've reached the end of the track, hide next button
-    trackRef.current.offsetWidth - newPage < newPage
+    trackRef.current.offsetWidth - newPage < ref.current.offsetWidth
       ? setNextHidden(true)
       : setNextHidden(false);
 
@@ -51,7 +50,7 @@ const DiscoverCarousel = () => {
     setCurrentPage(newPage);
 
     // If you've reached the end of the track, hide next button
-    trackRef.current.offsetWidth - newPage < newPage
+    trackRef.current.offsetWidth - newPage < ref.current.offsetWidth
       ? setNextHidden(true)
       : setNextHidden(false);
 
@@ -92,13 +91,13 @@ const DiscoverCarousel = () => {
       </div>
       <div className="nav">
         {!prevHidden && (
-        <button className="prev">
-          <ChevronLeftIcon onClick={prevPage} />
+        <button onClick={prevPage} className="prev">
+          <ChevronLeftIcon />
         </button>
             )}
             {!nextHidden && (
-        <button className="next">
-          <ChevronRightIcon onClick={nextPage} />
+        <button onClick={nextPage} className="next">
+          <ChevronRightIcon />
         </button>
           )}
       </div>

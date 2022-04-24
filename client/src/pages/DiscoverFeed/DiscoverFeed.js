@@ -21,8 +21,6 @@ const DiscoverFeed = () => {
   const [nextHidden, setNextHidden] = useState(false);
   const [prevHidden, setPrevHidden] = useState(true);
 
-  // console.log(carouselWidth);
-
   const nextPage = () => {
     let newPage;
     // if width of container is less than 300px, only slide the width of one picture instead of by the width of the entire carousel container
@@ -34,7 +32,7 @@ const DiscoverFeed = () => {
     setCurrentPage(newPage);
 
     // If you've reached the end of the track, hide next button
-    trackRef.current.offsetWidth - newPage < newPage
+    trackRef.current.offsetWidth - newPage < ref.current.offsetWidth
       ? setNextHidden(true)
       : setNextHidden(false);
 
@@ -58,7 +56,7 @@ const DiscoverFeed = () => {
     setCurrentPage(newPage);
 
     // If you've reached the end of the track, hide next button
-    trackRef.current.offsetWidth - newPage < newPage
+    trackRef.current.offsetWidth - newPage < ref.current.offsetWidth
       ? setNextHidden(true)
       : setNextHidden(false);
 
@@ -153,13 +151,13 @@ const DiscoverFeed = () => {
             </div>
             <div className="nav">
               {!prevHidden && (
-                <button className="prev">
-                  <ChevronLeftIcon onClick={prevPage} />
+                <button onClick={prevPage} className="prev">
+                  <ChevronLeftIcon />
                 </button>
               )}
               {!nextHidden && (
-                <button className="next">
-                  <ChevronRightIcon onClick={nextPage} />
+                <button onClick={nextPage} className="next">
+                  <ChevronRightIcon />
                 </button>
               )}
             </div>

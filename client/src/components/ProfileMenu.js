@@ -21,7 +21,6 @@ export default function ProfileMenu() {
   const { loading, data } = useQuery(GET_ME);
 
   const userData = data?.me;
-  console.log(userData);
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
