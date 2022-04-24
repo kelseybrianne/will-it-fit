@@ -14,10 +14,12 @@ import { useQuery } from '@apollo/client';
 import { GET_USERMATCHES } from '../../utils/queries';
 
 const DiscoverFeed = () => {
-  const track = document.querySelector('.track');
+  const ref = useRef();
+  const trackRef = useRef();
 
   const [currentPage, setCurrentPage] = useState(0);
-  const ref = useRef();
+  const [nextHidden, setNextHidden] = useState(false);
+  const [prevHidden, setPrevHidden] = useState(true);
 
   const nextPage = () => {
     let newPage;
@@ -26,8 +28,16 @@ const DiscoverFeed = () => {
       ? (newPage = currentPage + ref.current.offsetWidth)
       : (newPage = currentPage + 200);
 
-    track.style.transform = `translateX(-${newPage}px`;
+    trackRef.current.style.transform = `translateX(-${newPage}px`;
     setCurrentPage(newPage);
+
+    // If you've reached the end of the track, hide next button
+    trackRef.current.offsetWidth - newPage < ref.current.offsetWidth
+      ? setNextHidden(true)
+      : setNextHidden(false);
+
+    // if the track has shifted to a new page, show the previous button, otherwise hide it
+    newPage ? setPrevHidden(false) : setPrevHidden(true);
   };
 
   const prevPage = () => {
@@ -42,8 +52,16 @@ const DiscoverFeed = () => {
       ? (newPage = newPageIsNotMobile)
       : (newPage = currentPage - 200);
 
-    track.style.transform = `translateX(-${newPage}px)`;
+    trackRef.current.style.transform = `translateX(-${newPage}px)`;
     setCurrentPage(newPage);
+
+    // If you've reached the end of the track, hide next button
+    trackRef.current.offsetWidth - newPage < ref.current.offsetWidth
+      ? setNextHidden(true)
+      : setNextHidden(false);
+
+    // if the track has shifted to a new page, show the previous button, otherwise hide it
+    newPage ? setPrevHidden(false) : setPrevHidden(true);
   };
 
   // const { data: data_me } = useQuery(GET_ME);
@@ -78,9 +96,15 @@ const DiscoverFeed = () => {
   );
 
   const { data: data_users, loading } = useQuery(GET_USERMATCHES);
-  if (loading ) {
-    return <Stack alignItems = 'center' sx={{ zIndex: 'modal' }}><p><CircularProgress /></p></Stack>
-   }
+  if (loading) {
+    return (
+      <Stack alignItems="center" sx={{ zIndex: 'modal' }}>
+        <p>
+          <CircularProgress />
+        </p>
+      </Stack>
+    );
+  }
 
   return (
     <div>
@@ -93,7 +117,7 @@ const DiscoverFeed = () => {
             id="responsive-container"
           >
             <div className="carousel-inner">
-              <div className="track">
+              <div ref={trackRef} className="track">
                 {Auth.loggedIn()
                   ? data_users?.userMatches?.map(
                       ({ primaryPhoto, _id, username }) => (
@@ -126,12 +150,16 @@ const DiscoverFeed = () => {
               </div>
             </div>
             <div className="nav">
-              <button className="prev">
-                <ChevronLeftIcon onClick={prevPage} />
-              </button>
-              <button className="next">
-                <ChevronRightIcon onClick={nextPage} />
-              </button>
+              {!prevHidden && (
+                <button onClick={prevPage} className="prev">
+                  <ChevronLeftIcon />
+                </button>
+              )}
+              {!nextHidden && (
+                <button onClick={nextPage} className="next">
+                  <ChevronRightIcon />
+                </button>
+              )}
             </div>
           </div>
         </div>

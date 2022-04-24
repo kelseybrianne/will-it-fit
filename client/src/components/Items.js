@@ -21,7 +21,6 @@ import Auth from '../utils/auth';
 
 const Items = ({ windowSize, userData }) => {
   // handles opening and closing of MUI modal
-  console.log(userData);
   const [open, setOpen] = React.useState(false);
   const [modalItemProps, setModalItemProps] = useState({
     _id: '',
@@ -35,7 +34,6 @@ const Items = ({ windowSize, userData }) => {
   })
 
   const handleOpen = (e) => {
-    console.log(e.currentTarget);
     const capitalizeFirstLetter = (str) => str.charAt(0).toUpperCase() + str.slice(1);
  
     setModalItemProps({

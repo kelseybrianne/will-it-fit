@@ -115,7 +115,6 @@ export default function Item({ item, savedItems }) {
 
   const handleOpen = (e) => {
     setOpen(true);
-    console.log('Modal opened');
   };
   const handleClose = () => setOpen(false);
 
@@ -138,7 +137,6 @@ export default function Item({ item, savedItems }) {
     variables: { id: _id },
   });
   const toggleHeartIcon = (e) => {
-    // console.log('Heart toggled');
     if (saved) {
       removeFavorite().then(() => {
         setSnackBarMessage('Removed');

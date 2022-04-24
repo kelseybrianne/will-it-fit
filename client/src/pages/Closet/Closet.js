@@ -24,6 +24,8 @@ import ItemList from '../../components/ItemList';
 const Closet = () => {
   let { username } = useParams();
 
+  // state used to toggle discover carousel
+  const [isHidden, setIsHidden] = useState(true);
 
   const [followingState, setFollowingState] = useState('notFollowing');
   const [addFollowing, { loadingAddFollowing, errorAddFollowing }] =
@@ -47,8 +49,7 @@ const Closet = () => {
   const followers = userData?.followers;
 
   const me = auth.getProfile(); // me.data.username
-  // if you already follow this user, button should be set at Following at page load.
-  
+
   useEffect(() => {
     if (followers?.length) {
       for (let i = 0; i < followers?.length; i++) {
@@ -83,15 +84,19 @@ const Closet = () => {
     setFollowingState('notFollowing');
     return;
   };
+
   if (loading || loadingAddFollowing || loadingRemoveFollowing) {
-   return <Stack alignItems = 'center' sx={{ zIndex: 'modal' }}><p><CircularProgress /></p></Stack>
+    return (
+      <Stack alignItems="center" sx={{ zIndex: 'modal' }}>
+        <p>
+          <CircularProgress />
+        </p>
+      </Stack>
+    );
   }
 
-  const discoverCarousel = document.querySelector('.toggle-discover-carousel');
   const toggleDiscoverCarousel = () => {
-    discoverCarousel.style.display === 'none'
-      ? (discoverCarousel.style.display = 'block')
-      : (discoverCarousel.style.display = 'none');
+    isHidden ? setIsHidden(false) : setIsHidden(true);
   };
 
   return (
@@ -107,8 +112,6 @@ const Closet = () => {
             }
             alt={userData.primaryPhoto}
           />
-          {/* <div className="folls-div">
-          </div> */}
         </div>
         <div className="username-div">
           <div className="border-bottom">
@@ -146,9 +149,7 @@ const Closet = () => {
           )}
         </div>
       </div>
-      <div className="toggle-discover-carousel">
-        <DiscoverCarousel />
-      </div>
+      {!isHidden && <DiscoverCarousel />}
       <div className="item-list-container">
         <ItemList items={userData.closet} />
       </div>

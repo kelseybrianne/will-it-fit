@@ -11,6 +11,7 @@ h1 {
   font-size: 25px;
   color: #444444;
   font-weight: 1;
+  padding: 0px 15px;
 }
 
 @media screen and (min-width: 767px) {

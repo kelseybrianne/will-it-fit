@@ -10,7 +10,7 @@
 }
 
 .carousel-container .track {
-    display: flex;
+    display: inline-flex;
     transition: transform .5s;
 }
 
@@ -40,6 +40,7 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
+    cursor: pointer;
 }
 
 .nav .prev {
