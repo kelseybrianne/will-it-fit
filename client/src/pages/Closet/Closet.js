@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import CircularProgress from '@mui/material/CircularProgress';
 import Stack from '@mui/material/Stack';
@@ -24,7 +24,6 @@ import ItemList from '../../components/ItemList';
 const Closet = () => {
   let { username } = useParams();
 
-
   const [followingState, setFollowingState] = useState('notFollowing');
   const [addFollowing, { loadingAddFollowing, errorAddFollowing }] =
     useMutation(ADD_FOLLOWING, { refetchQueries: [GET_USER] });
@@ -48,7 +47,7 @@ const Closet = () => {
 
   const me = auth.getProfile(); // me.data.username
   // if you already follow this user, button should be set at Following at page load.
-  
+
   useEffect(() => {
     if (followers?.length) {
       for (let i = 0; i < followers?.length; i++) {
@@ -83,16 +82,23 @@ const Closet = () => {
     setFollowingState('notFollowing');
     return;
   };
-  if (loading || loadingAddFollowing || loadingRemoveFollowing) {
-   return <Stack alignItems = 'center' sx={{ zIndex: 'modal' }}><p><CircularProgress /></p></Stack>
-  }
 
-  const discoverCarousel = document.querySelector('.toggle-discover-carousel');
+  const discoverCarousel = useRef(null);
   const toggleDiscoverCarousel = () => {
-    discoverCarousel.style.display === 'none'
-      ? (discoverCarousel.style.display = 'block')
-      : (discoverCarousel.style.display = 'none');
+    discoverCarousel.current.style.display === 'none'
+      ? (discoverCarousel.current.style.display = 'block')
+      : (discoverCarousel.current.style.display = 'none');
   };
+
+  if (loading || loadingAddFollowing || loadingRemoveFollowing) {
+    return (
+      <Stack alignItems="center" sx={{ zIndex: 'modal' }}>
+        <p>
+          <CircularProgress />
+        </p>
+      </Stack>
+    );
+  }
 
   return (
     <div className="profile-page">
@@ -146,7 +152,11 @@ const Closet = () => {
           )}
         </div>
       </div>
-      <div className="toggle-discover-carousel">
+      <div
+        className="toggle-discover-carousel"
+        ref={discoverCarousel}
+        style={{ display: 'none' }}
+      >
         <DiscoverCarousel />
       </div>
       <div className="item-list-container">

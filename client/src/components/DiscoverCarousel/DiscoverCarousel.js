@@ -10,10 +10,10 @@ import { useQuery } from '@apollo/client';
 import { GET_USERMATCHES, GET_ME } from '../../utils/queries';
 
 const DiscoverCarousel = () => {
-  const track = document.querySelector('.track');
+  const track = useRef(null);
 
   const [currentPage, setCurrentPage] = useState(0);
-  const ref = useRef();
+  const ref = useRef(null);
 
   const nextPage = () => {
     let newPage;
@@ -22,7 +22,7 @@ const DiscoverCarousel = () => {
       ? (newPage = currentPage + ref.current.offsetWidth)
       : (newPage = currentPage + 200);
 
-    track.style.transform = `translateX(-${newPage}px`;
+    track.current.style.transform = `translateX(-${newPage}px`;
     setCurrentPage(newPage);
   };
 
@@ -38,7 +38,7 @@ const DiscoverCarousel = () => {
       ? (newPage = newPageIsNotMobile)
       : (newPage = currentPage - 200);
 
-    track.style.transform = `translateX(-${newPage}px)`;
+    track.current.style.transform = `translateX(-${newPage}px)`;
     setCurrentPage(newPage);
   };
 
@@ -55,7 +55,7 @@ const DiscoverCarousel = () => {
   return (
     <div ref={ref} className="carousel-container">
       <div className="carousel-inner">
-        <div className="track">
+        <div ref={track} className="track">
           {Auth.loggedIn()
             ? data_users?.userMatches?.map(
                 ({ primaryPhoto, _id, username }) => (
@@ -74,11 +74,11 @@ const DiscoverCarousel = () => {
         </div>
       </div>
       <div className="nav">
-        <button className="prev">
-          <ChevronLeftIcon onClick={prevPage} />
+        <button className="prev" onClick={prevPage}>
+          <ChevronLeftIcon />
         </button>
-        <button className="next">
-          <ChevronRightIcon onClick={nextPage} />
+        <button className="next" onClick={nextPage}>
+          <ChevronRightIcon />
         </button>
       </div>
     </div>
