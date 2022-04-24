@@ -25,8 +25,8 @@ const resolvers = {
             },
           },
           {
-            username: {
-              $ne: context.user.username,
+            _id: {
+              $ne: context.user._id,
             },
           },
         ],
