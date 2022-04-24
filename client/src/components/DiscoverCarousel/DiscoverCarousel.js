@@ -5,6 +5,7 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import Auth from '../../utils/auth';
 import images from '../../assets/images.js';
+import placeholderProfilePic from '../../assets/images/mukuko-studio-mU88MlEFcoU-unsplash.jpg';
 
 import { useQuery } from '@apollo/client';
 import { GET_USERMATCHES, GET_ME } from '../../utils/queries';
@@ -77,7 +78,11 @@ const DiscoverCarousel = () => {
                 ({ primaryPhoto, _id, username }) => (
                   <Link to={`/closet/${username}`} key={_id}>
                     <div className="card-container">
-                      <img className="card" src={primaryPhoto} alt={username} />
+                      <img
+                        className="card"
+                        src={primaryPhoto || placeholderProfilePic}
+                        alt={username}
+                      />
                     </div>
                   </Link>
                 )
@@ -91,15 +96,15 @@ const DiscoverCarousel = () => {
       </div>
       <div className="nav">
         {!prevHidden && (
-        <button onClick={prevPage} className="prev">
-          <ChevronLeftIcon />
-        </button>
-            )}
-            {!nextHidden && (
-        <button onClick={nextPage} className="next">
-          <ChevronRightIcon />
-        </button>
-          )}
+          <button onClick={prevPage} className="prev">
+            <ChevronLeftIcon />
+          </button>
+        )}
+        {!nextHidden && (
+          <button onClick={nextPage} className="next">
+            <ChevronRightIcon />
+          </button>
+        )}
       </div>
     </div>
   );
