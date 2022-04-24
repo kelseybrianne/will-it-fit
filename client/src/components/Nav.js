@@ -4,17 +4,16 @@ import {
   IconButton,
   ListItemIcon,
   MenuItem,
-  TextField,
   Tooltip,
 } from '@mui/material';
 import { useState } from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
 import HomeIcon from '@mui/icons-material/Home';
-import DynamicFeedIcon from '@mui/icons-material/DynamicFeed';
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 import SearchIcon from '@mui/icons-material/Search';
 
 import { Link } from 'react-router-dom';
+import auth from '../utils/auth';
 
 export default function Nav() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -25,6 +24,11 @@ export default function Nav() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  if (!auth.loggedIn()) {
+    return <span></span>;
+  }
+
   return (
     <>
       <Tooltip title="Account settings">

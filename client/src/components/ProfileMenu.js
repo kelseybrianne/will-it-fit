@@ -6,7 +6,7 @@ import {
   ListItemIcon,
   MenuItem,
   Tooltip,
-  Typography
+  Typography,
 } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
@@ -21,7 +21,7 @@ export default function ProfileMenu() {
   const { loading, data } = useQuery(GET_ME);
 
   const userData = data?.me;
-console.log(userData)
+  console.log(userData);
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -31,7 +31,7 @@ console.log(userData)
   const handleClose = () => {
     setAnchorEl(null);
   };
-  if (loading  || !userData)  {
+  if (loading || !userData) {
     //   import spinner
     return <Typography>Loading...</Typography>;
   }
@@ -64,22 +64,24 @@ console.log(userData)
         onClose={handleClose}
         onClick={handleClose}
       >
-        <Link to="/profile">
-          <MenuItem>
-            <ListItemIcon>
-              {userData.primaryPhoto ? (
-                <Avatar
-                  src={userData.primaryPhoto}
-                  sx={{ width: 24, height: 24 }}
-                  style={{ objectFit: 'cover' }}
-                />
-              ) : (
-                <Avatar sx={{ width: 24, height: 24 }} />
-              )}
-            </ListItemIcon>
-            edit profile
-          </MenuItem>
-        </Link>
+        <MenuItem
+          sx={{
+            pointerEvents: 'none',
+          }}
+        >
+          <ListItemIcon>
+            {userData.primaryPhoto ? (
+              <Avatar
+                src={userData.primaryPhoto}
+                sx={{ width: 24, height: 24 }}
+                style={{ objectFit: 'cover' }}
+              />
+            ) : (
+              <Avatar sx={{ width: 24, height: 24 }} />
+            )}
+          </ListItemIcon>
+          {userData.username}
+        </MenuItem>
         {/* <MenuItem>
           <EditProfile />
         </MenuItem> */}
