@@ -14,10 +14,10 @@ import { useQuery } from '@apollo/client';
 import { GET_USERMATCHES } from '../../utils/queries';
 
 const DiscoverFeed = () => {
-  const track = document.querySelector('.track');
+  const ref = useRef();
+  const trackRef= useRef();
 
   const [currentPage, setCurrentPage] = useState(0);
-  const ref = useRef();
 
   const nextPage = () => {
     let newPage;
@@ -25,8 +25,8 @@ const DiscoverFeed = () => {
     ref.current.offsetWidth > 300
       ? (newPage = currentPage + ref.current.offsetWidth)
       : (newPage = currentPage + 200);
-
-    track.style.transform = `translateX(-${newPage}px`;
+    
+    trackRef.current.style.transform = `translateX(-${newPage}px`;
     setCurrentPage(newPage);
   };
 
@@ -42,7 +42,7 @@ const DiscoverFeed = () => {
       ? (newPage = newPageIsNotMobile)
       : (newPage = currentPage - 200);
 
-    track.style.transform = `translateX(-${newPage}px)`;
+    trackRef.current.style.transform = `translateX(-${newPage}px)`;
     setCurrentPage(newPage);
   };
 
@@ -93,7 +93,7 @@ const DiscoverFeed = () => {
             id="responsive-container"
           >
             <div className="carousel-inner">
-              <div className="track">
+              <div ref={trackRef} className="track">
                 {Auth.loggedIn()
                   ? data_users?.userMatches?.map(
                       ({ primaryPhoto, _id, username }) => (

@@ -100,10 +100,6 @@
   background-color: rgb(249, 249, 249);
 }
 
-.toggle-discover-carousel {
-  display: none;
-}
-
 @media screen and (min-width: 500px) {
   .profile-img-div {
     width: 320px;
