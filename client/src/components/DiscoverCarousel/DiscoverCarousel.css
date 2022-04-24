@@ -10,7 +10,7 @@
 }
 
 .carousel-container .track {
-    display: flex;
+    display: inline-flex;
     transition: transform .5s;
 }
 

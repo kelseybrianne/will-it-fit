@@ -15,9 +15,13 @@ import { GET_USERMATCHES } from '../../utils/queries';
 
 const DiscoverFeed = () => {
   const ref = useRef();
-  const trackRef= useRef();
+  const trackRef = useRef();
 
   const [currentPage, setCurrentPage] = useState(0);
+  const [nextHidden, setNextHidden] = useState(false);
+  const [prevHidden, setPrevHidden] = useState(true);
+
+  // console.log(carouselWidth);
 
   const nextPage = () => {
     let newPage;
@@ -25,9 +29,17 @@ const DiscoverFeed = () => {
     ref.current.offsetWidth > 300
       ? (newPage = currentPage + ref.current.offsetWidth)
       : (newPage = currentPage + 200);
-    
+
     trackRef.current.style.transform = `translateX(-${newPage}px`;
     setCurrentPage(newPage);
+
+    // If you've reached the end of the track, hide next button
+    trackRef.current.offsetWidth - newPage < newPage
+      ? setNextHidden(true)
+      : setNextHidden(false);
+
+    // if the track has shifted to a new page, show the previous button, otherwise hide it
+    newPage ? setPrevHidden(false) : setPrevHidden(true);
   };
 
   const prevPage = () => {
@@ -44,6 +56,14 @@ const DiscoverFeed = () => {
 
     trackRef.current.style.transform = `translateX(-${newPage}px)`;
     setCurrentPage(newPage);
+
+    // If you've reached the end of the track, hide next button
+    trackRef.current.offsetWidth - newPage < newPage
+      ? setNextHidden(true)
+      : setNextHidden(false);
+
+    // if the track has shifted to a new page, show the previous button, otherwise hide it
+    newPage ? setPrevHidden(false) : setPrevHidden(true);
   };
 
   // const { data: data_me } = useQuery(GET_ME);
@@ -78,9 +98,15 @@ const DiscoverFeed = () => {
   );
 
   const { data: data_users, loading } = useQuery(GET_USERMATCHES);
-  if (loading ) {
-    return <Stack alignItems = 'center' sx={{ zIndex: 'modal' }}><p><CircularProgress /></p></Stack>
-   }
+  if (loading) {
+    return (
+      <Stack alignItems="center" sx={{ zIndex: 'modal' }}>
+        <p>
+          <CircularProgress />
+        </p>
+      </Stack>
+    );
+  }
 
   return (
     <div>
@@ -126,12 +152,16 @@ const DiscoverFeed = () => {
               </div>
             </div>
             <div className="nav">
-              <button className="prev">
-                <ChevronLeftIcon onClick={prevPage} />
-              </button>
-              <button className="next">
-                <ChevronRightIcon onClick={nextPage} />
-              </button>
+              {!prevHidden && (
+                <button className="prev">
+                  <ChevronLeftIcon onClick={prevPage} />
+                </button>
+              )}
+              {!nextHidden && (
+                <button className="next">
+                  <ChevronRightIcon onClick={nextPage} />
+                </button>
+              )}
             </div>
           </div>
         </div>

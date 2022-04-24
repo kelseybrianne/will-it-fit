@@ -11,7 +11,7 @@ import Nav from '../Nav';
 const Header = () => {
   return (
     <header>
-      <Nav />
+      {Auth.loggedIn() && <Nav />}
 
       <Link to={'/'}>
         <h1>Will It Fit?</h1>
