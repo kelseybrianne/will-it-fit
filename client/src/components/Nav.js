@@ -26,7 +26,7 @@ export default function Nav() {
   };
 
   if (!auth.loggedIn()) {
-    return <span></span>;
+    return <span style={{ width: '40px' }}></span>;
   }
 
   return (
