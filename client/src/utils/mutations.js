@@ -117,7 +117,7 @@ export const ADD_FOLLOWER = gql`
   }
 `;
 
-// addFollowing: 
+// addFollowing:
 export const ADD_FOLLOWING = gql`
   mutation Mutation($id: ID!) {
     addFollowing(_id: $id) {
@@ -169,4 +169,37 @@ export const REMOVE_FOLLOWING = gql`
   }
 `;
 
-
+// editItem to edit the whole item
+export const EDIT_ITEM = gql`
+  mutation editItem(
+    $category: String!
+    $size: String!
+    $style: String
+    $photo: String!
+    $brand: String
+    $name: String!
+    $gender: String
+    $link: String
+    $color: String
+    $review: String
+    $user: ID!
+    $user_id: ID!
+  ) {
+    editItem(
+      category: $category
+      size: $size
+      style: $style
+      photo: $photo
+      brand: $brand
+      name: $name
+      gender: $gender
+      link: $link
+      color: $color
+      review: $review
+      user: $user
+      user_id: $user_id
+    ) {
+      _id
+    }
+  }
+`;

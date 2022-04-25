@@ -20,6 +20,7 @@ import { useMutation } from '@apollo/client';
 import { REMOVE_ITEM } from '../../utils/mutations';
 import ToggleHeartIcons from './ToggleHeartIcons';
 import { ADD_FAVORITE, REMOVE_FAVORITE } from '../../utils/mutations';
+import EditItem from '../EditItem';
 
 const Modal = styled(ModalUnstyled)`
   position: fixed;
@@ -186,9 +187,9 @@ export default function Item({ item, savedItems }) {
             'aria-labelledby': 'basic-button',
           }}
         >
-          <MenuItem onClick={handleCloseMenu}>Edit</MenuItem>
+          <EditItem data-id={_id}/>
           <MenuItem data-id={_id} onClick={handleDelete}>
-            {' '}
+      
             Delete
           </MenuItem>
         </Menu>
@@ -257,7 +258,7 @@ export default function Item({ item, savedItems }) {
                   'aria-labelledby': 'basic-button',
                 }}
               >
-                <MenuItem onClick={handleCloseMenu}>Edit</MenuItem>
+                   <EditItem />
                 <MenuItem data-id={_id} onClick={handleDelete}>
                   {' '}
                   Delete

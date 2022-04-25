@@ -435,6 +435,7 @@ const resolvers = {
               category: args.category,
               style: args.style,
               brand: args.brand,
+              photo: args.photo,
               name: args.name,
               gender: args.gender,
               size: args.size,

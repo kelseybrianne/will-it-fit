@@ -125,6 +125,7 @@ const Closet = () => {
           {me.data.username === username ? (
             <div className="btns-div">
               <AddItem />
+       
               <Button
                 variant="contained"
                 className="discover-btn"
