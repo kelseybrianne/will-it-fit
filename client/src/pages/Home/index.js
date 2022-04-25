@@ -9,7 +9,9 @@ import { GET_FEED, GET_ME } from '../../utils/queries';
 
 import auth from '../../utils/auth';
 export default function Home() {
-  const { data, error, loading } = useQuery(GET_FEED);
+  const { data, error, loading } = useQuery(GET_FEED, {
+    fetchPolicy: 'no-cache',
+  });
   const {
     data: me,
     error: meError,
@@ -22,18 +24,22 @@ export default function Home() {
   }
 
   if (loading || meLoading) {
-    if (loading || meLoading ) {
-      return <Stack alignItems = 'center' sx={{ zIndex: 'modal' }}><p><CircularProgress /></p></Stack>
-     }
+    if (loading || meLoading) {
+      return (
+        <Stack alignItems="center" sx={{ zIndex: 'modal' }}>
+          <p>
+            <CircularProgress />
+          </p>
+        </Stack>
+      );
+    }
   }
 
   // {auth.loggedIn() ? <Home /> : <DiscoverFeed />}
 
   return (
     <div>
-      <h2
-        className="page-header"
-      >
+      <h2 className="page-header">
         The latest and greatest from people you follow:
       </h2>
       <div className="item-list-container">

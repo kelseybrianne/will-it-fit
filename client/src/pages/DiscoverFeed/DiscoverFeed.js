@@ -9,6 +9,7 @@ import { Snackbar, Button, IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import CircularProgress from '@mui/material/CircularProgress';
 import Stack from '@mui/material/Stack';
+import placeholderProfilePic from '../../assets/images/mukuko-studio-mU88MlEFcoU-unsplash.jpg';
 
 import { useQuery } from '@apollo/client';
 import { GET_USERMATCHES } from '../../utils/queries';
@@ -129,7 +130,7 @@ const DiscoverFeed = () => {
                           <div className="card-container" id="card-container">
                             <img
                               className="card"
-                              src={primaryPhoto}
+                              src={primaryPhoto || placeholderProfilePic}
                               alt={username}
                             />
                             <div className="view-on-hover">Follow</div>
