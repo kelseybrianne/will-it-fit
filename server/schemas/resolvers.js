@@ -24,6 +24,11 @@ const resolvers = {
               $lt: context.user.weight + context.user.weight * weightVar,
             },
           },
+          {
+            _id: {
+              $ne: context.user._id,
+            },
+          },
         ],
       })
         .populate('closet')
