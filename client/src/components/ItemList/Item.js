@@ -187,7 +187,7 @@ export default function Item({ item, savedItems }) {
             'aria-labelledby': 'basic-button',
           }}
         >
-          <EditItem data-id={_id}/>
+          <EditItem item={_id} />
           <MenuItem data-id={_id} onClick={handleDelete}>
       
             Delete

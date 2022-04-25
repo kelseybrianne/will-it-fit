@@ -7,8 +7,7 @@ import MenuItem from '@mui/material/MenuItem';
 import '../AddItem/AddItem.css';
 import auth from '../../utils/auth';
 import uploadImage from '../../utils/uploadImage';
-
-import { useMutation } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { EDIT_ITEM } from '../../utils/mutations';
 let filter = require('leo-profanity');
 // *arrays for drop downs*:
@@ -68,8 +67,9 @@ const colorDB = [
   { label: 'Black', value: 'Black' },
   { label: 'Brown', value: 'Brown' },
 ];
-const EditItem = () => {
+const EditItem = (props) => {
   const me = auth.getProfile();
+// const item = useQuery(GET_ITEM)
 
   const [editItem] = useMutation(EDIT_ITEM);
   const [open, setOpen] = React.useState(false);
