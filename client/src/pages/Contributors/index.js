@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './Contributors.module.css';
 import kelseyProfile from '../../assets/images/kelsey-betteridge-profile.JPG';
 import kimProfile from '../../assets/images/Kimothy.jpg';
+import jProfile from '../../assets/images/headshot.jpeg';
 
 const index = () => {
   return (
@@ -47,7 +48,7 @@ const index = () => {
           rel="noreferrer"
         >
           <div>
-            <img className={styles.profile} src="{}" alt="J's profile" />
+            <img className={styles.profile} src={jProfile} alt="J's profile" />
             <p>J. Michael Brown</p>
           </div>
         </a>
