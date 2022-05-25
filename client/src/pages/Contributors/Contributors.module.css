@@ -1,0 +1,31 @@
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    min-height: calc(100vh - 290px);
+    padding: 16px;
+    overflow: hidden;
+}
+
+.contributor div{
+    width: 200px;
+    height: 240px;
+    margin: 16px;
+    box-sizing: border-box;
+    border-radius: 3px;
+    background-color: var(--green);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile {
+    height: 140px;
+    width: 140px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin: 24px;
+}

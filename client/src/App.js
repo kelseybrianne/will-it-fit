@@ -18,6 +18,7 @@ import SavedItems from './pages/SavedItems/index.js';
 import Home from './pages/Home/index.js';
 import Footer from './components/Footer/Footer.js';
 import auth from './utils/auth.js';
+import Contributors from './pages/Contributors';
 
 // Construct our main GraphQL API endpoint
 // const httpLink = createHttpLink({
@@ -67,9 +68,11 @@ function App() {
                 path="*"
                 element={<h2 className="page-header">Wrong page!</h2>}
               />
+              <Route path="/contributors" element={<Contributors />} />
             </Routes>
           ) : (
             <Routes>
+              <Route path="/contributors" element={<Contributors />} />
               <Route path="*" element={<DiscoverFeed />} />
             </Routes>
           )}
