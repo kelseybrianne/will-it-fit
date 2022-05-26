@@ -3,6 +3,7 @@ import styles from './Contributors.module.css';
 import kelseyProfile from '../../assets/images/kelsey-betteridge-profile.JPG';
 import kimProfile from '../../assets/images/Kimothy.jpg';
 import jProfile from '../../assets/images/headshot.jpeg';
+import mikaylaProfile from '../../assets/images/mukuko-studio-mU88MlEFcoU-unsplash.jpg';
 
 const index = () => {
   return (
@@ -61,7 +62,7 @@ const index = () => {
           <div>
             <img
               className={styles.profile}
-              src="{kelseyProfile}"
+              src={mikaylaProfile}
               alt="mikayla's profile"
             />
             <p>Mikayla Bruce</p>
