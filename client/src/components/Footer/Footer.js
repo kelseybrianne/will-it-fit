@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styles from './Footer.module.css';
 import GitHubIcon from '@mui/icons-material/GitHub';
 
@@ -13,7 +14,9 @@ const Footer = () => {
         >
           <p>GitHub</p>
         </a>
-        <p>Contributors</p>
+        <Link to={'/contributors'}>
+          <p>Contributors</p>
+        </Link>
         <div className={styles.contributors}>
           {/* Create modal */}
           {/* <a href="" target="_blank" rel="noreferrer">

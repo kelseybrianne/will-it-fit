@@ -40,7 +40,7 @@ export default function Home() {
   return (
     <div>
       <h2 className="page-header">
-        The latest and greatest from people you follow:
+        The latest and greatest from people you follow
       </h2>
       <div className="item-list-container">
         <ItemList items={data?.feed} savedItems={me.me.savedItems}></ItemList>

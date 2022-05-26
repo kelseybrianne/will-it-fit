@@ -111,7 +111,7 @@ const DiscoverFeed = () => {
     <div>
       <div className="carousel-div">
         <div className="inner-carousel-div">
-          <h2 className="page-header">Discover users you match with</h2>
+          <h2 className="page-header">Discover users with similar height and weight</h2>
           <div
             ref={ref}
             className="carousel-container"
