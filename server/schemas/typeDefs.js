@@ -136,6 +136,22 @@ const typeDefs = gql`
 
     addFollower(_id: ID!): User
     removeFollower(_id: ID!): User
+
+    editItem(
+      _id: ID!
+      category: String!
+      style: String
+      brand: String
+      name: String!
+      gender: String
+      size: String!
+      link: String
+      photo: String!
+      color: String
+      review: String
+      user: ID!
+      user_id: ID!
+    ): Item
   }
 `;
 

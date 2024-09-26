@@ -425,6 +425,30 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
+    // Editing an item
+    editItem: async (parent, args, context) => {
+      if (context.user) {
+        return await Item.findByIdAndUpdate(
+          { _id: args._id },
+          {
+            $set: {
+              category: args.category,
+              style: args.style,
+              brand: args.brand,
+              photo: args.photo,
+              name: args.name,
+              gender: args.gender,
+              size: args.size,
+              link: args.link,
+              photo: args.photo,
+              color: args.color,
+              review: args.review,
+            },
+          }
+        );
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
   },
 };
 
